@@ -4,6 +4,8 @@
 		<title>Tanishq Rupaal</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Tanishq Rupaal, MS Cybersecurity at Georgia Tech. Cybersecurity Practitioner." />
+		<meta name="robots" content="index, follow" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
@@ -36,9 +38,12 @@
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<div class="logo"><i class="fas fa-user-secret fa-3x"></i> &nbsp; &nbsp; <i class="fas fa-key fa-2x"></i></div>
-							<h2>Tanishq Rupaal</h2>
-							<p>Cyber Security Practitioner</p>
+							<!-- <div class="logo"><i class="fas fa-user-secret fa-3x"></i> &nbsp; &nbsp; <i class="fas fa-key fa-2x"></i></div> -->
+							<h2><i class="fas fa-user-secret fa-2x"></i> Tanishq Rupaal</h2>
+							<p>
+								<b>Cyber Security Practitioner</b> <br> <br> 
+								<button class="button default small" id="btnScrollToContact">&nbsp; Contact me &nbsp;</button>
+							</p>
 						</div>
 					</section>
 
@@ -51,7 +56,7 @@
 									<div class="content">
 										<h2 class="major">About Me</h2>
 										<p align="justify">
-											"Everything has a workaround". That's an ideology I strongly believe in. It's not just something to do with generic hacking, but a reminder that every problem has not just a solution, but a smart solution. I try to find such smart and witty solutions for all puzzles of my life. <br><br>With a passion for computers and security, I present myself to the world as a Cyber Security Practitioner/Enthusiast/Student. I hold a Bachelors degree in Computer Science and am currently pursuing a Masters of Science in Cyber Security from Georgia Tech. Such a background allows me to relate day to day functioning of every aspect of life to the intricacies of a computer system. On top of that, I possess a fortunate touch of mild laziness and witty impulsiveness, which helps unlock a whole new perspective when thinking of solutions to tricky problems. I use these skills to learn more about Cyber Security, to identify loopholes and ponder about a solid secure design for different systems.<br><br>
+											"Everything has a workaround". That's an ideology I strongly believe in. It's not just something to do with generic hacking, but a reminder that every problem has not just a solution, but a smart solution. I try to find such smart and witty solutions for all puzzles of my life. <br><br>With a passion for computers and security, I present myself to as a Cyber Security Practitioner/Enthusiast/Student. I hold a Bachelors degree in Computer Science and am currently pursuing a Masters of Science in Cyber Security from Georgia Tech. Such a background allows me to relate day to day functioning of every aspect of life to the intricacies of a computer system. On top of that, I possess a fortunate touch of mild laziness and witty impulsiveness, which helps unlock a whole new perspective when thinking of solutions to tricky problems. I use these skills to learn more about Cyber Security, to identify loopholes and ponder about a solid secure design for different systems.<br><br>
 											I now spend my days studying several courses for my Masters degree while being involved in several projects for courses like Applied Cryptography, Network Security and Secure Computer Systems. Playing CTFs, playing drums and clicking photographs are three constructive hobbies that I pursue. My aim is to be a successful Cyber Security Practitioner in the industry and experience Security in a manner which is more hands on than I have ever experienced before. I hope to make a positive contribution and give back to the Cybersec community that has helped me get to where I am today. <br> <br><br><br> <br>
 										</p>
 									</div>
@@ -78,8 +83,8 @@
 												<li>Encrypted full-duplex communication and file sharing suite</li>
 												<li>Secure Cookie-Less Login</li>
 											</ul>
-											To learn more about the projects, visit "<a href="projects.html"><i>Projects and Write-Ups</i></a>" page. On the page, click Learn More to visit the respective Github repos. <br>
-											<br><a href="assets/Resume.pdf" target="_blank" class="button primary icon solid fa-download">Look at my resume!</a>
+											To learn more about the projects, visit "<a href="projects.html"><i><b>Projects and Write-Ups</b></i></a>" page. On the page, click Learn More to visit the respective Github repos. <br>
+											<br><a href="assets/Resume.pdf" target="_blank" class="button primary">&nbsp; Look at my resume! &nbsp;</a>
 										</p>
 									</div>
 								</div>
@@ -92,7 +97,7 @@
 						<div class="inner">
 							<h2 class="major">Get in touch</h2>
 							<ul class="contact">
-								<li class="icon solid fa-envelope"><a href="mailto:trupaal@gmail.com">trupaal@gmail.com</a>, <a href="mailto:trupaal3@gatech.edu">trupaal3@gatech.edu</a></li>
+								<li class="icon solid fa-envelope"><a href="mailto:trupaal@gmail.com"><b>trupaal@gmail.com</b></a>, <a href="mailto:trupaal3@gatech.edu"><b>trupaal3@gatech.edu</b></a></li>
 								<li class="icon brands fa-twitter">Twitter account: <a href="https://twitter.com/tangtiphongkul" target="_blank"> <b>@tangtiphongkul</b> </a></li>
 								<li class="icon brands fa-linkedin">LinkedIn account: <a href="https://linkedin.com/in/tanishqrupaal" target="_blank"> <b>tanishqrupaal</b> </a></li>
 							</ul>
@@ -108,6 +113,12 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				const btnScrollToContact = document.querySelector("#btnScrollToContact");
+				btnScrollToContact.addEventListener("click", function() {
+					window.scrollTo({top: 10000, left: 0, behavior: 'smooth'})
+				});
+			</script>
 
 	</body>
 </html>
