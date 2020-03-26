@@ -1,6 +1,7 @@
 @import url(fontawesome-all.min.css);
+/* @import url("https://fonts.googleapis.com/css?family=Audiowide|Baloo+2&display=swap"); */
 @import url("https://fonts.googleapis.com/css?family=Audiowide|Baloo+2&display=swap");
-/* Audiowide, Cursiveo:300,600,300italic,600italic 
+/* Audiowide, Cursive o:300,600,300italic,600italic 
 
 Baloo 2 Audiowide, Cursive */
 /*
@@ -3405,16 +3406,18 @@ input, select, textarea {
 
 			#banner .inner .hahanet2 {
 				display: inline-block;
-				transition: transform .3s;
+				/* transition: transform .3s; */
+				transition: transform 0.1s ease-in-out;
 			}	
 			.hahanet2:hover {
-				transform: rotate(360deg);
-				transform-origin: center;
+				/* transform: rotate(360deg); */
+				/* transform-origin: center; */
+				transform: scale(1.15);
 			}
 
 			#banner .inner .hahanet {
 				display: inline-block;
-				transition: transform .1s ease-in-out;
+				transition: transform 0.1s ease-out;
 			}	
 			.hahanet:hover {
 				transform: scale(1.5);
