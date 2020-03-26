@@ -2989,7 +2989,7 @@ input, select, textarea {
 				padding: 0;
 			}
 		}
-
+	
 /* Features */
 
 	.features {
@@ -3378,6 +3378,18 @@ input, select, textarea {
 
 /* Banner */
 
+@keyframes pulse {
+	0% {
+		transform: scale(0.75);
+	}
+	60% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(0.75);
+	}
+}
+
 	#banner {
 		padding: 10em 0 4.75em 0 ;
 	}
@@ -3386,6 +3398,27 @@ input, select, textarea {
 			margin: 0 auto;
 			width: 55em;
 		}
+			#banner .inner .hahanet3 {
+				display: inline-block;
+				animation: pulse 1s infinite;
+			}
+
+			#banner .inner .hahanet2 {
+				display: inline-block;
+				transition: transform .3s;
+			}	
+			.hahanet2:hover {
+				transform: rotate(360deg);
+				transform-origin: center;
+			}
+
+			#banner .inner .hahanet {
+				display: inline-block;
+				transition: transform .1s ease-in-out;
+			}	
+			.hahanet:hover {
+				transform: scale(1.5);
+			}
 
 		#banner .logo {
 			-moz-transition: opacity 2s ease, -moz-transform 1s ease;
@@ -3557,7 +3590,7 @@ input, select, textarea {
 			width: 55em;
 		}
 
-		#wrapper > header h2 {
+		#wrapper > header h2 {			
 			border-bottom: solid 2px rgba(255, 255, 255, 0.125);
 			font-size: 2em;
 			margin-bottom: 0.8em;
