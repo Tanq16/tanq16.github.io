@@ -144,7 +144,7 @@ title: tanishq rupaal
 						<div class="inner">
 							<h2 class="major"></h2>
 							<p id="challenge" align="center">
-								<a href="#">Click on my name on top for a fun little exercise!</a>
+							<a id="btnScrollToChallenge">Click on my name on top for a short and fun exercise! <br>Click here to go to top! DM me your solution!</a>
 							</p>
 						</div>
 					</section>
@@ -159,13 +159,13 @@ title: tanishq rupaal
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-				const btnScrollToContact = document.querySelector("#btnScrollToContact");
-				btnScrollToContact.addEventListener("click", function() {
-					window.scrollTo({top: 10000, left: 0, behavior: 'smooth'})
+				const btnScrollToChallenge = document.querySelector("#btnScrollToChallenge");
+				btnScrollToChallenge.addEventListener("click", function() {
+					window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
 				});
 			</script>
 			<script>
-				document.getElementById("challenge").style.opacity = 0.5;
+				document.getElementById("challenge").style.opacity = 0.6;
 			</script>
 
 	</body>
