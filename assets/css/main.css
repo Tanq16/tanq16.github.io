@@ -3437,7 +3437,7 @@ input, select, textarea {
 
 			.popup .popuptext {
 				visibility: hidden;
-				width: 200px;
+				width: 300px;
 				background-color: rgba(39, 39, 39, 0.4);
 				color: #fff;
 				text-align: center;
@@ -3448,7 +3448,7 @@ input, select, textarea {
 				z-index: 1;
 				/* bottom: 50px; */
 				left: 50%;
-				margin-left: -100px;
+				margin-left: -150px;
 				margin-top: -30px;
 			}
 			.popup .show {
