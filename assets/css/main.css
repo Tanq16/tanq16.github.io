@@ -3429,10 +3429,10 @@ input, select, textarea {
 				position: relative;
 				display: inline-block;
 				cursor: pointer;
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
+				-webkit-user-select: text;
+				-moz-user-select: text;
+				-ms-user-select: text;
+				user-select: text;
 			}
 
 			.popup .popuptext {
@@ -3443,6 +3443,7 @@ input, select, textarea {
 				text-align: center;
 				border-radius: 6px;
 				padding: 8px;
+				cursor: text;
 				position: absolute;
 				z-index: 1;
 				/* bottom: 50px; */
