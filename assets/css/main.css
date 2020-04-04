@@ -3407,6 +3407,15 @@ input, select, textarea {
           text-shadow: 0px 15px 5px rgb(0, 0, 0);
      }
 }
+@-webkit-keyframes fadeIn {
+	from {opacity: 0;} 
+	to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity:1 ;}
+}
 
 	#banner {
 		padding: 10em 0 4.75em 0 ;
@@ -3416,6 +3425,36 @@ input, select, textarea {
 			margin: 0 auto;
 			width: 55em;
 		}
+			#banner .inner .popup {
+				position: relative;
+				display: inline-block;
+				cursor: pointer;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+
+			.popup .popuptext {
+				visibility: hidden;
+				width: 200px;
+				background-color: rgba(39, 39, 39, 0.4);
+				color: #fff;
+				text-align: center;
+				border-radius: 6px;
+				padding: 8px;
+				position: absolute;
+				z-index: 1;
+				/* bottom: 50px; */
+				left: 50%;
+				margin-left: -100px;
+				margin-top: -30px;
+			}
+			.popup .show {
+				visibility: visible;
+				-webkit-animation: fadeIn 1s;
+				animation: fadeIn 1s;
+			}
 			#banner .inner .hahanet3 {
 				display: inline-block;
 				animation: pulse 2.5s infinite;
