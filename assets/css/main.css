@@ -3437,25 +3437,34 @@ input, select, textarea {
 
 			.popup .popuptext {
 				visibility: hidden;
+				opacity: 0;
 				width: 300px;
-				background-color: rgba(39, 39, 39, 0.4);
+				background-color: rgba(70, 70, 70, 0.7);
 				color: #fff;
 				text-align: center;
 				border-radius: 6px;
 				padding: 8px;
 				cursor: text;
 				position: absolute;
-				z-index: 1;
-				/* bottom: 50px; */
+				z-index: 4;
 				left: 50%;
 				margin-left: -150px;
 				margin-top: -30px;
+				transition:visibility 0s linear 0.3s,opacity 0.3s linear;
 			}
 			.popup .show {
 				visibility: visible;
+				/* -webkit-animation: ease-in-out 1s;
+				animation: ease-in-out 1s; */
+				opacity: 1;
+				transition-delay:0s;
+			}
+
+			/* .popup .hide {
+				visibility: hidden;
 				-webkit-animation: fadeIn 1s;
 				animation: fadeIn 1s;
-			}
+			} */
 			#banner .inner .hahanet3 {
 				display: inline-block;
 				animation: pulse 2.5s infinite;
