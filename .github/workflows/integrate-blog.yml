@@ -21,6 +21,7 @@ jobs:
 
       - name: Pull blog
         run: |
+          rm -rf blog
           git clone --depth=1 https://github.com/tanq16/blog_site
           mv ./blog_site/blog ./blog
           rm -rf blog_site
