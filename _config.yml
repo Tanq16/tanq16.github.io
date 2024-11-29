@@ -1,4 +1,6 @@
 title: "Tanishq Rupaal"
+description: "Cybersecurity Engineer focused on AWS Security and Application Security"
+url: "https://tanishq.page"
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
