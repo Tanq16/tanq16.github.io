@@ -22,7 +22,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const experienceData = [
         {
             role: 'Lead Security Engineer',
-            company: 'Praetorian',
+            company: 'Praetorian Canada Inc.',
+            period: '2023 - Present',
+            description: 'Leading security assessments and building security tools',
+            highlights: [
+                'Conducted AWS security assessments',
+                'Developed automated security testing tools',
+                'Led client security implementations'
+            ]
+        },
+        {
+            role: 'Senior Security Engineer',
+            company: 'Praetorian Security, Inc.',
+            period: '2023 - Present',
+            description: 'Leading security assessments and building security tools',
+            highlights: [
+                'Conducted AWS security assessments',
+                'Developed automated security testing tools',
+                'Led client security implementations'
+            ]
+        },
+        {
+            role: 'Security Engineer',
+            company: 'Praetorian Security, Inc.',
+            period: '2023 - Present',
+            description: 'Leading security assessments and building security tools',
+            highlights: [
+                'Conducted AWS security assessments',
+                'Developed automated security testing tools',
+                'Led client security implementations'
+            ]
+        },
+        {
+            role: 'Graduate Teaching Assistant',
+            company: 'Georgia Institute of Technology',
+            period: '2023 - Present',
+            description: 'Leading security assessments and building security tools',
+            highlights: [
+                'Conducted AWS security assessments',
+                'Developed automated security testing tools',
+                'Led client security implementations'
+            ]
+        },
+        {
+            role: 'Security Engineer Intern',
+            company: 'Google LLC',
             period: '2023 - Present',
             description: 'Leading security assessments and building security tools',
             highlights: [
@@ -55,6 +99,27 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'Command-line tools for enhancing security workflow efficiency',
             tags: ['Python', 'CLI', 'Automation'],
             link: 'https://github.com/Tanq16/cli-productivity-suite',
+            details: 'Improves workflow efficiency with automated tools'
+        },
+        {
+            title: 'BudgetLord - Expense Tracker',
+            description: 'Command-line tools for enhancing security workflow efficiency',
+            tags: ['Python', 'CLI', 'Automation'],
+            link: 'https://github.com/Tanq16/BudgetLord',
+            details: 'Improves workflow efficiency with automated tools'
+        },
+        {
+            title: 'Local-Content-Share',
+            description: 'Command-line tools for enhancing security workflow efficiency',
+            tags: ['Python', 'CLI', 'Automation'],
+            link: 'https://github.com/Tanq16/local-content-share',
+            details: 'Improves workflow efficiency with automated tools'
+        },
+        {
+            title: 'SubDextract - Subdomain Enumeration',
+            description: 'Command-line tools for enhancing security workflow efficiency',
+            tags: ['Python', 'CLI', 'Automation'],
+            link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
             details: 'Improves workflow efficiency with automated tools'
         }
     ];
