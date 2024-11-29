@@ -161,13 +161,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeline = document.querySelector('.timeline');
         timeline.innerHTML = experienceData.map(exp => `
             <div class="timeline-item">
-                <div class="timeline-dot"></div>
+                <div class="timeline-arrow"></div>
                 <div class="timeline-content">
                     <h3>${exp.role}</h3>
                     <div class="timeline-period">${exp.period}</div>
                     <h4>${exp.company}</h4>
-                    <p>${exp.description}</p>
-                    <div class="timeline-details" style="display: none;">
+                    <div class="timeline-description">
+                        <p>${exp.description}</p>
+                    </div>
+                    <div class="timeline-highlights">
                         <ul>
                             ${exp.highlights.map(h => `<li>${h}</li>`).join('')}
                         </ul>
@@ -175,12 +177,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `).join('');
-
-        // Add click handlers for timeline dots
-        document.querySelectorAll('.timeline-dot').forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                const details = document.querySelectorAll('.timeline-details')[index];
-                details.style.display = details.style.display === 'none' ? 'block' : 'none';
+    
+        // Add click handlers for timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            const arrow = item.querySelector('.timeline-arrow');
+            const content = item.querySelector('.timeline-content');
+    
+            // Handle click on either arrow or content
+            const toggleExpand = () => {
+                arrow.classList.toggle('expanded');
+                content.classList.toggle('expanded');
+            };
+    
+            arrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleExpand();
+            });
+    
+            content.addEventListener('click', () => {
+                toggleExpand();
             });
         });
     }
