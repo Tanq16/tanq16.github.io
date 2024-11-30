@@ -8,6 +8,10 @@ function setTheme(theme) {
     if (logoImg) {
         logoImg.src = theme === 'dark' ? '/assets/images/logotdark.svg' : '/assets/images/logotlight.svg';
     }
+    const themeIcon = document.getElementById('theme-icon');
+    if (themeIcon) {
+        themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+    }
 }
 
 function toggleTheme() {

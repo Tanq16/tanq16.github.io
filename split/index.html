@@ -1,223 +1,48 @@
-<!DOCTYPE HTML>
-<!--
-	Astral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Bill Splitter</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <title>Modern Bill Splitter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fas fa-sun" id="theme-icon"></i>
+    </button>
+    <div class="container">
+        <h1>Bill Splitter</h1>
+        
+        <div class="calculator">
+            <div class="input-group">
+                <label>Enter costs (format: A.B-5.4, C-4.89)</label>
+                <input type="text" id="costInput" placeholder="Example: A.B-5.4, C-4.89">
+            </div>
+            
+            <div class="input-group">
+                <label>Total amount (with tax/discounts)</label>
+                <input type="text" id="totalInput" placeholder="Example: 44.36">
+            </div>
+            
+            <button onclick="calculateSplit()">Calculate Split</button>
+        </div>
 
-		<!-- Wrapper-->
-			<div id="wrapper">
+        <div id="result">
+            Results will appear here
+        </div>
 
-				<!-- Main -->
-					<div id="main">
-							<article id="contact" class="panel">
-								<header>
-									<h2>Weighted Payment Splitter</h2>
-								</header>
-								<a href="#howto">Read the guide for using this tool.</a><br><hr>
-								<form action="#" method="post">
-									<div>
-										<div class="row">
-											<div class="col-12">
-												<input type="text" name="amount_list" placeholder="Cost per person without tax/discounts." />
-											</div>
-											<div class="col-12">
-												<input type="text" name="total" placeholder="Total amount." rows="6"></textarea>
-											</div>
-											<div class="col-12">
-												<input type="button" value="Calculate" onclick="calculate();" />
-											</div>
-										</div>
-									</div>
-								</form>
-								<div id="alert">
-									<p>Result will appear here.</p>
-								</div>
-							</article>
-							<article id="howto" class="panel">
-								<header>
-									<h1>How to use the tool</h1>
-								</header>
-								<p>
-									<a href="#">Back to using the tool.</a><br>
-									This tool allows for weighted splitting of bills with taxations and deductions included. <br>
-									The split of the discounts and taxes is done according to the share of the person.
-									Assume the bill to be split among persons A, B, C and D is as follows -
-									<table>
-										<tr>
-											<th>Item</th>
-											<th>Cost</th>
-											<th>Persons</th>
-										</tr>
-										<tr>
-											<th>X</th>
-											<th>$5.4</th>
-											<th>A, B</th>
-										</tr>
-										<tr>
-											<th>Y</th>
-											<th>$4.89</th>
-											<th>C</th>
-										</tr>
-										<tr>
-											<th>Z</th>
-											<th>$20.7</th>
-											<th>A, B, D</th>
-										</tr>
-										<tr>
-											<th>W</th>
-											<th>$12.3</th>
-											<th>B, C</th>
-										</tr>
-										<tr>
-											<th>V</th>
-											<th>$3.45</th>
-											<th>D</th>
-										</tr>
-									</table>
-									Let the taxes be $4.62 <br>
-									Let the delivery fee be $2.99 <br>
-									Let there be a discount of $9.99 <br>
-									<br>
-									The total bill value is $44.36
-									<br><br>
-									As an example, the following values can be entered in the fields of the tool - <br>
-									Cost per person: A.B-5.4, C-4.89, A.B.D-20.7, B.C-12.3, D-3.45 <br>
-									Total cost: 44.36 <br>
-									<br>
-									This will give the result as - <br>
-									C : 10.48   
-									D : 9.82   
-									A : 9.11   
-									B : 14.95   <br>
-									Next, there will be a section (after a horizontal line), that displays - <br>
-									A.B : 2.56   
-									A.B.D : 6.55   
-									B.C : 5.84   <br>
-									These values signify the per person cost for each person in the group mentioned. Example - A, B, D had common items that cost each of them $6.55 at the end.
-									<br>
-									<a href="#">Back to using the tool.</a>
-								</p>
-							</article>
-					</div>
-
-				<!-- Footer -->
-					<div id="footer">
-						<ul class="copyright">
-							<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script>
-				function calculate() {
-				let amount_list = document.getElementsByName("amount_list")[0].value;
-				let total = parseFloat(document.getElementsByName("total")[0].value);
-
-				var people_splits = amount_list.split(", ");
-				var split_dict = {};
-
-				var common = [];
-				var total_pre = 0.0; // total cost before discounts and taxes
-				// Put common items into common list
-				for (let index = 0; index < people_splits.length; index++) {
-					var element = people_splits[index].split("-");
-					if (element[0].includes(".")) {
-						common.push(element);
-						continue;
-					}
-					// If not common, add cost to total cost (pre tax/discount) and update person cost
-					else if (split_dict[element[0]]) {
-						split_dict[element[0]] += parseFloat(element[1]);
-						total_pre += parseFloat(element[1]);
-					}
-					else {
-						split_dict[element[0]] = parseFloat(element[1]);
-						total_pre += parseFloat(element[1]);
-					}
-				}
-
-				// Add cost per person to final common list i.e., a.b.c have cost $x each
-				final_common = {};
-				for (let index = 0; index < common.length; index++) {
-					var element = common[index];
-					// Sort to allow similar entries to have same meaning - a.b.c = c.a.b
-					var inner_split = element[0].split(".").sort();
-					if (final_common[inner_split.join(".")]) {
-						final_common[inner_split.join(".")] += parseFloat(element[1])/inner_split.length;
-					}
-					else {
-						final_common[inner_split.join(".")] = parseFloat(element[1])/inner_split.length;
-					}
-					// Add common cost for each person to main split dictionary
-					for (let jindex = 0; jindex < inner_split.length; jindex++) {
-						var item = inner_split[jindex];
-						if (split_dict[item]) {
-							split_dict[item] += parseFloat(element[1])/inner_split.length;
-							total_pre += parseFloat(element[1])/inner_split.length;
-						}
-						else {
-							split_dict[item] = parseFloat(element[1])/inner_split.length;
-							total_pre += parseFloat(element[1])/inner_split.length;
-						}
-					}
-				}
-
-				var computed_final_total = 0;
-				var result = "<p>";
-
-				// Calculate total and adjust off by cents due to roundoff
-				for (var k in split_dict) {
-					var v = split_dict[k];
-					var calculated = parseFloat((v*total/total_pre).toFixed(2));
-					computed_final_total += calculated;
-				}
-				if (computed_final_total !== total) {
-					var difference = total - computed_final_total;
-				} else {
-					var difference = 0;
-				}
-				var single_difference = true;
-				
-				// Write per person cost into result
-				for (var k in split_dict) {
-					var v = split_dict[k];
-					var calculated = (v*total/total_pre);
-					if (single_difference) {
-						calculated += difference;
-						single_difference = false;
-					}
-					result += k + " : " + String(calculated.toFixed(2)) + "<br>";
-				}
-
-				result += "<hr>";
-				
-				// Write cost per person for common items into result
-				for (var k in final_common) {
-					var v = final_common[k];
-					result += k + " : " + String((v*total/total_pre).toFixed(2)) + "<br>";
-				}
-				result += "</p>";
-
-				document.getElementById("alert").innerHTML = result;
-				return true;
-				}
-			</script>
-	</body>
+        <div class="help">
+            <h2>How to use</h2>
+            <p>Enter costs in the format: PERSON-AMOUNT</p>
+            <p>For shared items use: PERSON.PERSON-AMOUNT</p>
+            <p>Example inputs:</p>
+            <ul>
+                <li>A.B-5.4, C-4.89, A.B.D-20.7, B.C-12.3, D-3.45</li>
+                <li>44.36</li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>
