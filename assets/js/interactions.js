@@ -2,19 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Skills data
     const skillsData = {
         cloud: [
-            { name: 'AWS Security', level: 90 },
-            { name: 'Cloud Architecture', level: 85 },
-            { name: 'IAM', level: 88 }
+            { name: 'Amazon Web Services (AWS)', level: 95 },
+            { name: 'Google Cloud Platform (GCP)', level: 75 },
+            { name: 'Microsoft Azure', level: 75 },
+            { name: 'Kubernetes', level: 75 },
+            { name: 'CI/CD Security', level: 80 }
         ],
-        web: [
-            { name: 'Application Security', level: 92 },
-            { name: 'Penetration Testing', level: 85 },
-            { name: 'OWASP Top 10', level: 90 }
+        systems: [
+            { name: 'GitHub Actions', level: 90 },
+            { name: 'Containerization', level: 90 },
+            { name: 'Systems Architecture', level: 80 },
+            { name: 'IaC (primarily Terraform)', level: 90 },
+            { name: 'Build Systems', level: 70 }
+        ],
+        app: [
+            { name: 'Web App Security', level: 85 },
+            { name: 'OWASP Top 10', level: 85 },
+            { name: 'Mobile App Testing', level: 70 },
+            { name: '(M)ASVS', level: 75 },
+            { name: 'AI & LLM Security', level: 70 }
         ],
         tools: [
-            { name: 'Python', level: 95 },
-            { name: 'Docker', level: 88 },
-            { name: 'Git', level: 90 }
+            { name: 'Git', level: 90 },
+            { name: 'Docker', level: 90 },
+            { name: 'Linux', level: 95 },
+            { name: 'Industry CSPM Tools', level: 80 },
+            { name: 'Burpsuite', level: 85 },
+            { name: 'Nmap', level: 80 },
+            { name: 'Kali Linux', level: 90 },
+            { name: 'Neo4j & Cypher', level: 80 },
+            { name: 'GDB', level: 60 }
+        ],
+        programming: [
+            { name: 'Golang', level: 80 },
+            { name: 'Bash', level: 85 },
+            { name: 'Python', level: 80 },
+            { name: 'C/C++', level: 60 },
+            { name: 'Assembley', level: 60 }
         ]
     };
 
@@ -23,56 +47,55 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             role: 'Lead Security Engineer',
             company: 'Praetorian Canada Inc.',
-            period: '2023 - Present',
-            description: 'Leading security assessments and building security tools',
+            period: 'Oct 2024 - Present',
+            description: 'Lead cloud security assessments and building security tools',
             highlights: [
-                'Conducted AWS security assessments',
-                'Developed automated security testing tools',
-                'Led client security implementations'
+                'Create assessment methodologies for cloud security assessments',
+                'Develop automated security testing tools',
+                'Execute advanced cloud architecture assessments',
+                'Mentor junior engineers and conduct new hire interviews'
             ]
         },
         {
             role: 'Senior Security Engineer',
             company: 'Praetorian Security, Inc.',
-            period: '2023 - Present',
-            description: 'Leading security assessments and building security tools',
+            period: 'Oct 2022 - Oct 2024',
+            description: 'Perform product and cloud security assessments',
             highlights: [
-                'Conducted AWS security assessments',
-                'Developed automated security testing tools',
-                'Led client security implementations'
+                'Perform AWS security assessments',
+                'Conduct client architecture interviews and threat modeling',
+                'Develop automation scripts for security testing',
             ]
         },
         {
             role: 'Security Engineer',
             company: 'Praetorian Security, Inc.',
-            period: '2023 - Present',
-            description: 'Leading security assessments and building security tools',
+            period: 'Jul 2021 - Oct 2022',
+            description: 'Perform product security assessments for clients',
             highlights: [
-                'Conducted AWS security assessments',
-                'Developed automated security testing tools',
-                'Led client security implementations'
+                'Perform web application security assessments',
+                'Perform mobile application security assessments',
+                'Work in solo and teams of 2 for assessments'
             ]
         },
         {
             role: 'Graduate Teaching Assistant',
             company: 'Georgia Institute of Technology',
-            period: '2023 - Present',
-            description: 'Leading security assessments and building security tools',
+            period: 'Jan 2020 - May 2021',
+            description: 'Teaching assistant for a graduate security course',
             highlights: [
-                'Conducted AWS security assessments',
-                'Developed automated security testing tools',
-                'Led client security implementations'
+                'Supervise logistics and grading for CS 6035/4235 (Intro to InfoSec)',
+                'Prepare and graded exams, quizzes, and assignments for 200+ students'
             ]
         },
         {
             role: 'Security Engineer Intern',
             company: 'Google LLC',
-            period: '2023 - Present',
-            description: 'Leading security assessments and building security tools',
+            period: 'May 2020 - Aug 2020',
+            description: 'Implement improvements for open source fuzzing projects',
             highlights: [
-                'Conducted AWS security assessments',
-                'Developed automated security testing tools',
-                'Led client security implementations'
+                'Improve FuzzBench to use single source of truth for benchmarks',
+                'Integrate a fuzzer into FuzzBench and 2 fuzz targets for OSS-Fuzz'
             ]
         }
         // Add more experiences as needed
@@ -82,45 +105,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectsData = [
         {
             title: 'Containerized Security Toolkit',
-            description: 'A comprehensive collection of security tools containerized for efficient deployment',
-            tags: ['Docker', 'Python', 'Security'],
+            description: 'A containerized collection of security tools for security assessments',
+            tags: ['Docker', 'GitHub Actions', 'Pentesting', 'Automation', 'Build Systems'],
             link: 'https://github.com/tanq16/containerized-security-toolkit',
-            details: 'Features modern analysis capabilities and integrates with CI/CD pipelines'
+            details: 'A multi-arch containerized toolkit with multi-staged Docker build pipelines. Provides an advanced workflow for data persistence.'
         },
         {
             title: 'Link Hub',
-            description: 'Resource management system for organizing and accessing security-related information',
-            tags: ['JavaScript', 'Organization', 'Tools'],
+            description: 'Collection of resources and tools for security professionals',
+            tags: ['Cybersecurity', 'Resources'],
             link: 'https://github.com/Tanq16/link-hub',
-            details: 'Streamlines access to security resources and documentation'
+            details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.'
         },
         {
             title: 'CLI Productivity Suite',
             description: 'Command-line tools for enhancing security workflow efficiency',
-            tags: ['Python', 'CLI', 'Automation'],
+            tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
             link: 'https://github.com/Tanq16/cli-productivity-suite',
-            details: 'Improves workflow efficiency with automated tools'
+            details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.'
         },
         {
             title: 'BudgetLord - Expense Tracker',
-            description: 'Command-line tools for enhancing security workflow efficiency',
-            tags: ['Python', 'CLI', 'Automation'],
+            description: 'Simple Expense Tracker with REST API and tracking-based visualization',
+            tags: ['Go', 'GitHub Actions', 'Application'],
             link: 'https://github.com/Tanq16/BudgetLord',
-            details: 'Improves workflow efficiency with automated tools'
+            details: 'Simple expense tracker built in Go with custom GitHub Actions for multi-platform and multi-architecture builds, including a containerized version.'
         },
         {
             title: 'Local-Content-Share',
-            description: 'Command-line tools for enhancing security workflow efficiency',
-            tags: ['Python', 'CLI', 'Automation'],
+            description: 'Web Application for sharing text and files within a local network',
+            tags: ['Go', 'Web Application', 'GitHub Actions'],
             link: 'https://github.com/Tanq16/local-content-share',
-            details: 'Improves workflow efficiency with automated tools'
+            details: 'A Go application for sharing text and files within a local network, with GHA workflows for multi-platform and multi-arch builds, including a containerized version.'
         },
         {
             title: 'SubDextract - Subdomain Enumeration',
-            description: 'Command-line tools for enhancing security workflow efficiency',
+            description: 'Python CLI tool for automating subdomain enumeration',
             tags: ['Python', 'CLI', 'Automation'],
             link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
-            details: 'Improves workflow efficiency with automated tools'
+            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.'
         }
     ];
 

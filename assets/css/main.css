@@ -8,12 +8,12 @@
     /* Light theme */
     --bg-color: #ffffff;
     --text-color: #1a1a1a;
-    --accent-color: #2563eb;
+    --accent-color: #ed8d61;
     --secondary-color: #64748b;
     --border-color: #e2e8f0;
     --card-bg: #ffffff;
     --nav-bg: rgba(255, 255, 255, 0.8);
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(25, 25, 25, 0.1);
     --heading-font: 'Clash Display', sans-serif;
     --subheading-font: 'General Sans', sans-serif;
     --body-font: 'Inter', sans-serif;
@@ -21,13 +21,13 @@
 
 [data-theme="dark"] {
     /* Dark theme */
-    --bg-color: #0f172a;
-    --text-color: #e2e8f0;
-    --accent-color: #60a5fa;
-    --secondary-color: #94a3b8;
+    --bg-color: #121d2a;
+    --text-color: #e0e7f0;
+    --accent-color: #5693dd;
+    --secondary-color: #acbbcf;
     --border-color: #1e293b;
-    --card-bg: #1e293b;
-    --nav-bg: rgba(15, 23, 42, 0.8);
+    --card-bg: #192335;
+    --nav-bg: #121d2a;
     --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -79,6 +79,16 @@ h3 {
 
 p {
     margin-bottom: 1.5rem;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--text-color);
 }
 
 /* Loading and Progress */
@@ -243,10 +253,8 @@ p {
 }
 
 .social-link:hover {
-    background-color: var(--accent-color);
     border-color: var(--accent-color);
-    color: var(--accent-color);
-    transform: translateY(-2px);
+    transform: scale(1.5);
 }
 
 .social-link span {
@@ -359,7 +367,7 @@ p {
     border-radius: 50%;
     z-index: 1;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -367,25 +375,31 @@ p {
 
 .timeline-arrow::before {
     content: '';
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid var(--bg-color);
-    border-right: 2px solid var(--bg-color);
-    transform: rotate(45deg);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--bg-color);
+    transform: translateY(2px);
     transition: transform 0.3s ease;
 }
 
 .timeline-item:nth-child(odd) .timeline-arrow {
     right: -0.75rem;
-    transform: rotate(180deg);
+    transform: rotate(90deg);
 }
 
 .timeline-item:nth-child(even) .timeline-arrow {
     left: -0.75rem;
+    transform: rotate(-90deg);
 }
 
-.timeline-arrow.expanded::before {
-    transform: rotate(135deg);
+.timeline-item:nth-child(even) .timeline-arrow.expanded::before {
+    transform: rotate(90deg);
+}
+
+.timeline-item:nth-child(odd) .timeline-arrow.expanded::before {
+    transform: rotate(-90deg);
 }
 
 .timeline-content {
@@ -399,7 +413,12 @@ p {
 }
 
 .timeline-content:hover {
-    transform: scale(1.02);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px var(--shadow-color);
+}
+
+.timeline-content:hover.expanded {
+    transform: translateY(-4px);
 }
 
 .timeline-description,
@@ -419,7 +438,8 @@ p {
 
 .timeline-content.expanded {
     background-color: var(--card-bg);
-    box-shadow: 0 4px 12px var(--shadow-color);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px var(--shadow-color);
 }
 
 .timeline-content h3 {
@@ -452,8 +472,44 @@ p {
     }
     
     .timeline-item:nth-child(odd) .timeline-arrow {
-        transform: none;
+        transform: rotate(-90deg);
     }
+    .timeline-item:nth-child(odd) .timeline-arrow.expanded::before {
+        transform: rotate(90deg);
+    }
+}
+
+.timeline-content, .project-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.timeline-content {
+    padding: 1.2rem;
+    position: relative;
+    transform-origin: top;
+    cursor: pointer;
+}
+
+.timeline-content:hover, .timeline-content.expanded {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px var(--shadow-color);
+    border-color: var(--accent-color);
+}
+
+.project-card {
+    padding: 2rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px var(--shadow-color);
+    border-color: var(--accent-color);
 }
 
 /* Projects Grid */

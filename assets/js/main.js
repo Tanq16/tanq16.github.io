@@ -2,6 +2,12 @@
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+    
+    // Update logo image based on theme
+    const logoImg = document.querySelector('.nav-logo img');
+    if (logoImg) {
+        logoImg.src = theme === 'dark' ? '/assets/images/logotdark.svg' : '/assets/images/logotlight.svg';
+    }
 }
 
 function toggleTheme() {
