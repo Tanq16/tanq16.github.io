@@ -51,6 +51,42 @@
     <main>
         <!-- Hero Section -->
         <section class="hero">
+            <div class="hero-background">
+                <div class="blurred-image"></div>
+                <style>
+                    .hero-background {
+                        position: absolute;
+                        inset: 50px; /* Provide some margin from the edges */
+                        overflow: hidden;
+                        z-index: -1;
+                        border-radius: 30px; /* Rounded corners for the container */
+                    }
+                    .blurred-image {
+                        position: absolute;
+                        inset: -50px; /* Slightly larger than container to avoid blur edges */
+                        background-image: url('/assets/images/bg1.jpg');
+                        background-position: center;
+                        background-size: cover;
+                        filter: blur(2px) opacity(0.6);
+                        transform: scale(1.2); /* Avoid showing blur edges */
+                        border-radius: 30px;
+                    }
+                    [data-theme="dark"] .blurred-image {
+                        background-image: url('/assets/images/bg4.jpg');
+                        filter: blur(2px) opacity(0.6);
+                    }
+                    @media screen and (max-width: 768px) {
+                        .hero-background {
+                            inset: 30px; /* Less margin on smaller screens */
+                        }
+                    }
+                    @media screen and (max-width: 480px) {
+                        .hero-background {
+                            inset: 20px; /* Even less margin on mobile */
+                        }
+                    }
+                </style>
+            </div>
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Tanishq Rupaal</h1>
