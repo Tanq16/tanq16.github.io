@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Bash', level: 85 },
             { name: 'Python', level: 80 },
             { name: 'C/C++', level: 60 },
-            { name: 'Assembley', level: 60 }
+            { name: 'Assembly', level: 60 }
         ]
     };
 
@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
             period: 'Oct 2024 - Present',
             description: 'Lead cloud security assessments and building security tools',
             highlights: [
-                'Create assessment methodologies for cloud security assessments',
-                'Develop automated security testing tools',
-                'Execute advanced cloud architecture assessments',
-                'Mentor junior engineers and conduct new hire interviews'
+                '- Prepare methodologies for cloud security assessments',
+                '- Develop automated security testing tools',
+                '- Execute advanced cloud architecture assessments',
+                '- Mentor junior engineers and conduct new hire interviews'
             ]
         },
         {
@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             period: 'Oct 2022 - Oct 2024',
             description: 'Perform product and cloud security assessments',
             highlights: [
-                'Perform AWS security assessments',
-                'Conduct client architecture interviews and threat modeling',
-                'Develop automation scripts for security testing',
+                '- Perform AWS security assessments',
+                '- Conduct client architecture interviews and threat modeling',
+                '- Develop automation scripts for security testing',
             ]
         },
         {
@@ -73,19 +73,19 @@ document.addEventListener('DOMContentLoaded', () => {
             period: 'Jul 2021 - Oct 2022',
             description: 'Perform product security assessments for clients',
             highlights: [
-                'Perform web application security assessments',
-                'Perform mobile application security assessments',
-                'Work in solo and teams of 2 for assessments'
+                '- Perform web application security assessments',
+                '- Perform mobile application security assessments',
+                '- Work in solo and teams of 2 for assessments'
             ]
         },
         {
             role: 'Graduate Teaching Assistant',
             company: 'Georgia Institute of Technology',
             period: 'Jan 2020 - May 2021',
-            description: 'Teaching assistant for a graduate security course',
+            description: 'Teaching assistant for CS 6035/4235 (Intro to InfoSec)',
             highlights: [
-                'Supervise logistics and grading for CS 6035/4235 (Intro to InfoSec)',
-                'Prepare and graded exams, quizzes, and assignments for 200+ students'
+                '- Supervise logistics and grading for the grad and UG course',
+                '- Write & grade quizzes and assignments for 200+ students'
             ]
         },
         {
@@ -94,8 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
             period: 'May 2020 - Aug 2020',
             description: 'Implement improvements for open source fuzzing projects',
             highlights: [
-                'Improve FuzzBench to use single source of truth for benchmarks',
-                'Integrate a fuzzer into FuzzBench and 2 fuzz targets for OSS-Fuzz'
+                '- Write single source of truth for FuzzBench benchmarks',
+                '- Integrate a fuzzer into FuzzBench'
             ]
         }
         // Add more experiences as needed
