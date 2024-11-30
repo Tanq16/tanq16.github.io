@@ -156,31 +156,35 @@ a:hover {
 }
 
 .nav-logo img:hover {
-    transform: scale(1.05);
+    transform: scale(1.2);
 }
 
 .nav-links {
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
     font-family: var(--subheading-font);
+    display: flex;
+    align-items: center;
 }
 
 .nav-links a:hover {
     color: var(--accent-color);
+    transform: scale(1.2);
 }
 
 /* Theme Toggle */
 .theme-toggle {
     background: none;
     border: none;
-    padding: 0.5rem;
+    padding: 0;
     cursor: pointer;
     color: var(--text-color);
     display: flex;
@@ -188,15 +192,27 @@ a:hover {
     justify-content: center;
     border-radius: 6px;
     transition: all 0.2s ease;
+    height: 24px;
 }
 
 .theme-toggle:hover {
     background-color: var(--border-color);
+    transform: scale(1.2);
 }
 
 .theme-toggle svg {
     width: 20px;
     height: 20px;
+}
+
+.section {
+    padding: 4rem 0;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+}
+
+.section:first-of-type {
+    border-top: none;
 }
 
 /* Hero Section */
@@ -238,6 +254,7 @@ a:hover {
     justify-content: center;
     gap: 2rem;
     margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
 /* Social Links */
@@ -247,26 +264,13 @@ a:hover {
     color: var(--text-color);
     font-size: 2rem;
     transition: all 0.2s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
 }
 
 .social-link:hover {
-    border-color: var(--accent-color);
     transform: scale(1.5);
-}
-
-.social-link span {
-    font-family: var(--subheading-font);
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-/* Common Section Styles */
-.section {
-    padding: 4rem 0;
-    border-top: 1px solid var(--border-color);
 }
 
 /* Skills Section */
@@ -275,12 +279,32 @@ a:hover {
     border-radius: 12px;
     padding: 2rem;
     margin-top: 2rem;
+    overflow: hidden;
 }
 
 .skills-nav {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    white-space: nowrap;
+}
+
+.skills-nav::-webkit-scrollbar {
+    height: 4px;
+}
+
+.skills-nav::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 2px;
+}
+
+.skills-nav::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 2px;
 }
 
 .skill-tab {
@@ -291,6 +315,8 @@ a:hover {
     color: var(--text-color);
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .skill-tab.active {
@@ -466,19 +492,6 @@ a:hover {
     margin-top: 1rem;
 }
 
-@media screen and (max-width: 768px) {
-    .timeline-arrow {
-        left: -0.75rem !important;
-    }
-    
-    .timeline-item:nth-child(odd) .timeline-arrow {
-        transform: rotate(-90deg);
-    }
-    .timeline-item:nth-child(odd) .timeline-arrow.expanded::before {
-        transform: rotate(90deg);
-    }
-}
-
 .timeline-content, .project-card {
     background-color: var(--card-bg);
     border-radius: 12px;
@@ -607,6 +620,26 @@ a:hover {
     .timeline-dot {
         left: -0.4rem !important;
     }
+
+    .hero-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .timeline-arrow {
+        left: -0.75rem !important;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-arrow {
+        transform: rotate(-90deg);
+    }
+    .timeline-item:nth-child(odd) .timeline-arrow.expanded::before {
+        transform: rotate(90deg);
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -615,13 +648,12 @@ a:hover {
         gap: 1rem;
     }
 
-    .hero-links {
-        flex-direction: column;
-        align-items: center;
+    .social-link {
+        width: auto;
+        max-width: none;
     }
 
-    .social-link {
-        width: 100%;
-        max-width: 200px;
+    .hero-links {
+        gap: 1.5rem;
     }
 }
