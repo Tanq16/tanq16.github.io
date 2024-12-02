@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'CLI Productivity Suite',
-            description: 'Command-line tools for enhancing security workflow efficiency',
+            description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
             tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
             link: 'https://github.com/Tanq16/cli-productivity-suite',
             details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.'
