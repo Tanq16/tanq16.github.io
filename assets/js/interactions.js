@@ -3,22 +3,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillsData = {
         cloud: [
             { name: 'Amazon Web Services', level: 95, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Google Cloud Platform', level: 75, icon: '<i class="fab fa-google"></i>' },
-            { name: 'Microsoft Azure', level: 75, icon: '<i class="fab fa-microsoft"></i>' },
-            { name: 'Kubernetes', level: 75, icon: '<i class="fas fa-dharmachakra"></i>' },
-            { name: 'CI/CD Security', level: 80, icon: '<i class="fas fa-code-branch"></i>' }
+            { name: 'Google Cloud Platform', level: 75, icon: '<i class="devicon-googlecloud-plain"></i>' },
+            { name: 'Microsoft Azure', level: 75, icon: '<i class="devicon-azure-plain"></i>' },
+            { name: 'Kubernetes', level: 75, icon: '<i class="devicon-kubernetes-plain"></i>' },
+            { name: 'CI/CD Security', level: 80, icon: '<i class="devicon-githubactions-plain"></i>' }
         ],
         systems: [
             { name: 'GitHub Actions', level: 90, icon: '<i class="fab fa-github"></i>' },
             { name: 'Containerization', level: 90, icon: '<i class="fas fa-cubes"></i>' },
-            { name: 'Systems Architecture', level: 80, icon: '<i class="fas fa-server"></i>' },
-            { name: 'IaC (primarily Terraform)', level: 90, icon: '<i class="fas fa-code"></i>' },
-            { name: 'Build Systems', level: 65, icon: '<i class="fas fa-trowel-bricks"></i>' }
+            { name: 'Architecture Design', level: 80, icon: '<i class="fas fa-server"></i>' },
+            { name: 'IaC (primarily Terraform)', level: 90, icon: '<i class="devicon-terraform-plain"></i>' },
+            { name: 'Server Administration', level: 80, icon: '<i class="devicon-putty-plain"></i>' },
+            { name: 'Build Systems', level: 60, icon: '<i class="devicon-cmake-plain"></i>' }
         ],
         app: [
-            { name: 'Web App Security', level: 85, icon: '<i class="fas fa-shield-virus"></i>' },
-            { name: 'OWASP Top 10', level: 85, icon: '<i class="fas fa-laptop-code"></i>' },
-            { name: 'Mobile App Testing', level: 65, icon: '<i class="fas fa-mobile-screen-button"></i>' },
+            { name: 'Web App Security', level: 85, icon: '<i class="devicon-safari-plain"></i>' },
+            { name: 'OWASP Top 10', level: 85, icon: '<i class="devicon-ros-original"></i>' },
+            { name: 'Mobile App Testing', level: 65, icon: '<i class="devicon-android-plain"></i>' },
             { name: '(M)ASVS', level: 70, icon: '<i class="fas fa-circle-check"></i>' },
             { name: 'AI & LLM Security', level: 70, icon: '<i class="fas fa-brain"></i>' }
         ],
@@ -26,18 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Git', level: 80, icon: '<i class="fab fa-git-alt"></i>' },
             { name: 'Docker', level: 90, icon: '<i class="fab fa-docker"></i>' },
             { name: 'Linux', level: 95, icon: '<i class="fab fa-linux"></i>' },
-            { name: 'Industry CSPM Tools', level: 80, icon: '<i class="fas fa-tools"></i>' },
             { name: 'Burpsuite', level: 85, icon: '<i class="fas fa-spider"></i>' },
-            { name: 'Nmap', level: 80, icon: '<i class="fas fa-network-wired"></i>' },
+            { name: 'Vim', level: 80, icon: '<i class="devicon-vim-plain"></i>' },
+            { name: 'Nmap', level: 80, icon: '<i class="devicon-networkx-plain"></i>' },
             { name: 'Kali Linux', level: 90, icon: '<i class="fas fa-dragon"></i>' },
+            { name: 'Industry CSPM Tools', level: 70, icon: '<i class="fas fa-magnifying-glass-chart"></i>' },
             { name: 'Neo4j & Cypher', level: 70, icon: '<i class="fas fa-database"></i>' },
             { name: 'GDB', level: 55, icon: '<i class="fas fa-bug"></i>' }
         ],
         programming: [
             { name: 'Golang', level: 80, icon: '<i class="fab fa-golang"></i>' },
-            { name: 'Bash', level: 85, icon: '<i class="fas fa-terminal"></i>' },
+            { name: 'Bash', level: 85, icon: '<i class="devicon-bash-plain"></i>' },
             { name: 'Python', level: 80, icon: '<i class="fab fa-python"></i>' },
-            { name: 'C/C++', level: 55, icon: '<i class="fas fa-file-code"></i>' },
+            { name: 'C/C++', level: 55, icon: '<i class="devicon-cplusplus-plain"></i>' },
+            { name: 'Java', level: 55, icon: '<i class="devicon-java-plain"></i>' },
             { name: 'Assembly', level: 50, icon: '<i class="fas fa-microchip"></i>' }
         ]
     };
