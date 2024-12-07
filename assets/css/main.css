@@ -300,6 +300,7 @@ a:hover {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     white-space: nowrap;
+    overflow: visible;
 }
 
 .skills-nav::-webkit-scrollbar {
@@ -326,6 +327,17 @@ a:hover {
     transition: all 0.2s ease;
     white-space: nowrap;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-tab i {
+    font-size: 1rem;
+}
+
+.skill-tab:hover {
+    transform: scale(1.2);
 }
 
 .skill-tab.active {

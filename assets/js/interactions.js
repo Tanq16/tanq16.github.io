@@ -2,43 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Skills data
     const skillsData = {
         cloud: [
-            { name: 'Amazon Web Services (AWS)', level: 95, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Google Cloud Platform (GCP)', level: 75, icon: '<i class="fab fa-google"></i>' },
+            { name: 'Amazon Web Services', level: 95, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Google Cloud Platform', level: 75, icon: '<i class="fab fa-google"></i>' },
             { name: 'Microsoft Azure', level: 75, icon: '<i class="fab fa-microsoft"></i>' },
-            { name: 'Kubernetes', level: 75, icon: '<i class="fab fa-microsoft"></i>' },
-            { name: 'CI/CD Security', level: 80, icon: '<i class="fab fa-aws"></i>' }
+            { name: 'Kubernetes', level: 75, icon: '<i class="fas fa-dharmachakra"></i>' },
+            { name: 'CI/CD Security', level: 80, icon: '<i class="fas fa-code-branch"></i>' }
         ],
         systems: [
             { name: 'GitHub Actions', level: 90, icon: '<i class="fab fa-github"></i>' },
-            { name: 'Containerization', level: 90, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Systems Architecture', level: 80, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'IaC (primarily Terraform)', level: 90, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Build Systems', level: 70, icon: '<i class="fab fa-aws"></i>' }
+            { name: 'Containerization', level: 90, icon: '<i class="fas fa-cubes"></i>' },
+            { name: 'Systems Architecture', level: 80, icon: '<i class="fas fa-server"></i>' },
+            { name: 'IaC (primarily Terraform)', level: 90, icon: '<i class="fas fa-code"></i>' },
+            { name: 'Build Systems', level: 65, icon: '<i class="fas fa-trowel-bricks"></i>' }
         ],
         app: [
-            { name: 'Web App Security', level: 85, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'OWASP Top 10', level: 85, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Mobile App Testing', level: 70, icon: '<i class="fab fa-aws"></i>' },
-            { name: '(M)ASVS', level: 75, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'AI & LLM Security', level: 70, icon: '<i class="fab fa-aws"></i>' }
+            { name: 'Web App Security', level: 85, icon: '<i class="fas fa-shield-virus"></i>' },
+            { name: 'OWASP Top 10', level: 85, icon: '<i class="fas fa-laptop-code"></i>' },
+            { name: 'Mobile App Testing', level: 65, icon: '<i class="fas fa-mobile-screen-button"></i>' },
+            { name: '(M)ASVS', level: 70, icon: '<i class="fas fa-circle-check"></i>' },
+            { name: 'AI & LLM Security', level: 70, icon: '<i class="fas fa-brain"></i>' }
         ],
         tools: [
-            { name: 'Git', level: 90, icon: '<i class="fab fa-git-alt"></i>' },
+            { name: 'Git', level: 80, icon: '<i class="fab fa-git-alt"></i>' },
             { name: 'Docker', level: 90, icon: '<i class="fab fa-docker"></i>' },
             { name: 'Linux', level: 95, icon: '<i class="fab fa-linux"></i>' },
-            { name: 'Industry CSPM Tools', level: 80, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Burpsuite', level: 85, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Nmap', level: 80, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Kali Linux', level: 90, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Neo4j & Cypher', level: 80, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'GDB', level: 60, icon: '<i class="fab fa-aws"></i>' }
+            { name: 'Industry CSPM Tools', level: 80, icon: '<i class="fas fa-tools"></i>' },
+            { name: 'Burpsuite', level: 85, icon: '<i class="fas fa-spider"></i>' },
+            { name: 'Nmap', level: 80, icon: '<i class="fas fa-network-wired"></i>' },
+            { name: 'Kali Linux', level: 90, icon: '<i class="fas fa-dragon"></i>' },
+            { name: 'Neo4j & Cypher', level: 70, icon: '<i class="fas fa-database"></i>' },
+            { name: 'GDB', level: 55, icon: '<i class="fas fa-bug"></i>' }
         ],
         programming: [
             { name: 'Golang', level: 80, icon: '<i class="fab fa-golang"></i>' },
-            { name: 'Bash', level: 85, icon: '<i class="fab fa-terminal"></i>' },
+            { name: 'Bash', level: 85, icon: '<i class="fas fa-terminal"></i>' },
             { name: 'Python', level: 80, icon: '<i class="fab fa-python"></i>' },
-            { name: 'C/C++', level: 60, icon: '<i class="fab fa-aws"></i>' },
-            { name: 'Assembly', level: 60, icon: '<i class="fab fa-aws"></i>' }
+            { name: 'C/C++', level: 55, icon: '<i class="fas fa-file-code"></i>' },
+            { name: 'Assembly', level: 50, icon: '<i class="fas fa-microchip"></i>' }
         ]
     };
 
