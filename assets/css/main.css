@@ -351,6 +351,27 @@ a:hover {
     margin: 2rem auto;
 }
 
+.timeline-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-icon {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
 .timeline::after {
     content: '';
     position: absolute;
@@ -438,6 +459,14 @@ a:hover {
     box-shadow: 0 12px 24px var(--shadow-color);
 }
 
+.timeline-content:hover .timeline-icon {
+    transform: scale(1.1);
+}
+
+.timeline-title {
+    flex-grow: 1;
+}
+
 .timeline-content:hover.expanded {
     transform: translateY(-4px);
 }
@@ -479,6 +508,17 @@ a:hover {
     font-size: 0.875rem;
     color: var(--accent-color);
     margin-bottom: 0.5rem;
+}
+
+.timeline-period, .timeline-title h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-period i, .timeline-title h4 i {
+    font-size: 0.9rem;
+    color: var(--accent-color);
 }
 
 .timeline-content:hover .timeline-description,
@@ -615,6 +655,16 @@ a:hover {
     
     .timeline-dot {
         left: -0.4rem !important;
+    }
+    
+    .timeline-header {
+        gap: 0.75rem;
+    }
+    
+    .timeline-icon {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
     }
 
     .hero-links {

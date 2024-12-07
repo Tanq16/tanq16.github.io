@@ -182,13 +182,45 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Timeline
     function initializeTimeline() {
         const timeline = document.querySelector('.timeline');
+        
+        // Function to get appropriate icon for each company
+        function getCompanyIcon(company) {
+            const iconMap = {
+                'Praetorian Security, Inc.': 'fa-solid fa-user-shield',
+                'Praetorian Canada Inc.': 'fa-solid fa-user-shield',
+                'Google LLC': 'fa-solid fa-baby-carriage',
+                'Georgia Institute of Technology': 'fa-solid fa-user-graduate'
+            };
+            
+            // Check if company name contains any of the keys
+            for (const [key, icon] of Object.entries(iconMap)) {
+                if (company.includes(key)) {
+                    return icon;
+                }
+            }
+            return 'fa-building'; // Default icon
+        }
+    
         timeline.innerHTML = experienceData.map(exp => `
             <div class="timeline-item">
                 <div class="timeline-arrow"></div>
                 <div class="timeline-content">
-                    <h3>${exp.role}</h3>
-                    <div class="timeline-period">${exp.period}</div>
-                    <h4>${exp.company}</h4>
+                    <div class="timeline-header">
+                        <div class="timeline-icon">
+                            <i class="${getCompanyIcon(exp.company)}" aria-hidden="true"></i>
+                        </div>
+                        <div class="timeline-title">
+                            <h3>${exp.role}</h3>
+                            <div class="timeline-period">
+                                <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                ${exp.period}
+                            </div>
+                            <h4>
+                                <i class="far fa-building" aria-hidden="true"></i>
+                                ${exp.company}
+                            </h4>
+                        </div>
+                    </div>
                     <div class="timeline-description">
                         <p>${exp.description}</p>
                     </div>
