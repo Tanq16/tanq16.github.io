@@ -2,43 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Skills data
     const skillsData = {
         cloud: [
-            { name: 'Amazon Web Services (AWS)', level: 95 },
-            { name: 'Google Cloud Platform (GCP)', level: 75 },
-            { name: 'Microsoft Azure', level: 75 },
-            { name: 'Kubernetes', level: 75 },
-            { name: 'CI/CD Security', level: 80 }
+            { name: 'Amazon Web Services (AWS)', level: 95, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Google Cloud Platform (GCP)', level: 75, icon: '<i class="fab fa-google"></i>' },
+            { name: 'Microsoft Azure', level: 75, icon: '<i class="fab fa-microsoft"></i>' },
+            { name: 'Kubernetes', level: 75, icon: '<i class="fab fa-microsoft"></i>' },
+            { name: 'CI/CD Security', level: 80, icon: '<i class="fab fa-aws"></i>' }
         ],
         systems: [
-            { name: 'GitHub Actions', level: 90 },
-            { name: 'Containerization', level: 90 },
-            { name: 'Systems Architecture', level: 80 },
-            { name: 'IaC (primarily Terraform)', level: 90 },
-            { name: 'Build Systems', level: 70 }
+            { name: 'GitHub Actions', level: 90, icon: '<i class="fab fa-github"></i>' },
+            { name: 'Containerization', level: 90, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Systems Architecture', level: 80, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'IaC (primarily Terraform)', level: 90, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Build Systems', level: 70, icon: '<i class="fab fa-aws"></i>' }
         ],
         app: [
-            { name: 'Web App Security', level: 85 },
-            { name: 'OWASP Top 10', level: 85 },
-            { name: 'Mobile App Testing', level: 70 },
-            { name: '(M)ASVS', level: 75 },
-            { name: 'AI & LLM Security', level: 70 }
+            { name: 'Web App Security', level: 85, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'OWASP Top 10', level: 85, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Mobile App Testing', level: 70, icon: '<i class="fab fa-aws"></i>' },
+            { name: '(M)ASVS', level: 75, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'AI & LLM Security', level: 70, icon: '<i class="fab fa-aws"></i>' }
         ],
         tools: [
-            { name: 'Git', level: 90 },
-            { name: 'Docker', level: 90 },
-            { name: 'Linux', level: 95 },
-            { name: 'Industry CSPM Tools', level: 80 },
-            { name: 'Burpsuite', level: 85 },
-            { name: 'Nmap', level: 80 },
-            { name: 'Kali Linux', level: 90 },
-            { name: 'Neo4j & Cypher', level: 80 },
-            { name: 'GDB', level: 60 }
+            { name: 'Git', level: 90, icon: '<i class="fab fa-git-alt"></i>' },
+            { name: 'Docker', level: 90, icon: '<i class="fab fa-docker"></i>' },
+            { name: 'Linux', level: 95, icon: '<i class="fab fa-linux"></i>' },
+            { name: 'Industry CSPM Tools', level: 80, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Burpsuite', level: 85, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Nmap', level: 80, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Kali Linux', level: 90, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Neo4j & Cypher', level: 80, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'GDB', level: 60, icon: '<i class="fab fa-aws"></i>' }
         ],
         programming: [
-            { name: 'Golang', level: 80 },
-            { name: 'Bash', level: 85 },
-            { name: 'Python', level: 80 },
-            { name: 'C/C++', level: 60 },
-            { name: 'Assembly', level: 60 }
+            { name: 'Golang', level: 80, icon: '<i class="fab fa-golang"></i>' },
+            { name: 'Bash', level: 85, icon: '<i class="fab fa-terminal"></i>' },
+            { name: 'Python', level: 80, icon: '<i class="fab fa-python"></i>' },
+            { name: 'C/C++', level: 60, icon: '<i class="fab fa-aws"></i>' },
+            { name: 'Assembly', level: 60, icon: '<i class="fab fa-aws"></i>' }
         ]
     };
 
@@ -153,11 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const skillTabs = document.querySelectorAll('.skill-tab');
 
         function showSkills(category) {
+            const skillsContent = document.querySelector('.skills-content');
             const skills = skillsData[category];
+            
             skillsContent.innerHTML = skills.map(skill => `
                 <div class="skill-item">
                     <div class="skill-header">
-                        <span>${skill.name}</span>
+                        <div class="skill-name">
+                            ${skill.icon}
+                            <span>${skill.name}</span>
+                        </div>
                         <span>${skill.level}%</span>
                     </div>
                     <div class="skill-bar">
