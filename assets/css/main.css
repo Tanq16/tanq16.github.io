@@ -12,7 +12,7 @@
     --secondary-color: #64748b;
     --border-color: #e2e8f0;
     --card-bg: #ffffff;
-    --nav-bg: rgba(255, 255, 255, 0.8);
+    --nav-bg: #ffffff;
     --shadow-color: rgba(25, 25, 25, 0.1);
     --heading-font: 'Clash Display', sans-serif;
     --subheading-font: 'General Sans', sans-serif;
@@ -140,6 +140,7 @@ a:hover {
     top: 0;
     z-index: 100;
     background-color: var(--nav-bg);
+    transition: all 0.3s ease;
     /* backdrop-filter: blur(100%);
     -webkit-backdrop-filter: blur(100%); */
 }
