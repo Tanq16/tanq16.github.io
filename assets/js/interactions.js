@@ -31,14 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'Vim', level: 80, icon: '<i class="devicon-vim-plain"></i>' },
             { name: 'Nmap', level: 80, icon: '<i class="devicon-networkx-plain"></i>' },
             { name: 'Kali Linux', level: 90, icon: '<i class="fas fa-dragon"></i>' },
-            { name: 'Industry CSPM Tools', level: 70, icon: '<i class="fas fa-magnifying-glass-chart"></i>' },
+            // { name: 'Industry CSPM Tools', level: 70, icon: '<i class="fas fa-magnifying-glass-chart"></i>' },
             { name: 'Neo4j & Cypher', level: 70, icon: '<i class="fas fa-database"></i>' },
             { name: 'GDB', level: 55, icon: '<i class="fas fa-bug"></i>' }
         ],
         programming: [
-            { name: 'Golang', level: 80, icon: '<i class="fab fa-golang"></i>' },
+            { name: 'Golang', level: 75, icon: '<i class="fab fa-golang"></i>' },
             { name: 'Bash', level: 85, icon: '<i class="devicon-bash-plain"></i>' },
-            { name: 'Python', level: 80, icon: '<i class="fab fa-python"></i>' },
+            { name: 'Python', level: 75, icon: '<i class="fab fa-python"></i>' },
             { name: 'C/C++', level: 55, icon: '<i class="devicon-cplusplus-plain"></i>' },
             { name: 'Java', level: 55, icon: '<i class="devicon-java-plain"></i>' },
             { name: 'Assembly', level: 50, icon: '<i class="fas fa-microchip"></i>' }
@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 '- Integrate a fuzzer into FuzzBench'
             ]
         }
-        // Add more experiences as needed
     ];
 
     // Projects data
@@ -121,25 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
             details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.'
         },
         {
-            title: 'CLI Productivity Suite',
-            description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
-            tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
-            link: 'https://github.com/Tanq16/cli-productivity-suite',
-            details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.'
-        },
-        {
-            title: 'BudgetLord - Expense Tracker',
-            description: 'Simple Expense Tracker with REST API and tracking-based visualization',
-            tags: ['Go', 'GitHub Actions', 'Application'],
-            link: 'https://github.com/Tanq16/BudgetLord',
-            details: 'Simple expense tracker built in Go with custom GitHub Actions for multi-platform and multi-architecture builds, including a containerized version.'
-        },
-        {
             title: 'Local-Content-Share',
             description: 'Web Application for sharing text and files within a local network',
             tags: ['Go', 'Web Application', 'GitHub Actions'],
             link: 'https://github.com/Tanq16/local-content-share',
             details: 'A Go application for sharing text and files within a local network, with GHA workflows for multi-platform and multi-arch builds, including a containerized version.'
+        },
+        {
+            title: 'AI Context',
+            description: 'Generate AI-friendly context from repositories or videos',
+            tags: ['Go', 'CLI', 'AI', 'Automation'],
+            link: 'https://github.com/Tanq16/ai-context',
+            details: 'A command-line tool designed to produce a context file from various sources, to make interactions with LLM apps (like ChatGPT, Claude, etc.) easy.'
+        },
+        {
+            title: 'CLI Productivity Suite',
+            description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
+            tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
+            link: 'https://github.com/Tanq16/cli-productivity-suite',
+            details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.'
         },
         {
             title: 'SubDextract - Subdomain Enumeration',
