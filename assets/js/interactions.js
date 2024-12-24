@@ -155,6 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
             details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.'
         },
         {
+            title: 'Expense Owl',
+            description: 'Extremely simple expense tracker with nice UI intended for home lab use.',
+            tags: ['Go', 'Expense Tracker', 'Web Application'],
+            link: 'https://github.com/Tanq16/RAGaaS',
+            details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.'
+        },
+        {
             title: 'SubDextract - Subdomain Enumeration',
             description: 'Python CLI tool for automating subdomain enumeration',
             tags: ['Python', 'CLI', 'Automation'],
