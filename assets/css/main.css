@@ -247,7 +247,7 @@ a:hover {
 .hero-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     margin-top: 2rem;
     flex-wrap: wrap;
 }
@@ -257,7 +257,7 @@ a:hover {
     text-decoration: none;
     border-radius: 6px;
     color: var(--text-color);
-    font-size: 2rem;
+    font-size: 1.8rem;
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
@@ -614,7 +614,7 @@ a:hover {
 .project-card {
     background-color: var(--card-bg);
     border-radius: 12px;
-    padding: 2rem;
+    padding: 1.5rem;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
@@ -713,7 +713,11 @@ a:hover {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1.5rem;
+        gap: 1.2rem;
+    }
+
+    .social-link {
+        font-size: 1.6rem;
     }
 }
 
@@ -742,9 +746,10 @@ a:hover {
     .social-link {
         width: auto;
         max-width: none;
+        font-size: 1.6rem;
     }
 
     .hero-links {
-        gap: 1.5rem;
+        gap: 1.2rem;
     }
 }

@@ -113,11 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
             details: 'A multi-arch containerized toolkit with multi-staged Docker build pipelines. Provides an advanced workflow for data persistence.'
         },
         {
-            title: 'Link Hub',
-            description: 'Collection of resources and tools for security professionals',
-            tags: ['Cybersecurity', 'Resources'],
-            link: 'https://github.com/Tanq16/link-hub',
-            details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.'
+            title: 'AI Context',
+            description: 'Generate AI-friendly context from repositories or videos',
+            tags: ['Go', 'CLI', 'AI', 'Automation'],
+            link: 'https://github.com/Tanq16/ai-context',
+            details: 'A command-line tool designed to produce a context file from various sources, to make interactions with LLM apps (like ChatGPT, Claude, etc.) easy.'
         },
         {
             title: 'Local-Content-Share',
@@ -127,18 +127,32 @@ document.addEventListener('DOMContentLoaded', () => {
             details: 'A Go application for sharing text and files within a local network, with GHA workflows for multi-platform and multi-arch builds, including a containerized version.'
         },
         {
-            title: 'AI Context',
-            description: 'Generate AI-friendly context from repositories or videos',
-            tags: ['Go', 'CLI', 'AI', 'Automation'],
-            link: 'https://github.com/Tanq16/ai-context',
-            details: 'A command-line tool designed to produce a context file from various sources, to make interactions with LLM apps (like ChatGPT, Claude, etc.) easy.'
-        },
-        {
             title: 'CLI Productivity Suite',
             description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
             tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
             link: 'https://github.com/Tanq16/cli-productivity-suite',
             details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.'
+        },
+        {
+            title: 'Nottif',
+            description: 'CLI tool for sending custom notifications to Discord webhooks',
+            tags: ['Go', 'CLI', 'Discord'],
+            link: 'https://github.com/Tanq16/nottif',
+            details: 'A Go CLI tool to send Discord markdown messages to one or more webhooks. Supports piped input and custom message formatting.'
+        },
+        {
+            title: 'Link Hub',
+            description: 'Collection of resources and tools for security professionals',
+            tags: ['Cybersecurity', 'Resources'],
+            link: 'https://github.com/Tanq16/link-hub',
+            details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.'
+        },
+        {
+            title: 'RAGaaS',
+            description: 'Quick drop-in implementation of Retrieval-Augmented Generation',
+            tags: ['Python', 'ML', 'RAG', 'Ollama', 'Qdrant'],
+            link: 'https://github.com/Tanq16/RAGaaS',
+            details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.'
         },
         {
             title: 'SubDextract - Subdomain Enumeration',
