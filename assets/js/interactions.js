@@ -110,63 +110,72 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'A containerized collection of security tools for security assessments',
             tags: ['Docker', 'GitHub Actions', 'Pentesting', 'Automation', 'Build Systems'],
             link: 'https://github.com/tanq16/containerized-security-toolkit',
-            details: 'A multi-arch containerized toolkit with multi-staged Docker build pipelines. Provides an advanced workflow for data persistence.'
+            details: 'A multi-arch containerized toolkit with multi-staged Docker build pipelines. Provides an advanced workflow for data persistence.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/containerized-security-toolkit/main/docs/assets/CST-Logo.png'
         },
         {
             title: 'AI Context',
             description: 'Generate AI-friendly context from repositories or videos',
             tags: ['Go', 'CLI', 'AI', 'Automation'],
             link: 'https://github.com/Tanq16/ai-context',
-            details: 'A command-line tool designed to produce a context file from various sources, to make interactions with LLM apps (like ChatGPT, Claude, etc.) easy.'
+            details: 'A command-line tool designed to produce a context file from various sources, to make interactions with LLM apps (like ChatGPT, Claude, etc.) easy.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
         },
         {
             title: 'Local-Content-Share',
             description: 'Web Application for sharing text and files within a local network',
             tags: ['Go', 'Web Application', 'GitHub Actions'],
             link: 'https://github.com/Tanq16/local-content-share',
-            details: 'A Go application for sharing text and files within a local network, with GHA workflows for multi-platform and multi-arch builds, including a containerized version.'
+            details: 'A Go application for sharing text and files within a local network, with GHA workflows for multi-platform and multi-arch builds, including a containerized version.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
         },
         {
             title: 'CLI Productivity Suite',
             description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
             tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
             link: 'https://github.com/Tanq16/cli-productivity-suite',
-            details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.'
+            details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/cli-productivity-suite/master/logo.png'
         },
         {
             title: 'Nottif',
             description: 'CLI tool for sending custom notifications to Discord webhooks',
             tags: ['Go', 'CLI', 'Discord'],
             link: 'https://github.com/Tanq16/nottif',
-            details: 'A Go CLI tool to send Discord markdown messages to one or more webhooks. Supports piped input and custom message formatting.'
+            details: 'A Go CLI tool to send Discord markdown messages to one or more webhooks. Supports piped input and custom message formatting.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/nottif/main/.github/assets/logo.png'
         },
         {
             title: 'Link Hub',
             description: 'Collection of resources and tools for security professionals',
             tags: ['Cybersecurity', 'Resources'],
             link: 'https://github.com/Tanq16/link-hub',
-            details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.'
+            details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/link-hub/main/.github/assets/logo.png'
         },
         {
             title: 'RAGaaS',
             description: 'Quick drop-in implementation of Retrieval-Augmented Generation',
             tags: ['Python', 'ML', 'RAG', 'Ollama', 'Qdrant'],
             link: 'https://github.com/Tanq16/RAGaaS',
-            details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.'
+            details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/RAGaaS/main/.github/assets/logo.png'
         },
         {
             title: 'Expense Owl',
             description: 'Extremely simple expense tracker with nice UI intended for home lab use.',
             tags: ['Go', 'Expense Tracker', 'Web Application'],
             link: 'https://github.com/Tanq16/RAGaaS',
-            details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.'
+            details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
         },
         {
-            title: 'SubDextract - Subdomain Enumeration',
+            title: 'SubDextract',
             description: 'Python CLI tool for automating subdomain enumeration',
             tags: ['Python', 'CLI', 'Automation'],
             link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
-            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.'
+            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
         }
     ];
 
@@ -288,7 +297,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectsGrid = document.querySelector('.projects-grid');
         projectsGrid.innerHTML = projectsData.map(project => `
             <div class="project-card" onclick="window.open('${project.link}', '_blank')">
-                <h3>${project.title}</h3>
+                <div class="project-header">
+                    <img src="${project.icon}" 
+                         alt="${project.title} icon" 
+                         class="project-icon">
+                    <p class="project-title">${project.title}</p>
+                </div>
                 <p>${project.description}</p>
                 <div class="project-details">
                     <p>${project.details}</p>

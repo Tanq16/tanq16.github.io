@@ -67,6 +67,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('formSuccess');
+    if (form) {
+        form.setAttribute('action', 'https://docs.google.com/forms/d/e/1FAIpQLSdwo76OfO7YoLfxf2BUesXxPfeVVoehnHN3u-hWlhXn_LbgFw/formResponse');
+        form.setAttribute('target', 'hidden_iframe');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            })
+            .then(() => {
+                form.style.display = 'none';
+                successMessage.classList.remove('hidden');
+                form.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            });
+        });
+    }
+});
+
 // Scroll event listener
 window.addEventListener('scroll', () => {
     requestAnimationFrame(updateScrollProgress);

@@ -43,6 +43,7 @@
                 <a href="/#experience">Experience</a>
                 <a href="/#skills">Skills</a>
                 <a href="/#projects">Projects</a>
+                <a href="/#contact">Ping Me</a>
                 <!-- <a href="/blog/" target="_blank">Blog</a> -->
                 <!-- <a href="/assets/resume.pdf" target="_blank">Resume</a> -->
 				<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -61,19 +62,19 @@
                 <style>
                     .hero-background {
                         position: absolute;
-                        inset: 50px; /* Provide some margin from the edges */
+                        inset: 50px;
                         overflow: hidden;
                         z-index: -1;
-                        border-radius: 30px; /* Rounded corners for the container */
+                        border-radius: 30px;
                     }
                     .blurred-image {
                         position: absolute;
-                        inset: -50px; /* Slightly larger than container to avoid blur edges */
+                        inset: -50px;
                         background-image: url('/assets/images/bg1.jpg');
                         background-position: center;
                         background-size: cover;
                         filter: blur(2px) opacity(0.6);
-                        transform: scale(1.2); /* Avoid showing blur edges */
+                        transform: scale(1.2);
                         border-radius: 30px;
                     }
                     [data-theme="dark"] .blurred-image {
@@ -82,12 +83,12 @@
                     }
                     @media screen and (max-width: 768px) {
                         .hero-background {
-                            inset: 30px; /* Less margin on smaller screens */
+                            inset: 30px;
                         }
                     }
                     @media screen and (max-width: 480px) {
                         .hero-background {
-                            inset: 20px; /* Even less margin on mobile */
+                            inset: 20px;
                         }
                     }
                 </style>
@@ -116,7 +117,7 @@
                     <a href="https://twitter.com/etheriosking" class="social-link">
                         <i class="fab fa-x-twitter"></i>
                     </a>
-                    <a href="https://twitter.com/etheriosking" class="social-link">
+                    <a href="https://www.reddit.com/user/import-base64" class="social-link">
                         <i class="fab fa-reddit-alien"></i>
                     </a>
                     <a href="https://tanishq.page/blog" class="social-link" target="_blank">
@@ -173,16 +174,31 @@
                     <h3>Containerized Security Toolkit</h3>
                     <p>A comprehensive collection of security tools containerized for efficient deployment</p>
                 </a>
-                <a href="https://github.com/Tanq16/link-hub" class="work-item">
-                    <h3>Link Hub</h3>
-                    <p>Resource management system for organizing and accessing security-related information</p>
-                </a>
-                <a href="https://github.com/Tanq16/cli-productivity-suite" class="work-item">
-                    <h3>CLI Productivity Suite</h3>
-                    <p>Command-line tools for enhancing security workflow efficiency</p>
                 </a>
             </div>
         </section> -->
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2>Ping Me!</h2>
+            <div class="contact-container">
+                <form id="contactForm" class="custom-form">
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="entry.1571572371" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="entry.1124901568" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+                <div id="formSuccess" class="form-success hidden">
+                    Message sent! I'll get back to you soon.
+                </div>
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
