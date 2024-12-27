@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'Generate AI-friendly context from repositories or videos',
             tags: ['Go', 'CLI', 'AI', 'Automation'],
             link: 'https://github.com/Tanq16/ai-context',
-            details: 'A command-line tool designed to produce a context file from various sources, to make interactions with LLM apps (like ChatGPT, Claude, etc.) easy.',
+            details: 'A CLI tool that produces context files from webpages, YouTube videos, and repositories, to make interactions with ChatGPT, Claude, etc. easy.',
             icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
         },
         {
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'Web Application for sharing text and files within a local network',
             tags: ['Go', 'Web Application', 'GitHub Actions'],
             link: 'https://github.com/Tanq16/local-content-share',
-            details: 'A Go application for sharing text and files within a local network, with GHA workflows for multi-platform and multi-arch builds, including a containerized version.',
+            details: 'A Go application for sharing text snippets and files within a local network, with multi-platform & multi-arch builds, and a containerized version.',
             icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
         },
         {
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'Expense Owl',
-            description: 'Extremely simple expense tracker with nice UI intended for home lab use.',
+            description: 'Extremely simple expense tracker with nice UI intended for home lab use',
             tags: ['Go', 'Expense Tracker', 'Web Application'],
             link: 'https://github.com/Tanq16/RAGaaS',
             details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.',
