@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'AI Context',
-            description: 'Generate AI-friendly context from repositories or videos',
+            description: 'Generate AI-friendly context from code repos, webpages, or YouTube videos',
             tags: ['Go', 'CLI', 'AI', 'Automation'],
             link: 'https://github.com/Tanq16/ai-context',
             details: 'A CLI tool that produces context files from webpages, YouTube videos, and repositories, to make interactions with ChatGPT, Claude, etc. easy.',
@@ -152,6 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
             link: 'https://github.com/Tanq16/link-hub',
             details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.',
             icon: 'https://raw.githubusercontent.com/Tanq16/link-hub/main/.github/assets/logo.png'
+        },
+        {
+            title: 'BackHub',
+            description: 'A simple backup tool to maintain local mirrors of GitHub repositories',
+            tags: ['Go', 'Automation', 'CLI', 'Backup'],
+            link: 'https://github.com/Tanq16/backhub',
+            details: 'Local mirror backups of GitHub repositories with concurrency, scheduling (every 3 days), multi-arch & multi-OS binaries, and a Docker image.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/backhub/main/.github/assets/logo.png'
         },
         {
             title: 'RAGaaS',
