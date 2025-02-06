@@ -138,12 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/cli-productivity-suite/master/logo.png'
         },
         {
-            title: 'Nottif',
-            description: 'CLI tool for sending custom notifications to Discord webhooks',
-            tags: ['Go', 'CLI', 'Discord'],
-            link: 'https://github.com/Tanq16/nottif',
-            details: 'A Go CLI tool to send Discord markdown messages to one or more webhooks. Supports piped input and custom message formatting.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/nottif/main/.github/assets/logo.png'
+            title: 'Expense Owl',
+            description: 'Extremely simple expense tracker with nice UI intended for home lab use',
+            tags: ['Go', 'Expense Tracker', 'Web Application'],
+            link: 'https://github.com/Tanq16/RAGaaS',
+            details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
         },
         {
             title: 'Link Hub',
@@ -162,28 +162,36 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/backhub/main/.github/assets/logo.png'
         },
         {
-            title: 'RAGaaS',
-            description: 'Quick drop-in implementation of Retrieval-Augmented Generation',
-            tags: ['Python', 'ML', 'RAG', 'Ollama', 'Qdrant'],
-            link: 'https://github.com/Tanq16/RAGaaS',
-            details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/RAGaaS/main/.github/assets/logo.png'
-        },
-        {
-            title: 'Expense Owl',
-            description: 'Extremely simple expense tracker with nice UI intended for home lab use',
-            tags: ['Go', 'Expense Tracker', 'Web Application'],
-            link: 'https://github.com/Tanq16/RAGaaS',
-            details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
-        },
-        {
             title: 'SubDextract',
             description: 'Python CLI tool for automating subdomain enumeration',
             tags: ['Python', 'CLI', 'Automation'],
             link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
             details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.',
             icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
+        },
+        {
+            title: 'LinkSnapper',
+            description: 'A simple self-hosted bookmark manager with nested categories',
+            tags: ['Go', 'Bookmarks', 'Web Application'],
+            link: 'https://github.com/Tanq16/linksnapper',
+            details: 'A Go CLI and containerized bookmark management tool that supports nested categories in a beautiful UI. Also supports health checks and a fuzzy search.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/linksnapper/main/assets/logo.png'
+        },
+        {
+            title: 'Nottif',
+            description: 'CLI tool for sending custom notifications to Discord webhooks',
+            tags: ['Go', 'CLI', 'Discord'],
+            link: 'https://github.com/Tanq16/nottif',
+            details: 'A Go CLI tool to send Discord markdown messages to one or more webhooks. Supports piped input and custom message formatting.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/nottif/main/.github/assets/logo.png'
+        },
+        {
+            title: 'RAGaaS',
+            description: 'Quick drop-in implementation of Retrieval-Augmented Generation',
+            tags: ['Python', 'ML', 'RAG', 'Ollama', 'Qdrant'],
+            link: 'https://github.com/Tanq16/RAGaaS',
+            details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/RAGaaS/main/.github/assets/logo.png'
         }
     ];
 
