@@ -123,10 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'Local-Content-Share',
-            description: 'Web Application for sharing text and files within a local network',
+            description: 'Self-hosted app for sharing text snippets and files within a local network',
             tags: ['Go', 'Web Application', 'GitHub Actions'],
             link: 'https://github.com/Tanq16/local-content-share',
-            details: 'A Go application for sharing text snippets and files within a local network, with multi-platform & multi-arch builds, and a containerized version.',
+            details: 'A self-hosted Go application for sharing text and files in a network, with multi-platform & multi-arch builds, and a containerized version.',
             icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
         },
         {
@@ -158,16 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'A simple backup tool to maintain local mirrors of GitHub repositories',
             tags: ['Go', 'Automation', 'CLI', 'Backup'],
             link: 'https://github.com/Tanq16/backhub',
-            details: 'Local mirror backups of GitHub repositories with concurrency, scheduling (every 3 days), multi-arch & multi-OS binaries, and a Docker image.',
+            details: 'Local mirror backups of GitHub repositories with concurrency, scheduled backups (when self-hosted), multi-arch & multi-OS binaries, and a Docker image.',
             icon: 'https://raw.githubusercontent.com/Tanq16/backhub/main/.github/assets/logo.png'
-        },
-        {
-            title: 'SubDextract',
-            description: 'Python CLI tool for automating subdomain enumeration',
-            tags: ['Python', 'CLI', 'Automation'],
-            link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
-            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
         },
         {
             title: 'LinkSnapper',
@@ -176,6 +168,14 @@ document.addEventListener('DOMContentLoaded', () => {
             link: 'https://github.com/Tanq16/linksnapper',
             details: 'A Go CLI and containerized bookmark management tool that supports nested categories in a beautiful UI. Also supports health checks and a fuzzy search.',
             icon: 'https://raw.githubusercontent.com/Tanq16/linksnapper/main/assets/logo.png'
+        },
+        {
+            title: 'SubDextract',
+            description: 'Python CLI tool for automating subdomain enumeration',
+            tags: ['Python', 'CLI', 'Automation'],
+            link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
+            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
         },
         {
             title: 'Nottif',
