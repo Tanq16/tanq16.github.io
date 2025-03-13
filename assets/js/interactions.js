@@ -178,6 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
         },
         {
+            title: 'Danzo',
+            description: 'Fast, multi-connection CLI file download manager written in Go',
+            tags: ['Go', 'CLI', 'Download Manager'],
+            link: 'https://github.com/Tanq16/danzo',
+            details: 'A multi-platform and multi-architecture Go CLI tool to download files with multiple connections, resume support, and a progress bar.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
+        },
+        {
             title: 'Nottif',
             description: 'CLI tool for sending custom notifications to Discord webhooks',
             tags: ['Go', 'CLI', 'Discord'],
