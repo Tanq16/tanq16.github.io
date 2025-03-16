@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Expense Owl',
             description: 'Extremely simple expense tracker with nice UI intended for home lab use',
             tags: ['Go', 'Expense Tracker', 'Web Application'],
-            link: 'https://github.com/Tanq16/RAGaaS',
+            link: 'https://github.com/Tanq16/ExpenseOwl',
             details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.',
             icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
         },
@@ -318,6 +318,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Projects
     function initializeProjects() {
+        initializeProjectsWithStars();
+        return;
         const projectsGrid = document.querySelector('.projects-grid');
         projectsGrid.innerHTML = projectsData.map(project => `
             <div class="project-card" onclick="window.open('${project.link}', '_blank')">
@@ -338,6 +340,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `).join('');
+    }
+
+    // Function to fetch GitHub stars for a repository
+    async function fetchGitHubStars(repoUrl) {
+        // Extract owner and repo from GitHub URL
+        const urlParts = repoUrl.split('/');
+        if (urlParts.length < 5 || !repoUrl.includes('github.com')) {
+            return null; // Not a valid GitHub URL
+        }
+        
+        const owner = urlParts[3];
+        const repo = urlParts[4];
+        
+        try {
+            const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+            if (response.ok) {
+                const data = await response.json();
+                return data.stargazers_count;
+            } else {
+                console.error(`Failed to fetch stars for ${owner}/${repo}`);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error fetching GitHub stars:', error);
+            return null;
+        }
+    }
+
+    // Update the project card rendering to include stars (only visible on hover)
+    function initializeProjectsWithStars() {
+        const projectsGrid = document.querySelector('.projects-grid');
+        
+        // First, render the projects
+        projectsGrid.innerHTML = projectsData.map(project => `
+            <div class="project-card" data-repo-url="${project.link}" onclick="window.open('${project.link}', '_blank')">
+                <div class="project-header">
+                    <img src="${project.icon}" 
+                        alt="${project.title} icon" 
+                        class="project-icon">
+                    <p class="project-title">${project.title}</p>
+                </div>
+                <p>${project.description}</p>
+                <div class="project-details">
+                    <div class="project-stars" id="stars-${project.title.replace(/\s+/g, '-').toLowerCase()}">
+                        <i class="fas fa-star"></i> <span>...</span>
+                    </div>
+                    <p>${project.details}</p>
+                    <div class="project-tags">
+                        ${project.tags.map(tag => `
+                            <span class="project-tag">${tag}</span>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        // Then fetch and update star counts
+        document.querySelectorAll('.project-card').forEach(async (card) => {
+            const repoUrl = card.dataset.repoUrl;
+            if (!repoUrl) return;
+            
+            const starsCount = await fetchGitHubStars(repoUrl);
+            const starsElement = card.querySelector('.project-stars span');
+            
+            if (starsCount !== null && starsElement) {
+                starsElement.textContent = starsCount;
+            } else if (starsElement) {
+                // If we couldn't fetch stars, hide the stars element
+                card.querySelector('.project-stars').style.display = 'none';
+            }
+        });
     }
 
     // Initialize all sections
