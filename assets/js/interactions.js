@@ -114,28 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/containerized-security-toolkit/main/docs/assets/CST-Logo.png'
         },
         {
-            title: 'AI Context',
-            description: 'Generate AI-friendly context from code repos, webpages, or YouTube videos',
-            tags: ['Go', 'CLI', 'AI', 'Automation'],
-            link: 'https://github.com/Tanq16/ai-context',
-            details: 'A CLI tool that produces context files from webpages, YouTube videos, and repositories, to make interactions with ChatGPT, Claude, etc. easy.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
-        },
-        {
-            title: 'Local-Content-Share',
-            description: 'Self-hosted app for sharing text snippets and files within a local network',
-            tags: ['Go', 'Web Application', 'GitHub Actions'],
-            link: 'https://github.com/Tanq16/local-content-share',
-            details: 'A self-hosted Go application for sharing text and files in a network, with multi-platform & multi-arch builds, and a containerized version.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
-        },
-        {
-            title: 'CLI Productivity Suite',
-            description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
-            tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
-            link: 'https://github.com/Tanq16/cli-productivity-suite',
-            details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/cli-productivity-suite/master/logo.png'
+            title: 'Danzo',
+            description: 'Fast, multi-connection CLI file download manager written in Go',
+            tags: ['Go', 'CLI', 'Download Manager'],
+            link: 'https://github.com/Tanq16/danzo',
+            details: 'A multi-platform and multi-architecture Go CLI tool to download files with multiple connections, resume support, and a progress bar.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
         },
         {
             title: 'Expense Owl',
@@ -146,12 +130,20 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
         },
         {
-            title: 'Link Hub',
-            description: 'Collection of resources and tools for security professionals',
-            tags: ['Cybersecurity', 'Resources'],
-            link: 'https://github.com/Tanq16/link-hub',
-            details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/link-hub/main/.github/assets/logo.png'
+            title: 'Local-Content-Share',
+            description: 'Self-hosted app for sharing text snippets and files within a local network',
+            tags: ['Go', 'Web Application', 'GitHub Actions'],
+            link: 'https://github.com/Tanq16/local-content-share',
+            details: 'A self-hosted Go application for sharing text and files in a network, with multi-platform & multi-arch builds, and a containerized version.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
+        },
+        {
+            title: 'AI Context',
+            description: 'Generate AI-friendly context from code repos, webpages, or YouTube videos',
+            tags: ['Go', 'CLI', 'AI', 'Automation'],
+            link: 'https://github.com/Tanq16/ai-context',
+            details: 'A CLI tool that produces context files from webpages, YouTube videos, and repositories, to make interactions with ChatGPT, Claude, etc. easy.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
         },
         {
             title: 'BackHub',
@@ -170,20 +162,20 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/linksnapper/main/assets/logo.png'
         },
         {
-            title: 'SubDextract',
-            description: 'Python CLI tool for automating subdomain enumeration',
-            tags: ['Python', 'CLI', 'Automation'],
-            link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
-            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
+            title: 'CLI Productivity Suite',
+            description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
+            tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
+            link: 'https://github.com/Tanq16/cli-productivity-suite',
+            details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/cli-productivity-suite/master/logo.png'
         },
         {
-            title: 'Danzo',
-            description: 'Fast, multi-connection CLI file download manager written in Go',
-            tags: ['Go', 'CLI', 'Download Manager'],
-            link: 'https://github.com/Tanq16/danzo',
-            details: 'A multi-platform and multi-architecture Go CLI tool to download files with multiple connections, resume support, and a progress bar.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
+            title: 'Link Hub',
+            description: 'Collection of resources and tools for security professionals',
+            tags: ['Cybersecurity', 'Resources'],
+            link: 'https://github.com/Tanq16/link-hub',
+            details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/link-hub/main/.github/assets/logo.png'
         },
         {
             title: 'Nottif',
@@ -200,6 +192,14 @@ document.addEventListener('DOMContentLoaded', () => {
             link: 'https://github.com/Tanq16/RAGaaS',
             details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.',
             icon: 'https://raw.githubusercontent.com/Tanq16/RAGaaS/main/.github/assets/logo.png'
+        },
+        {
+            title: 'SubDextract',
+            description: 'Python CLI tool for automating subdomain enumeration',
+            tags: ['Python', 'CLI', 'Automation'],
+            link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
+            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
         }
     ];
 
