@@ -110,12 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
             description: 'A containerized collection of security tools for security assessments',
             tags: ['Docker', 'GitHub Actions', 'Pentesting', 'Automation', 'Build Systems'],
             link: 'https://github.com/tanq16/containerized-security-toolkit',
-            details: 'A multi-arch containerized toolkit with multi-staged Docker build pipelines. Provides an advanced workflow for data persistence.',
+            details: 'A multi-arch security toolkit with multi-staged Docker build pipelines for security operations & workflows.',
             icon: 'https://raw.githubusercontent.com/Tanq16/containerized-security-toolkit/main/docs/assets/CST-Logo.png'
         },
         {
             title: 'Danzo',
-            description: 'Fast, multi-connection CLI file download manager written in Go',
+            description: 'Fast, advanced, multi-connection CLI downloads manager written in Go',
             tags: ['Go', 'CLI', 'Download Manager'],
             link: 'https://github.com/Tanq16/danzo',
             details: 'A multi-platform and multi-architecture Go CLI tool to download files with multiple connections, resume support, and a progress bar.',
