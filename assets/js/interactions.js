@@ -106,6 +106,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Projects data
     const projectsData = [
         {
+            title: 'Danzo',
+            description: 'Fast, advanced, multi-threaded CLI download manager written in Go.',
+            tags: ['Go', 'CLI', 'Download Manager'],
+            link: 'https://github.com/Tanq16/danzo',
+            details: 'Multi-OS, multi-arch, multi-threaded CLI downloader that supports various sources (HTTP, S3, YouTube, GitHub, M3U8, etc.). Danzo also has resume support and a custom TUI progress reporting system.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
+        },
+        {
+            title: 'Expense Owl',
+            description: 'Simple and beautiful, self-hosted expense tracking software.',
+            tags: ['Go', 'Expense Tracker', 'Web Application'],
+            link: 'https://github.com/Tanq16/ExpenseOwl',
+            details: 'Expense tracking system with a modern UI and month-month pie-chart visualization, built with Go and ChartJS. Available as a container and a binary, with many more small features.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
+        },
+        {
+            title: 'Local-Content-Share',
+            description: 'Self-hosted app for sharing text & files in LAN, along with a notepad.',
+            tags: ['Go', 'Web Application', 'Data Sharing'],
+            link: 'https://github.com/Tanq16/local-content-share',
+            details: 'A Go-based app for sharing text snippets and files within a network. It also contains a notepad for rough notes. LCS is multi-platform, has multi-arch builds, and a Docker image.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
+        },
+        {
+            title: 'Anbu',
+            description: 'A swiss army knife CLI tool for performing everyday tasks with ease.',
+            tags: ['Go', 'CLI Application', 'Automation'],
+            link: 'https://github.com/tanq16/anbu',
+            details: 'Anbu can perform time printing/parsing, network tunneling, command template execution, simple HTTP(S) server, secrets scan, bulk rename, file (en/de)cryption, RSA/SSH key-pair creation, etc.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/anbu/main/.github/assets/logo.png'
+        },
+        {
+            title: 'AI Context',
+            description: 'Generate AI-friendly context from code repos, webpages, or YouTube videos',
+            tags: ['Go', 'CLI', 'AI', 'Automation'],
+            link: 'https://github.com/Tanq16/ai-context',
+            details: 'A Go-based multi-threaded CLI tool that produces context files from webpages, YouTube videos, and repositories, to make interactions with ChatGPT, Claude, etc. easy.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
+        },
+        {
             title: 'Containerized Security Toolkit',
             description: 'A containerized collection of security tools for security assessments',
             tags: ['Docker', 'GitHub Actions', 'Pentesting', 'Automation', 'Build Systems'],
@@ -114,56 +154,24 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/containerized-security-toolkit/main/docs/assets/CST-Logo.png'
         },
         {
-            title: 'Danzo',
-            description: 'Fast, advanced, multi-connection CLI downloads manager written in Go',
-            tags: ['Go', 'CLI', 'Download Manager'],
-            link: 'https://github.com/Tanq16/danzo',
-            details: 'A multi-platform and multi-architecture Go CLI tool to download files with multiple connections, resume support, and a progress bar.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
-        },
-        {
-            title: 'Expense Owl',
-            description: 'Extremely simple expense tracker with nice UI intended for home lab use',
-            tags: ['Go', 'Expense Tracker', 'Web Application'],
-            link: 'https://github.com/Tanq16/ExpenseOwl',
-            details: 'Expense tracking system with a modern UI and pie-chart visualization, built with Go and ChartJS and available as a container and a binary.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
-        },
-        {
-            title: 'Local-Content-Share',
-            description: 'Self-hosted app for sharing text snippets and files within a local network',
-            tags: ['Go', 'Web Application', 'GitHub Actions'],
-            link: 'https://github.com/Tanq16/local-content-share',
-            details: 'A self-hosted Go application for sharing text and files in a network, with multi-platform & multi-arch builds, and a containerized version.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
-        },
-        {
-            title: 'AI Context',
-            description: 'Generate AI-friendly context from code repos, webpages, or YouTube videos',
-            tags: ['Go', 'CLI', 'AI', 'Automation'],
-            link: 'https://github.com/Tanq16/ai-context',
-            details: 'A CLI tool that produces context files from webpages, YouTube videos, and repositories, to make interactions with ChatGPT, Claude, etc. easy.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
-        },
-        {
             title: 'BackHub',
-            description: 'A simple backup tool to maintain local mirrors of GitHub repositories',
+            description: 'A simple backup tool to maintain local mirrors of GitHub repositories.',
             tags: ['Go', 'Automation', 'CLI', 'Backup'],
             link: 'https://github.com/Tanq16/backhub',
-            details: 'Local mirror backups of GitHub repositories with concurrency, scheduled backups (when self-hosted), multi-arch & multi-OS binaries, and a Docker image.',
+            details: 'Local mirror backups of GitHub repositories with concurrency and template support baked in. BackHub is multi-arch, has multi-OS binaries, and a Docker image.',
             icon: 'https://raw.githubusercontent.com/Tanq16/backhub/main/.github/assets/logo.png'
         },
         {
             title: 'LinkSnapper',
-            description: 'A simple self-hosted bookmark manager with nested categories',
+            description: 'A simple self-hosted bookmark manager with nested categories.',
             tags: ['Go', 'Bookmarks', 'Web Application'],
             link: 'https://github.com/Tanq16/linksnapper',
-            details: 'A Go CLI and containerized bookmark management tool that supports nested categories in a beautiful UI. Also supports health checks and a fuzzy search.',
+            details: 'A Go CLI and containerized bookmark management tool that supports nested categories in a modern AMOLED UI. Also supports health checks and a fuzzy-word search across all fields.',
             icon: 'https://raw.githubusercontent.com/Tanq16/linksnapper/main/assets/logo.png'
         },
         {
             title: 'CLI Productivity Suite',
-            description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS',
+            description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS.',
             tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
             link: 'https://github.com/Tanq16/cli-productivity-suite',
             details: 'A custom set of command-line tools and dotfiles management suite with multi-platform support to enhance workflow efficiency for CLI users.',
@@ -171,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'Link Hub',
-            description: 'Collection of resources and tools for security professionals',
+            description: 'Collection of resources and tools for security professionals.',
             tags: ['Cybersecurity', 'Resources'],
             link: 'https://github.com/Tanq16/link-hub',
             details: 'A curated list of resources and tools across cloud security, application security, systems security, AI security, programming, and more.',
@@ -179,27 +187,19 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             title: 'Nottif',
-            description: 'CLI tool for sending custom notifications to Discord webhooks',
+            description: 'CLI tool for sending custom notifications to Discord webhooks.',
             tags: ['Go', 'CLI', 'Discord'],
             link: 'https://github.com/Tanq16/nottif',
-            details: 'A Go CLI tool to send Discord markdown messages to one or more webhooks. Supports piped input and custom message formatting.',
+            details: 'A Go-based CLI tool that sends Discord-markdown messages to one or more webhooks. Supports piped input and custom message formatting.',
             icon: 'https://raw.githubusercontent.com/Tanq16/nottif/main/.github/assets/logo.png'
         },
         {
             title: 'RAGaaS',
-            description: 'Quick drop-in implementation of Retrieval-Augmented Generation',
+            description: 'Quick drop-in implementation of Retrieval-Augmented Generation.',
             tags: ['Python', 'ML', 'RAG', 'Ollama', 'Qdrant'],
             link: 'https://github.com/Tanq16/RAGaaS',
             details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.',
             icon: 'https://raw.githubusercontent.com/Tanq16/RAGaaS/main/.github/assets/logo.png'
-        },
-        {
-            title: 'SubDextract',
-            description: 'Python CLI tool for automating subdomain enumeration',
-            tags: ['Python', 'CLI', 'Automation'],
-            link: 'https://github.com/Tanq16/Sub-Domain-Enumeration-SubDextract',
-            details: 'Python CLI tool to enumerate subdomains using CT logs, VirusTotal, ThreatCrowd, search engine queries, SAN & DNS MX query, and breadth-first scraping with regex match.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/Sub-Domain-Enumeration-SubDextract/master/.github/assets/logo.png'
         }
     ];
 
@@ -320,26 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeProjects() {
         initializeProjectsWithStars();
         return;
-        const projectsGrid = document.querySelector('.projects-grid');
-        projectsGrid.innerHTML = projectsData.map(project => `
-            <div class="project-card" onclick="window.open('${project.link}', '_blank')">
-                <div class="project-header">
-                    <img src="${project.icon}" 
-                         alt="${project.title} icon" 
-                         class="project-icon">
-                    <p class="project-title">${project.title}</p>
-                </div>
-                <p>${project.description}</p>
-                <div class="project-details">
-                    <p>${project.details}</p>
-                    <div class="project-tags">
-                        ${project.tags.map(tag => `
-                            <span class="project-tag">${tag}</span>
-                        `).join('')}
-                    </div>
-                </div>
-            </div>
-        `).join('');
     }
 
     // Function to fetch GitHub stars for a repository

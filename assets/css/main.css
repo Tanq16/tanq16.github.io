@@ -7,11 +7,13 @@
 :root {
     /* Light theme */
     --bg-color: #ffffff;
+    --bg-color2: #b76844;
     --text-color: #1a1a1a;
     --accent-color: #ed8d61;
     --secondary-color: #64748b;
     --border-color: #e2e8f0;
     --card-bg: #ffffff;
+    --card-bg2: #f4f4f4;
     --nav-bg: #ffffff;
     --shadow-color: rgba(25, 25, 25, 0.1);
     --heading-font: 'Clash Display', sans-serif;
@@ -22,11 +24,13 @@
 [data-theme="dark"] {
     /* Dark theme */
     --bg-color: #121d2a;
+    --bg-color2: #335885;
     --text-color: #e0e7f0;
     --accent-color: #5693dd;
     --secondary-color: #acbbcf;
     --border-color: #1e293b;
     --card-bg: #192335;
+    --card-bg2: #192335;
     --nav-bg: #121d2a;
     --shadow-color: rgba(0, 0, 0, 0.3);
 }
@@ -808,8 +812,7 @@ a:hover {
 }
 
 .contact-container {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--card-bg2);
     border-radius: 12px;
     padding: 1.5rem;
 }
@@ -833,7 +836,7 @@ a:hover {
 .custom-form input,
 .custom-form textarea {
     padding: 0.75rem;
-    border: 1px solid var(--border-color);
+    border: none;
     border-radius: 8px;
     background: var(--bg-color);
     color: var(--text-color);
@@ -855,7 +858,7 @@ a:hover {
 }
 
 .custom-form button:hover {
-    background: var(--accent-hover);
+    background: var(--bg-color2);
 }
 
 .form-success {
