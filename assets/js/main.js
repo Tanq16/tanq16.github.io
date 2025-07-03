@@ -71,26 +71,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contactForm');
     const successMessage = document.getElementById('formSuccess');
     if (form) {
-        form.setAttribute('action', 'https://docs.google.com/forms/d/e/1FAIpQLSdwo76OfO7YoLfxf2BUesXxPfeVVoehnHN3u-hWlhXn_LbgFw/formResponse');
-        form.setAttribute('target', 'hidden_iframe');
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
             const submitBtn = form.querySelector('button[type="submit"]');
+            const formData = new FormData(form);
+            const email = formData.get('email');
+            const message = formData.get('message');
+            const webhookUrl = 'https://discord.com/api/webhooks/1390401811252510782/T7A0oCQEAnFsHMky2y5mm12cp3HW_7NjxgLWk1bSb17WZ_9sdEL8T3h0WCuROei3RYO1'; 
+            const discordMessage = {
+                content: `## ${email}\n\n${message}`
+            };
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
-            const formData = new FormData(form);
-            fetch(form.action, {
+            fetch(webhookUrl, {
                 method: 'POST',
-                body: formData,
-                mode: 'no-cors'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(discordMessage),
             })
-            .then(() => {
-                form.style.display = 'none';
-                successMessage.classList.remove('hidden');
-                form.reset();
+            .then(response => {
+                if (response.ok) {
+                    form.style.display = 'none';
+                    successMessage.classList.remove('hidden');
+                } else {
+                    alert('There was an error sending your message. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                }
             })
             .catch(error => {
-                console.error('Error:', error);
+                alert('There was a network error. Please try again.');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
             });
