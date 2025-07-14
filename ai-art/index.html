@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanishq's AI Art Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .nav-link {
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #d1d5db; /* gray-300 */
+            transform: scale(1.05);
+        }
+        .nav-link.active {
+            color: #f3f4f6; /* gray-100 */
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        #image-container img {
+            transition: opacity 1s ease-in-out;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-51FXJVSNB5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-51FXJVSNB5');
+</script>
+<body class="bg-black text-white">
+
+    <div class="text-center w-full max-w-4xl mx-auto p-4">
+        <h1 class="text-4xl md:text-5xl mb-4">Tanishq's AI Art Gallery</h1>
+
+        <nav class="flex justify-center space-x-6 md:space-x-12 mb-6 text-xl md:text-2xl">
+            <a href="#" class="nav-link active" data-category="sketches">Sketches</a>
+            <a href="#" class="nav-link" data-category="images">Images</a>
+            <a href="#" class="nav-link" data-category="illustrations">Illustrations</a>
+        </nav>
+
+        <p id="section-description" class="text-lg md:text-xl text-gray-400 mb-8 h-12 md:h-16"></p>
+
+        <div id="image-container" class="w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto">
+            <img id="slideshow-image" src="" alt="AI Generated Art" class="rounded-lg shadow-lg shadow-gray-700/50 w-full">
+        </div>
+    </div>
+
+    <script>
+        var images = {
+            sketches: [],
+            images: [],
+            illustrations: []
+        };
+        for (let i = 1; i <= 68; i++) {
+            images.sketches.push(`./sketches/sketch${i}.jpg`);
+        }
+        for (let i = 1; i <= 2; i++) {
+            images.images.push(`./images/image${i}.jpg`);
+        }
+        for (let i = 1; i <= 19; i++) {
+            images.illustrations.push(`./illustrations/ill${i}.jpg`);
+        }
+
+        const descriptions = {
+            sketches: "These are some sketches I generated with AI. They are a cool look into the interpretation of my ideas by AI.",
+            images: "This collection showcases all general images I created with the help of AI, using prompting and additional references.",
+            illustrations: "These are illustrations I created with AI, expressing a range of ideas from idioms to abstract concepts."
+        };
+
+        let currentCategory = 'sketches';
+        let slideshowInterval;
+        let currentImageIndex = 0;
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const slideshowImage = document.getElementById('slideshow-image');
+        const descriptionElement = document.getElementById('section-description');
+
+        function changeImage() {
+            const imagePool = images[currentCategory];
+            if (!imagePool || imagePool.length === 0) return;
+            
+            // Fade out
+            slideshowImage.style.opacity = 0;
+
+            setTimeout(() => {
+                // Get a random index different from the current one
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * imagePool.length);
+                } while (imagePool.length > 1 && newIndex === currentImageIndex);
+                
+                currentImageIndex = newIndex;
+                slideshowImage.src = imagePool[currentImageIndex];
+                
+                // Fade in
+                slideshowImage.style.opacity = 1;
+            }, 1000); // Wait for fade out to complete
+        }
+
+        function setCategory(category) {
+            currentCategory = category;
+            
+            // Update active link
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.dataset.category === category);
+            });
+
+            // Update description
+            descriptionElement.textContent = descriptions[category];
+            
+            // Restart slideshow
+            clearInterval(slideshowInterval);
+            currentImageIndex = -1; // Reset index to allow the first image to be any
+            changeImage(); // Change image immediately
+            slideshowInterval = setInterval(changeImage, 5000); // Change image every 4 seconds
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = e.target.dataset.category;
+                if (category !== currentCategory) {
+                    setCategory(category);
+                }
+            });
+        });
+        
+        // Initial load
+        window.addEventListener('load', () => {
+             setCategory('sketches');
+        });
+
+    </script>
+</body>
+</html>
