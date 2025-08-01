@@ -106,14 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Projects data
     const projectsData = [
         {
-            title: 'Danzo',
-            description: 'Fast, advanced, multi-threaded CLI download manager written in Go.',
-            tags: ['Go', 'CLI', 'Download Manager'],
-            link: 'https://github.com/Tanq16/danzo',
-            details: 'Multi-OS, multi-arch, multi-threaded CLI downloader that supports various sources (HTTP, S3, YouTube, GitHub, M3U8, etc.). Danzo also has resume support and a custom TUI progress reporting system.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
-        },
-        {
             title: 'Expense Owl',
             description: 'Simple and beautiful, self-hosted expense tracking software.',
             tags: ['Go', 'Expense Tracker', 'Web Application'],
@@ -128,6 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
             link: 'https://github.com/Tanq16/local-content-share',
             details: 'A Go-based app for sharing text snippets and files within a network. It also contains a notepad for rough notes. LCS is multi-platform, has multi-arch builds, and a Docker image.',
             icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
+        },
+        {
+            title: 'Danzo',
+            description: 'Fast, advanced, multi-threaded CLI download manager written in Go.',
+            tags: ['Go', 'CLI', 'Download Manager'],
+            link: 'https://github.com/Tanq16/danzo',
+            details: 'Multi-OS, multi-arch, multi-threaded CLI downloader that supports various sources (HTTP, S3, YouTube, GitHub, M3U8, etc.). Danzo also has resume support and a custom TUI progress reporting system.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
         },
         {
             title: 'Anbu',
@@ -194,12 +194,12 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'https://raw.githubusercontent.com/Tanq16/nottif/main/.github/assets/logo.png'
         },
         {
-            title: 'RAGaaS',
-            description: 'Quick drop-in implementation of Retrieval-Augmented Generation.',
+            title: 'Kaname',
+            description: 'Elegant self-hosted web application for on-demand task execution.',
             tags: ['Python', 'ML', 'RAG', 'Ollama', 'Qdrant'],
-            link: 'https://github.com/Tanq16/RAGaaS',
-            details: 'A dockerized implementation of RAG with Ollama and Qdrant for quick drop-in chats with your knowledgebase.',
-            icon: 'https://raw.githubusercontent.com/Tanq16/RAGaaS/main/.github/assets/logo.png'
+            link: 'https://github.com/Tanq16/kaname',
+            details: 'A dockerized application that provides a simple web interface for on-demand task execution using Python or Bash scripts with frontend output and error propagation.',
+            icon: 'https://raw.githubusercontent.com/Tanq16/kaname/main/.github/assets/logo.png'
         }
     ];
 
