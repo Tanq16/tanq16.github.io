@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(form);
             const email = formData.get('email');
             const message = formData.get('message');
-            const webhookUrl = 'https://discord.com/api/webhooks/1390401811252510782/T7A0oCQEAnFsHMky2y5mm12cp3HW_7NjxgLWk1bSb17WZ_9sdEL8T3h0WCuROei3RYO1'; 
+            const webhookUrl = atob('aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTQwMjAzMzkwNDQ1MzQyMzI1NC9nbGJ1VGRXZFVqT01OUWFWN0xPQmZPOEZkd3l4ZFl1N3drSHlZalIwYmN6NFBxTF9rRWM2TldmS3lrNXpIVU13VGgxbA==');
             const discordMessage = {
                 content: `## ${email}\n\n${message}`
             };
