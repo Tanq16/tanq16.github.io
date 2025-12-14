@@ -1,29 +1,106 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tanishq Rupaal - Lead Security Engineer at Praetorian. 
+    MS Cybersecurity graduate from Georgia Tech. AWS Security and Application Security 
+    professional." />
+    <meta name="keywords" content="Cybersecurity, AWS Security, Cloud Security, Ethical 
+    Hacking, Penetration Testing, Homelab, Self-hosting, Self-Hosted, Google Cloud Platform, 
+    Azure, Kubernetes, Docker, Containers, Web Security, Tanishq Rupaal, Praetorian, Georgia 
+    Tech" />
+
     <title>Tanishq Rupaal | Cybersecurity Practician</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="Tanishq Rupaal - Lead Security Engineer at Praetorian. MS Cybersecurity graduate from Georgia Tech. AWS Security and Application Security professional." />
-    <meta name="keywords" content="Cybersecurity, AWS Security, Cloud Security, Ethical Hacking, Penetration Testing, Homelab, Self-hosting, Self-Hosted, Google Cloud Platform, Azure, Kubernetes, Docker, Containers, Web Security, Tanishq Rupaal, Praetorian, Georgia Tech" />
     
-    <!-- Fonts -->
+    <!-- Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- CSS & JS -->
-    <link rel="stylesheet" href="/assets/css/main.css" />
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-	<script src="/assets/js/main.js" defer></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        rosewater: '#f5e0dc',
+                        flamingo: '#f2cdcd',
+                        pink: '#f5c2e7',
+                        mauve: '#cba6f7',
+                        red: '#f38ba8',
+                        maroon: '#eba0ac',
+                        peach: '#fab387',
+                        yellow: '#f9e2af',
+                        green: '#a6e3a1',
+                        teal: '#94e2d5',
+                        sky: '#89dceb',
+                        sapphire: '#74c7ec',
+                        blue: '#89b4fa',
+                        lavender: '#b4befe',
+                        text: '#cdd6f4',
+                        subtext1: '#bac2de',
+                        subtext0: '#a6adc8',
+                        overlay2: '#9399b2',
+                        overlay1: '#7f849c',
+                        overlay0: '#6c7086',
+                        surface2: '#585b70',
+                        surface1: '#45475a',
+                        surface0: '#313244',
+                        base: '#1e1e2e',
+                        mantle: '#181825',
+                        crust: '#11111b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar to match theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #11111b; /* Crust */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #313244; /* Surface0 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #45475a; /* Surface1 */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Fade in animation for sections */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#121d2a" media="(prefers-color-scheme: dark)">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-51FXJVSNB5"></script>
@@ -34,190 +111,11 @@
 
   gtag('config', 'G-51FXJVSNB5');
 </script>
-<body>
-	<div class="scroll-progress"></div>
-	<div class="loading">
-		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-			<path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-		</svg>
-	</div>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <a href="/" class="nav-logo">
-                <img src="/assets/images/logotdark.svg" alt="TR" width="40" height="40">
-            </a>
-            <div class="nav-links">
-				<!-- <a href="/#about">About</a> -->
-                <a href="/#experience">Experience</a>
-                <a href="/#skills">Skills</a>
-                <a href="/#projects">Projects</a>
-                <a href="/#contact">Ping Me</a>
-                <!-- <a href="/blog/" target="_blank">Blog</a> -->
-                <!-- <a href="/assets/resume.pdf" target="_blank">Resume</a> -->
-				<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-                    <i class="fas fa-sun" id="theme-icon"></i>
-				</button>
-            </div>
-        </nav>
-    </header>
+<body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base">
 
-    <!-- Main -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-background">
-                <div class="blurred-image"></div>
-                <style>
-                    .hero-background {
-                        position: absolute;
-                        inset: 50px;
-                        overflow: hidden;
-                        z-index: -1;
-                        border-radius: 30px;
-                    }
-                    .blurred-image {
-                        position: absolute;
-                        inset: -50px;
-                        background-image: url('/assets/images/bg1.jpg');
-                        background-position: center;
-                        background-size: cover;
-                        filter: blur(2px) opacity(0.6);
-                        transform: scale(1.2);
-                        border-radius: 30px;
-                    }
-                    [data-theme="dark"] .blurred-image {
-                        background-image: url('/assets/images/bg4.jpg');
-                        filter: blur(2px) opacity(0.6);
-                    }
-                    @media screen and (max-width: 768px) {
-                        .hero-background {
-                            inset: 30px;
-                        }
-                    }
-                    @media screen and (max-width: 480px) {
-                        .hero-background {
-                            inset: 20px;
-                        }
-                    }
-                </style>
-            </div>
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Tanishq Rupaal</h1>
-                    <h2>Cybersecurity Practician</h2>
-                    <p>Lead Security Engineer at Praetorian</p>
-                </div>
-                <div class="hero-links">
-                    <a href="mailto:dragonking47@proton.me" class="social-link">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://t.me/etheriosking" class="social-link">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/tanishqrupaal" class="social-link">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                <!-- </div>
-                <div class="hero-links"> -->
-                    <a href="https://github.com/tanq16" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://twitter.com/etheriosking" class="social-link">
-                        <i class="fab fa-x-twitter"></i>
-                    </a>
-                    <!-- <a href="https://www.reddit.com/user/import-base64" class="social-link">
-                        <i class="fab fa-reddit-alien"></i>
-                    </a> -->
-                    <a href="https://tanishq.page/blog" class="social-link" target="_blank">
-                        <i class="fas fa-pen-nib"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="section">
-            <h2>About</h2>
-            <p>
-                <b><i>There is always a workaround</i></b> - that's an ideology I strongly believe in. It's a reminder that problems don't just have solutions, but smart solutions. I try to find such solutions through hacks for all puzzles in my life.<br><br>
-
-                I currently work as a <b>Lead Security Engineer</b> at <b>Praetorian</b> and graduated with an <b>MS Cybersecurity</b> degree from <b>Georgia Tech</b>. My primary interests are Cloud Security, Application Security, and tinkering with Linux and containers in my homelab.<br><br>
-
-                Visit my <a href="/blog/"><b>blog</b></a> to read about some interesting things I write about (such as security lab walkthroughs, homelab, and containerization). I also occasionally write blogs at my workplace, Praetorian. Check out my <a href="/assets/resume.pdf"><b>resume</b></a> and read through this site for more details on my professional work.
-            </p>
-        </section>
-
-		<!-- Experience Section -->
-        <section id="experience" class="section">
-            <h2>Experience</h2>
-            <p>(Click the arrows or hover (click on mobile) on the box to expand)</p>
-            <div class="timeline"></div>
-        </section>
-
-        <!-- Skills Section -->
-		<section id="skills" class="section">
-            <h2>Skills</h2>
-            <p>(Click on the other tabs for more categories)</p>
-            <div class="skills-container">
-                <div class="skills-nav">
-                    <button class="skill-tab active" data-category="cloud"><i class="fas fa-cloud"></i>&nbsp;<span>Cloud Security</span></button>
-                    <button class="skill-tab" data-category="systems"><i class="fas fa-server"></i>&nbsp;<span>Systems</span></button>
-                    <button class="skill-tab" data-category="app"><i class="fas fa-shield-alt"></i>&nbsp;<span>Application Security</span></button>
-                    <button class="skill-tab" data-category="programming"><i class="fas fa-code"></i>&nbsp;<span>Programming</span></button>
-                    <button class="skill-tab" data-category="tools"><i class="fas fa-tools"></i>&nbsp;<span>Tools</span></button>
-                </div>
-                <div class="skills-content"></div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <h2>Projects</h2>
-            <p>(Expands on hover with mouse, otherwise click to visit)</p>
-            <div class="projects-grid"></div>
-        </section>
-
-        <!-- Future TODO Blog Mention Section -->
-        <!-- <section id="work" class="section">
-            <h2>Featured Work</h2>
-            <div class="work-grid">
-                <a href="https://github.com/tanq16/containerized-security-toolkit" class="work-item">
-                    <h3>Containerized Security Toolkit</h3>
-                    <p>A comprehensive collection of security tools containerized for efficient deployment</p>
-                </a>
-                </a>
-            </div>
-        </section> -->
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <h2>Ping Me!</h2>
-            <p>Send me an email for any questions, collabs, or an e-coffee!</p>
-            <div class="contact-container">
-                <form id="contactForm" class="custom-form">
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
-                <div id="formSuccess" class="form-success hidden">
-                    Message sent! I'll get back to you soon.
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© Tanishq Rupaal</p>
-    </footer>
-
-	<script src="/assets/js/interactions.js"></script>
+    <div id="app" class="min-h-screen flex flex-col"></div>
+    <script src="/assets/js/definitions.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/elements.js"></script>
 </body>
 </html>
