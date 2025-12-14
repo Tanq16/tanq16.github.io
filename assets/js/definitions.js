@@ -1,8 +1,3 @@
-/* * --------------------------------------------------------------------------
- * DEFINITIONS.JS
- * All content and configuration goes here.
- * --------------------------------------------------------------------------
- */
 const definitions = {
     config: {
         name: "Tanishq Rupaal",
@@ -10,12 +5,11 @@ const definitions = {
         subtitle: "Lead Security Engineer at Praetorian",
         email: "dragonking47@proton.me",
         socials: [
-            { icon: "fa:fas fa-envelope", link: "mailto:dragonking47@proton.me", label: "Email" },
+            { icon: "fa:fas fa-inbox", link: "mailto:dragonking47@proton.me", label: "Email" },
             { icon: "fa:fab fa-telegram", link: "https://t.me/etheriosking", label: "Telegram" },
-            { icon: "fa:fab fa-linkedin", link: "https://linkedin.com/in/tanishqrupaal", label: "LinkedIn" },
-            { icon: "fa:fab fa-github", link: "https://github.com/tanq16", label: "GitHub" },
-            { icon: "fa:fab fa-x-twitter", link: "https://twitter.com/etheriosking", label: "X" },
-            { icon: "fa:fas fa-pen-nib", link: "https://tanishq.page/blog", label: "Blog" }
+            { icon: "fa:fab fa-linkedin-in", link: "https://linkedin.com/in/tanishqrupaal", label: "LinkedIn" },
+            { icon: "fa:fab fa-github-alt", link: "https://github.com/tanq16", label: "GitHub" },
+            { icon: "fa:fab fa-x-twitter", link: "https://twitter.com/etheriosking", label: "X" }
         ]
     },
     
@@ -28,8 +22,8 @@ const definitions = {
             content: `<b><i>There is always a workaround</i></b> - that's an ideology I strongly believe in. It's a reminder that problems don't just have solutions, but smart solutions. I try to find such solutions through hacks for all puzzles in my life.<br><br>
             I currently work as a <b>Lead Security Engineer</b> at <b>Praetorian</b> and graduated with an <b>MS Cybersecurity</b> degree from <b>Georgia Tech</b>. My primary interests are Cloud Security, Application Security, and tinkering with Linux and containers in my homelab.`,
             actions: [
-                { label: "Blog", link: "/blog", icon: "lucide:book-open" },
-                { label: "Resume", link: "/assets/resume.pdf", icon: "lucide:file-text" }
+                { label: "Blog", link: "/blog", icon: "lucide:notebook-pen" },
+                { label: "Resume", link: "/resume", icon: "lucide:file-user" }
             ]
         },
         {
@@ -44,35 +38,35 @@ const definitions = {
                     date: "Oct 2024 - Present",
                     icon: "fa:fas fa-user-shield",
                     location: "Remote",
-                    summary: "Lead cloud security assessments and building security tools"
+                    summary: "Create assessment methodologies and tooling for cloud security service lines. Execute advanced cloud architecture security assessments and mentor junior engineers across product and cloud security verticals."
                 },
                 {
                     title: "Senior Security Engineer",
                     subtitle: "Praetorian Security, Inc.",
                     date: "Oct 2022 - Oct 2024",
                     icon: "fa:fas fa-user-shield",
-                    summary: "Perform product and cloud security assessments"
+                    summary: "Lead client interviews to understand and document client systems, and improve the quality of assessment reports for the cloud security service line."
                 },
                 {
                     title: "Security Engineer",
                     subtitle: "Praetorian Security, Inc.",
                     date: "Jul 2021 - Oct 2022",
                     icon: "fa:fas fa-user-shield",
-                    summary: "Perform product security assessments for clients"
+                    summary: "Performed solo and grouped security assessments for clients to assess the security posture of mobile & web apps, cloud & network infrastructures."
                 },
                 {
                     title: "Graduate Teaching Assistant",
                     subtitle: "Georgia Institute of Technology",
                     date: "Jan 2020 - May 2021",
                     icon: "fa:fas fa-user-graduate",
-                    summary: "Teaching assistant for CS 6035/4235 (Intro to InfoSec)"
+                    summary: "Supervised course logistics examinations, and assignments for CS 6035/4235 - Intro to InfoSec batch of 200+ students."
                 },
                 {
                     title: "Security Engineer Intern",
                     subtitle: "Google LLC",
                     date: "May 2020 - Aug 2020",
                     icon: "fa:fas fa-baby-carriage", 
-                    summary: "Implement improvements for open source fuzzing projects"
+                    summary: "Improved Fuzzbench to use single source of truth for benchmark container builds and eliminated differences between standard and OSS-Fuzz benchmark integration."
                 }
             ]
         },
@@ -86,10 +80,10 @@ const definitions = {
                     icon: "fa:fas fa-cloud",
                     items: [
                         { name: 'Amazon Web Services', level: 95, icon: 'fa:fab fa-aws' },
-                        { name: 'Google Cloud Platform', level: 75, icon: 'di:googlecloud' },
+                        { name: 'Google Cloud Platform', level: 85, icon: 'di:googlecloud' },
                         { name: 'Microsoft Azure', level: 75, icon: 'di:azure' },
                         { name: 'Kubernetes', level: 75, icon: 'di:kubernetes' },
-                        { name: 'CI/CD Security', level: 80, icon: 'di:githubactions' }
+                        { name: 'CI/CD Security', level: 85, icon: 'di:githubactions' }
                     ]
                 },
                 systems: {
@@ -101,7 +95,7 @@ const definitions = {
                         { name: 'Architecture Design', level: 80, icon: 'fa:fas fa-server' },
                         { name: 'IaC (Terraform)', level: 90, icon: 'di:terraform' },
                         { name: 'Server Admin', level: 80, icon: 'di:putty' },
-                        { name: 'Build Systems', level: 60, icon: 'di:cmake' }
+                        { name: 'Build Systems', level: 65, icon: 'di:cmake' }
                     ]
                 },
                 app: {
@@ -109,30 +103,30 @@ const definitions = {
                     icon: "fa:fas fa-shield-alt",
                     items: [
                         { name: 'Web App Security', level: 85, icon: 'di:safari' },
-                        { name: 'OWASP Top 10', level: 85, icon: 'di:ros' }, 
+                        { name: 'OWASP Top 10', level: 85, icon: 'di:ros-original' }, 
                         { name: 'Mobile App Testing', level: 65, icon: 'di:android' },
                         { name: '(M)ASVS', level: 70, icon: 'fa:fas fa-circle-check' },
-                        { name: 'AI & LLM Security', level: 70, icon: 'fa:fas fa-brain' }
+                        { name: 'AI & LLM Security', level: 80, icon: 'fa:fas fa-brain' }
                     ]
                 },
                 tools: {
                     label: "Tools",
                     icon: "fa:fas fa-tools",
                     items: [
-                        { name: 'Git', level: 80, icon: 'fa:fab fa-git-alt' },
+                        { name: 'Git', level: 85, icon: 'fa:fab fa-git-alt' },
                         { name: 'Docker', level: 90, icon: 'fa:fab fa-docker' },
                         { name: 'Linux', level: 95, icon: 'fa:fab fa-linux' },
                         { name: 'Burpsuite', level: 85, icon: 'fa:fas fa-spider' },
                         { name: 'Vim', level: 80, icon: 'di:vim' },
-                        { name: 'Kali Linux', level: 90, icon: 'fa:fas fa-dragon' },
-                        { name: 'Neo4j & Cypher', level: 70, icon: 'fa:fas fa-database' }
+                        { name: 'Kali Linux', level: 85, icon: 'fa:fas fa-dragon' },
+                        { name: 'Neo4j & Cypher', level: 80, icon: 'fa:fas fa-database' }
                     ]
                 },
                 programming: {
                     label: "Programming",
                     icon: "fa:fas fa-code",
                     items: [
-                        { name: 'Golang', level: 75, icon: 'fa:fab fa-golang' },
+                        { name: 'Golang', level: 80, icon: 'fa:fab fa-golang' },
                         { name: 'Bash', level: 85, icon: 'di:bash' },
                         { name: 'Python', level: 75, icon: 'fa:fab fa-python' },
                         { name: 'C/C++', level: 55, icon: 'di:cplusplus' },
@@ -178,12 +172,12 @@ const definitions = {
                 {
                     title: 'AI Context',
                     description: 'Generate AI-friendly context from code repos, webpages, or YouTube videos',
-                    tags: ['Go', 'CLI', 'AI'],
+                    tags: ['Go', 'CLI', 'AI', 'Archiver'],
                     link: 'https://github.com/Tanq16/ai-context',
                     icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
                 },
                 {
-                    title: 'CST',
+                    title: 'Containerized Security Toolkit',
                     description: 'A containerized collection of security tools for security assessments',
                     tags: ['Docker', 'Pentesting', 'SecOps'],
                     link: 'https://github.com/tanq16/containerized-security-toolkit',
@@ -197,18 +191,18 @@ const definitions = {
                     icon: 'https://raw.githubusercontent.com/Tanq16/backhub/main/.github/assets/logo.png'
                 },
                 {
-                    title: 'LinkSnapper',
-                    description: 'A simple self-hosted bookmark manager with nested categories.',
-                    tags: ['Go', 'Bookmarks', 'Web App'],
-                    link: 'https://github.com/Tanq16/linksnapper',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/linksnapper/main/assets/logo.png'
+                    title: 'CLI Productivity Suite',
+                    description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS systems.',
+                    tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
+                    link: 'https://github.com/Tanq16/cli-productivity-suite',
+                    icon: 'https://raw.githubusercontent.com/Tanq16/cli-productivity-suite/master/logo.png'
                 },
                 {
-                    title: 'Kaname',
-                    description: 'Elegant self-hosted web application for on-demand task execution.',
-                    tags: ['Python', 'RAG', 'Ollama'],
-                    link: 'https://github.com/Tanq16/kaname',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/kaname/main/.github/assets/logo.png'
+                    title: 'Link Hub',
+                    description: 'Collection of resources and tools for security professionals.',
+                    tags: ['Cybersecurity', 'Resources'],
+                    link: 'https://github.com/Tanq16/link-hub',
+                    icon: 'https://raw.githubusercontent.com/Tanq16/link-hub/main/.github/assets/logo.png'
                 }
             ]
         },
@@ -217,15 +211,13 @@ const definitions = {
             type: "contact", 
             title: "Ping Me",
             content: "Send me an email for any questions, collabs, or an e-coffee!",
-            // Encoded Discord webhook
             webhookUrl: "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTQwMjAzMzkwNDQ1MzQyMzI1NC9nbGJ1VGRXZFVqT01OUWFWN0xPQmZPOEZkd3l4ZFl1N3drSHlZalIwYmN6NFBxTF9rRWM2TldmS3lrNXpIVU13VGgxbA==",
             form: {
                 emailLabel: "Your Email",
                 messageLabel: "Your Message",
                 buttonText: "Send Message",
-                successMessage: "Message sent! I'll get back to you soon."
+                successMessage: "Message posted! I'll get back to you soon."
             }
         }
     ]
 };
-

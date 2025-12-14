@@ -84,8 +84,7 @@ const RESUME_DATA = {
                 "Specialist in cloud security and identity management for <b>AWS</b>, <b>GCP</b>, <b>Azure</b>, and <b>Kubernetes</b>",
                 "Proficient in supply chain (CI/CD) security across GitHub, Azure DevOps, CircleCI",
                 "Proficient in <b>Go</b>, <b>Bash</b>, and <b>Python</b>, with fundamentals of C, C++, java, and html/css/js/php",
-                "Experienced with <b>BurpSuite</b>, OWASP Top 10, MASVS, and ASVS",
-                "Experienced with <b>Nmap</b>, <b>Nikto</b>, <b>Wireshark</b> and fundamentals of Hydra, GDB, Ghidra",
+                "Experienced with <b>BurpSuite</b>, <b>Neo4j</b>, <b>Sliver</b>, <b>Nmap</b>, <b>Wireshark</b>, and many security technologies",
                 "Knowledgeable in Linux, Computer Networking, Docker and build systems like Make"
             ]
         },
@@ -116,27 +115,25 @@ const RESUME_DATA = {
             icon: "git-graph",
             entries: [
                 {
-                    title: "Containerized Security Toolkit",
-                    date: "June 2023",
+                    title: "Security Tooling",
                     details: [
-                        "Prepared a single Docker container with a collection of security tools",
-                        "Devised workflow for security operations and image updates"
+                        "<b>Nebula</b> - Multi-cloud security testing tool for AWS, GCP, Azure, and K8s with IAM graph analysis",
+                        "<b>Containerized Security Toolkit</b> - Docker container with collection of security tools and workflow for security operations"
                     ]
                 },
                 {
-                    title: "Analysis of Top 1 Million Domains",
-                    date: "March 2020",
+                    title: "Personal Projects",
                     details: [
-                        "Analyzed Majestic, Alexa, and Tranco lists over 30 days",
-                        "Enumerated adoption over 3 security metrics - HTTP/2.0, IPv6, and TLS"
+                        "<b>Expense Owl</b> - Self-hosted expense tracking web app built with Go",
+                        "<b>Local-Content-Share</b> - Self-hosted app for sharing text & files in LAN with integrated notepad",
+                        "<b>AI Context</b> - CLI tool to generate AI-friendly context from code repos, webpages, or YouTube videos",
                     ]
                 },
                 {
-                    title: "SubDextract - Sub-Domain Enumeration in Python",
-                    date: "March 2020",
+                    title: "Exploratory Projects",
                     details: [
-                        "Incorporated fast and reliable queries such as CT logs, SAN, DNS, etc.",
-                        "Yields 10x speedup with decrement of 30% # subdomains compared to Sublist3r"
+                        "<b>SubDextract</b> - Sub-domain enumeration tool in Python with CT logs, SAN, DNS queries",
+                        "<b>Analysis of Top 1 Million Domains</b> from Majestic, Alexa, Tranco lists for HTTP/2.0, IPv6, TLS adoption"
                     ]
                 }
             ]
@@ -148,11 +145,9 @@ const RESUME_DATA = {
             icon: "medal",
             entries: [
                 "<b>Dubai Police CTF Competition</b> - Top 15 (Feb 2019)",
-                "<b>Hack in The Box (HiTB)</b> Conference 2018, Dubai: Secured Rank 1 (UAE)",
-                "<b>IEEE Xtreme 11.0</b>: Secured Rank 1 (UAE), Rank 415 globally",
-                "Developed prototype for a Healthcare activities Tracking System in NYU Abu Dhabi Hackathon 2019",
-                "Participated in Global OSINT Search Party CTF by TraceLabs",
-                "Solved numerous challenges from HackTheBox, VulnHub, Root-me and Pwnable"
+                "<b>Hack in The Box (HiTB)</b> Conference 2018, Dubai - Rank 1 in UAE under <b>PCS_RT</b> team",
+                "<b>IEEE Xtreme 11.0</b> - Rank 1 in UAE, 415th globally",
+                "Participated in <b>Global OSINT Search Party CTF</b> by TraceLabs"
             ]
         },
         {
@@ -161,11 +156,10 @@ const RESUME_DATA = {
             type: "basic",
             icon: "drum", 
             entries: [
-                "President and Founder of ACM The Hacker's Exclusive (HEx), at BITS Pilani",
-                "Managed student placements as a Student Executive, Careers Division at BITS",
-                "Tinkering with linux systems and security tools in my home lab",
-                "Involvement in Security Conferences like BSides, HiTB",
-                "Drumming, Photography, Digital Presence Design and Digital Concept Art"
+                "President & Founder of <b>ACM The Hacker's Exclusive (HEx)</b>, at BITS Pilani Dubai",
+                "Managed student placements as <b>Student Executive, Careers Division</b> at BITS Pilani Dubai",
+                "Tinkering with Linux systems, containers, and security tools in my home lab",
+                "Drumming, Photography, and Digital Concept Art"
             ]
         }
     ]

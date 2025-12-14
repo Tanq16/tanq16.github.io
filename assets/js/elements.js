@@ -36,7 +36,7 @@ const elements = {
         `}).join('');
 
         return `
-        <section class="min-h-[60vh] flex flex-col md:flex-row items-center justify-between px-6 py-20 max-w-6xl mx-auto relative overflow-hidden gap-12">
+        <section class="min-h-[60vh] flex flex-col md:flex-row items-center justify-between px-6 py-10 max-w-6xl mx-auto relative overflow-hidden gap-12">
             <!-- Left: Content -->
             <div class="z-10 max-w-xl text-center animate-fade-in-up flex-1 flex flex-col items-center">
                 <h1 class="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-mauve via-pink to-blue bg-clip-text text-transparent tracking-tight">
@@ -73,7 +73,7 @@ const elements = {
             <div class="flex justify-center gap-4 mt-8">
                 ${data.actions.map(action => `
                     <a href="${action.link}" target="_blank" 
-                       class="px-8 py-3 rounded-full bg-surface0 text-text hover:bg-surface1 hover:text-mauve transition-all duration-300 flex items-center gap-2 font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-surface1/20">
+                       class="px-6 py-2 rounded-full bg-surface0 text-text hover:bg-surface1 hover:text-mauve transition-all duration-300 flex items-center gap-2 font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-surface1/20">
                         ${utils.resolveIcon(action.icon)}
                         <span>${action.label}</span>
                     </a>
@@ -150,7 +150,7 @@ const elements = {
                 
                 <!-- Header -->
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-8 h-8 shrink-0 flex items-center justify-center">
+                    <div class="w-16 h-16 shrink-0 flex items-center justify-center">
                         <img src="${item.icon}" alt="${item.title}" class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.style.display='none'">
                     </div>
                     <h3 class="text-lg font-bold text-lavender group-hover:text-mauve transition-colors">${item.title}</h3>
