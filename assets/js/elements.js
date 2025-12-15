@@ -1,5 +1,26 @@
 const elements = {
     
+    // 0. Ambient Background (Orbital Shapes)
+    Background: () => {
+        // By setting a transform-origin outside the element, rotation creates an orbit.
+        return `
+            <!-- Shape 1: Top Right - Mauve Square -->
+            <div class="absolute top-[15%] right-[15%] w-24 h-24 bg-surface0/30 rounded-3xl border border-mauve/10 animate-orbit-slow origin-[120px_120px]"></div>
+            
+            <!-- Shape 2: Left Center - Blue Rounded Rect -->
+            <div class="absolute top-[40%] left-[10%] w-20 h-20 bg-surface0/20 rounded-[2rem] border border-blue/10 animate-orbit-medium origin-[-60px_80px]"></div>
+            
+            <!-- Shape 3: Bottom Right - Lavender Circle -->
+            <div class="absolute bottom-[20%] right-[25%] w-32 h-32 bg-surface0/20 rounded-full border border-lavender/10 animate-orbit-fast origin-[80px_-80px]"></div>
+            
+            <!-- Shape 4: Top Left - Rosewater Small Square -->
+            <div class="absolute top-[20%] left-[20%] w-12 h-12 bg-surface0/10 rounded-xl border border-rosewater/10 animate-orbit-slow origin-[0px_100px]" style="animation-direction: reverse;"></div>
+            
+            <!-- Shape 5: Bottom Left - Teal Rounded -->
+            <div class="absolute bottom-[10%] left-[5%] w-28 h-28 bg-surface0/10 rounded-[2rem] border border-teal/10 animate-orbit-medium origin-[100px_-50px]"></div>
+        `;
+    },
+    
     // 1. Navbar
     Header: (config, sections) => {
         const navLinks = sections.map(s => 
@@ -72,7 +93,7 @@ const elements = {
         const actions = data.actions ? `
             <div class="flex justify-center gap-4 mt-8">
                 ${data.actions.map(action => `
-                    <a href="${action.link}" target="_blank" 
+                    <a href="${action.link}"
                        class="px-6 py-2 rounded-full bg-surface0 text-text hover:bg-surface1 hover:text-mauve transition-all duration-300 flex items-center gap-2 font-medium shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-surface1/20">
                         ${utils.resolveIcon(action.icon)}
                         <span>${action.label}</span>

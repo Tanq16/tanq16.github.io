@@ -59,6 +59,17 @@
                         base: '#1e1e2e',
                         mantle: '#181825',
                         crust: '#11111b',
+                    },
+                    animation: {
+                        'orbit-slow': 'orbit 35s linear infinite',
+                        'orbit-medium': 'orbit 25s linear infinite',
+                        'orbit-fast': 'orbit 15s linear infinite',
+                    },
+                    keyframes: {
+                        orbit: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        }
                     }
                 }
             }
@@ -111,9 +122,15 @@
 
   gtag('config', 'G-51FXJVSNB5');
 </script>
-<body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base">
+<body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base min-h-screen relative">
 
-    <div id="app" class="min-h-screen flex flex-col"></div>
+    <!-- Ambient Background Shapes -->
+    <div id="ambient-background" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <!-- Rendered by JS -->
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="relative z-10 min-h-screen flex flex-col"></div>
     <script src="/assets/js/definitions.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/elements.js"></script>

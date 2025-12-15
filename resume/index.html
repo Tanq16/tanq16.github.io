@@ -160,9 +160,8 @@
                     <div class="modal-close cursor-pointer" onclick="toggleModal('modal-id')"><i data-lucide="x" class="w-5 h-5"></i></div>
                 </div>
                 <div class="flex flex-col gap-3">
-                    <button onclick="window.print(); toggleModal('modal-id')" class="flex items-center justify-between w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded transition-colors group">
-                        <span class="flex items-center gap-3"><i data-lucide="printer" class="w-5 h-5 text-gray-600 group-hover:text-black"></i> Print to PDF</span>
-                        <span class="text-xs font-normal bg-gray-300 px-2 py-1 rounded">Default</span>
+                    <button onclick="window.print(); toggleModal('modal-id')" class="flex items-center justify-start gap-3 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded transition-colors group">
+                        <i data-lucide="printer" class="w-5 h-5 text-gray-600 group-hover:text-black"></i> Print to PDF
                     </button>
                     <button onclick="downloadJSON()" class="flex items-center justify-start gap-3 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded transition-colors group">
                         <i data-lucide="file-json" class="w-5 h-5 text-blue-600"></i> Download JSON

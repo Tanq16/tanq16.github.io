@@ -36,8 +36,10 @@ const utils = {
 };
 
 const app = document.getElementById('app');
+const bgContainer = document.getElementById('ambient-background');
 
 function init() {
+    bgContainer.innerHTML = elements.Background();
     app.innerHTML += elements.Header(definitions.config, definitions.sections);
     app.innerHTML += elements.Hero(definitions.config);
     definitions.sections.forEach(section => {
