@@ -1,10 +1,15 @@
 const app = document.getElementById('app');
 const bgContainer = document.getElementById('ambient-background');
 
+function parseDate(dateStr) {
+    return new Date(dateStr);
+}
+
 function init() {
     bgContainer.innerHTML = elements.Background();
     app.innerHTML = elements.Header(blogData.config);
-    app.innerHTML += elements.BlogGrid(blogData.posts);
+    const sortedPosts = [...blogData.posts].sort((a, b) => parseDate(b.date) - parseDate(a.date));
+    app.innerHTML += elements.BlogGrid(sortedPosts);
     app.innerHTML += elements.Footer(blogData.config);
     lucide.createIcons();
     initSearch();
@@ -18,15 +23,19 @@ function initSearch() {
     const container = document.getElementById('posts-container');
 
     searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
+        const term = e.target.value.toLowerCase().trim();
         let visibleCount = 0;
 
         cards.forEach(card => {
-            const title = card.dataset.title;
-            const category = card.dataset.category;
-            const tags = card.dataset.tags;
+            const title = card.dataset.title || '';
+            const description = card.dataset.description || '';
+            const category = card.dataset.category || '';
+            const date = card.dataset.date || '';
+            const tags = card.dataset.tags || '';
             
-            if (title.includes(term) || category.includes(term) || tags.includes(term)) {
+            const searchableText = `${title} ${description} ${category} ${date} ${tags}`;
+            
+            if (searchableText.includes(term)) {
                 card.style.display = 'flex';
                 visibleCount++;
             } else {

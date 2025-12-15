@@ -92,6 +92,9 @@ const elements = {
         <article class="blog-card flex flex-col h-full bg-surface0/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
                  onclick="window.location.href='/blog/posts/${post.location}/'"
                  data-title="${post.title.toLowerCase()}" 
+                 data-description="${post.description.toLowerCase()}"
+                 data-category="${post.category.toLowerCase()}"
+                 data-date="${post.date.toLowerCase()}"
                  data-tags="${post.tags.join(' ').toLowerCase()}">
             
             <!-- Image Area (Reduced Height) -->

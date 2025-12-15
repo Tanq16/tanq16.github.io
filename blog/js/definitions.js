@@ -219,7 +219,7 @@ const blogData = {
             id: "homelab-discord-reddit",
             title: "Discord & Reddit News Feed in Home Lab",
             description: "This post details how Discord webhooks and Reddit API can be used in tandom with a cron job to post news feeds to a Discord channel. The news feeds are collected from the r/technews subreddit...",
-            date: "Dec 14, 2025",
+            date: "Feb 18, 2022",
             category: "Home Server",
             location: "homelab-discord-reddit",
             tags: ["discord", "reddit", "news-feed", "home-lab"],
