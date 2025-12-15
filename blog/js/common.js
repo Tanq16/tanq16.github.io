@@ -75,7 +75,7 @@ const elements = {
         </footer>`
 };
 
-// --- CORE LOGIC ---
+// CORE LOGIC
 let tocHeaders = [];
 
 function generateId(text) {
@@ -88,7 +88,6 @@ function initMarked() {
             const text = token.text;
             const language = token.lang;
             if (language === 'mermaid') {
-                // Added horizontal scrolling wrapper for large diagrams
                 return `<div class="overflow-x-auto my-6"><div class="mermaid">${text}</div></div>`;
             }
             const validLang = hljs.getLanguage(language) ? language : 'plaintext';
@@ -132,13 +131,8 @@ function addCopyButtons() {
     const codeBlocks = document.querySelectorAll('pre:has(code):not(:has(.mermaid))');
     
     codeBlocks.forEach(block => {
-        // Skip if button already exists
         if (block.querySelector('.copy-code-btn')) return;
-        
-        // Create wrapper for positioning
         block.style.position = 'relative';
-        
-        // Create copy button
         const button = document.createElement('button');
         button.className = 'copy-code-btn';
         button.type = 'button';
@@ -146,21 +140,16 @@ function addCopyButtons() {
         button.setAttribute('aria-label', 'Copy code');
         button.setAttribute('title', 'Copy code');
         
-        // Add click handler
         button.addEventListener('click', async (e) => {
             e.preventDefault();
             e.stopPropagation();
-            
             const code = block.querySelector('code').textContent;
             try {
                 await navigator.clipboard.writeText(code);
-                // Change icon to check
                 button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
                 button.classList.add('copied');
                 button.setAttribute('title', 'Copied!');
                 lucide.createIcons();
-                
-                // Reset after 2 seconds
                 setTimeout(() => {
                     button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
                     button.classList.remove('copied');
@@ -169,7 +158,6 @@ function addCopyButtons() {
                 }, 2000);
             } catch (err) {
                 console.error('Failed to copy:', err);
-                // Fallback: Select text manually as last resort
                 const textArea = document.createElement('textarea');
                 textArea.value = code;
                 textArea.style.position = 'fixed';
@@ -205,29 +193,22 @@ function addCopyButtons() {
                 document.body.removeChild(textArea);
             }
         });
-        
         block.appendChild(button);
     });
-    
-    // Reinitialize lucide icons for the new buttons
     lucide.createIcons();
 }
 
 function initApp() {
     const app = document.getElementById('app');
     const bg = document.getElementById('ambient-background');
-    
     bg.innerHTML = elements.Background();
     app.innerHTML = elements.Header(articleData.config) + elements.Layout(articleData) + elements.Footer(articleData.config);
 
     initMarked();
     const mdContainer = document.getElementById('markdown-container');
     mdContainer.innerHTML = marked.parse(articleData.content);
-
-    // Add copy buttons to code blocks
     addCopyButtons();
 
-    // Initialize Mermaid with Catppuccin Mocha theme before rendering
     mermaid.initialize({ 
         startOnLoad: false, 
         theme: 'base',
@@ -265,8 +246,6 @@ function initApp() {
             noteBorderColor: '#f2cdcd', // flamingo
         } 
     });
-    
-    // Wait for fonts to load before rendering Mermaid to prevent text clipping
     document.fonts.ready.then(() => {
         mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
     });

@@ -1,12 +1,11 @@
 // Global Helper for Tag Clicks
 window.handleTagClick = (event, tag) => {
-    event.stopPropagation(); // Prevent card click
+    event.stopPropagation();
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.value = tag;
-        searchInput.dispatchEvent(new Event('input')); // Trigger filter
+        searchInput.dispatchEvent(new Event('input'));
         searchInput.focus();
-        // Optional: Scroll to top of posts to show results
         const container = document.getElementById('posts-container');
         if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

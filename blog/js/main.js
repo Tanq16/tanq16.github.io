@@ -1,17 +1,11 @@
-// Main Initialization
 const app = document.getElementById('app');
 const bgContainer = document.getElementById('ambient-background');
 
 function init() {
-    // Render Background
     bgContainer.innerHTML = elements.Background();
-
-    // Render Layout
     app.innerHTML = elements.Header(blogData.config);
     app.innerHTML += elements.BlogGrid(blogData.posts);
     app.innerHTML += elements.Footer(blogData.config);
-
-    // Initialize Icons & Interactivity
     lucide.createIcons();
     initSearch();
 }
@@ -53,5 +47,4 @@ function initSearch() {
     });
 }
 
-// Run
 document.addEventListener('DOMContentLoaded', init);
