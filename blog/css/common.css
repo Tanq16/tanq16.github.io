@@ -55,6 +55,29 @@ body { background-color: #11111b; }
     background-color: transparent !important;
 }
 
+/* Lists */
+.markdown-body ul,
+.markdown-body ol {
+    list-style-position: outside;
+    padding-left: 2em;
+    margin-bottom: 1rem;
+}
+.markdown-body ul {
+    list-style-type: disc;
+}
+.markdown-body ol {
+    list-style-type: decimal;
+}
+.markdown-body ul ul {
+    list-style-type: circle;
+}
+.markdown-body ul ul ul {
+    list-style-type: square;
+}
+.markdown-body li {
+    margin-bottom: 0.25rem;
+}
+
 /* TABLE OVERRIDES */
 .markdown-body table {
     display: table !important; /* Force table display to stretch */
@@ -134,7 +157,8 @@ body { background-color: #11111b; }
 .callout.danger .callout-icon { color: #f38ba8; }
 
 /* Misc */
-.search-match { background-color: #f9e2af; color: #11111b; padding: 0 2px; border-radius: 2px; }
+#markdown-container { position: relative; z-index: 45; }
+.search-match { background-color: #f9e2af; color: #11111b; padding: 0 2px; border-radius: 2px; position: relative; z-index: 45; }
 .toc-link.active {
     color: #cba6f7;
     border-left-color: #cba6f7;

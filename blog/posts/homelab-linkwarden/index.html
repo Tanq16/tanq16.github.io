@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark Manager in Home Lab | Tanishq Rupaal</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: {
+                        rosewater: '#f5e0dc', flamingo: '#f2cdcd', pink: '#f5c2e7', mauve: '#cba6f7',
+                        red: '#f38ba8', maroon: '#eba0ac', peach: '#fab387', yellow: '#f9e2af',
+                        green: '#a6e3a1', teal: '#94e2d5', sky: '#89dceb', sapphire: '#74c7ec',
+                        blue: '#89b4fa', lavender: '#b4befe', text: '#cdd6f4', subtext1: '#bac2de',
+                        subtext0: '#a6adc8', overlay2: '#9399b2', overlay1: '#7f849c', overlay0: '#6c7086',
+                        surface2: '#585b70', surface1: '#45475a', surface0: '#313244', base: '#1e1e2e',
+                        mantle: '#181825', crust: '#11111b',
+                    },
+                    animation: {
+                        'orbit-slow': 'orbit 35s linear infinite',
+                        'orbit-medium': 'orbit 25s linear infinite',
+                        'orbit-fast': 'orbit 15s linear infinite',
+                    },
+                    keyframes: {
+                        orbit: { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GitHub Markdown CSS (Structure) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+
+    <!-- Marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/blog/css/common.css">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-51FXJVSNB5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-51FXJVSNB5');
+</script>
+<body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base min-h-screen relative">
+
+    <!-- Ambient Background -->
+    <div id="ambient-background" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- App Container -->
+    <div id="app" class="relative z-10 flex flex-col min-h-screen"></div>
+
+    <!-- DATA -->
+    <script>
+        const articleData = {
+            config: { name: "Tanishq Rupaal", portfolioLink: "/blog/" },
+            meta: {
+                title: "Bookmark Manager in Home Lab",
+                author: "Tanishq Rupaal",
+                date: "Jan 15, 2024",
+                readTime: "2 min read",
+                coverImage: "../../images/homelab-cover.jpeg",
+                tags: ["bookmarks", "linkwarden", "home-lab"],
+                license: "This post is licensed under CC BY 4.0 by the author."
+            },
+            contentFile: "./markdown.md"
+        };
+    </script>
+
+    <!-- LOGIC -->
+    <script src="/blog/js/common.js"></script>
+</body>
+</html>

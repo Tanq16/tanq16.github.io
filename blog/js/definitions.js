@@ -324,6 +324,267 @@ const blogData = {
             location: "homelab-filebrowser",
             tags: ["filebrowser", "home-lab"],
             image: "homelab-cover.jpeg"
+        },
+        {
+            id: "dbs-zamasu-timeline",
+            title: "Dragon Ball Super - Zamasu Timeline 101",
+            description: "I did a similar writeup on Dragon Ball Z's Cell saga timeline earlier. Just like in Z, Super also had a saga involving Future Trunks and, therefore, a...",
+            date: "Feb 03, 2024",
+            category: "Just Fun Things",
+            location: "dbs-zamasu-timeline",
+            tags: ["anime", "dragon-ball"],
+            image: "goku-black-cover.jpeg"
+        },
+        {
+            id: "go-tui",
+            title: "Building a Terminal UI for Go CLI Tools",
+            description: "Command Line Interface (CLI) tools are essential for developers, sysadmins, and security professionals. They're lightweight, scriptable, and often mor...",
+            date: "May 08, 2025",
+            category: "Computers and Security",
+            location: "go-tui",
+            tags: ["programming", "go", "terminal-ui", "cli"],
+            image: "go-tui.jpg"
+        },
+        {
+            id: "go-coding",
+            title: "The Way to Go(lang)",
+            description: "When I started exploring new programming languages and tooling, Go caught my attention for several compelling reasons. First and foremost, its ability...",
+            date: "Dec 14, 2024",
+            category: "Computers and Security",
+            location: "go-coding",
+            tags: ["programming", "go", "scripting", "tool"],
+            image: "go-cover.jpg"
+        },
+        {
+            id: "homelab-budgeting",
+            title: "Personal Finance & Budgeting in Home Lab",
+            description: "Personal finance is more than just a practice - it's a skill. But at the same time, finding a good, privacy-focused application to help manage persona...",
+            date: "Jan 14, 2024",
+            category: "Home Server",
+            location: "homelab-budgeting",
+            tags: ["budgeting", "personal-finance", "actualbudget", "home-lab"],
+            image: "homelab-cover.jpeg"
+        },
+        {
+            id: "homelab-budgetlord",
+            title: "Expense Tracking in Home Lab",
+            description: "I wrote a tool called ExpenseOwl for one straightforward reason - to track expenses. There are so So sO SO many tools out there that do the same. And ...",
+            date: "Dec 14, 2024",
+            category: "Home Server",
+            location: "homelab-budgetlord",
+            tags: ["expenseowl", "expense-tracking", "home-lab"],
+            image: "homelab-cover.jpeg"
+        },
+        {
+            id: "ai-rag",
+            title: "Exploring RAG (Retrieval-Augmented Generation) and Talking to my Notes",
+            description: "> Preamble &rarr; This blog is a collection of my research and experimentation over two days to learn about RAG and LLMs. The main idea I was chasin...",
+            date: "Nov 04, 2024",
+            category: "Computers and Security",
+            location: "ai-rag",
+            tags: ["ai", "llm", "container", "rag", "machine-learning"],
+            image: "rag-cover.jpg"
+        },
+        {
+            id: "newbified-effective-notes",
+            title: "Effective Note-Taking",
+            description: "I'm not the best at taking notes, and I've been pursuing a goal for improving my note-taking ever since I started my Masters degree. During that time,...",
+            date: "Oct 13, 2024",
+            category: "Computers Newbified",
+            location: "newbified-effective-notes",
+            tags: ["markdown", "note-taking", "productivity", "obsidian"],
+            image: "markdown-cover.jpeg"
+        },
+        {
+            id: "homelab-wallabag",
+            title: "Wallabag in Home Lab",
+            description: "Wallabag is a read-it-later application for storing bookmarks. It automatically extracts the readable text and images and stores in a reader-format, w...",
+            date: "Jan 20, 2024",
+            category: "Home Server",
+            location: "homelab-wallabag",
+            tags: ["reader", "bookmarks", "wallabag", "home-lab"],
+            image: "homelab-cover.jpeg"
+        },
+
+        {
+            id: "homelab-linkwarden",
+            title: "Bookmark Manager in Home Lab",
+            description: "There are probably a hundred different ways to manage links and bookmarks. People use Chrome's bookmarks, some use an extension like Toby, and others ...",
+            date: "Jan 15, 2024",
+            category: "Home Server",
+            location: "homelab-linkwarden",
+            tags: ["bookmarks", "linkwarden", "home-lab"],
+            image: "homelab-cover.jpeg"
+        },
+        {
+            id: "homelab-excalidraw",
+            title: "Excalidraw in Home Lab",
+            description: "Excalidraw is an open source infinite-canvas whiteboard software. It is primary local-first and the public hosted version is end to end encrypted, wit...",
+            date: "Jan 13, 2024",
+            category: "Home Server",
+            location: "homelab-excalidraw",
+            tags: ["budgeter", "excalidraw", "whiteboard", "home-lab"],
+            image: "homelab-cover.jpeg"
+        },
+        {
+            id: "website-jekyll-ghpages",
+            title: "Hosting a Website using GitHub Pages and Jekyll",
+            description: "GitHub Pages is a straightforward method to deploy a website right from a GitHub repository, especially for those with computer science skills. In a v...",
+            date: "Sep 09, 2023",
+            category: "Computers and Security",
+            location: "website-jekyll-ghpages",
+            tags: ["github-pages", "github", "jekyll", "deployment"],
+            image: "jekyll-cover.jpeg"
+        },
+        {
+            id: "homelab-local-dumpster",
+            title: "Local Content Share in Home Lab",
+            description: "> I updated the project to port it to Go and removed the rendering capability because it was barely being used. The UI is updated and much improved. T...",
+            date: "May 05, 2023",
+            category: "Home Server",
+            location: "homelab-local-dumpster",
+            tags: ["local-content-share", "home-lab"],
+            image: "homelab-cover.jpeg"
+        },
+        {
+            id: "newbified-apple-ecosystem-features",
+            title: "Interesting Apple Ecosystem Features",
+            description: "> Features in iOS also work on iPadOS. So, the iPadOS section only contains features specific to the iPad. Also, Siri related features work on all dev...",
+            date: "Nov 26, 2022",
+            category: "Computers Newbified",
+            location: "newbified-apple-ecosystem-features",
+            tags: ["apple", "productivity"],
+            image: "appleecosystem-cover.jpeg"
+        },
+        {
+            id: "newbified-effective-email-management",
+            title: "Effective Email Management - Inbox Zero",
+            description: "Following is a post on achieving perfect email management. All ideas and thoughts here are the way I personally implement my own email management syst...",
+            date: "Sep 08, 2022",
+            category: "Computers Newbified",
+            location: "newbified-effective-email-management",
+            tags: ["email", "inbox-zero", "productivity"],
+            image: "email-cover.jpeg"
+        },
+        {
+            id: "homelab-snapdrop-local",
+            title: "SnapDrop Local Container in Home Lab",
+            description: ">As explained below, the WebRTC-based Snapdrop uses TURN (Traversal Using Relays around NAT) for the publicly available instance when a peer-peer conn...",
+            date: "Apr 24, 2022",
+            category: "Home Server",
+            location: "homelab-snapdrop-local",
+            tags: ["home-lab", "snapdrop"],
+            image: "homelab-cover.jpeg"
+        },
+        {
+            id: "homelab-plex",
+            title: "Plex Media Server in Home Lab",
+            description: ">Note: Jellyfin is a pretty similar option with an easier setup and more reliable execution. It's the one I switched over to from Plex. Check out my g...",
+            date: "Apr 24, 2022",
+            category: "Home Server",
+            location: "homelab-plex",
+            tags: ["home-lab", "plex"],
+            image: "homelab-cover.jpeg"
+        },
+        {
+            id: "flaws-1",
+            title: "flAWS 1",
+            description: "This level is buckets of fun. See if you can find the first sub-domain.",
+            date: "Mar 31, 2022",
+            category: "Lab Practice Notes",
+            location: "flaws-1",
+            tags: ["aws", "lab", "flaws1", "security"],
+            image: "flaws-cover.jpeg"
+        },
+        {
+            id: "github-secret-scan",
+            title: "10k GitHub Repositories Secret Scanning Code",
+            description: "The API used to search git repositories is &rarr;",
+            date: "Mar 10, 2022",
+            category: "Computers and Security",
+            location: "github-secret-scan",
+            tags: ["github", "programming", "secret-scan", "security"],
+            image: "github-secret-scan"
+        },
+        {
+            id: "open-source-build",
+            title: "Introduction to Open Source Projects and CMake",
+            description: "A typical open source project has the following types of people &rarr;",
+            date: "Jun 15, 2021",
+            category: "Computers and Security",
+            location: "open-source-build",
+            tags: ["open-source", "cmake", "make"],
+            image: "open-source-build"
+        },
+        {
+            id: "setuid-attack-lab",
+            title: "SetUID Attack Lab - SeedLabs",
+            description: "Set-UID is an important security mechanism in unix systems. When a Set-UID program is run, the executing program assumes the owner’s privileges irresp...",
+            date: "Jun 01, 2020",
+            category: "Lab Practice Notes",
+            location: "setuid-attack-lab",
+            tags: ["setuid", "linux", "lab", "seed-labs"],
+            image: "seedlabs-cover.jpg"
+        },
+        {
+            id: "md5-collision-lab",
+            title: "MD5 Collision Attack Lab - SeedLabs",
+            description: "A hash function is said to be secure if it is a one way hash function and is collision resistant. The one way property ensures that given a hash value...",
+            date: "Jun 01, 2020",
+            category: "Lab Practice Notes",
+            location: "md5-collision-lab",
+            tags: ["md5-collision", "cryptography", "lab", "seed-labs"],
+            image: "seedlabs-cover.jpg"
+        },
+        {
+            id: "linux-cli-netcat",
+            title: "Basics of Linux Commands and NetCat",
+            description: "A shell is an interface to the operating system's services. All process are created by fork() and given a new direction by the exec() process. The tra...",
+            date: "May 30, 2020",
+            category: "Computers and Security",
+            location: "linux-cli-netcat",
+            tags: ["linux", "tool", "netcat"],
+            image: "linux-cli-netcat"
+        },
+        {
+            id: "exploit-exercises-protostar",
+            title: "Exploit Exercises Protostar Lab Write-Up",
+            description: "Code related to the Exploit Exercises Protostar Lab Write-Up",
+            date: "Aug 12, 2019",
+            category: "Lab Practice Notes",
+            location: "exploit-exercises-protostar",
+            tags: ["binary-exploitation", "assembly", "lab", "exploit-exercises"],
+            image: "exploit-exercises-protostar"
+        },
+        {
+            id: "oscp-pg-set8",
+            title: "OffSec PG - Sunset Decoy, Vegeta1, Wpwn, Y0usef",
+            description: "Machine IP &rarr; 192.168.80.85",
+            date: "Dec 19, 2021",
+            category: "Lab Practice Notes",
+            location: "oscp-pg-set8",
+            tags: ["oscp", "lab", "offsec-proving-grounds"],
+            image: "pg-cover.jpeg"
+        },
+        {
+            id: "oscp-pg-set4",
+            title: "OffSec PG - Katana, Lampiao, Loly, Monitoring",
+            description: "Machine IP &rarr; 192.168.51.83",
+            date: "Dec 19, 2021",
+            category: "Lab Practice Notes",
+            location: "oscp-pg-set4",
+            tags: ["oscp", "lab", "offsec-proving-grounds"],
+            image: "pg-cover.jpeg"
+        },
+        {
+            id: "oscp-pg-set2",
+            title: "OffSec PG - FunBox - Easy, Enum, Rookie",
+            description: "Machine IP &rarr; 192.168.101.111",
+            date: "Dec 19, 2021",
+            category: "Lab Practice Notes",
+            location: "oscp-pg-set2",
+            tags: ["oscp", "lab", "offsec-proving-grounds"],
+            image: "pg-cover.jpeg"
         }
     ]
 };
