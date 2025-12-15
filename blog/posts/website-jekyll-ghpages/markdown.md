@@ -21,10 +21,10 @@ GitHub also (obviously) allows the use of custom domains. Put simply, these are 
 - **Subdomain site, custom domain** &rarr; A completely separate repo can be used as a subdomain site for the primary domain by setting the appropriate subdomain in the settings. Given the primary domain is already set up with a GitHub pages site, this step is straightforward and allows hosting from a different repo. See also [GitHub's documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages).
 - **Subdirectory site, custom domain** &rarr; As stated above, doing this isn't possible from a separate repo; therefore, the site resources must be deployed from the same directory as the primary domain but inside a subfolder. Then, visiting that domain's subdirectory will serve that site. Example - this blog site is deployed in the same manner [https://tanishq.page/blog](https://tanishq.page/blog/).
 
+> [!TIP]
 >The subdomain vs. subdirectory debate is a split decision across the internet. I'm not an SEO guru by any means, but the consensus seems to be that if you're an established business, it's okay to have a subdomain site, specifically for things like regional sites or alternate offerings, i.e., all cases where you want a different keyword association for the subdomain site than the primary domain. However, it's generally better for individuals like myself to have a subdirectory since all keywords link to the same domain and boost SEO.
 >
 >Again, the guidance could be clearer since we also see established organizations like Google shifting some sites from a subdomain to a subdirectory. Many organizations also make the subdomain a pointer to the subdirectory for extra audience reach. All that to say - pick your poison and make an informed decision.
-{: .prompt-tip }
 
 ## Using a Static Site Generator - Jekyll
 
@@ -34,8 +34,8 @@ I choose Jekyll (or static site generators) because we - the people of CS - like
 
 ### Setup and Serve a Jekyll Site
 
+> [!INFO]
 >I'll stick to instructions for Ubuntu, but just translate these for other distributions of linux or simply deploy it in a container :)
-{: .prompt-info }
 
 The first step is the prerequisites. Here is a one-liner `apt` command for installing all dependencies &rarr;
 
@@ -124,8 +124,8 @@ jobs:
 
 Basically, the action is manually executable due to the `workflow_dispatch` being present and automatically executable through changes in the blog repo code. Ultimately, the action commits the generated files in the `blog` directory to the same repo. This means that if I locally run a `php -S 0.0.0.0:8000` from the repo root, the site should be working at `localhost:8000/blog/`.
 
+> [!DANGER]
 >For the site generator to work, the base URL for specifying paths for CSS and JS assets must be the `blog` directory, not the repo root. Setting this can be tricky based on the chosen Jekyll theme, as some might hardcode it to be the root, but others may have an option to specify the path. Chirpy has such an option for the record (check the `_config.yml` file for an example).
-{: .prompt-warning }
 
 Over on the main website repo, I have the following GitHub action &rarr;
 

@@ -6,8 +6,8 @@ Usually, an in-depth understanding of such concepts isn't necessary to enjoy the
 
 A very brief recap of the Cell saga &rarr;
 
+> [!INFO]
 > Future Trunks goes back in time because his world is being terrorized by Androids 17 & 18. There, he saves Goku from dying of a virus and helps the Z fighters fight the Androids. But another bionic Android - Cell, had also travelled back to a point 1 year before Trunks did, so that he could absorb the Androids 17 & 18 to become perfect and gain power. Z fighters destroy the baby Cell from the present and find that the Cell they would fight was actually from the future where he had killed Trunks and hijacked his time machine.
-{: .prompt-info }
 
 Now many people are content with contextualizing this story over just 2 timelines - the present and the future. But that is of course incorrect, because clearly the Future Trunks in the present cannot be alive if Cell killed him in the same future. Follow along to get a flow chart and explanation.
 
@@ -30,7 +30,7 @@ Now that's a complicated set of rules! But it was extremely engaging to think ab
 
 This diagram is a representation of time as a sequence of events for each of the timelines that were created during the Cell saga. I've omitted dates from it because they are unnecessary to understand what happened. The only numerical value that has some significance is `1` year, which was the difference in time between when Future Trunks and primary Cell travel back in time.
 
-![cell-timeline](/assets/post-images/dbz-cell-saga-timeline.png)
+![cell-timeline](../../post-images/dbz-cell-saga-timeline.png)
 
 Legend &rarr;
 
@@ -43,7 +43,7 @@ Legend &rarr;
 
 All the timelines actually stem from a single unified timeline (Cell's timeline). The sequence of the splits and who caused the splits is shown below.
 
-![cell-timeline-splits](/assets/post-images/dbz-cell-saga-timeline-splits.png)
+![cell-timeline-splits](../../post-images/dbz-cell-saga-timeline-splits.png)
 
 There is also more proof of this in Dragon Ball Super where we see that Gowasu, the Supreme Kai of Universe 10, was asked to show his time rings by Beerus. That's when we learnt there are 4 timelines as there as 4 rings.
 
@@ -61,8 +61,8 @@ We can actually go a step further and further increase accuracy - in the show, C
 
 The plothole I posed was as follows &rarr;
 
+> [!DANGER]
 >Regressed Cell remains in this timeline, but it is hard to say what he may have been doing. Was he dormant/killed?
-{: .prompt-warning }
 
 I say this based on the fact that Cell from the initial timeline travelling back created the Future Trunks timeline. This is because the point in time where Cell travelled to was a year before when Trunks came in. So, the timeline that Trunks split would be the one where Cell (regressed larvae form) was already present. Cell's split became the Future Trunks timeline and Trunks' split became the main timeline (the actual show).
 

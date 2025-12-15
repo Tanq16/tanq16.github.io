@@ -1,7 +1,7 @@
 ## Level 1
 
+> [!INFO]
 > This level is *buckets* of fun. See if you can find the first sub-domain.
-{: .prompt-info }
 
 Begin with doing a `dig` of `flaws.cloud`, which returns the following &rarr; 
 
@@ -69,8 +69,8 @@ The robots file did not give anything but the secret file gave the link to the n
 
 ## Level 2
 
+> [!INFO]
 > The next level is fairly similar, with a slight twist. You're going to need your own AWS account for this. You just need the free tier.
-{: .prompt-info }
 
 Calling `s3 ls` again on the discovered bucket gives an access denied message &rarr; 
 
@@ -84,8 +84,8 @@ However, calling it with a valid profile lists the bucket which means that the b
 
 ## Level 3
 
+> [!INFO]
 > The next level is fairly similar, with a slight twist. Time to find your first AWS key! I bet you'll find something that will let you list what other buckets are.
-{: .prompt-info }
 
 Listing the contents like previous parts gives a `.git` folder in the contents. Pulling that down as follows &rarr; 
 
@@ -130,10 +130,10 @@ This is all the S3 buckets which are also the further levels.
 
 Visiting the bucket static website at &rarr; `http://level4-1156739cfb264ced6de514971a4bef68.flaws.cloud/`
 
+> [!INFO]
 > For the next level, you need to get access to the web page running on an EC2 at 4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud
 > 
 > It'll be useful to know that a snapshot was made of that EC2 shortly after nginx was setup on it.
-{: .prompt-info }
 
 Using `aws sts get-caller-identitity --profile flaws` it gives the name of the account which is `backup`.
 
@@ -234,6 +234,7 @@ This gives the password for the web server running in the EC2 instance at `4d0cf
 
 ## Level 5
 
+> [!INFO]
 > This EC2 has a simple HTTP only proxy on it. Here are some examples of it's usage:  
 > `http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/flaws.cloud/`  
 > `http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/summitroute.com/blog/feed.xml`  
@@ -242,7 +243,6 @@ This gives the password for the web server running in the EC2 instance at `4d0cf
 > 
 > Visiting the page directly at `http://4d0cf09b9b2d761a7d87be99d17507bce8b86f3b.flaws.cloud/proxy/level6-cc4c404a8a8b876167f5e70a7d8c9880.flaws.cloud/` gives the error of &rarr; 
 > Level 6 is hosted in a sub-directory, but to figure out that directory, you need to play level 5 properly.
-{: .prompt-info }
 
 One of the most common ways to escalate an SSRF in an AWS Cloud environment is the (mis)use of the AWS Metadata API. Therefore, accessing the APIPA address, metadata can be obtained. There is a role under `security-credentials` i.e., the role of `flaws` has been attached to the EC2 instance.
 
@@ -267,10 +267,10 @@ This gives the name of the directory where the next level is located.
 
 ## Level 6
 
+> [!INFO]
 > For this final challenge, you're getting a user access key that has the SecurityAudit policy attached to it. See what else it can do and what else you might find in this AWS account.
 > Access key ID: `AKIAJ...57Q3OBGA`
 > Secret: `S2IpymMBlV....XrYxZYhP+dZ4ps+u`
-{: .prompt-info }
 
 Adding these credentials to the `credentials` file grants us the user `Level6`.
 

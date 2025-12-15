@@ -39,7 +39,7 @@ Personal or company wikis also support Markdown. Some of the most popular ones a
 
 So, first and foremost, try out Markdown in your browser here &rarr; [MDLivePreview](https://markdownlivepreview.com) or [StackEdit](https://stackedit.io/app#) or [Dillinger](https://dillinger.io).
 
-You could read through those default documents and understand the basic syntax of Markdown, but I want to provide a cheatsheet here. **[This is some markdown text](https://raw.githubusercontent.com/Tanq16/blog_site/main/assets/post-files/markdown-101.md)** that I've written using most of the basic syntactical concepts. Next, find the **[rendered PDF version](https://raw.githubusercontent.com/Tanq16/blog_site/main/assets/post-files/markdown-101.pdf)** of how that documents looks.
+You could read through those default documents and understand the basic syntax of Markdown, but I want to provide a cheatsheet here. **[This is some markdown text](https://raw.githubusercontent.com/Tanq16/blog_site/main/../../post-files/markdown-101.md)** that I've written using most of the basic syntactical concepts. Next, find the **[rendered PDF version](https://raw.githubusercontent.com/Tanq16/blog_site/main/../../post-files/markdown-101.pdf)** of how that documents looks.
 
 You can also refer to [this article](https://www.freecodecamp.org/news/markdown-cheatsheet/) to learn Markdown syntax.
 

@@ -504,7 +504,7 @@ const blogData = {
             category: "Computers and Security",
             location: "github-secret-scan",
             tags: ["github", "programming", "secret-scan", "security"],
-            image: "github-secret-scan"
+            image: "github-cover.jpeg"
         },
         {
             id: "open-source-build",

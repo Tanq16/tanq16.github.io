@@ -89,8 +89,8 @@ Considerations for selecting a cloud storage platform &rarr;
 | 4 (Heavy Windows/O365 users) | One Drive | 5 GB |
 | 5 (Highest capacity for India) | DigiBoxx (for India) | 20 GB |
 
+> [!DANGER]
 >The above table is not exhaustive of all platforms and may contain outdated information depending on when the blog post is being read.
-{: .prompt-warning }
 
 ## Conclusive Consideration
 

@@ -38,8 +38,8 @@ Go is particularly well-suited for building TUIs because:
 - Excellent community support with libraries like `lipgloss` for styling of tables.
 - Strong performance characteristics for real-time updates as workers can "send" updates to a central output manager goroutine.
 
+> [!TIP]
 > This tries to use the pipeline pattern in a sense.
-{: .prompt-tip }
 
 ### Differences from General TUIs
 
@@ -110,7 +110,7 @@ go get github.com/tanq16/go-utils
 
 Here's how it looks in action:
 
-![TUI Example GIF](/assets/post-images/go-tui-rec.gif)
+![TUI Example GIF](../../post-images/go-tui-rec.gif)
 
 Key features visible in the example:
 
@@ -126,8 +126,8 @@ Building effective TUIs for CLI tools requires balancing information density wit
 
 While there are many TUI libraries available, sometimes a purpose-built solution that aligns exactly with your tool's needs is worth the investment. This implementation continues to evolve as I discover new requirements in my CLI tool development. I exclusively use this for [anbu](https://github.com/tanq16/anbu), [ai-context](https://github.com/tanq16/ai-context), and [danzo](https://github.com/tanq16/danzo).
 
+> [!TIP]
 > The best TUIs enhance functionality without compromising the CLI nature of the tool. They should provide better organization and visibility while still allowing for scriptability and automation.
-{: .prompt-tip }
 
 ## Resources
 

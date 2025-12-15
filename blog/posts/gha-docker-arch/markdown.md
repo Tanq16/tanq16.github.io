@@ -1,5 +1,5 @@
+> [!TIP]
 > This blog post covers my troubleshooting efforts and research on how we can use GitHub workflows for various architectures. It focuses more on how to build container images for ARM in the absence of native ARM runners and the state of such things in mid-2024 (this means any improvements made after mid-2024 were not considered when writing this content).
-{: .prompt-tip }
 
 ## GitHub Actions Primer
 
@@ -7,8 +7,8 @@ GitHub allows building projects and code artifacts from a given project using Gi
 
 Steps can be usual Linux (shell) code that we define, or they can be prepared procedures, also called actions, that GitHub and the open-source community maintain in the actions marketplace. One example is the `actions/checkout@v3`, which is used as a starting step to checkout code from the repository into the runner. Many different kinds of actions can aid in several tasks, such as code analysis, linting and testing, building and pushing container images, sending notifications, and many other things.
 
+> [!DANGER]
 > Quick thing to note: if you have hawk-eyes, you realize some actions you might perform on the runners require internet access. In Organizations, these actions and how they can be initiated (like from non-restricted branches) are some of the most common ways CI/CD systems are compromised.
-{: .prompt-danger }
 
 ## Runners and the State of ARM
 
@@ -23,8 +23,8 @@ Apple launched Rosetta - an emulator to support x86-64 code by performing dynami
 
 With all that, we're in this state of limbo where some things have ARM variants, and others don't. This was one of the primary issues I faced when building my [Containerized Security Toolkit](https://github.com/tanq16/containerized-security-toolkit). The good thing is that GitHub runners immediately started supporting the ARM MacOS machine type, likely through some sort of Mac Mini farm. However, the drawback is that the MacOS runners do not support containerization, so we can't build ARM Docker images, for example.
 
+> [!TIP]
 > All this is almost old news now, as GitHub just launched native ARM runners for everyone.
-{: .prompt-tip }
 
 ## Solutions for Running ARM Images
 
@@ -34,8 +34,8 @@ The ***easiest*** solve for any simple project was to switch to a DevOps provide
 
 I maintain a similar container-based project in my organization and couldn't rely on CircleCI. So, I took the next best solution - using Rosetta and other emulators locally to build and push images to container registries. Of course, this is an imperfect solution because of the operational effort, so the next step was to run virtualized builds on x86-64 GitHub runners. Specifically, this would involve using QEMU (keemu, q-e-m-u, I don't know at this point) and Docker BuildX. I initially implemented this as a solution for my [Containerized Security Toolkit](https://github.com/tanq16/containerized-security-toolkit) project before switching to CircleCI. The only drawback is the slow build time due to virtualization, which is why many projects don't have releases for ARM64. The other drawback is that Docker build operations for multi-stage builds can consume all disk space and fail.
 
+> [!TIP]
 > Quick tip - Apple's Rosetta is great on Macs for emulating some things, but it's not flawless. Docker natively supports Rosetta and can use that to run x86-64 images; however, some specific images may still not work. It's still very convenient and impressive.
-{: .prompt-tip }
 
 Let's explore emulated builds in more detail.
 

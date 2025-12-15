@@ -27,8 +27,8 @@ No flags are printed in the walkthrough since the correct value can be checked f
 grep -hiroE "FLAG\{[^\{\}]+?\}" . | sort -u
 ```
 
+> [!INFO]
 > Any `aws` command used as `awsn` is aliased to `aws --no-cli-pager`.
-{: .prompt-info }
 
 ## It's a secret
 
@@ -474,8 +474,8 @@ cloudfox aws sns -p cloudfoxable -v2
 
 `viniciusjr` has SNS read-only access. Listing out the SNS topic in the account, the `executioner` topic allows anyone to publish or subscribe to it via the resource policy as long as they're in the same account. With the current permissions, it's hard to establish a direct link between the topic and its Lambda trigger, but that's generally common and we also have a Lambda function with the same name already.
 
+> [!DANGER]
 > ***Solution Caveat*** &rarr; The challenge does not grant any role the ability to view Lambda execution logs to get a sense of what is being executed. Hence, it's easier to look at the logs using a privileged role instead. This can also be fixed by adding a policy attachment to allow viewing of the CloudWatch Logs.
-{: .prompt-warning }
 
 Therefore, sending a message to the topic executes ***a*** Lambda function, the logs of which can be seen in CloudWatch. Therefore, invoking the following &rarr;
 
@@ -495,8 +495,8 @@ That solves the challenge with the caveat that additional permissions were requi
 
 This challenge starts with the role `pepi` and requires us to exploit misconfigurations to get to a flag.
 
+> [!DANGER]
 > ***Solution Caveat*** &rarr; The challenge has a command execution `python` line commented in the `consumer` Lambda function. I had to uncomment that line to make the function exploitable. I didn't find any other means to modify the Lambda function in concern (in case it was meant to be this). So, I uncommented that line and then deployed the infrastructure with Terraform.
-{: .prompt-warning }
 
 The following analysis was done to get some information about the attack path &rarr;
 

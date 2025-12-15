@@ -96,8 +96,8 @@ Since I primarily use Portainer/Dockge, I also want to highlight this - they can
 
 While each service can be deployed as a separate stack, it's also easy to deploy everything as a single stack if it's small enough. Maintaining a single compose YAML template helps to start all of the services in a single-click fashion. Alternatively, separate stacks allow easy debugging on the home server. Additionally, you can deploy containers in specific networks easily (though it's generally best to isolate them).
 
+> [!TIP]
 >Stack are defined via YAML syntax and this is very useful for deploying services together. However, keep in mind that if Portainer is started as the `root` user, then the volume binds will also be maintained and inherited by `root`, which might be an issue if other services/containers need to access the same volume mounts.
-{: .prompt-tip }
 
 The stacks also allow editing the definitions on the browser UI. One of the features I use very often is the checkbox of "Re-pull and deploy" on Portainer and a similar option in Dockge when updating a stack. This can be done without actually making a modification to the definition, allowing a simple update of the containers in a given stack. Again, there are other services like [Watchtower](https://github.com/containrrr/watchtower) that are great at updating containers, but I just like to do that manually for specific stacks.
 

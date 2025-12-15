@@ -1,5 +1,5 @@
+> [!TIP]
 > Since writing this blog, I've updated the [project](https://github.com/Tanq16/containerized-security-toolkit) significantly with multiple image options. The bulk of the usage below remains relevant, but the images are now named `cst-<variant>:arm` (or `amd` for x86_64). Refer to the newer and much more [detailed documentation](https://tanishq.page/containerized-security-toolkit/) for full details.
-{: .prompt-tip }
 
 This blog is a guide on using the [Containerized Security Toolkit](https://github.com/Tanq16/containerized-security-toolkit), a project I maintain. The repository contains a quickstart command to instantly jump into a running instance. This guide, however, describes advanced workflows and usage of the toolkit.
 
@@ -45,8 +45,8 @@ To stop the container after working on it, use the following &rarr;
 docker stop security_docker -t 0
 ```
 
+> [!DANGER]
 > ***Note*** &rarr; One known issue that may come up is that the terminal colors may not behave in the best manner through the shell opened by Docker `exec`. This can be fixed by using SSH instead. The way to do this along with other customization is explained in the *Example Workflow* section next.
-{: .prompt-warning }
 
 ## Example Workflow
 
@@ -90,8 +90,8 @@ stop_work(){
 }
 ```
 
+> [!TIP]
 > Replace `main` tag with `main_apple` for ARM64 machines.
-{: .prompt-tip }
 
 With that done, the two functions above accomplish the following &rarr;
 
@@ -105,8 +105,8 @@ With that done, the two functions above accomplish the following &rarr;
   - It copies over the shell history from the container to the persistence directory
   - It then stops the container
 
+> [!TIP]
 > ***Tip*** &rarr; On MacOS, add `echo $new_pass | pbcopy` to the `start_work()` function to automatically copy the password to the clipboard.
-{: .prompt-tip }
 
 Next, restart the shell or source the shell rc file, after which, the workflow can be used as follows &rarr;
 
@@ -129,8 +129,8 @@ echo $(curl -s https://ipapi.co/timezone) > /etc/timezone
 
 Finally, after completing your work, exit the SSH session and stop the container with the `stop_work` command.
 
+> [!INFO]
 > ***Note:*** Once you start `vim`, refer to the [Post Installation Steps of my CLI Productivity Suite](https://github.com/Tanq16/cli-productivity-suite/tree/master?tab=readme-ov-file#post-installation-steps), as the container uses that suite by default.
-{: .prompt-info }
 
 While this workflow uses SSH (and there are reasons for it I talk about later), similar functions without the SSH requirements (instead only using `docker exec`) can be written as follows &rarr;
 
@@ -185,8 +185,8 @@ The toolkit image is built via CI/CD pipelines and published to DockerHub. As su
 docker pull tanq16/sec_docker:main # or use main_apple for ARM64
 ```
 
+> [!INFO]
 > The builds are pretty large in size due to some tools like `az-cli`. So the images are approximately 7-8 GB in size.
-{: .prompt-info }
 
 The containers can be built by cloning my repository and using `docker build` command as follows &rarr;
 

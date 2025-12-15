@@ -29,8 +29,8 @@ An email inbox must be treated like a list of things that are pending to look at
 
 Everything that doesn't qualify as the above must be either deleted or archived (a formal process defined soon). That would help achieve the concept of **Inbox Zero**, which is aimed at maintaining a clutter-free and well-organized email inbox.
 
+> [!DANGER]
 >DO NOT treat your inbox like a dustbin that stores everything unnecessarily. Important things must be transferred and filed away in your cloud storage. Unimportant things such as newsletters and spam must be removed
-{: .prompt-warning }
 
 ## Achieving Inbox Zero
 
@@ -49,7 +49,7 @@ The simplest (and recommended) way to maintain an Inbox Zero state is by just ke
 
 The following flow chart can help with a decision process &rarr;
 
-![Mail Management Flowchart](/assets/post-images/Email%20Management%20Flow%20Chart%20for%20Inbox%20Zero.jpeg)
+![Mail Management Flowchart](../../post-images/Email%20Management%20Flow%20Chart%20for%20Inbox%20Zero.jpeg)
 
 If you want to maintain the highest level of cleanliness, you could also setup a reminder to clear all archive emails older than 10 months once every quarter. But this is optional.
 

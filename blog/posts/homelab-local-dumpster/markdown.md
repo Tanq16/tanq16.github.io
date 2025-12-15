@@ -1,5 +1,5 @@
+> [!DANGER]
 > I updated the project to port it to Go and removed the rendering capability because it was barely being used. The UI is updated and much improved. The project is still available for x86_64 containerized execution. But it also builds binaries for all operating systems (linux, darwin, and windows) and architectures (amd64 and arm64).
-{: .prompt-warning }
 
 This is an application I wrote to solve several of my needs that are listed throughout the text here. The idea behind this application is effectively that it acts like a local network clipboard with history and support for displaying raw text for copying. It can render markdown files in GitHub-flavored MarkDown in light and dark themes, and store files to share within the local network. All updates made by any device are immediately (within 1 second) reflected on all other devices.
 
@@ -17,8 +17,8 @@ docker run --rm -d \
 -t tanq16/local_dumpster:main
 ```
 
+> [!TIP]
 > Use "tanq16/local_dumpster:main_arm" for ARM64 images (apple silicon or raspberry pi).
-{: .prompt-tip }
 
 To stop the container, do the following &rarr;
 
@@ -47,7 +47,7 @@ This is a Flask-based application that stores all the information entered within
 
 This is an example screenshot of what the UI looks like &rarr;
 
-![Local Dumpster UI.png](/assets/post-images/localdumpsterui.jpeg)
+![Local Dumpster UI.png](../../post-images/localdumpsterui.jpeg)
 
 The functionalities available here are as follows &rarr;
 
@@ -56,8 +56,8 @@ The functionalities available here are as follows &rarr;
 - **Link Store** &rarr; Like the other sections, there is a link paste section below, so add a link and click the "Add link!" button. The last section will get populated with all available links (clickable) and an option to delete.
 - **Render MarkDown** &rarr; Visit `http://<server>:5000/print` or `http://<server>:5000/print` to render a markdown dump in GitHub-flavored light and dark modes, respectively. This option doesn't persist the pastes.
 
+> [!DANGER]
 >Deleting text and files requires confirmation, while links do not.
-{: .prompt-warning }
 
 ## Motivation
 

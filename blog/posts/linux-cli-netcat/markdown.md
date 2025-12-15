@@ -62,8 +62,8 @@ for ip in sys.argv:
                         print("{} : {}".format(proto,kk))
 ```
 
+> [!INFO]
 > `#!` is the shebang directive. Using optparse, the commands we make will be very similar to the existing command structure. We can even have the help section and error messages inbuilt which make the commands more interactive.
-{: .prompt-info }
 
 ## Argparse
 

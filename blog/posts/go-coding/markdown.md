@@ -8,8 +8,8 @@ Python is still invaluable for many tasks I undertake on a day to day basis, esp
 
 Before getting anywhere, Go should be installed using the instructions specified in [Go Docs](https://go.dev/doc/install). It's very straightforward.
 
+> [!TIP]
 > It's an amazing idea to use containers to run Go stuff. In my project [containerized security toolkit](https://github.com/tanq16/containerized-security-toolkit), the default Go BIN path is at `/root/go/bin/`.
-{: .prompt-tip }
 
 ### Getting Started
 
@@ -101,6 +101,7 @@ func main() {
 }
 ```
 
+> [!TIP]
 > A quick reference of all CLI commands used so far &rarr;
 > ```bash
 > go mod init $MODULE_PATH
@@ -112,7 +113,6 @@ func main() {
 > go env -w GOBIN=/home/user/bin/
 > go install
 > ```
-{: .prompt-tip }
 
 ### Learning to Walk
 
@@ -277,8 +277,8 @@ for i := range ch
 
 Channels will close by default when all values are retrieved, so they don't need an explicit close operation.
 
+> [!TIP]
 > Inside complex interactions, closing it after sending all data is recommended.
-{: .prompt-tip }
 
 The `sync` package provides `Muetx` type for locking and unlocking data and `WaitGroups` to coordinate multiple goroutines &rarr;
 
@@ -371,8 +371,8 @@ If the help function is to be called at any point in the code, use the following
 cmd.Help()
 ```
 
+> [!TIP]
 > While Cobra is excellent for traditional CLI applications, it's also worth mentioning `Bubbletea` for creating modern terminal user interfaces.
-{: .prompt-tip }
 
 ## Fin
 

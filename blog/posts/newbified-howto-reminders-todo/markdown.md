@@ -2,8 +2,8 @@
 
 I believe reminders started out as a cover term for ticks that can remind us about doing something, where the ticks could also be other humans. To-Dos on the other hand are basically a checklist to just mark things off as we do them.
 
+> [!INFO]
 >The **difference** here is &rarr; reminders are for time-sensitive things while to-dos are for making a list of items we need to do.
-{: .prompt-info }
 
 ## Productivity can Go Overboard - What do you do?
 

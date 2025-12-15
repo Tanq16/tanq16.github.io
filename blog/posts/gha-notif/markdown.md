@@ -88,11 +88,11 @@ jobs:
 - The `curl` command is used to send a JSON payload to a Discord webhook stored in the repository secrets (as `DISCORD_WEBHOOK`)
 - For individual triggers like issue comments, the job step only runs if the actor was not myself (i.e., my comment wouldn't trigger an event)
 
+> [!TIP]
 > Conditionals (like `if: github.actor != 'your-username'`) are the main thing in GitHub workflows that allow filtering out actions from specific users and customizing them however you like. You could also significantly modify the content being sent with custom messages, links, etc.
-{: .prompt-tip }
 
+> [!DANGER]
 > API rate limits also apply when querying GitHub's API frequently, so I don't recommend many requests for a single job/workflow.
-{: .prompt-warning }
 
 ## Fin
 

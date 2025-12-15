@@ -29,8 +29,8 @@ There are a LOT of methodologies for note-taking. Of course, people create their
 
 Each of these has a loose or strict organization mechanism. Generally speaking, how the notes are represented also depends on the software or application being used. Typically, it is also tied to how the notes are written - markdown-compatible (Markdown supported rich text), Markdown (pure Markdown and/or latex), or something else (rich text, plain, handwritten). However, there will always be a loose concept of files, folders, subfolders, and tags.
 
+> [!INFO]
 > There is another class of managed note-storing/processing applications that automatically handle organization, recall, and ingestion of information. Such applications, however, are more challenging to use in computer science-related fields. If they work for someone, great, but I won't include them in this blog.
-{: .prompt-info }
 
 ### Gimmicks
 
@@ -62,8 +62,8 @@ Contrary to popular belief, here are my thoughts on some of the gimmicks &rarr;
 
 ### Software & Philosophy
 
+> [!INFO]
 > ***Philosophy*** &rarr; Notes on a given topic should be easy to find, and any single note should not confuse the user with multiple topics contained within, i.e., they should have atomic context. Additionally, the system should act as a one-stop solution for everything the user wants to write and store without limiting the addition of other software or applications. The system should allow full control over the data without limiting migration to other note-taking software or applications. Lastly, it should inspire and make it easy to take notes, irrespective of whether they end up as published content or knowledge material.
-{: .prompt-info }
 
 Based on this philosophy and all the research and experiments I conducted, my current setup uses ***Obsidian*** as the backbone. I don't conform to a particular note-taking methodology; however, my methodology is derived from and is an amalgamation of several famous ones mentioned earlier. I also follow a custom organization structure. Obsidian best suits me because of the flat file structure, pure Markdown support, inline-Latex support, and Mermaid diagram support.
 
@@ -87,8 +87,8 @@ The Personal Note type does not have a fixed format. The idea is to keep this fr
 
 The General Note, however, is special - it follows a set format and strictly deals with a singular topic only. Subtopics are intended to be kept to a minimum. These are also the ones that are most methodically organized under specific file paths. The format for these notes is strict because they are what I refer back to the most. This particular format helps make revisiting, updating, understanding, and sharing the note much easier.
 
+> [!TIP]
 > Additionally, Obsidian supports Markdown callouts that help increase readability. While Obsidian supports several callout tags, I only use the `TIP`, `WARNING`, and `INFO` callout tags to keep things consistent with GitHub.
-{: .prompt-tip }
 
 The format is represented as follows &rarr;
 
@@ -103,8 +103,8 @@ The format is represented as follows &rarr;
 
 Sticking to this format helps solidify how the note-taking system works.
 
+> [!TIP]
 > Each file is named `TYPE - topic` where `TYPE` is `Concept` or `Process`. I use `Methodology` instead of `Process`, but the idea is that a concept describes information about something. In contrast, a process describes how the information in the note can be used to perform something specific.
-{: .prompt-tip }
 
 ### Organization
 
@@ -126,8 +126,8 @@ Tracker.md
 
 In the above list, I use the `Tracker.md` file as an inbox for tasks, links, plans, etc. However, the important thing is that no information that can potentially increase the size of the file should be added to it. It's just temporary information.
 
+> [!TIP]
 > I use the numbers 0, 1, 2, etc., before the folder names to order the display order based on what I want it to look like. Also, the \_Attachments folder is meant to store ALL attachments irrespective of the note to which they're added.
-{: .prompt-tip }
 
 By convention, one should only go as deep as five levels in the hierarchy. Two sub-levels inside a folder should be sufficient.
 

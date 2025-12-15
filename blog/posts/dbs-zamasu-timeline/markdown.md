@@ -4,8 +4,8 @@ I did a similar writeup on Dragon Ball Z's Cell saga timeline [earlier](https://
 
 A very brief recap of the Zamasu saga &rarr;
 
+> [!INFO]
 > Future Trunks goes back in time because Goku Black is terrorizing his world. Black somehow follows back and fights Goku. Beerus and Whis thought the energy was similar to Zamasu from Universe 10. When Goku, Vegeta, and Trunks go to the future, Black achieves Super Saiyan Rose and is stronger than all Z fighters. With this knowledge, they head back to the present, where Beerus deals with a scheming Zamasu; however, that godly act didn't erase the future Zamasu because he wore a time ring. After multiple back and forths in the time machine, Zamasu is partially defeated and becomes an ether to be destroyed by Zeno. Whis then takes Trunks and Mai back to their past and fixes everything by talking to the then Beerus, and Trunks and Mai live with another version of them.
-{: .prompt-info }
 
 ## Concepts & Explanations
 
@@ -21,7 +21,7 @@ While such a split does happen, it doesn't need to occur at the point when the t
 
 This diagram represents time as a sequence of events for each of the timelines created during the Zamasu saga. The main timeline and the Future Trunks timeline are continuations of their named counterparts from the [Cell Timeline blog post](https://tanishq.page/blog/posts/dbz-cell-timeline/).
 
-![zamasu-timeline](/assets/post-images/dbs-zamasu-timeline.png)
+![zamasu-timeline](../../post-images/dbs-zamasu-timeline.png)
 
 Legend &rarr;
 

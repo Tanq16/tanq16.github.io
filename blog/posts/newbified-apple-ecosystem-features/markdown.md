@@ -1,6 +1,6 @@
+> [!INFO]
 > _Features in iOS also work on iPadOS. So, the iPadOS section only contains features specific to the iPad. Also, Siri related features work on all devices. Some specific applications by Apple, such as Safari may have common features among all the operating systems too._
 > Updated - `2024-10-27`
-{: .prompt-info }
 
 ## MacOS (Sequoia)
 

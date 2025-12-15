@@ -76,7 +76,7 @@ The steps and discussions on the topic are present in [this gist](https://gist.g
 
 An example setup of my Homepage dashboard is as follows &rarr;
 
-![Homapege Example](/assets/post-images/homepageexample.png)
+![Homapege Example](../../post-images/homepageexample.png)
 
 Maybe that provides some inspiration. I also want to mention a couple of other dashboards that are famous and might be worth looking into &rarr;
 

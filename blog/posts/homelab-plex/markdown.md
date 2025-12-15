@@ -1,5 +1,5 @@
+> [!TIP]
 >**Note:** Jellyfin is a pretty similar option with an easier setup and more reliable execution. It's the one I switched over to from Plex. Check out [my guide](https://tanishq.page/blog/posts/homelab-jellyfin/).
-{: .prompt-tip }
 
 ## Deployment
 
@@ -41,7 +41,7 @@ For TV shows and Anime, [TVDB](https://thetvdb.com) is the best source and for m
 <NAME> (Year) {tvdb-<id>}
 ```
 
+> [!TIP]
 >The `tvdb` and `tmdb` IDs can be obtained by visiting the show on the respective DB sites. The sites also list the full name and year, both of which are also important for perfect matches.
-{: .prompt-tip }
 
 Ensuring this naming scheme is the best way to avoid any issues with content match. After that, everything's good to go!
