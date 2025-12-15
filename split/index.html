@@ -1,48 +1,220 @@
 <!DOCTYPE html>
-<html data-theme="light">
+<html lang="en">
 <head>
-    <title>Modern Bill Splitter</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modern Bill Splitter - Split bills easily with friends and handle shared costs, taxes, and discounts." />
+    <meta name="keywords" content="bill splitter, split bills, shared costs, expense calculator, group expenses" />
+    
+    <title>Bill Splitter | Tanishq Rupaal</title>
+    
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        // Catppuccin Mocha
+                        rosewater: '#f5e0dc',
+                        flamingo: '#f2cdcd',
+                        pink: '#f5c2e7',
+                        mauve: '#cba6f7',
+                        red: '#f38ba8',
+                        maroon: '#eba0ac',
+                        peach: '#fab387',
+                        yellow: '#f9e2af',
+                        green: '#a6e3a1',
+                        teal: '#94e2d5',
+                        sky: '#89dceb',
+                        sapphire: '#74c7ec',
+                        blue: '#89b4fa',
+                        lavender: '#b4befe',
+                        text: '#cdd6f4',
+                        subtext1: '#bac2de',
+                        subtext0: '#a6adc8',
+                        overlay2: '#9399b2',
+                        overlay1: '#7f849c',
+                        overlay0: '#6c7086',
+                        surface2: '#585b70',
+                        surface1: '#45475a',
+                        surface0: '#313244',
+                        base: '#1e1e2e',
+                        mantle: '#181825',
+                        crust: '#11111b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #11111b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #313244;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #45475a;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(10px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<body>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
-        <i class="fas fa-sun" id="theme-icon"></i>
-    </button>
-    <div class="container">
-        <h1>Bill Splitter</h1>
-        
-        <div class="calculator">
-            <div class="input-group">
-                <label>Enter costs (format: A.B-5.4, C-4.89)</label>
-                <input type="text" id="costInput" placeholder="Example: A.B-5.4, C-4.89">
-            </div>
-            
-            <div class="input-group">
-                <label>Total amount (with tax/discounts)</label>
-                <input type="text" id="totalInput" placeholder="Example: 44.36">
-            </div>
-            
-            <button onclick="calculateSplit()">Calculate Split</button>
-        </div>
+<body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base min-h-screen">
+    
+    <!-- Back to Home Button -->
+    <a href="/" 
+       class="fixed top-6 left-6 z-50 w-10 h-10 rounded-lg bg-surface0/50 backdrop-blur-sm text-subtext0 hover:bg-blue hover:text-crust transition-all duration-200 flex items-center justify-center group"
+       aria-label="Back to home">
+        <i class="fas fa-home text-lg transition-transform duration-200 group-hover:scale-110"></i>
+    </a>
 
-        <div id="result">
-            Results will appear here
-        </div>
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            
+            <!-- Header -->
+            <div class="text-center mb-12 fade-in">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-mauve via-blue to-sapphire bg-clip-text text-transparent">
+                    Bill Splitter
+                </h1>
+                <p class="text-subtext0">
+                    Split expenses fairly with automatic tax and discount adjustments
+                </p>
+            </div>
 
-        <div class="help">
-            <h2>How to use</h2>
-            <p>Enter costs in the format: PERSON-AMOUNT</p>
-            <p>For shared items use: PERSON.PERSON-AMOUNT</p>
-            <p>Example inputs:</p>
-            <ul>
-                <li>A.B-5.4, C-4.89, A.B.D-20.7, B.C-12.3, D-3.45</li>
-                <li>44.36</li>
-            </ul>
+            <!-- Calculator Section -->
+            <div class="mb-10 fade-in space-y-6">
+                <!-- Cost Input -->
+                <div>
+                    <label for="costInput" class="block text-sm font-medium text-subtext1 mb-2">
+                        <i class="fas fa-receipt mr-2 text-mauve"></i>Enter Costs
+                    </label>
+                    <input type="text" 
+                           id="costInput" 
+                           placeholder="Example: A.B-5.4, C-4.89, D-10.50"
+                           class="w-full px-3 py-2.5 bg-surface0/40 rounded-lg text-text placeholder-overlay0 focus:bg-surface0 focus:outline-none focus:ring-1 focus:ring-mauve/40 transition-all duration-200">
+                    <p class="mt-1.5 text-xs text-overlay0">
+                        Format: <code class="text-blue">PERSON-AMOUNT</code> or 
+                        <code class="text-blue">PERSON.PERSON-AMOUNT</code> for shared
+                    </p>
+                </div>
+
+                <!-- Total Input -->
+                <div>
+                    <label for="totalInput" class="block text-sm font-medium text-subtext1 mb-2">
+                        <i class="fas fa-calculator mr-2 text-blue"></i>Total Amount
+                    </label>
+                    <input type="text" 
+                           id="totalInput" 
+                           placeholder="Example: 44.36"
+                           class="w-full px-3 py-2.5 bg-surface0/40 rounded-lg text-text placeholder-overlay0 focus:bg-surface0 focus:outline-none focus:ring-1 focus:ring-blue/40 transition-all duration-200">
+                    <p class="mt-1.5 text-xs text-overlay0">
+                        Final amount including tax, tips, and discounts
+                    </p>
+                </div>
+
+                <!-- Calculate Button -->
+                <button onclick="calculateSplit()" 
+                        class="w-full py-3 bg-gradient-to-r from-mauve to-blue hover:from-mauve/90 hover:to-blue/90 text-crust font-semibold rounded-lg transition-all duration-200 transform hover:scale-[1.01] active:scale-[0.99]">
+                    <i class="fas fa-divide mr-2"></i>Calculate Split
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="result" class="mb-10 fade-in text-subtext0">
+                <div class="text-center py-10">
+                    <i class="fas fa-chart-pie text-4xl text-surface1 mb-3"></i>
+                    <p class="text-sm text-overlay0">Results will appear here</p>
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="fade-in">
+                <h2 class="text-xl font-bold text-lavender mb-4 flex items-center">
+                    <i class="fas fa-circle-info mr-2 text-sm"></i>How to Use
+                </h2>
+                
+                <div class="space-y-4 text-sm text-subtext0">
+                    <div>
+                        <h3 class="font-medium text-text mb-1 flex items-center">
+                            <i class="fas fa-user mr-2 text-green text-xs"></i>Individual Costs
+                        </h3>
+                        <p class="text-xs text-overlay0">
+                            <code class="text-blue">PERSON-AMOUNT</code> — Example: <code class="text-green">Alice-12.50</code>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-medium text-text mb-1 flex items-center">
+                            <i class="fas fa-users mr-2 text-yellow text-xs"></i>Shared Costs
+                        </h3>
+                        <p class="text-xs text-overlay0">
+                            <code class="text-blue">PERSON.PERSON-AMOUNT</code> — Example: <code class="text-yellow">Alice.Bob-20.00</code>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-medium text-text mb-1 flex items-center">
+                            <i class="fas fa-lightbulb mr-2 text-peach text-xs"></i>Complete Example
+                        </h3>
+                        <div class="space-y-1 text-xs">
+                            <code class="block bg-surface0/30 px-2.5 py-1.5 rounded text-peach overflow-x-auto">A.B-5.4, C-4.89, A.B.D-20.7, B.C-12.3, D-3.45</code>
+                            <code class="block bg-surface0/30 px-2.5 py-1.5 rounded text-peach">44.36</code>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-surface0/50">
+                        <ul class="text-xs space-y-0.5 text-overlay0">
+                            <li>• Separate entries with commas</li>
+                            <li>• Shared items split equally</li>
+                            <li>• Tax/discounts distributed proportionally</li>
+                            <li>• Rounding adjusted on first person</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

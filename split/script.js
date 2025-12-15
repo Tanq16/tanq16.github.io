@@ -1,37 +1,3 @@
-// Theme toggle functionality
-function toggleTheme() {
-    const html = document.documentElement;
-    const themeIcon = document.getElementById('theme-icon');
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    
-    // Toggle icon
-    themeIcon.className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
-}
-
-// Set initial theme based on user's preference
-function initializeTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const themeIcon = document.getElementById('theme-icon');
-    
-    let theme = 'light';
-    if (savedTheme) {
-        theme = savedTheme;
-    } else if (prefersDark) {
-        theme = 'dark';
-    }
-    
-    document.documentElement.setAttribute('data-theme', theme);
-    themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
-}
-
-// Initialize theme on page load
-initializeTheme();
-
 function calculateSplit() {
     // Get input values
     const amountList = document.getElementById('costInput').value;
@@ -39,7 +5,12 @@ function calculateSplit() {
     
     // Validate inputs
     if (!amountList || !total || isNaN(total)) {
-        document.getElementById('result').innerHTML = '<p style="color: var(--accent-color);">Please enter valid inputs</p>';
+        document.getElementById('result').innerHTML = `
+            <div class="text-center py-10">
+                <i class="fas fa-exclamation-circle text-4xl text-red mb-3"></i>
+                <p class="text-sm text-red font-medium">Please enter valid inputs</p>
+            </div>
+        `;
         return;
     }
     
@@ -96,7 +67,14 @@ function calculateSplit() {
     });
     
     // Calculate final amounts with tax/discount adjustment
-    let result = '<h3>Individual Amounts</h3>';
+    let result = `
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-lg font-bold text-mauve mb-3 flex items-center">
+                    <i class="fas fa-user-circle mr-2 text-sm"></i>Individual Amounts
+                </h3>
+                <div class="space-y-2">
+    `;
     let computedTotal = 0;
     
     // Calculate individual amounts
@@ -104,27 +82,72 @@ function calculateSplit() {
         const amount = splitDict[person];
         const finalAmount = (amount * total / totalPre).toFixed(2);
         computedTotal += parseFloat(finalAmount);
-        result += `<p><strong>${person}:</strong> $${finalAmount}</p>`;
+        result += `
+            <div class="bg-surface0/30 rounded-lg p-3 hover:bg-surface0/50 transition-colors duration-200 flex justify-between items-center">
+                <span class="font-medium text-text flex items-center">
+                    <i class="fas fa-circle text-green text-xs mr-2"></i>${person}
+                </span>
+                <span class="text-xl font-bold text-green">$${finalAmount}</span>
+            </div>
+        `;
     }
+    
+    result += '</div></div>';
     
     // Adjust for rounding errors
     const difference = (total - computedTotal).toFixed(2);
     if (difference !== '0.00') {
         const firstPerson = Object.keys(splitDict)[0];
         const adjustedAmount = (parseFloat(splitDict[firstPerson] * total / totalPre) + parseFloat(difference)).toFixed(2);
-        result = result.replace(`<strong>${firstPerson}:</strong> $${(splitDict[firstPerson] * total / totalPre).toFixed(2)}`,
-                              `<strong>${firstPerson}:</strong> $${adjustedAmount}`);
+        const originalAmount = (splitDict[firstPerson] * total / totalPre).toFixed(2);
+        result = result.replace(
+            `<span class="text-2xl font-bold text-green">$${originalAmount}</span>`,
+            `<span class="text-2xl font-bold text-green">$${adjustedAmount}</span>`
+        );
     }
     
     // Add shared amounts
     if (Object.keys(finalCommon).length > 0) {
-        result += '<hr><h3>Shared Amounts (per person)</h3>';
+        result += `
+            <div>
+                <h3 class="text-lg font-bold text-blue mb-3 flex items-center">
+                    <i class="fas fa-users mr-2 text-sm"></i>Shared Amounts (per person)
+                </h3>
+                <div class="space-y-2">
+        `;
         for (const group in finalCommon) {
             const amount = finalCommon[group];
-            result += `<p><strong>${group}:</strong> $${(amount * total / totalPre).toFixed(2)}</p>`;
+            const people = group.split('.');
+            result += `
+                <div class="bg-surface0/30 rounded-lg p-3 hover:bg-surface0/50 transition-colors duration-200">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-medium text-text">${group}</span>
+                        <span class="text-lg font-bold text-yellow">$${(amount * total / totalPre).toFixed(2)}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 text-xs text-subtext0">
+                        ${people.map(p => `<span class="bg-surface0/50 px-2 py-0.5 rounded"><i class="fas fa-user text-blue mr-1"></i>${p}</span>`).join('')}
+                    </div>
+                </div>
+            `;
         }
+        result += '</div></div>';
     }
     
-    // Display results
-    document.getElementById('result').innerHTML = result;
+    // Add total summary
+    result += `
+            <div class="bg-gradient-to-r from-mauve/20 to-blue/20 rounded-lg p-4">
+                <div class="flex justify-between items-center">
+                    <span class="font-semibold text-text flex items-center">
+                        <i class="fas fa-receipt mr-2 text-mauve text-sm"></i>Total Bill
+                    </span>
+                    <span class="text-2xl font-bold text-mauve">$${total.toFixed(2)}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Display results with animation
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = result;
+    resultDiv.classList.add('fade-in');
 }
