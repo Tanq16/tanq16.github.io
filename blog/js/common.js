@@ -128,6 +128,91 @@ function renderTOC() {
     }).join('');
 }
 
+function addCopyButtons() {
+    const codeBlocks = document.querySelectorAll('pre:has(code):not(:has(.mermaid))');
+    
+    codeBlocks.forEach(block => {
+        // Skip if button already exists
+        if (block.querySelector('.copy-code-btn')) return;
+        
+        // Create wrapper for positioning
+        block.style.position = 'relative';
+        
+        // Create copy button
+        const button = document.createElement('button');
+        button.className = 'copy-code-btn';
+        button.type = 'button';
+        button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
+        button.setAttribute('aria-label', 'Copy code');
+        button.setAttribute('title', 'Copy code');
+        
+        // Add click handler
+        button.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const code = block.querySelector('code').textContent;
+            try {
+                await navigator.clipboard.writeText(code);
+                // Change icon to check
+                button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+                button.classList.add('copied');
+                button.setAttribute('title', 'Copied!');
+                lucide.createIcons();
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
+                    button.classList.remove('copied');
+                    button.setAttribute('title', 'Copy code');
+                    lucide.createIcons();
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                // Fallback: Select text manually as last resort
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    // Note: execCommand is deprecated but kept for legacy browser support
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+                        button.classList.add('copied');
+                        lucide.createIcons();
+                        setTimeout(() => {
+                            button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
+                            button.classList.remove('copied');
+                            lucide.createIcons();
+                        }, 2000);
+                    }
+                } catch (err2) {
+                    console.error('All copy methods failed:', err2);
+                    button.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i>';
+                    button.style.color = '#f38ba8'; // red
+                    setTimeout(() => {
+                        button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
+                        button.style.color = '';
+                        lucide.createIcons();
+                    }, 2000);
+                }
+                document.body.removeChild(textArea);
+            }
+        });
+        
+        block.appendChild(button);
+    });
+    
+    // Reinitialize lucide icons for the new buttons
+    lucide.createIcons();
+}
+
 function initApp() {
     const app = document.getElementById('app');
     const bg = document.getElementById('ambient-background');
@@ -138,6 +223,9 @@ function initApp() {
     initMarked();
     const mdContainer = document.getElementById('markdown-container');
     mdContainer.innerHTML = marked.parse(articleData.content);
+
+    // Add copy buttons to code blocks
+    addCopyButtons();
 
     // Initialize Mermaid with Catppuccin Mocha theme before rendering
     mermaid.initialize({ 
