@@ -198,7 +198,23 @@ function addCopyButtons() {
     lucide.createIcons();
 }
 
-function initApp() {
+async function loadContent() {
+    // Check if content should be loaded from external file
+    if (articleData.contentFile) {
+        try {
+            const response = await fetch(articleData.contentFile);
+            if (!response.ok) throw new Error(`Failed to load ${articleData.contentFile}`);
+            return await response.text();
+        } catch (error) {
+            console.error('Error loading content file:', error);
+            return '**Error loading content.** Please check console for details.';
+        }
+    }
+    // Otherwise use inline content
+    return articleData.content || '';
+}
+
+async function initApp() {
     const app = document.getElementById('app');
     const bg = document.getElementById('ambient-background');
     bg.innerHTML = elements.Background();
@@ -206,7 +222,10 @@ function initApp() {
 
     initMarked();
     const mdContainer = document.getElementById('markdown-container');
-    mdContainer.innerHTML = marked.parse(articleData.content);
+    
+    // Load content (either from file or inline)
+    const content = await loadContent();
+    mdContainer.innerHTML = marked.parse(content);
     addCopyButtons();
 
     mermaid.initialize({ 
