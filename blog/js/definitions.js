@@ -12,7 +12,8 @@ const blogData = {
             date: "May 8, 2025",
             category: "Computers and Security",
             location: "go-cli-tui",
-            tags: ["Go", "CLI", "UI/UX"]
+            tags: ["Go", "CLI", "UI/UX"],
+            image: "go-cli-tui"
         },
         {
             id: "github-webhook",
@@ -21,7 +22,8 @@ const blogData = {
             date: "Feb 16, 2025",
             category: "Computers and Security",
             location: "github-webhook",
-            tags: ["GitHub", "Automation", "Security"]
+            tags: ["GitHub", "Automation", "Security"],
+            image: "github-webhook"
         },
         {
             id: "reverse-proxy",
@@ -30,7 +32,8 @@ const blogData = {
             date: "Jan 29, 2025",
             category: "Home Server",
             location: "reverse-proxy",
-            tags: ["Homelab", "Networking", "Nginx"]
+            tags: ["Homelab", "Networking", "Nginx"],
+            image: "reverse-proxy"
         },
         {
             id: "expense-tracking",
@@ -39,7 +42,8 @@ const blogData = {
             date: "Dec 14, 2024",
             category: "Home Server",
             location: "expense-tracking",
-            tags: ["Go", "Self-Hosted", "Finance"]
+            tags: ["Go", "Self-Hosted", "Finance"],
+            image: "expense-tracking"
         },
         {
             id: "way-to-go",
@@ -48,7 +52,8 @@ const blogData = {
             date: "Dec 14, 2024",
             category: "Computers and Security",
             location: "way-to-go",
-            tags: ["Go", "Programming", "Opinion"]
+            tags: ["Go", "Programming", "Opinion"],
+            image: "way-to-go"
         },
         {
             id: "rag-notes",
@@ -57,7 +62,8 @@ const blogData = {
             date: "Nov 4, 2024",
             category: "Computers and Security",
             location: "rag-notes",
-            tags: ["AI", "LLM", "RAG"]
+            tags: ["AI", "LLM", "RAG"],
+            image: "rag-notes"
         },
         {
             id: "hosting-jekyll",
@@ -66,7 +72,8 @@ const blogData = {
             date: "Sep 9, 2023",
             category: "Computers and Security",
             location: "hosting-jekyll",
-            tags: ["Web", "GitHub", "Jekyll"]
+            tags: ["Web", "GitHub", "Jekyll"],
+            image: "hosting-jekyll"
         }
     ]
 };

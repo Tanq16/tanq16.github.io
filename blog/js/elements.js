@@ -90,7 +90,7 @@ const elements = {
     BlogCard: (post) => {
         return `
         <article class="blog-card flex flex-col h-full bg-surface0/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
-                 onclick="window.location.href='/newblog/posts/${post.location}/'"
+                 onclick="window.location.href='/blog/posts/${post.location}/'"
                  data-title="${post.title.toLowerCase()}" 
                  data-category="${post.category.toLowerCase()}"
                  data-tags="${post.tags.join(' ').toLowerCase()}">
@@ -98,7 +98,7 @@ const elements = {
             <!-- Image Area (Reduced Height) -->
             <div class="relative h-40 overflow-hidden block">
                 <div class="absolute inset-0 bg-gradient-to-t from-crust/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
-                <img src="/newblog/images/${post.location}.jpg" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+                <img src="/blog/images/${post.image}" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
 
             <!-- Content Area -->
