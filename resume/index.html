@@ -135,6 +135,86 @@
         .modal { transition: opacity 0.25s ease; }
         body.modal-active { overflow: hidden; }
         .hidden { display: none; }
+
+        @media screen and (max-width: 900px) {
+            body {
+                padding: 0.5rem 0;
+            }
+            #app-root {
+                transform-origin: top center;
+            }
+            .page-container {
+                transform-origin: top center;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media screen and (max-width: 900px) and (min-width: 601px) {
+            #app-root {
+                transform: scale(0.7);
+            }
+            .no-print.fixed {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.625rem 1.25rem;
+                font-size: 0.875rem;
+            }
+            .modal-container {
+                width: 85vw !important;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            #app-root {
+                transform: scale(0.45);
+            }
+            body {
+                padding: 0;
+            }
+            .no-print.fixed {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+            .no-print.fixed i {
+                width: 14px;
+                height: 14px;
+            }
+            .modal-container {
+                width: 90vw !important;
+                max-width: none !important;
+            }
+            .modal-content {
+                padding: 1rem 1rem !important;
+            }
+            .modal-content .text-xl {
+                font-size: 1.125rem !important;
+            }
+            .modal-content button {
+                padding: 0.625rem 0.75rem !important;
+                font-size: 0.875rem !important;
+            }
+            .modal-content button i {
+                width: 16px !important;
+                height: 16px !important;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            #app-root {
+                transform: scale(0.38);
+            }
+            .no-print.fixed {
+                top: 0.375rem;
+                right: 0.375rem;
+                padding: 0.375rem 0.75rem;
+                font-size: 0.7rem;
+            }
+            .no-print.fixed i {
+                width: 12px;
+                height: 12px;
+            }
+        }
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
