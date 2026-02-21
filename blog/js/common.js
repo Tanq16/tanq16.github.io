@@ -27,7 +27,7 @@ const elements = {
                 </div>
                 <div class="w-full max-w-xs relative search-input-wrapper rounded-full bg-surface0/50">
                     <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-overlay1"></i>
-                    <input type="text" id="articleSearch" placeholder="Find in article..." 
+                    <input type="text" id="articleSearch" placeholder="Find in article..."
                         class="w-full bg-transparent py-2 pl-10 pr-4 text-sm text-text placeholder-overlay1 focus:outline-none">
                     <span id="matchCount" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-mauve hidden">0/0</span>
                 </div>
@@ -129,7 +129,7 @@ function renderTOC() {
 
 function addCopyButtons() {
     const codeBlocks = document.querySelectorAll('pre:has(code):not(:has(.mermaid))');
-    
+
     codeBlocks.forEach(block => {
         if (block.querySelector('.copy-code-btn')) return;
         block.style.position = 'relative';
@@ -139,7 +139,7 @@ function addCopyButtons() {
         button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
         button.setAttribute('aria-label', 'Copy code');
         button.setAttribute('title', 'Copy code');
-        
+
         button.addEventListener('click', async (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -166,7 +166,7 @@ function addCopyButtons() {
                 document.body.appendChild(textArea);
                 textArea.focus();
                 textArea.select();
-                
+
                 try {
                     // Note: execCommand is deprecated but kept for legacy browser support
                     const successful = document.execCommand('copy');
@@ -198,38 +198,65 @@ function addCopyButtons() {
     lucide.createIcons();
 }
 
-async function loadContent() {
-    // Check if content should be loaded from external file
-    if (articleData.contentFile) {
-        try {
-            const response = await fetch(articleData.contentFile);
-            if (!response.ok) throw new Error(`Failed to load ${articleData.contentFile}`);
-            return await response.text();
-        } catch (error) {
-            console.error('Error loading content file:', error);
-            return '**Error loading content.** Please check console for details.';
-        }
-    }
-    // Otherwise use inline content
-    return articleData.content || '';
-}
-
 async function initApp() {
     const app = document.getElementById('app');
     const bg = document.getElementById('ambient-background');
+
+    // Extract slug from URL: /blog/posts/{slug}/
+    const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
+    const slug = pathParts[pathParts.length - 1];
+
+    // Fetch posts.json and find this post
+    const postsResponse = await fetch('/blog/posts.json');
+    if (!postsResponse.ok) {
+        app.innerHTML = '<p class="text-red text-center mt-20">Failed to load post data.</p>';
+        return;
+    }
+    const posts = await postsResponse.json();
+    const post = posts.find(p => p.location === slug);
+    if (!post) {
+        app.innerHTML = '<p class="text-red text-center mt-20">Post not found.</p>';
+        return;
+    }
+
+    // Build articleData from JSON entry
+    const articleData = {
+        config: { name: "Tanishq Rupaal", portfolioLink: "/blog/" },
+        meta: {
+            title: post.title,
+            author: "Tanishq Rupaal",
+            date: post.date,
+            readTime: post.readTime,
+            coverImage: "../../images/" + post.image,
+            tags: post.tags,
+            license: "This post is licensed under CC BY 4.0 by the author."
+        }
+    };
+
+    // Update page title
+    document.title = post.title + " | Tanishq Rupaal";
+
     bg.innerHTML = elements.Background();
     app.innerHTML = elements.Header(articleData.config) + elements.Layout(articleData) + elements.Footer(articleData.config);
 
     initMarked();
     const mdContainer = document.getElementById('markdown-container');
-    
-    // Load content (either from file or inline)
-    const content = await loadContent();
-    mdContainer.innerHTML = marked.parse(content);
+
+    // Fetch markdown content
+    try {
+        const mdResponse = await fetch('./markdown.md');
+        if (!mdResponse.ok) throw new Error('Failed to load markdown');
+        const content = await mdResponse.text();
+        mdContainer.innerHTML = DOMPurify.sanitize(marked.parse(content));
+    } catch (error) {
+        console.error('Error loading content:', error);
+        mdContainer.innerHTML = '<p><strong>Error loading content.</strong> Please check console for details.</p>';
+    }
+
     addCopyButtons();
 
-    mermaid.initialize({ 
-        startOnLoad: false, 
+    mermaid.initialize({
+        startOnLoad: false,
         theme: 'base',
         themeVariables: {
             darkMode: true,
@@ -263,7 +290,7 @@ async function initApp() {
             noteBkgColor: '#181825', // mantle
             noteTextColor: '#cdd6f4', // text
             noteBorderColor: '#f2cdcd', // flamingo
-        } 
+        }
     });
     document.fonts.ready.then(() => {
         mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
