@@ -1,23 +1,37 @@
 const elements = {
 
     Header: (config, sections) => {
-        const navLinks = sections.map(s =>
+        const navSections = sections.filter(s => s.showInNav !== false);
+        const pageLinks = config.pageLinks || [];
+
+        const navLinks = navSections.map(s =>
             `<a href="#${s.id}" data-target="${s.id}" class="nav-link text-subtext0 hover:text-mauve transition-colors duration-300 font-medium text-sm md:text-[16px]">${s.title}</a>`
         ).join('');
 
-        const mobileNavLinks = sections.map(s =>
+        const mobileNavLinks = navSections.map(s =>
             `<a href="#${s.id}" data-target="${s.id}" class="nav-link block px-3 py-2.5 rounded-lg text-subtext0 hover:text-mauve hover:bg-surface0/50 transition-colors duration-300 font-medium">${s.title}</a>`
         ).join('');
 
+        const pageLinkButtons = pageLinks.map(l => `
+            <a href="${l.link}" class="px-4 py-1.5 rounded-full bg-surface0/60 text-text hover:bg-surface0 hover:text-mauve transition-all duration-300 font-medium text-sm border border-surface1/20 hover:-translate-y-0.5">
+                ${l.label}
+            </a>
+        `).join('');
+
         return `
         <header class="sticky top-0 z-50 bg-crust/80 backdrop-blur-md border-b border-surface0/0 py-4 transition-all duration-300">
-            <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
-                <a href="#" class="flex items-center hover:opacity-80 transition-opacity duration-300">
+            <div class="max-w-6xl mx-auto px-6 flex justify-between items-center gap-4">
+                <a href="#" class="flex items-center hover:opacity-80 transition-opacity duration-300 shrink-0">
                     <img src="/assets/images/logosmall.svg" alt="Logo" class="h-8 w-8">
                 </a>
-                <nav class="flex gap-6 items-center">
-                    <div class="hidden md:flex gap-8">
-                        ${navLinks}
+
+                <div class="hidden md:flex gap-8 items-center">
+                    ${navLinks}
+                </div>
+
+                <nav class="flex gap-2 md:gap-3 items-center shrink-0">
+                    <div class="flex gap-2 items-center">
+                        ${pageLinkButtons}
                     </div>
                     <button id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false"
                             class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-subtext0 hover:text-mauve hover:bg-surface0/50 transition-colors duration-300">
@@ -42,7 +56,7 @@ const elements = {
             <a href="${s.link}" target="_blank" title="${s.label}"
                class="group text-2xl flex items-center justify-center w-10 h-10">
                 <i class="${fa} social-glow text-mauve group-hover:-translate-y-1"
-                   style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards; transition: color 3.2s ease-in-out, transform .3s ease;"></i>
+                   style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards; transition: color 2.24s ease-in-out, transform .3s ease;"></i>
             </a>
         `;
         }).join('');
@@ -53,7 +67,7 @@ const elements = {
                 <!-- overflow-hidden masks the clip-up reveal; pb gives the descender room inside the mask -->
                 <div class="overflow-hidden pb-2 mb-2">
                     <h1 class="text-[40px] md:text-[64px] leading-[1.05] md:whitespace-nowrap font-bold tracking-tight bg-[linear-gradient(90deg,theme(colors.mauve),theme(colors.pink),theme(colors.blue),theme(colors.mauve))] bg-[length:200%_auto] bg-clip-text text-transparent"
-                        style="animation: clipUp .7s cubic-bezier(.22,1,.36,1) .1s both, shimmer 6s linear 1s infinite;">
+                        style="animation: clipUp .7s cubic-bezier(.22,1,.36,1) .1s both, shimmer 4.2s linear 1s infinite;">
                         ${config.name}
                     </h1>
                 </div>

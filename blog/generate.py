@@ -1,18 +1,5 @@
 #!/usr/bin/env python3
-"""Static blog generator for tanishq.page (standard library only).
-
-Source of truth is each blog/posts/<slug>/markdown.md, which carries a small
-frontmatter block followed by the article body. Running this script rebuilds,
-from those files:
-
-  - blog/posts.json               index consumed by the listing + post pages
-  - blog/posts/<slug>/index.html  per-post SEO shell, from templates/post.html
-  - sitemap.xml
-
-Usage:
-  python3 blog/generate.py             rebuild posts.json, all shells, sitemap
-  python3 blog/generate.py new <slug>  scaffold blog/posts/<slug>/markdown.md
-"""
+"""Generate posts.json, per-post HTML shells, and sitemap.xml from each post's markdown frontmatter."""
 import json
 import os
 import re
@@ -55,8 +42,7 @@ def parse_frontmatter(text):
 
 
 def esc_attr(s):
-    """Neutralize the double-quote so a value is safe inside a double-quoted
-    HTML attribute; existing entities (e.g. &rarr;) are left intact."""
+    # only a raw double-quote can break a double-quoted attribute; leave existing entities (e.g. &rarr;) intact
     return s.replace('"', "&quot;")
 
 

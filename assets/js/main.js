@@ -67,7 +67,7 @@ function initSocialColorCycle() {
         return c;
     };
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const INTERVAL = 3200; // matches the CSS colour fade so the morph is continuous
+    const INTERVAL = 2240; // matches the CSS colour fade so the morph is continuous
     icons.forEach((icon, i) => {
         let current = pick(null);
         icon.style.color = current;

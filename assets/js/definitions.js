@@ -10,14 +10,19 @@ const definitions = {
             { icon: "fa:fab fa-linkedin-in", link: "https://linkedin.com/in/tanishqrupaal", label: "LinkedIn" },
             { icon: "fa:fab fa-github-alt", link: "https://github.com/tanq16", label: "GitHub" },
             { icon: "fa:fab fa-x-twitter", link: "https://twitter.com/etheriosking", label: "X" }
+        ],
+        pageLinks: [
+            { label: "Blog", link: "/blog" },
+            { label: "Resume", link: "/resume" }
         ]
     },
     
     sections: [
         {
             id: "about",
-            type: "text", 
+            type: "text",
             title: "About",
+            showInNav: false,
             content: `<b><i>There is always a workaround</i></b> - that's an ideology I strongly believe in. It's a reminder that problems don't just have solutions, but smart solutions. I try to find such solutions through hacks for all puzzles in my life.<br><br>
             I currently work as a <b>Lead Security Engineer</b> at <b>Praetorian</b> and graduated with an <b>MS Cybersecurity</b> degree from <b>Georgia Tech</b>. My primary interests are Cloud Security, Application Security, and tinkering with Linux and containers in my homelab.`,
             actions: [
