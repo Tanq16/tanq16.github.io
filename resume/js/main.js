@@ -34,14 +34,12 @@ async function renderPaginated() {
     root.innerHTML = '';
     staging.innerHTML = '';
 
-    // 1. Determine Pixel Height of Page Content Area
     const testDiv = document.createElement('div');
     testDiv.style.height = '250mm'; // 279 (Letter) - 24 - 5 (buffer)
     document.body.appendChild(testDiv);
     const PAGE_CONTENT_HEIGHT_PX = testDiv.offsetHeight;
     document.body.removeChild(testDiv);
     
-    // 2. Helper to create a new page
     let pages = [];
     let currentPageContent = null;
     let currentHeight = 0;
@@ -51,7 +49,6 @@ async function renderPaginated() {
         page.className = 'page-container';
         page.innerHTML = `<div class="right-sidebar-bg"></div>`;
         
-        // Content Wrapper
         const content = document.createElement('div');
         content.style.position = 'relative';
         content.style.zIndex = '10';
@@ -62,7 +59,6 @@ async function renderPaginated() {
         currentHeight = 0;
     }
 
-    // 3. Helper to append Node
     function appendNode(node, forceNewPage = false) {
         const clone = node.cloneNode(true);
         staging.appendChild(clone);
@@ -92,10 +88,8 @@ async function renderPaginated() {
     for (let i = 0; i < RESUME_DATA.sections.length; i++) {
         const section = RESUME_DATA.sections[i];
         
-        // 1. Create Title Node
         const titleNode = document.createElement('div');
-        titleNode.className = 'section-container'; 
-        // Apply 'first-section' class if it's the very first section
+        titleNode.className = 'section-container';
         if (i === 0) {
             titleNode.classList.add('first-section');
         }
@@ -104,12 +98,10 @@ async function renderPaginated() {
             <h2 class="section-title">${section.title}</h2>
         `;
 
-        // 2. Measure Title Height
         staging.appendChild(titleNode);
         const titleHeight = titleNode.offsetHeight;
         staging.removeChild(titleNode);
 
-        // 3. Measure First Entry Height
         let firstEntryHeight = 0;
         let firstEntryNode = null;
         if (section.entries.length > 0) {
@@ -119,7 +111,7 @@ async function renderPaginated() {
             staging.removeChild(firstEntryNode);
         }
 
-        // 4. If Title + First Entry > Remaining Page Space, force new page for Title
+        // avoid an orphaned title: break to a new page if the title + first entry won't fit
         let forcePageBreak = false;
         if (pages.length > 0) {
             const remainingSpace = PAGE_CONTENT_HEIGHT_PX - currentHeight;
@@ -129,7 +121,6 @@ async function renderPaginated() {
         }
         appendNode(titleNode, forcePageBreak);
 
-        // 5. Append Entries
         for (let j = 0; j < section.entries.length; j++) {
             const entryNode = createEntryNode(section.entries[j], section.type);
             appendNode(entryNode);
@@ -167,5 +158,4 @@ function createEntryNode(entry, type) {
     return entryWrapper;
 }
 
-// Init
 window.onload = renderPaginated;

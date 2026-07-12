@@ -1,9 +1,7 @@
 function calculateSplit() {
-    // Get input values
     const amountList = document.getElementById('costInput').value;
     const total = parseFloat(document.getElementById('totalInput').value);
     
-    // Validate inputs
     if (!amountList || !total || isNaN(total)) {
         document.getElementById('result').innerHTML = `
             <div class="text-center py-10">
@@ -14,25 +12,20 @@ function calculateSplit() {
         return;
     }
     
-    // Initialize variables
     const splitDict = {};
     const common = [];
     let totalPre = 0.0;
     
-    // Parse the input string
     const peopleSplits = amountList.split(', ');
     
-    // Process each split
     peopleSplits.forEach(split => {
         const [people, amount] = split.split('-');
         
-        // Check if it's a shared cost
         if (people.includes('.')) {
             common.push([people, amount]);
             return;
         }
         
-        // Add individual costs
         if (splitDict[people]) {
             splitDict[people] += parseFloat(amount);
         } else {
@@ -41,13 +34,11 @@ function calculateSplit() {
         totalPre += parseFloat(amount);
     });
     
-    // Process shared costs
     const finalCommon = {};
     common.forEach(([people, amount]) => {
         const peopleList = people.split('.').sort();
         const perPerson = parseFloat(amount) / peopleList.length;
         
-        // Add to final common list
         const key = peopleList.join('.');
         if (finalCommon[key]) {
             finalCommon[key] += perPerson;
@@ -55,7 +46,6 @@ function calculateSplit() {
             finalCommon[key] = perPerson;
         }
         
-        // Add to individual totals
         peopleList.forEach(person => {
             if (splitDict[person]) {
                 splitDict[person] += perPerson;
@@ -66,7 +56,6 @@ function calculateSplit() {
         });
     });
     
-    // Calculate final amounts with tax/discount adjustment
     let result = `
         <div class="space-y-6">
             <div>
@@ -77,7 +66,6 @@ function calculateSplit() {
     `;
     let computedTotal = 0;
     
-    // Calculate individual amounts
     for (const person in splitDict) {
         const amount = splitDict[person];
         const finalAmount = (amount * total / totalPre).toFixed(2);
@@ -94,7 +82,6 @@ function calculateSplit() {
     
     result += '</div></div>';
     
-    // Adjust for rounding errors
     const difference = (total - computedTotal).toFixed(2);
     if (difference !== '0.00') {
         const firstPerson = Object.keys(splitDict)[0];
@@ -106,7 +93,6 @@ function calculateSplit() {
         );
     }
     
-    // Add shared amounts
     if (Object.keys(finalCommon).length > 0) {
         result += `
             <div>
@@ -133,7 +119,6 @@ function calculateSplit() {
         result += '</div></div>';
     }
     
-    // Add total summary
     result += `
             <div class="bg-gradient-to-r from-mauve/20 to-blue/20 rounded-lg p-4">
                 <div class="flex justify-between items-center">
@@ -146,7 +131,6 @@ function calculateSplit() {
         </div>
     `;
     
-    // Display results with animation
     const resultDiv = document.getElementById('result');
     resultDiv.innerHTML = result;
     resultDiv.classList.add('fade-in');

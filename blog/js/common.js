@@ -1,6 +1,3 @@
-// Common JS for Blog Articles
-
-// Load the shared, site-wide ambient background (soft morphing colour-bubbles).
 (function () {
     const s = document.createElement('script');
     s.src = '/assets/js/ambient.js';
@@ -55,7 +52,7 @@ const elements = {
                         <p>${data.meta.license}</p>
                     </div>
                 </div>
-                <!-- IMPORTANT: markdown-body class triggers GitHub CSS -->
+                <!-- markdown-body class triggers the GitHub markdown CSS -->
                 <article id="markdown-container" class="markdown-body"></article>
             </div>
             <aside class="hidden lg:block lg:col-span-3 relative">
@@ -75,7 +72,6 @@ const elements = {
         </footer>`
 };
 
-// CORE LOGIC
 let tocHeaders = [];
 
 function generateId(text) {
@@ -168,7 +164,7 @@ function addCopyButtons() {
                 textArea.select();
 
                 try {
-                    // Note: execCommand is deprecated but kept for legacy browser support
+                    // execCommand is deprecated but kept as a legacy-browser fallback
                     const successful = document.execCommand('copy');
                     if (successful) {
                         button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
@@ -183,7 +179,7 @@ function addCopyButtons() {
                 } catch (err2) {
                     console.error('All copy methods failed:', err2);
                     button.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i>';
-                    button.style.color = '#f38ba8'; // red
+                    button.style.color = '#f38ba8';
                     setTimeout(() => {
                         button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
                         button.style.color = '';
@@ -205,7 +201,6 @@ async function initApp() {
     const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
     const slug = pathParts[pathParts.length - 1];
 
-    // Fetch posts.json and find this post
     const postsResponse = await fetch('/blog/posts.json');
     if (!postsResponse.ok) {
         app.innerHTML = '<p class="text-red text-center mt-20">Failed to load post data.</p>';
@@ -218,7 +213,6 @@ async function initApp() {
         return;
     }
 
-    // Build articleData from JSON entry
     const articleData = {
         config: { name: "Tanishq Rupaal", portfolioLink: "/blog/" },
         meta: {
@@ -232,7 +226,6 @@ async function initApp() {
         }
     };
 
-    // Update page title
     document.title = post.title + " | Tanishq Rupaal";
 
     app.innerHTML = elements.Header(articleData.config) + elements.Layout(articleData) + elements.Footer(articleData.config);
@@ -240,7 +233,6 @@ async function initApp() {
     initMarked();
     const mdContainer = document.getElementById('markdown-container');
 
-    // Fetch markdown content
     try {
         const mdResponse = await fetch('./markdown.md');
         if (!mdResponse.ok) throw new Error('Failed to load markdown');
@@ -258,36 +250,36 @@ async function initApp() {
         theme: 'base',
         themeVariables: {
             darkMode: true,
-            background: '#181825', // mantle
+            background: '#181825',
             fontFamily: 'Inter',
             fontSize: '14px',
-            primaryColor: '#313244', // surface0
-            primaryTextColor: '#cdd6f4', // text
-            primaryBorderColor: '#cba6f7', // mauve
-            lineColor: '#b4befe', // lavender
-            secondaryColor: '#313244', // surface0
-            secondaryTextColor: '#cdd6f4', // text
-            secondaryBorderColor: '#89b4fa', // blue
-            tertiaryColor: '#1e1e2e', // base
-            tertiaryTextColor: '#cdd6f4', // text
-            tertiaryBorderColor: '#f5c2e7', // pink
-            nodeBorder: '#cba6f7', // mauve
-            clusterBkg: '#1e1e2e', // base
-            clusterBorder: '#45475a', // surface1
-            defaultLinkColor: '#b4befe', // lavender
-            titleColor: '#cba6f7', // mauve
-            edgeLabelBackground: '#11111b', // crust
-            actorBorder: '#cba6f7', // mauve
-            actorBkg: '#1e1e2e', // base
-            signalColor: '#b4befe', // lavender
-            signalTextColor: '#cdd6f4', // text
-            labelBoxBkgColor: '#1e1e2e', // base
-            labelBoxBorderColor: '#cba6f7', // mauve
-            labelTextColor: '#cdd6f4', // text
-            loopTextColor: '#cdd6f4', // text
-            noteBkgColor: '#181825', // mantle
-            noteTextColor: '#cdd6f4', // text
-            noteBorderColor: '#f2cdcd', // flamingo
+            primaryColor: '#313244',
+            primaryTextColor: '#cdd6f4',
+            primaryBorderColor: '#cba6f7',
+            lineColor: '#b4befe',
+            secondaryColor: '#313244',
+            secondaryTextColor: '#cdd6f4',
+            secondaryBorderColor: '#89b4fa',
+            tertiaryColor: '#1e1e2e',
+            tertiaryTextColor: '#cdd6f4',
+            tertiaryBorderColor: '#f5c2e7',
+            nodeBorder: '#cba6f7',
+            clusterBkg: '#1e1e2e',
+            clusterBorder: '#45475a',
+            defaultLinkColor: '#b4befe',
+            titleColor: '#cba6f7',
+            edgeLabelBackground: '#11111b',
+            actorBorder: '#cba6f7',
+            actorBkg: '#1e1e2e',
+            signalColor: '#b4befe',
+            signalTextColor: '#cdd6f4',
+            labelBoxBkgColor: '#1e1e2e',
+            labelBoxBorderColor: '#cba6f7',
+            labelTextColor: '#cdd6f4',
+            loopTextColor: '#cdd6f4',
+            noteBkgColor: '#181825',
+            noteTextColor: '#cdd6f4',
+            noteBorderColor: '#f2cdcd',
         }
     });
     document.fonts.ready.then(() => {

@@ -1,32 +1,25 @@
-// Shared site-wide ambient background: soft, muted colour-bubbles that morph between a
-// circle and a rounded square, wander randomly across the screen, pool softly where they
-// overlap, and disperse into "dust" before re-forming elsewhere on a random lifecycle.
-//
-// Self-contained + self-initialising: any page that loads this script gets the effect.
-// It reuses an existing #ambient-background element if present, otherwise creates one.
+// Shared, self-initialising ambient background: soft colour-bubbles that morph, wander, and re-form.
 (function () {
-    if (window.__ambientBackgroundInit) return; // guard against double-loading
+    if (window.__ambientBackgroundInit) return;
     window.__ambientBackgroundInit = true;
 
-    // Catppuccin accents (r,g,b), rendered as faint translucent tints on the dark base
     const PALETTE = [
-        [203, 166, 247], // mauve
-        [137, 180, 250], // blue
-        [180, 190, 254], // lavender
-        [245, 194, 231], // pink
-        [148, 226, 213], // teal
-        [137, 220, 235], // sky
-        [250, 179, 135], // peach
-        [166, 227, 161], // green
+        [203, 166, 247],
+        [137, 180, 250],
+        [180, 190, 254],
+        [245, 194, 231],
+        [148, 226, 213],
+        [137, 220, 235],
+        [250, 179, 135],
+        [166, 227, 161],
     ];
-    const COUNT = 7;        // "about 6 or 8"
-    const MAX_SPEED = 42;   // px/s cap
+    const COUNT = 7;
+    const MAX_SPEED = 42;
 
     const rand = (min, max) => min + Math.random() * (max - min);
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
     const smooth = (t) => t * t * (3 - 2 * t); // smoothstep easing
 
-    // circle <-> rounded-square morph, injected once so no page needs to define it
     function injectKeyframes() {
         if (document.getElementById('ambient-morph-kf')) return;
         const style = document.createElement('style');
@@ -57,13 +50,12 @@
         let W = window.innerWidth, H = window.innerHeight;
         window.addEventListener('resize', () => { W = window.innerWidth; H = window.innerHeight; });
 
-        // (re)initialise a bubble at a fresh random spot with fresh look + lifecycle
         function spawn(s, first) {
             const size = rand(90, 190);
             s.size = size;
             s.color = pick(PALETTE);
-            s.alpha = rand(0.05, 0.11);           // muted — faint tint, not a glow
-            s.baseBlur = size * rand(0.04, 0.07);  // soft edges, silhouette still readable
+            s.alpha = rand(0.05, 0.11);
+            s.baseBlur = size * rand(0.04, 0.07);
             s.x = rand(size * 0.3, Math.max(size * 0.3, W - size * 0.3));
             s.y = rand(size * 0.3, Math.max(size * 0.3, H - size * 0.3));
             const dir = rand(0, Math.PI * 2), speed = rand(12, 34);
@@ -93,7 +85,6 @@
             bubbles.push(s);
         }
 
-        // Reduced motion: place them statically as circles, no animation loop
         if (reduce) {
             bubbles.forEach((s) => {
                 s.el.style.borderRadius = '50%';
@@ -121,7 +112,7 @@
                     op = 1; scale = 1; extraBlur = 0;
                 } else if (s.age < s.formDur + s.lifespan + s.dissolveDur) {
                     const t = smooth((s.age - s.formDur - s.lifespan) / s.dissolveDur);
-                    op = 1 - t; scale = 1 + 0.45 * t; extraBlur = t * 10; // puff outward + blur away
+                    op = 1 - t; scale = 1 + 0.45 * t; extraBlur = t * 10;
                 } else {
                     spawn(s, false);
                     continue;

@@ -13,7 +13,6 @@ function parseDate(dateStr) {
 async function init() {
     app.innerHTML = elements.Header(blogConfig);
 
-    // Fetch posts from posts.json
     try {
         const response = await fetch('/blog/posts.json');
         if (!response.ok) throw new Error('Failed to load posts');
@@ -30,7 +29,6 @@ async function init() {
     initSearch();
 }
 
-// Search Logic
 function initSearch() {
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.blog-card');

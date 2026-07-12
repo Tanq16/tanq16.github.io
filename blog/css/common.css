@@ -12,42 +12,38 @@ body { background-color: #11111b; }
     border-bottom: 1px solid rgba(49, 50, 68, 0.3);
 }
 
-/* MARKDOWN OVERRIDES */
 .markdown-body {
     background-color: transparent !important;
     font-family: 'Inter', sans-serif !important;
-    color: #a6adc8 !important; /* subtext0 */
+    color: #a6adc8 !important;
     --color-canvas-default: transparent;
-    --color-canvas-subtle: #1e1e2e; /* base */
-    --color-border-default: #45475a; /* surface1 */
-    --color-border-muted: #313244; /* surface0 */
-    --color-fg-default: #cdd6f4; /* text */
-    --color-fg-muted: #a6adc8; /* subtext0 */
-    --color-accent-fg: #89b4fa; /* blue */
+    --color-canvas-subtle: #1e1e2e;
+    --color-border-default: #45475a;
+    --color-border-muted: #313244;
+    --color-fg-default: #cdd6f4;
+    --color-fg-muted: #a6adc8;
+    --color-accent-fg: #89b4fa;
     --color-accent-emphasis: #89b4fa;
-    --color-danger-fg: #f38ba8; /* red */
+    --color-danger-fg: #f38ba8;
 }
 
-/* Typography overrides */
 .markdown-body h1, .markdown-body h2, .markdown-body h3 {
     border-bottom-color: #313244;
-    color: #b4befe !important; /* lavender */
+    color: #b4befe !important;
 }
-.markdown-body h2 { color: #cba6f7 !important; /* mauve */ }
-.markdown-body h3 { color: #89b4fa !important; /* blue */ }
+.markdown-body h2 { color: #cba6f7 !important; }
+.markdown-body h3 { color: #89b4fa !important; }
 
-/* Code Blocks */
 .markdown-body pre {
-    background-color: #181825 !important; /* mantle */
+    background-color: #181825 !important;
     border: none !important;
     border-radius: 0.75rem;
     padding: 1rem !important;
 }
 
-/* Inline Code */
 .markdown-body code {
-    color: #fab387 !important; /* peach */
-    background-color: #313244 !important; /* surface0 */
+    color: #fab387 !important;
+    background-color: #313244 !important;
     border-radius: 4px;
 }
 .markdown-body pre code {
@@ -55,7 +51,6 @@ body { background-color: #11111b; }
     background-color: transparent !important;
 }
 
-/* Lists */
 .markdown-body ul,
 .markdown-body ol {
     list-style-position: outside;
@@ -78,20 +73,19 @@ body { background-color: #11111b; }
     margin-bottom: 0.25rem;
 }
 
-/* TABLE OVERRIDES */
 .markdown-body table {
     display: table !important; /* Force table display to stretch */
-    width: 100% !important;    /* Force full width */
+    width: 100% !important;
     border-collapse: separate;
     border-spacing: 0;
-    border: 1px solid #45475a; /* surface1 */
+    border: 1px solid #45475a;
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 1.5rem;
 }
 
 .markdown-body table thead {
-    background-color: rgba(203, 166, 247, 0.1); /* Mauve hint */
+    background-color: rgba(203, 166, 247, 0.1);
 }
 
 .markdown-body table tr {
@@ -100,23 +94,23 @@ body { background-color: #11111b; }
 }
 
 .markdown-body table tr:nth-child(2n) {
-    background-color: rgba(49, 50, 68, 0.3) !important; /* surface0/30 */
+    background-color: rgba(49, 50, 68, 0.3) !important;
 }
 
 .markdown-body table th {
-    color: #cba6f7 !important; /* mauve */
+    color: #cba6f7 !important;
     font-weight: 600;
     border: none !important; /* Override github-markdown-css */
-    border-bottom: 1px solid #45475a !important; /* surface1 */
-    border-right: 1px solid #313244; /* surface0 */
+    border-bottom: 1px solid #45475a !important;
+    border-right: 1px solid #313244;
     padding: 12px 16px !important;
 }
 
 .markdown-body table td {
     border: none !important; /* Override github-markdown-css */
-    border-bottom: 1px solid #313244 !important; /* surface0 */
+    border-bottom: 1px solid #313244 !important;
     border-right: 1px solid #313244;
-    color: #a6adc8 !important; /* subtext0 */
+    color: #a6adc8 !important;
     padding: 12px 16px !important;
 }
 
@@ -128,7 +122,6 @@ body { background-color: #11111b; }
     border-bottom: none !important;
 }
 
-/* Callouts */
 .callout {
     padding: 1rem;
     border-radius: 0.5rem;
@@ -156,7 +149,6 @@ body { background-color: #11111b; }
 .callout.danger { background-color: rgba(243, 139, 168, 0.1); }
 .callout.danger .callout-icon { color: #f38ba8; }
 
-/* Misc */
 #markdown-container { position: relative; z-index: 45; }
 .search-match { background-color: #f9e2af; color: #11111b; padding: 0 2px; border-radius: 2px; position: relative; z-index: 45; }
 .toc-link.active {
@@ -165,16 +157,15 @@ body { background-color: #11111b; }
     background-color: rgba(203, 166, 247, 0.05);
 }
 
-/* Copy Button */
 .copy-code-btn {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
     padding: 0.5rem;
-    background-color: rgba(49, 50, 68, 0.95); /* surface0 */
-    border: 1px solid rgba(69, 71, 90, 0.8); /* surface1 */
+    background-color: rgba(49, 50, 68, 0.95);
+    border: 1px solid rgba(69, 71, 90, 0.8);
     border-radius: 0.375rem;
-    color: #a6adc8; /* subtext0 */
+    color: #a6adc8;
     cursor: pointer;
     opacity: 0;
     transition: all 0.2s ease;
@@ -192,11 +183,11 @@ pre:hover .copy-code-btn {
 }
 .copy-code-btn:hover {
     background-color: rgba(69, 71, 90, 1);
-    color: #cba6f7; /* mauve */
+    color: #cba6f7;
     border-color: #cba6f7;
 }
 .copy-code-btn.copied {
-    color: #a6e3a1; /* green */
+    color: #a6e3a1;
     border-color: #a6e3a1;
 }
 .copy-code-btn:active {

@@ -13,7 +13,6 @@ const definitions = {
         ]
     },
     
-    // Section Definitions
     sections: [
         {
             id: "about",

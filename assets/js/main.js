@@ -56,9 +56,7 @@ function init() {
     initObservers();
 }
 
-// Social icons: each starts on a random Catppuccin pastel and slowly cross-fades to another
-// (fade handled by the CSS `transition: color` on each icon). Same interval for every icon,
-// but staggered 1s apart so they never all switch at once. Re-randomised on every page load.
+// Each social icon cross-fades between random Catppuccin pastels, staggered 1s apart, re-randomised per load.
 function initSocialColorCycle() {
     const icons = document.querySelectorAll('.social-glow');
     if (!icons.length) return;
@@ -69,18 +67,17 @@ function initSocialColorCycle() {
         return c;
     };
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const INTERVAL = 3200; // ms between colour changes; matches the CSS colour fade for a continuous morph
+    const INTERVAL = 3200; // matches the CSS colour fade so the morph is continuous
     icons.forEach((icon, i) => {
         let current = pick(null);
         icon.style.color = current;
-        if (reduce) return; // hold a single static colour
+        if (reduce) return;
         const tick = () => { current = pick(current); icon.style.color = current; };
         setTimeout(() => { tick(); setInterval(tick, INTERVAL); }, i * 1000);
     });
 }
 
 function initObservers() {
-    // Fade in sections
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -100,7 +97,6 @@ function initObservers() {
         observer.observe(section);
     });
 
-    // Nav Highlight
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -123,7 +119,6 @@ function initObservers() {
 }
 
 function initInteractions() {
-    // Mobile menu toggle (hamburger). Swaps the bars/x icon and closes on link tap.
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (menuBtn && mobileMenu) {
@@ -136,7 +131,6 @@ function initInteractions() {
         mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
     }
 
-    // Skills Tab
     document.querySelectorAll('.skill-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.skill-tab').forEach(t => {
@@ -152,7 +146,6 @@ function initInteractions() {
         });
     });
 
-    // Contact Form
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
@@ -178,7 +171,6 @@ function initInteractions() {
     }
 }
 
-// Smooth scroll for anchor links
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -197,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Initialize on DOMContentLoaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {

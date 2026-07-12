@@ -8,12 +8,10 @@
     
     <title>Bill Splitter | Tanishq Rupaal</title>
     
-    <!-- Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +23,6 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        // Catppuccin Mocha
                         rosewater: '#f5e0dc',
                         flamingo: '#f2cdcd',
                         pink: '#f5c2e7',
@@ -58,7 +55,6 @@
         }
     </script>
     <style>
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -76,7 +72,6 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Fade in animation */
         .fade-in {
             animation: fadeIn 0.6s ease-out;
         }
@@ -100,7 +95,6 @@
 </head>
 <body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base min-h-screen">
     
-    <!-- Back to Home Button -->
     <a href="/" 
        class="fixed top-6 left-6 z-50 w-10 h-10 rounded-lg bg-surface0/50 backdrop-blur-sm text-subtext0 hover:bg-blue hover:text-crust transition-all duration-200 flex items-center justify-center group"
        aria-label="Back to home">
@@ -110,7 +104,6 @@
     <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto">
             
-            <!-- Header -->
             <div class="text-center mb-12 fade-in">
                 <h1 class="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-mauve via-blue to-sapphire bg-clip-text text-transparent">
                     Bill Splitter
@@ -120,9 +113,7 @@
                 </p>
             </div>
 
-            <!-- Calculator Section -->
             <div class="mb-10 fade-in space-y-6">
-                <!-- Cost Input -->
                 <div>
                     <label for="costInput" class="block text-sm font-medium text-subtext1 mb-2">
                         <i class="fas fa-receipt mr-2 text-mauve"></i>Enter Costs
@@ -137,7 +128,6 @@
                     </p>
                 </div>
 
-                <!-- Total Input -->
                 <div>
                     <label for="totalInput" class="block text-sm font-medium text-subtext1 mb-2">
                         <i class="fas fa-calculator mr-2 text-blue"></i>Total Amount
@@ -151,14 +141,12 @@
                     </p>
                 </div>
 
-                <!-- Calculate Button -->
                 <button onclick="calculateSplit()" 
                         class="w-full py-3 bg-gradient-to-r from-mauve to-blue hover:from-mauve/90 hover:to-blue/90 text-crust font-semibold rounded-lg transition-all duration-200 transform hover:scale-[1.01] active:scale-[0.99]">
                     <i class="fas fa-divide mr-2"></i>Calculate Split
                 </button>
             </div>
 
-            <!-- Results Section -->
             <div id="result" class="mb-10 fade-in text-subtext0">
                 <div class="text-center py-10">
                     <i class="fas fa-chart-pie text-4xl text-surface1 mb-3"></i>
@@ -166,7 +154,6 @@
                 </div>
             </div>
 
-            <!-- Help Section -->
             <div class="fade-in">
                 <h2 class="text-xl font-bold text-lavender mb-4 flex items-center">
                     <i class="fas fa-circle-info mr-2 text-sm"></i>How to Use
