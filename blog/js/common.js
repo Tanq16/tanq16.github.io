@@ -1,13 +1,13 @@
 // Common JS for Blog Articles
 
+// Load the shared, site-wide ambient background (soft morphing colour-bubbles).
+(function () {
+    const s = document.createElement('script');
+    s.src = '/assets/js/ambient.js';
+    document.head.appendChild(s);
+})();
+
 const elements = {
-    Background: () => `
-        <div class="absolute top-[15%] right-[15%] w-24 h-24 bg-surface0/30 rounded-3xl border border-mauve/10 animate-orbit-slow origin-[120px_120px]"></div>
-        <div class="absolute top-[40%] left-[10%] w-20 h-20 bg-surface0/20 rounded-[2rem] border border-blue/10 animate-orbit-medium origin-[-60px_80px]"></div>
-        <div class="absolute bottom-[20%] right-[25%] w-32 h-32 bg-surface0/20 rounded-full border border-lavender/10 animate-orbit-fast origin-[80px_-80px]"></div>
-        <div class="absolute top-[20%] left-[20%] w-12 h-12 bg-surface0/10 rounded-xl border border-rosewater/10 animate-orbit-slow origin-[0px_100px]" style="animation-direction: reverse;"></div>
-        <div class="absolute bottom-[10%] left-[5%] w-28 h-28 bg-surface0/10 rounded-[2rem] border border-teal/10 animate-orbit-medium origin-[100px_-50px]"></div>
-    `,
     Header: (config) => `
         <header class="glass-header sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -200,7 +200,6 @@ function addCopyButtons() {
 
 async function initApp() {
     const app = document.getElementById('app');
-    const bg = document.getElementById('ambient-background');
 
     // Extract slug from URL: /blog/posts/{slug}/
     const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
@@ -236,7 +235,6 @@ async function initApp() {
     // Update page title
     document.title = post.title + " | Tanishq Rupaal";
 
-    bg.innerHTML = elements.Background();
     app.innerHTML = elements.Header(articleData.config) + elements.Layout(articleData) + elements.Footer(articleData.config);
 
     initMarked();

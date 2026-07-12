@@ -12,27 +12,8 @@ window.handleTagClick = (event, tag) => {
 };
 
 const elements = {
-    
-    // 0. Scattered Geometric Background (Small, Radial Orbits)
-    Background: () => {
-        // By setting a transform-origin outside the element, rotation creates an orbit.
-        return `
-            <!-- Shape 1: Top Right - Mauve Square -->
-            <div class="absolute top-[15%] right-[15%] w-24 h-24 bg-surface0/30 rounded-3xl border border-mauve/10 animate-orbit-slow origin-[120px_120px]"></div>
-            
-            <!-- Shape 2: Left Center - Blue Rounded Rect -->
-            <div class="absolute top-[40%] left-[10%] w-20 h-20 bg-surface0/20 rounded-[2rem] border border-blue/10 animate-orbit-medium origin-[-60px_80px]"></div>
-            
-            <!-- Shape 3: Bottom Right - Lavender Circle -->
-            <div class="absolute bottom-[20%] right-[25%] w-32 h-32 bg-surface0/20 rounded-full border border-lavender/10 animate-orbit-fast origin-[80px_-80px]"></div>
-            
-            <!-- Shape 4: Top Left - Rosewater Small Square -->
-            <div class="absolute top-[20%] left-[20%] w-12 h-12 bg-surface0/10 rounded-xl border border-rosewater/10 animate-orbit-slow origin-[0px_100px]" style="animation-direction: reverse;"></div>
-            
-            <!-- Shape 5: Bottom Left - Teal Rounded -->
-            <div class="absolute bottom-[10%] left-[5%] w-28 h-28 bg-surface0/10 rounded-[2rem] border border-teal/10 animate-orbit-medium origin-[100px_-50px]"></div>
-        `;
-    },
+
+    // Note: the ambient background is now the shared /assets/js/ambient.js system.
 
     // 1. Header (Hidden title on mobile, Rounded search)
     Header: (config) => {

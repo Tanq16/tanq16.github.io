@@ -1,5 +1,4 @@
 const app = document.getElementById('app');
-const bgContainer = document.getElementById('ambient-background');
 
 const blogConfig = {
     name: "Tanishq Rupaal",
@@ -12,7 +11,6 @@ function parseDate(dateStr) {
 }
 
 async function init() {
-    bgContainer.innerHTML = elements.Background();
     app.innerHTML = elements.Header(blogConfig);
 
     // Fetch posts from posts.json
