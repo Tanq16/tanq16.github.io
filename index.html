@@ -105,6 +105,26 @@
             opacity: 1;
             transform: none;
         }
+
+        /* ===== Hero intro animations (from design handoff) ===== */
+        /* entrance */
+        @keyframes fadeRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+        @keyframes clipUp   { from { opacity: 0; transform: translateY(110%); } to { opacity: 1; transform: none; } }
+        @keyframes popIn    { from { opacity: 0; transform: scale(0); }         to { opacity: 1; transform: scale(1); } }
+        @keyframes dropIn   { from { opacity: 0; transform: translateY(-52px) scale(.7); } to { opacity: 1; transform: none; } }
+        @keyframes zoomOvershoot { 0% { opacity: 0; transform: scale(.55); } 100% { opacity: 1; transform: scale(1); } }
+        /* idle loops */
+        @keyframes floatBreathe { 0%, 100% { transform: scale(.9); } 50% { transform: scale(1.1); } }
+        @keyframes sq1 { 0%, 100% { transform: rotate(12deg) translateY(0); }          50% { transform: rotate(8deg)   translateY(-12px); } }
+        @keyframes sq2 { 0%, 100% { transform: rotate(-6deg) translate(16px, 16px); }   50% { transform: rotate(-10deg) translate(22px, 6px); } }
+        @keyframes sq3 { 0%, 100% { transform: rotate(45deg) translate(-48px, -48px); } 50% { transform: rotate(52deg)  translate(-40px, -56px); } }
+        /* name gradient shimmer */
+        @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+        /* Respect reduced-motion: land on the final state, drop the looping motion */
+        @media (prefers-reduced-motion: reduce) {
+            #app [style*="animation"] { animation: none !important; }
+        }
     </style>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">

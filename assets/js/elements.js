@@ -49,9 +49,12 @@ const elements = {
         
         const socialLinks = config.socials.map((s, index) => {
             const colorClass = colors[index % colors.length];
+            // staggered pop-in entrance; `backwards` fill keeps the hover transform working once it lands
+            const delay = (0.52 + index * 0.08).toFixed(2);
             return `
-            <a href="${s.link}" target="_blank" title="${s.label}" 
-               class="${colorClass} hover:text-text hover:-translate-y-1 transition-all duration-300 text-2xl flex items-center justify-center w-10 h-10">
+            <a href="${s.link}" target="_blank" title="${s.label}"
+               class="${colorClass} hover:text-text hover:-translate-y-1 transition-all duration-300 text-2xl flex items-center justify-center w-10 h-10"
+               style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${delay}s backwards;">
                 ${utils.resolveIcon(s.icon)}
             </a>
         `}).join('');
@@ -59,15 +62,23 @@ const elements = {
         return `
         <section class="min-h-[60vh] flex flex-col md:flex-row items-center justify-between px-6 py-10 max-w-6xl mx-auto relative overflow-hidden gap-12">
             <!-- Left: Content -->
-            <div class="z-10 max-w-xl text-center animate-fade-in-up flex-1 flex flex-col items-center">
-                <h1 class="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-mauve via-pink to-blue bg-clip-text text-transparent tracking-tight">
-                    ${config.name}
-                </h1>
-                <h2 class="text-2xl md:text-3xl font-medium text-text mb-4">
-                    ${config.title}
-                </h2>
-                <p class="text-lg text-subtext0 mb-8 max-w-lg">${config.subtitle}</p>
-                
+            <div class="z-10 max-w-xl text-center flex-1 flex flex-col items-center">
+                <!-- overflow-hidden masks the clip-up reveal; pb gives the descender room inside the mask -->
+                <div class="overflow-hidden pb-2 mb-2">
+                    <h1 class="text-[40px] md:text-[64px] leading-[1.05] md:whitespace-nowrap font-bold tracking-tight bg-[linear-gradient(90deg,theme(colors.mauve),theme(colors.pink),theme(colors.blue),theme(colors.mauve))] bg-[length:200%_auto] bg-clip-text text-transparent"
+                        style="animation: clipUp .7s cubic-bezier(.22,1,.36,1) .1s both, shimmer 6s linear 1s infinite;">
+                        ${config.name}
+                    </h1>
+                </div>
+                <div class="overflow-hidden mb-4">
+                    <h2 class="text-2xl md:text-3xl font-medium text-text"
+                        style="animation: clipUp .7s cubic-bezier(.22,1,.36,1) .24s both;">
+                        ${config.title}
+                    </h2>
+                </div>
+                <p class="text-lg text-subtext0 mb-8 max-w-lg"
+                   style="animation: fadeRise .7s cubic-bezier(.22,1,.36,1) .38s both;">${config.subtitle}</p>
+
                 <div class="flex flex-wrap gap-4 mt-2 justify-center">
                     ${socialLinks}
                 </div>
@@ -75,14 +86,25 @@ const elements = {
 
             <!-- Right: Artistic Squares & Image -->
             <div class="relative w-full md:w-1/2 h-[400px] flex items-center justify-center">
-                <!-- Abstract Squares -->
-                <div class="absolute w-64 h-64 bg-surface0/30 rounded-3xl rotate-12 backdrop-blur-sm border border-mauve/20 z-0"></div>
-                <div class="absolute w-64 h-64 bg-surface0/20 rounded-3xl -rotate-6 backdrop-blur-sm border border-blue/20 z-0 translate-x-4 translate-y-4"></div>
-                <div class="absolute w-48 h-48 bg-mauve/10 rounded-2xl rotate-45 backdrop-blur-md z-0 -translate-x-12 -translate-y-12"></div>
-                
-                <!-- Logo Image -->
+                <!-- Abstract Squares: outer wrapper = drop-in entrance, inner = idle bob.
+                     Inner keeps its base rotate/translate as the reduced-motion resting state. -->
+                <div class="absolute z-0" style="animation: dropIn .8s cubic-bezier(.34,1.4,.5,1) .15s both;">
+                    <div class="w-64 h-64 bg-surface0/30 rounded-3xl rotate-12 backdrop-blur-sm border border-mauve/20" style="animation: sq1 9s ease-in-out infinite;"></div>
+                </div>
+                <div class="absolute z-0" style="animation: dropIn .8s cubic-bezier(.34,1.4,.5,1) .3s both;">
+                    <div class="w-64 h-64 bg-surface0/20 rounded-3xl -rotate-6 backdrop-blur-sm border border-blue/20 translate-x-4 translate-y-4" style="animation: sq2 11s ease-in-out infinite;"></div>
+                </div>
+                <div class="absolute z-0" style="animation: dropIn .8s cubic-bezier(.34,1.4,.5,1) .45s both;">
+                    <div class="w-48 h-48 bg-mauve/10 rounded-2xl rotate-45 backdrop-blur-md -translate-x-12 -translate-y-12" style="animation: sq3 13s ease-in-out infinite;"></div>
+                </div>
+
+                <!-- Logo Image: outer wrapper = zoom-in entrance, inner = gentle breathe -->
                 <div class="relative z-10 w-full h-full flex items-center justify-center">
-                    <img src="/assets/images/logobig.png" class="w-auto h-full object-contain drop-shadow-2xl" alt="Portrait">
+                    <div class="h-full flex items-center justify-center" style="animation: zoomOvershoot .9s cubic-bezier(.34,1.56,.64,1) .35s both;">
+                        <div class="h-full flex items-center justify-center" style="animation: floatBreathe 6s ease-in-out infinite;">
+                            <img src="/assets/images/logobig.png" class="w-auto h-full object-contain drop-shadow-2xl" alt="Portrait">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>`;
