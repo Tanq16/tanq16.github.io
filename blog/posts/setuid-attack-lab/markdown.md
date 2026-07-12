@@ -1,3 +1,12 @@
+---
+title: SetUID Attack Lab - SeedLabs
+date: 2020-06-01
+category: Lab Practice Notes
+tags: [setuid, linux, lab, seed-labs]
+image: seedlabs-cover.jpg
+description: Set-UID is an important security mechanism in unix systems. When a Set-UID program is run, the executing program assumes the owner's privileges irresp...
+---
+
 Set-UID is an important security mechanism in unix systems. When a Set-UID program is run, the executing program assumes the owner’s privileges irrespective of the user running the program. The tasks are exploration based and are to be done on linux systems. The prebuilt VM called `seedubuntu` comes installed with all the required software. Various scenarios are duplicated using Set-UID programs. The problems with each are listed.
 
 ## Task 1 : Familiarizing with `chsh`, `su`, `sudo`

@@ -1,3 +1,12 @@
+---
+title: flAWS 1
+date: 2022-03-31
+category: Lab Practice Notes
+tags: [aws, lab, flaws1, security]
+image: flaws-cover.jpeg
+description: This level is buckets of fun. See if you can find the first sub-domain.
+---
+
 ## Level 1
 
 > [!INFO]

@@ -1,3 +1,12 @@
+---
+title: OffSec PG - Potato, PyExp, Sar, Seppukku
+date: 2021-12-19
+category: Lab Practice Notes
+tags: [oscp, lab, offsec-proving-grounds]
+image: pg-cover.jpeg
+description: OSCP-style walkthrough notes for the OffSec Proving Grounds machines Potato, PyExp, Sar, and Seppukku.
+---
+
 ## Potato
 
 ### Enumeration

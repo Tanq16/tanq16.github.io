@@ -1,3 +1,12 @@
+---
+title: Bookmark Manager in Home Lab
+date: 2024-01-15
+category: Home Server
+tags: [bookmarks, linkwarden, home-lab]
+image: homelab-cover.jpeg
+description: There are probably a hundred different ways to manage links and bookmarks. People use Chrome's bookmarks, some use an extension like Toby, and others ...
+---
+
 ## Intro
 
 There are probably a hundred different ways to manage links and bookmarks. People use Chrome's bookmarks, some use an extension like Toby, and others store them on GitHub. There are also many bookmark manager apps, dashboard applications, and even command-line tools that can manage bookmarks. Once again, I turn to the amazing open-source community in search of projects.

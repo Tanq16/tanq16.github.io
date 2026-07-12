@@ -236,7 +236,8 @@ async function initApp() {
     try {
         const mdResponse = await fetch('./markdown.md');
         if (!mdResponse.ok) throw new Error('Failed to load markdown');
-        const content = await mdResponse.text();
+        const raw = await mdResponse.text();
+        const content = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
         mdContainer.innerHTML = DOMPurify.sanitize(marked.parse(content));
     } catch (error) {
         console.error('Error loading content:', error);

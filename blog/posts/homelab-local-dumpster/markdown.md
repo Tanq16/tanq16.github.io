@@ -1,3 +1,12 @@
+---
+title: Local Content Share in Home Lab
+date: 2023-05-05
+category: Home Server
+tags: [local-content-share, home-lab]
+image: homelab-cover.jpeg
+description: Self-hosting Local Dumpster, a tool I built that works as a local-network clipboard with history for sharing text and files.
+---
+
 > [!DANGER]
 > I updated the project to port it to Go and removed the rendering capability because it was barely being used. The UI is updated and much improved. The project is still available for x86_64 containerized execution. But it also builds binaries for all operating systems (linux, darwin, and windows) and architectures (amd64 and arm64).
 

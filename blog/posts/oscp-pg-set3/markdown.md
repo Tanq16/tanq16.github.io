@@ -1,3 +1,12 @@
+---
+title: OffSec PG - Gaara, Geisha, Ha-Natraj, Inclusiveness
+date: 2021-12-19
+category: Lab Practice Notes
+tags: [oscp, lab, offsec-proving-grounds]
+image: pg-cover.jpeg
+description: OSCP-style walkthrough notes for the OffSec Proving Grounds machines Gaara, Geisha, Ha-Natraj, and Inclusiveness.
+---
+
 ## Gaara
 
 ### Enumeration

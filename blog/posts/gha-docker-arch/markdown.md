@@ -1,3 +1,12 @@
+---
+title: GitHub Actions & ARM Architecture
+date: 2024-06-06
+category: Computers and Security
+tags: [github-actions, docker, container, cicd]
+image: ghaarch-cover.jpeg
+description: Building ARM container images with GitHub Actions when native ARM runners aren't available, as of mid-2024.
+---
+
 > [!TIP]
 > This blog post covers my troubleshooting efforts and research on how we can use GitHub workflows for various architectures. It focuses more on how to build container images for ARM in the absence of native ARM runners and the state of such things in mid-2024 (this means any improvements made after mid-2024 were not considered when writing this content).
 

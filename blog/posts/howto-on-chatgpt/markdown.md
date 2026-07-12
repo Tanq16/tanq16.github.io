@@ -1,3 +1,12 @@
+---
+title: Unleashing ChatGPT - A Guide for Professional Use
+date: 2023-05-01
+category: Computers and Security
+tags: [chatgpt, programming, productivity]
+image: gpt-cover.jpeg
+description: OpenAI developed a state-of-the-art language model based on the GPT architecture that uses deep learning to generate human-like responses to natural l...
+---
+
 ## ChatGPT Primer
 
 OpenAI developed a state-of-the-art language model based on the GPT architecture that uses deep learning to generate human-like responses to natural language input. It ingests text input and processes it in multiple steps to refine the understanding of the input. It then uses autoregression to generate a response one token at a time, using the previous output to generate the next token. The model has been trained over a massive dataset of websites, documents, and books up to the end of 2021.

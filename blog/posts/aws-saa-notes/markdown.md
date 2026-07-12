@@ -1,3 +1,12 @@
+---
+title: AWS Certified Solutions Architect - Associate Notes
+date: 2022-07-24
+category: Cloud
+tags: [aws, solutions-architect-associate, course]
+image: template.jpeg
+description: The sections here are based on the course by ACloudGuru, and the notes list the most important points I learned overall for the CSAA certification, as...
+---
+
 # AWS Certified Solutions Architect - Associate Notes
 
 The sections here are based on the course by ACloudGuru, and the notes list the most important points I learned overall for the CSAA certification, as well as some based on practice of incorrect mock questions.

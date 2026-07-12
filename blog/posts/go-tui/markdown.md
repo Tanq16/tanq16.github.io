@@ -1,3 +1,12 @@
+---
+title: Building a Terminal UI for Go CLI Tools
+date: 2025-05-08
+category: Computers and Security
+tags: [programming, go, terminal-ui, cli]
+image: go-tui.jpg
+description: Command Line Interface (CLI) tools are essential for developers, sysadmins, and security professionals. They're lightweight, scriptable, and often mor...
+---
+
 ## The World of CLI Tools
 
 Command Line Interface (CLI) tools are essential for developers, sysadmins, and security professionals. They're lightweight, scriptable, and often more powerful than their GUI counterparts.

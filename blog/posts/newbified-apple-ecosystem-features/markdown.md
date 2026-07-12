@@ -1,3 +1,12 @@
+---
+title: Interesting Apple Ecosystem Features
+date: 2022-11-26
+category: Computers Newbified
+tags: [apple, productivity]
+image: appleecosystem-cover.jpeg
+description: A tour of handy Apple ecosystem features across iOS, iPadOS, and macOS — Handoff, Universal Clipboard, Siri tricks, and more.
+---
+
 > [!INFO]
 > _Features in iOS also work on iPadOS. So, the iPadOS section only contains features specific to the iPad. Also, Siri related features work on all devices. Some specific applications by Apple, such as Safari may have common features among all the operating systems too._
 > Updated - `2024-10-27`

@@ -1,3 +1,12 @@
+---
+title: Hosting a Website using GitHub Pages and Jekyll
+date: 2023-09-09
+category: Computers and Security
+tags: [github-pages, github, jekyll, deployment]
+image: jekyll-cover.jpeg
+description: GitHub Pages is a straightforward method to deploy a website right from a GitHub repository, especially for those with computer science skills. In a v...
+---
+
 ## Covering Bases
 
 [GitHub Pages](https://pages.github.com/) is a straightforward method to deploy a website right from a GitHub repository, especially for those with computer science skills. In a very simplistic way, GitHub pages can simply use the repository root as the webroot and serve a website from there. It can also serve from a specific branch.

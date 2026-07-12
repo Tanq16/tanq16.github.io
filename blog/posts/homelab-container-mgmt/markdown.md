@@ -1,3 +1,12 @@
+---
+title: Container Management in Home Lab - Portainer, Dockge & Yacht
+date: 2023-05-06
+category: Home Server
+tags: [portainer, yacht, home-lab]
+image: homelab-cover.jpeg
+description: Home Labs come in different shapes and sizes. We could have a multi-node setup running Kubernetes and a couple of other servers running Proxmox with s...
+---
+
 ## Reasoning & Candidates
 
 Home Labs come in different shapes and sizes. We could have a multi-node setup running Kubernetes and a couple of other servers running Proxmox with specialized virtual machines and containers, all interacting with each other over TLS; or it can be a simple raspberry pi running a single docker container like Plex or PiHole. But irrespective of the size of a home lab, the intention is - to make your home network cool and automate some parts of your life or improve experiences related to your everyday activities. With this intent in mind, a container management service can help debug issues and observe logs, manage running services by spinning them up or down, obtain command line access to running containers, and organize and monitor all the images/volumes/containers from an eagle-eyed view.

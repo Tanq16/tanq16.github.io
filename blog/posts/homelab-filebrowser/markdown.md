@@ -1,3 +1,12 @@
+---
+title: FileBrowser in Home Lab
+date: 2023-05-14
+category: Home Server
+tags: [filebrowser, home-lab]
+image: homelab-cover.jpeg
+description: FileBrowser is a file management service that can run within the local network through a browser. It can be thought of as a "create your own cloud storage" solution, with the cloud being the self-hosted home lab...
+---
+
 [FileBrowser](https://filebrowser.org) is a file management service that can run within the local network through a browser. It can be thought of as a "create your own cloud storage" solution, with the cloud being the self-hosted home lab. It has a slick UI for mobile and desktop web browsers and allows all basic functionalities that a service like Google Drive would provide. In addition to that, FileBrowser also has the ability to edit the text in files with syntax highlighting for code files.
 
 All of these features are very helpful for local file shares. The entire home directory should be shared with the container to enable editing files relating to other containers. Multiple files can also be zipped, gzipped, or converted into tarballs.

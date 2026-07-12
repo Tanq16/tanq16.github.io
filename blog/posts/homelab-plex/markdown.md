@@ -1,3 +1,12 @@
+---
+title: Plex Media Server in Home Lab
+date: 2022-04-24
+category: Home Server
+tags: [home-lab, plex]
+image: homelab-cover.jpeg
+description: Running Plex Media Server as a Docker container in a home lab.
+---
+
 > [!TIP]
 >**Note:** Jellyfin is a pretty similar option with an easier setup and more reliable execution. It's the one I switched over to from Plex. Check out [my guide](https://tanishq.page/blog/posts/homelab-jellyfin/).
 

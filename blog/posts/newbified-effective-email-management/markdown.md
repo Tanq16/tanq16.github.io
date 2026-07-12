@@ -1,3 +1,12 @@
+---
+title: Effective Email Management - Inbox Zero
+date: 2022-09-08
+category: Computers Newbified
+tags: [email, inbox-zero, productivity]
+image: email-cover.jpeg
+description: Following is a post on achieving perfect email management. All ideas and thoughts here are the way I personally implement my own email management syst...
+---
+
 Following is a post on achieving perfect email management. All ideas and thoughts here are the way I personally implement my own email management system. There might be other methods or ideas by other productivity gurus out there which may work better depending on specific use cases. However, the following is what I find to be easy to implement and effective in results.
 
 ## Email Applications

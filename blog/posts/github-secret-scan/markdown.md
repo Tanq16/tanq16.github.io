@@ -1,3 +1,12 @@
+---
+title: 10k GitHub Repositories Secret Scanning Code
+date: 2022-03-10
+category: Computers and Security
+tags: [github, programming, secret-scan, security]
+image: template.jpeg
+description: Bulk-scanning 10,000 GitHub repositories for leaked secrets using the search API.
+---
+
 The API used to search git repositories is &rarr; 
 
 ```

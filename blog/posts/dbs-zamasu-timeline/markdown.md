@@ -1,3 +1,12 @@
+---
+title: Dragon Ball Super - Zamasu Timeline 101
+date: 2024-02-03
+category: Just Fun Things
+tags: [anime, dragon-ball]
+image: goku-black-cover.jpeg
+description: I did a similar writeup on Dragon Ball Z's Cell saga timeline earlier. Just like in Z, Super also had a saga involving Future Trunks and, therefore, a...
+---
+
 ## Whats and Whys
 
 I did a similar writeup on Dragon Ball Z's Cell saga timeline [earlier](https://tanishq.page/blog/posts/dbz-cell-timeline/). Just like in Z, Super also had a saga involving Future Trunks and, therefore, another time travel mystery. An in-depth understanding of this timeline isn't necessary to enjoy the story. Like Z, many people feel there are only two timelines in the Zamasu saga of Dragon Ball Super. I'll present my theories on how this is a quad-timeline story and how a 5th timeline came into existence.

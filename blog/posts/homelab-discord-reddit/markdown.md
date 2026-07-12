@@ -1,3 +1,12 @@
+---
+title: Discord & Reddit News Feed in Home Lab
+date: 2022-02-18
+category: Home Server
+tags: [discord, reddit, news-feed, home-lab]
+image: homelab-cover.jpeg
+description: This post details how Discord webhooks and Reddit API can be used in tandom with a cron job to post news feeds to a Discord channel. The news feeds are collected from the r/technews subreddit...
+---
+
 ## News Feeds from Reddit
 
 This code is to be run on a linux server. A subreddit page can be loaded without authentication and has a huge JSON object which contains information about the window that is loaded in the browser. This can be extracted and the corresponding titles of posts can be pulled from the first page.

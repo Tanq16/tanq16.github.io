@@ -1,3 +1,12 @@
+---
+title: XSS Attack Lab - SeedLabs
+date: 2020-06-01
+category: Lab Practice Notes
+tags: [xss, web-application, lab, seed-labs]
+image: seedlabs-cover.jpg
+description: SeedLabs cross-site scripting lab on the ELGG social-networking app, from stored XSS to a self-propagating worm.
+---
+
 The tasks are based on a web application called ELGG which is open source. It is designed to be like an open source version of Facebook or myspace. The prebuilt vm called seedubuntu is used to host the web application and there are a few users already created. Logging in to the web app will be done from a different vm on the same virtual box network.
 
 ## Task 1 : Post a malicious message to display an alert window

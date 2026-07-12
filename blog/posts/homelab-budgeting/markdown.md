@@ -1,3 +1,12 @@
+---
+title: Personal Finance & Budgeting in Home Lab
+date: 2024-01-14
+category: Home Server
+tags: [budgeting, personal-finance, actualbudget, home-lab]
+image: homelab-cover.jpeg
+description: Personal finance is more than just a practice - it's a skill. But at the same time, finding a good, privacy-focused application to help manage persona...
+---
+
 ## Intro
 
 Personal finance is more than just a practice - it's a skill. But at the same time, finding a good, privacy-focused application to help manage personal finances is very hard. Many applications are either paywalled for tiers of features, or hold your data hostage to make migration harder. Of course, there are good paid services as well, but an open-source application that can be deployed in our home labs - that's what I'm after. [Actual Budget](https://github.com/actualbudget/actual) is such an application.

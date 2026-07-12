@@ -1,3 +1,12 @@
+---
+title: Streamlining Security-Related Workflows with Docker Containers
+date: 2023-04-29
+category: Computers and Security
+tags: [docker, container, productivity, security]
+image: docker-cover.jpeg
+description: I'm generally always looking for ways to improve my workflow and make my work as a cybersec professional more efficient. One of the tools that has had...
+---
+
 I'm generally always looking for ways to improve my workflow and make my work as a cybersec professional more efficient. One of the tools that has had the biggest impact on my work is [Docker](https://www.docker.com).
 
 ## What is Docker?

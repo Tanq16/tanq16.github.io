@@ -1,3 +1,12 @@
+---
+title: SnapDrop Local Container in Home Lab
+date: 2022-04-24
+category: Home Server
+tags: [home-lab, snapdrop]
+image: homelab-cover.jpeg
+description: Self-hosting a fully local Snapdrop for AirDrop-style file sharing, patched to avoid public STUN and TURN relays.
+---
+
 > [!DANGER]
 >As explained below, the WebRTC-based Snapdrop uses TURN (Traversal Using Relays around NAT) for the publicly available [instance](https://snapdrop.net) when a peer-peer connection cannot be established, and SnapDrop uses its public TURN servers for that. Now, all that and more has been solved by another project that I created - [Local Content Share](https://github.com/Tanq16/local-content-share). To learn more about how that works, read my blog in the Home Lab series - [Local Content Share in Home Lab](https://tanishq.page/blog/posts/homelab-local-dumpster/).
 

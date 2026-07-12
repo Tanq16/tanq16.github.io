@@ -1,3 +1,12 @@
+---
+title: Excalidraw in Home Lab
+date: 2024-01-13
+category: Home Server
+tags: [budgeter, excalidraw, whiteboard, home-lab]
+image: homelab-cover.jpeg
+description: Excalidraw is an open source infinite-canvas whiteboard software. It is primary local-first and the public hosted version is end to end encrypted, wit...
+---
+
 ## Excalidraw
 
 Excalidraw is an open source infinite-canvas whiteboard software. It is primary local-first and the public hosted version is end to end encrypted, with support for live collaboration as well. The online version of the software has some additional features as well, such as generative AI features, a laser pointer for presentations, and mermaid diagram to excalidraw functionality.
