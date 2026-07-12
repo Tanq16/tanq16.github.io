@@ -39,18 +39,17 @@ const elements = {
 
     // 2. Hero Section (Redesigned)
     Hero: (config) => {
-        // Each icon carries the name's shimmer gradient on its OWN glyph (background-clip:text only
-        // works reliably on the element whose own text it clips — not on a container's descendants).
-        const iconGrad = 'bg-[linear-gradient(90deg,theme(colors.mauve),theme(colors.pink),theme(colors.blue),theme(colors.mauve))] bg-[length:200%_auto] bg-clip-text text-transparent';
+        // Each icon shows a solid colour that slowly cross-fades to a new random Catppuccin
+        // pastel (driven by initSocialColorCycle). The split transition keeps the colour morph
+        // slow while the hover lift stays quick. text-mauve is just the pre-JS fallback.
         const socialLinks = config.socials.map((s, index) => {
             const fa = s.icon.replace(/^fa:/, ''); // socials are all Font Awesome glyphs
             const popDelay = (0.52 + index * 0.08).toFixed(2);
-            const shimDelay = (1 - index * 0.4).toFixed(2); // phase-offset so the shimmer sweeps across the row
             return `
             <a href="${s.link}" target="_blank" title="${s.label}"
                class="group text-2xl flex items-center justify-center w-10 h-10">
-                <i class="${fa} ${iconGrad} transition-transform duration-300 group-hover:-translate-y-1"
-                   style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards, shimmer 6s linear ${shimDelay}s infinite;"></i>
+                <i class="${fa} social-glow text-mauve group-hover:-translate-y-1"
+                   style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards; transition: color 3.2s ease-in-out, transform .3s ease;"></i>
             </a>
         `;
         }).join('');

@@ -51,8 +51,32 @@ function init() {
     });
     app.innerHTML += elements.Footer(definitions.config);
     initInteractions();
+    initSocialColorCycle();
     lucide.createIcons();
     initObservers();
+}
+
+// Social icons: each starts on a random Catppuccin pastel and slowly cross-fades to another
+// (fade handled by the CSS `transition: color` on each icon). Same interval for every icon,
+// but staggered 1s apart so they never all switch at once. Re-randomised on every page load.
+function initSocialColorCycle() {
+    const icons = document.querySelectorAll('.social-glow');
+    if (!icons.length) return;
+    const palette = ['#cba6f7', '#f5c2e7', '#b4befe', '#89b4fa', '#74c7ec', '#89dceb', '#94e2d5'];
+    const pick = (avoid) => {
+        let c;
+        do { c = palette[Math.floor(Math.random() * palette.length)]; } while (c === avoid);
+        return c;
+    };
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const INTERVAL = 3200; // ms between colour changes; matches the CSS colour fade for a continuous morph
+    icons.forEach((icon, i) => {
+        let current = pick(null);
+        icon.style.color = current;
+        if (reduce) return; // hold a single static colour
+        const tick = () => { current = pick(current); icon.style.color = current; };
+        setTimeout(() => { tick(); setInterval(tick, INTERVAL); }, i * 1000);
+    });
 }
 
 function initObservers() {
