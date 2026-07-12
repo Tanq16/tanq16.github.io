@@ -36,10 +36,8 @@ const utils = {
 };
 
 const app = document.getElementById('app');
-const bgContainer = document.getElementById('ambient-background');
 
 function init() {
-    bgContainer.innerHTML = elements.Background();
     app.innerHTML += elements.Header(definitions.config, definitions.sections);
     app.innerHTML += elements.Hero(definitions.config);
     definitions.sections.forEach(section => {
@@ -101,6 +99,19 @@ function initObservers() {
 }
 
 function initInteractions() {
+    // Mobile menu toggle (hamburger). Swaps the bars/x icon and closes on link tap.
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        const setOpen = (open) => {
+            mobileMenu.classList.toggle('hidden', !open);
+            menuBtn.setAttribute('aria-expanded', String(open));
+            menuBtn.querySelector('i').className = `fas ${open ? 'fa-xmark' : 'fa-bars'} text-lg`;
+        };
+        menuBtn.addEventListener('click', () => setOpen(mobileMenu.classList.contains('hidden')));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    }
+
     // Skills Tab
     document.querySelectorAll('.skill-tab').forEach(tab => {
         tab.addEventListener('click', () => {

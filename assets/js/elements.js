@@ -1,30 +1,16 @@
 const elements = {
-    
-    // 0. Ambient Background (Orbital Shapes)
-    Background: () => {
-        // By setting a transform-origin outside the element, rotation creates an orbit.
-        return `
-            <!-- Shape 1: Top Right - Mauve Square -->
-            <div class="absolute top-[15%] right-[15%] w-24 h-24 bg-surface0/30 rounded-3xl border border-mauve/10 animate-orbit-slow origin-[120px_120px]"></div>
-            
-            <!-- Shape 2: Left Center - Blue Rounded Rect -->
-            <div class="absolute top-[40%] left-[10%] w-20 h-20 bg-surface0/20 rounded-[2rem] border border-blue/10 animate-orbit-medium origin-[-60px_80px]"></div>
-            
-            <!-- Shape 3: Bottom Right - Lavender Circle -->
-            <div class="absolute bottom-[20%] right-[25%] w-32 h-32 bg-surface0/20 rounded-full border border-lavender/10 animate-orbit-fast origin-[80px_-80px]"></div>
-            
-            <!-- Shape 4: Top Left - Rosewater Small Square -->
-            <div class="absolute top-[20%] left-[20%] w-12 h-12 bg-surface0/10 rounded-xl border border-rosewater/10 animate-orbit-slow origin-[0px_100px]" style="animation-direction: reverse;"></div>
-            
-            <!-- Shape 5: Bottom Left - Teal Rounded -->
-            <div class="absolute bottom-[10%] left-[5%] w-28 h-28 bg-surface0/10 rounded-[2rem] border border-teal/10 animate-orbit-medium origin-[100px_-50px]"></div>
-        `;
-    },
-    
+
+    // Note: the ambient background is now the shared /assets/js/ambient.js system.
+
     // 1. Navbar
     Header: (config, sections) => {
-        const navLinks = sections.map(s => 
+        const navLinks = sections.map(s =>
             `<a href="#${s.id}" data-target="${s.id}" class="nav-link text-subtext0 hover:text-mauve transition-colors duration-300 font-medium text-sm md:text-[16px]">${s.title}</a>`
+        ).join('');
+
+        // Same links, stacked, for the collapsible mobile menu (md:hidden below).
+        const mobileNavLinks = sections.map(s =>
+            `<a href="#${s.id}" data-target="${s.id}" class="nav-link block px-3 py-2.5 rounded-lg text-subtext0 hover:text-mauve hover:bg-surface0/50 transition-colors duration-300 font-medium">${s.title}</a>`
         ).join('');
 
         return `
@@ -37,27 +23,37 @@ const elements = {
                     <div class="hidden md:flex gap-8">
                         ${navLinks}
                     </div>
+                    <button id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false"
+                            class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-subtext0 hover:text-mauve hover:bg-surface0/50 transition-colors duration-300">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
                 </nav>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden border-t border-surface0/50 mt-4">
+                <div class="max-w-6xl mx-auto px-6 py-3 flex flex-col gap-1">
+                    ${mobileNavLinks}
+                </div>
             </div>
         </header>`;
     },
 
     // 2. Hero Section (Redesigned)
     Hero: (config) => {
-        // Color array to cycle through for icons
-        const colors = ['text-mauve', 'text-pink', 'text-lavender', 'text-blue', 'text-sapphire', 'text-teal'];
-        
+        // Each icon carries the name's shimmer gradient on its OWN glyph (background-clip:text only
+        // works reliably on the element whose own text it clips — not on a container's descendants).
+        const iconGrad = 'bg-[linear-gradient(90deg,theme(colors.mauve),theme(colors.pink),theme(colors.blue),theme(colors.mauve))] bg-[length:200%_auto] bg-clip-text text-transparent';
         const socialLinks = config.socials.map((s, index) => {
-            const colorClass = colors[index % colors.length];
-            // staggered pop-in entrance; `backwards` fill keeps the hover transform working once it lands
-            const delay = (0.52 + index * 0.08).toFixed(2);
+            const fa = s.icon.replace(/^fa:/, ''); // socials are all Font Awesome glyphs
+            const popDelay = (0.52 + index * 0.08).toFixed(2);
+            const shimDelay = (1 - index * 0.4).toFixed(2); // phase-offset so the shimmer sweeps across the row
             return `
             <a href="${s.link}" target="_blank" title="${s.label}"
-               class="${colorClass} hover:text-text hover:-translate-y-1 transition-all duration-300 text-2xl flex items-center justify-center w-10 h-10"
-               style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${delay}s backwards;">
-                ${utils.resolveIcon(s.icon)}
+               class="group text-2xl flex items-center justify-center w-10 h-10">
+                <i class="${fa} ${iconGrad} transition-transform duration-300 group-hover:-translate-y-1"
+                   style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards, shimmer 6s linear ${shimDelay}s infinite;"></i>
             </a>
-        `}).join('');
+        `;
+        }).join('');
 
         return `
         <section class="min-h-[60vh] flex flex-col md:flex-row items-center justify-between px-6 py-10 max-w-6xl mx-auto relative overflow-hidden gap-12">
