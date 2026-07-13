@@ -134,11 +134,11 @@ function initInteractions() {
     document.querySelectorAll('.skill-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.skill-tab').forEach(t => {
-                t.classList.remove('bg-surface0', 'text-mauve', 'font-bold', 'active-tab');
+                t.classList.remove('bg-surface0', 'text-mauve', 'active-tab');
                 t.classList.add('bg-surface0/50', 'text-subtext0');
             });
             tab.classList.remove('bg-surface0/50', 'text-subtext0');
-            tab.classList.add('bg-surface0', 'text-mauve', 'font-bold', 'active-tab');
+            tab.classList.add('bg-surface0', 'text-mauve', 'active-tab');
 
             const category = tab.dataset.tab;
             document.querySelectorAll('.skill-panel').forEach(p => p.classList.add('hidden'));

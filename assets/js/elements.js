@@ -216,7 +216,7 @@ const elements = {
         const categories = Object.entries(data.categories);
         
         const tabs = categories.map(([key, cat], index) => `
-            <button data-tab="${key}" class="skill-tab px-6 py-2 rounded-full bg-surface0/50 text-subtext0 hover:text-mauve hover:bg-surface0 transition-all duration-300 flex items-center gap-2 whitespace-nowrap ${index === 0 ? 'bg-surface0 text-mauve font-bold active-tab' : ''}">
+            <button data-tab="${key}" class="skill-tab px-6 py-2 rounded-full font-medium flex items-center gap-2 whitespace-nowrap transition-colors duration-300 hover:text-mauve hover:bg-surface0 ${index === 0 ? 'bg-surface0 text-mauve active-tab' : 'bg-surface0/50 text-subtext0'}">
                 ${utils.resolveIcon(cat.icon)}
                 <span>${cat.label}</span>
             </button>
@@ -264,19 +264,15 @@ const elements = {
                 <h2 class="text-3xl font-bold mb-4 text-mauve text-center">${data.title}</h2>
                 <p class="text-center text-subtext0 mb-10">${data.content}</p>
                 
-                <div class="bg-surface0/30 rounded-2xl p-6 md:p-8">
+                <div class="bg-surface0/30 rounded-2xl p-5">
                     <form id="contact-form" class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-subtext1 mb-1">${data.form.emailLabel}</label>
-                            <input type="email" name="email" required class="w-full bg-crust rounded-lg px-4 py-3 text-text focus:outline-none focus:ring-1 focus:ring-mauve transition-all placeholder-overlay1 border border-surface1/20" placeholder="john@example.com">
+                        <input type="email" name="email" required aria-label="${data.form.emailLabel}" class="w-full bg-crust rounded-lg px-4 py-3 text-text focus:outline-none focus:ring-1 focus:ring-mauve transition-all placeholder-overlay1 border border-surface1/20" placeholder="${data.form.emailLabel}">
+                        <textarea name="message" required rows="5" aria-label="${data.form.messageLabel}" class="w-full bg-crust rounded-lg px-4 py-3 text-text focus:outline-none focus:ring-1 focus:ring-mauve transition-all placeholder-overlay1 border border-surface1/20" placeholder="${data.form.messageLabel}"></textarea>
+                        <div class="text-center">
+                            <button type="submit" class="px-6 py-1.5 rounded-full bg-mauve text-crust font-medium text-sm hover:bg-pink transition-all duration-300 hover:-translate-y-0.5">
+                                ${data.form.buttonText}
+                            </button>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-subtext1 mb-1">${data.form.messageLabel}</label>
-                            <textarea name="message" required rows="5" class="w-full bg-crust rounded-lg px-4 py-3 text-text focus:outline-none focus:ring-1 focus:ring-mauve transition-all placeholder-overlay1 border border-surface1/20" placeholder="Hello..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-mauve text-base font-bold py-3 rounded-lg text-crust hover:bg-pink transition-colors">
-                            ${data.form.buttonText}
-                        </button>
                     </form>
                     <div id="form-success" class="hidden mt-4 p-4 bg-sapphire/10 text-sapphire rounded-lg text-center border border-sapphire/20">
                         ${data.form.successMessage}
