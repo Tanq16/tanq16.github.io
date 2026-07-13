@@ -1,3 +1,12 @@
+---
+title: Custom GitHub WebHook Notifications via GitHub Actions
+date: 2025-02-16
+category: Computers and Security
+tags: [github-actions, custom-notifications, notifications, webhook, cicd]
+image: ghanotif-cover.jpeg
+description: A class of notifications on GitHub repositories allows sending events via webhooks. A prevalent way people use this feature is by setting up a Slack o...
+---
+
 ## Motivation for Custom Notifications
 
 A class of notifications on GitHub repositories allows sending events via webhooks. A prevalent way people use this feature is by setting up a Slack or Discord channel to send events there. While for general use cases, it does allow customizing which events get sent; I found it lacking in two areas &rarr;

@@ -1,3 +1,12 @@
+---
+title: Dragon Ball Z - Cell Saga Timeline 101
+date: 2024-01-13
+category: Just Fun Things
+tags: [anime, dragon-ball]
+image: cell-cover.jpeg
+description: Time travel has always been a fascination of the entertainment industry and Anime is no exception. Complicated timelines and going back in time to cha...
+---
+
 ## Whats and Whys
 
 Time travel has always been a fascination of the entertainment industry and Anime is no exception. Complicated timelines and going back in time to change history are very common concepts. But portraying them properly is hard and often gets very convoluted in the finished product. Also, because information about the storyline is mixed in with the time travel concepts, many a times it can make it harder for the viewers to understand the nuances completely.

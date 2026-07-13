@@ -1,3 +1,12 @@
+---
+title: Effective Note-Taking
+date: 2024-10-13
+category: Computers Newbified
+tags: [markdown, note-taking, productivity, obsidian]
+image: markdown-cover.jpeg
+description: I'm not the best at taking notes, and I've been pursuing a goal for improving my note-taking ever since I started my Masters degree. During that time,...
+---
+
 ## Intent
 
 I'm not the best at taking notes, and I've been pursuing a goal for improving my note-taking ever since I started my Masters degree. During that time, I discovered [Notion](https://www.notion.so/), which gave me a lot of control over my notes, inspired me to take more notes and build a "dashboard" of sorts, popularized a lot on YouTube. I also discovered the concept of [Building a Second Brain](https://www.buildingasecondbrain.com/) by **Tiago Forte** and one of his organization methods called [PARA](https://fortelabs.com/blog/para/) (Projects, Areas, Research, Archives). This kept me excited for a time, and I took decent notes for my Masters. Soon after, I started working and felt like my note-taking took a nosedive. Nothing was working as I wanted it to, and I was confused not only about what notes to take but also about finding things I had already taken notes on.

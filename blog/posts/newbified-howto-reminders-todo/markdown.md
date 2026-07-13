@@ -1,3 +1,12 @@
+---
+title: How to Effectively Use Reminders and To-Dos
+date: 2022-11-26
+category: Computers Newbified
+tags: [reminders, productivity, to-dos]
+image: reminders-cover.jpeg
+description: I believe reminders started out as a cover term for ticks that can remind us about doing something, where the ticks could also be other humans. To-Dos...
+---
+
 ## What are Reminders and To-Dos?
 
 I believe reminders started out as a cover term for ticks that can remind us about doing something, where the ticks could also be other humans. To-Dos on the other hand are basically a checklist to just mark things off as we do them.

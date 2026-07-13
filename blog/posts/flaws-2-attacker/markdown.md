@@ -1,3 +1,12 @@
+---
+title: flAWS 2 - Attacker
+date: 2023-05-12
+category: Lab Practice Notes
+tags: [aws, lab, flaws2, security]
+image: flaws-cover.jpeg
+description: Solving the attacker track of the flAWS 2 AWS challenge, starting from an exposed API Gateway PIN check.
+---
+
 ## Level 1
 
 > [!INFO]

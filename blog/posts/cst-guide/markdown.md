@@ -1,3 +1,12 @@
+---
+title: Containerized Security Toolkit - A Guide
+date: 2024-10-26
+category: Computers and Security
+tags: [security, docker, container, toolkit, workflow]
+image: cst-cover.jpg
+description: A guide to advanced workflows with the Containerized Security Toolkit, a portable Docker-based security tooling environment I maintain.
+---
+
 > [!TIP]
 > Since writing this blog, I've updated the [project](https://github.com/Tanq16/containerized-security-toolkit) significantly with multiple image options. The bulk of the usage below remains relevant, but the images are now named `cst-<variant>:arm` (or `amd` for x86_64). Refer to the newer and much more [detailed documentation](https://tanishq.page/containerized-security-toolkit/) for full details.
 

@@ -1,5 +1,4 @@
 const app = document.getElementById('app');
-const bgContainer = document.getElementById('ambient-background');
 
 const blogConfig = {
     name: "Tanishq Rupaal",
@@ -12,10 +11,8 @@ function parseDate(dateStr) {
 }
 
 async function init() {
-    bgContainer.innerHTML = elements.Background();
     app.innerHTML = elements.Header(blogConfig);
 
-    // Fetch posts from posts.json
     try {
         const response = await fetch('/blog/posts.json');
         if (!response.ok) throw new Error('Failed to load posts');
@@ -32,7 +29,6 @@ async function init() {
     initSearch();
 }
 
-// Search Logic
 function initSearch() {
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.blog-card');

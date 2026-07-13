@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Tanishq Rupaal</title>
     
-    <!-- Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -73,7 +70,6 @@
         }
     </script>
     <style>
-        /* Custom scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #11111b; }
         ::-webkit-scrollbar-thumb { background: #313244; border-radius: 4px; }
@@ -88,11 +84,10 @@
         }
 
         .search-input-wrapper:focus-within {
-            background-color: rgba(49, 50, 68, 0.8); /* surface0 */
+            background-color: rgba(49, 50, 68, 0.8);
         }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-51FXJVSNB5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -103,16 +98,13 @@
 </script>
 <body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base min-h-screen relative">
 
-    <!-- Ambient Background Shapes (No Glow/Blur) -->
     <div id="ambient-background" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <!-- Rendered by JS -->
     </div>
 
-    <!-- Main App Container -->
     <div id="app" class="relative z-10 flex flex-col min-h-screen">
-        <!-- Content Rendered by JS -->
     </div>
 
+    <script src="/assets/js/ambient.js"></script>
     <script src="/blog/js/elements.js"></script>
     <script src="/blog/js/main.js"></script>
 </body>

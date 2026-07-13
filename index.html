@@ -13,12 +13,10 @@
 
     <title>Tanishq Rupaal | Cybersecurity Practician</title>
     
-    <!-- Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -76,25 +74,23 @@
         }
     </script>
     <style>
-        /* Custom scrollbar to match theme */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #11111b; /* Crust */
+            background: #11111b;
         }
         ::-webkit-scrollbar-thumb {
-            background: #313244; /* Surface0 */
+            background: #313244;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #45475a; /* Surface1 */
+            background: #45475a;
         }
         html {
             scroll-behavior: smooth;
         }
-        /* Fade in animation for sections */
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
@@ -105,6 +101,21 @@
             opacity: 1;
             transform: none;
         }
+
+        @keyframes fadeRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+        @keyframes clipUp   { from { opacity: 0; transform: translateY(110%); } to { opacity: 1; transform: none; } }
+        @keyframes popIn    { from { opacity: 0; transform: scale(0); }         to { opacity: 1; transform: scale(1); } }
+        @keyframes dropIn   { from { opacity: 0; transform: translateY(-52px) scale(.7); } to { opacity: 1; transform: none; } }
+        @keyframes zoomOvershoot { 0% { opacity: 0; transform: scale(.55); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes floatBreathe { 0%, 100% { transform: scale(.9); } 50% { transform: scale(1.1); } }
+        @keyframes sq1 { 0%, 100% { transform: rotate(12deg) translateY(0); }          50% { transform: rotate(8deg)   translateY(-12px); } }
+        @keyframes sq2 { 0%, 100% { transform: rotate(-6deg) translate(16px, 16px); }   50% { transform: rotate(-10deg) translate(22px, 6px); } }
+        @keyframes sq3 { 0%, 100% { transform: rotate(45deg) translate(-48px, -48px); } 50% { transform: rotate(52deg)  translate(-40px, -56px); } }
+        @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            #app [style*="animation"] { animation: none !important; }
+        }
     </style>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
@@ -113,7 +124,6 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="shortcut icon" href="/favicon.ico">
 </head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-51FXJVSNB5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -124,13 +134,11 @@
 </script>
 <body class="bg-crust text-text font-sans antialiased overflow-x-hidden selection:bg-mauve selection:text-base min-h-screen relative">
 
-    <!-- Ambient Background Shapes -->
     <div id="ambient-background" class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <!-- Rendered by JS -->
     </div>
 
-    <!-- Main App Container -->
     <div id="app" class="relative z-10 min-h-screen flex flex-col"></div>
+    <script src="/assets/js/ambient.js"></script>
     <script src="/assets/js/definitions.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/elements.js"></script>

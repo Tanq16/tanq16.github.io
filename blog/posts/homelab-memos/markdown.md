@@ -1,3 +1,12 @@
+---
+title: Memos Notes in Home Lab
+date: 2023-05-24
+category: Home Server
+tags: [memos, home-lab]
+image: homelab-cover.jpeg
+description: Memos is a note-taking application aimed at simplified note-taking with nothing but memos! The intent is - we store ideas quickly and forget, relying ...
+---
+
 [Memos](https://github.com/usememos/memos) is a note-taking application aimed at simplified note-taking with nothing but memos! The intent is - we store ideas quickly and forget, relying only on discovery and search based on text and tags to retrieve the information we need.
 
 Not only is this application an awesome alternative to generic journaling, it can also work very well with technical people to store information in a concise and quick fashion. It supports markdown syntax, so it's easy to use, and is also lightweight with all data stored in an SQLite database. It supports pasting images for quick capture, and the notes can be exported as a PNG image too.

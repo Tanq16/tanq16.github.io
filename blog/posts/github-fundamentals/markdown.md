@@ -1,3 +1,12 @@
+---
+title: Fundamentals of GitHub
+date: 2022-05-01
+category: Computers and Security
+tags: [github, open-source]
+image: github-cover.jpeg
+description: The fundamentals of GitHub — repositories, commits, branches, and the pull and push workflow for collaborating on code.
+---
+
 ## Introduction
 This blog is a primer of how basic GitHub collaboration works. This is not exhaustive of all features and tidbits but a basic explanation sheet to help people work on GitHub with relative comfort and ease.
 

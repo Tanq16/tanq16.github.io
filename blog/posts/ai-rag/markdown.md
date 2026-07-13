@@ -1,3 +1,12 @@
+---
+title: Exploring RAG (Retrieval-Augmented Generation) and Talking to my Notes
+date: 2024-11-04
+category: Computers and Security
+tags: [ai, llm, container, rag, machine-learning]
+image: rag-cover.jpg
+description: Experimenting with Retrieval-Augmented Generation (RAG) and local LLMs to build a service for querying my own notes.
+---
+
 > [!INFO]
 > ***Preamble*** &rarr;
 > This blog is a collection of my research and experimentation over two days to learn about RAG and LLMs. The main idea I was chasing was to set up RAG as a service ([RAGaaS](https://github.com/Tanq16/RAGaaS)) - it's pretty straightforward! ***Point a container (or a multi-container stack) to a directory containing notes or files and be able to talk to an LLM about it.*** I don't know much about machine learning and this post is about me getting on the AI train.

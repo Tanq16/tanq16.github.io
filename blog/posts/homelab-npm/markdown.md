@@ -1,3 +1,12 @@
+---
+title: Reverse Proxy in Home Lab
+date: 2025-01-29
+category: Home Server
+tags: [reverse-proxy, nginx-proxy-manager, cloudflare-tunnel, home-lab]
+image: homelab-cover.jpeg
+description: A forward proxy sends a legitimate request made by a user to the origin of the service that the user requested. It also forwards back the response fro...
+---
+
 ## Whats and Whys?
 
 A *forward proxy* sends a legitimate request made by a user to the origin of the service that the user requested. It also forwards back the response from the origin server and is considered part of the "client" when dumbing down client-server communication. Forward proxies (usually just called a proxy) is very commonly used for various purposes.

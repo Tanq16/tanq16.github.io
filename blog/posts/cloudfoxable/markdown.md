@@ -1,3 +1,12 @@
+---
+title: Cloudfoxable
+date: 2023-06-25
+category: Lab Practice Notes
+tags: [aws, lab, cloudfoxable, security]
+image: cloudfoxable-cover.jpeg
+description: Working through the CloudFoxable AWS security challenges, from setting up the sandbox environment to solving each objective in order.
+---
+
 Checkout the challenges over at [GitHub](https://github.com/BishopFox/cloudfoxable).
 
 ## Setup & First Flag

@@ -3,8 +3,6 @@ const RESUME_DATA = {
         name: "TANISHQ RUPAAL",
         email: "<a href='mailto:trupaal+resume@gmail.com' target='_blank'>trupaal@gmail.com</a>",
         website: "<a href='https://tanishq.page' target='_blank'>tanishq.page</a>",
-        // location: "Earth, Solar System, Milky Way Galaxy",
-        // phone: "+1 (555) 555-5555",
         github: "<a href='https://github.com/Tanq16' target='_blank'>github.com/Tanq16</a>"
     },
     sections: [

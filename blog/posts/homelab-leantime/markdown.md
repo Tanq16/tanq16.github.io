@@ -1,3 +1,12 @@
+---
+title: Leantime in Home Lab
+date: 2024-08-10
+category: Home Server
+tags: [time-tracking, project-management, leantime, home-lab]
+image: homelab-cover.jpeg
+description: Leantime is an open-source project management solution that can be considered an alternative to Asana, Monday.com, or ClickUp. Leantime provides proje...
+---
+
 [Leantime](https://leantime.io/) is an open-source project management solution that can be considered an alternative to Asana, Monday.com, or ClickUp. Leantime provides project-based task management using Kanban boards, tabular, and calendar views. Additionally, it supports tracking milestones and goals for a project through Gantt charts. The most amazing feature is support for time tracking, where users can easily track time against a given to-do until its completion. This allows amazing overall time management metrics for projects, making it easy for retrospectives.
 
 It supports various authentication mechanisms and notification integration with Slack or Mattermost. It also supports multiple user roles, which make it easy to assign tasks to specific individuals. All metrics are easily exportable to CSV, making it easy to ingest into other analytics platforms.

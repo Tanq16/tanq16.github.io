@@ -36,10 +36,8 @@ const utils = {
 };
 
 const app = document.getElementById('app');
-const bgContainer = document.getElementById('ambient-background');
 
 function init() {
-    bgContainer.innerHTML = elements.Background();
     app.innerHTML += elements.Header(definitions.config, definitions.sections);
     app.innerHTML += elements.Hero(definitions.config);
     definitions.sections.forEach(section => {
@@ -53,12 +51,33 @@ function init() {
     });
     app.innerHTML += elements.Footer(definitions.config);
     initInteractions();
+    initSocialColorCycle();
     lucide.createIcons();
     initObservers();
 }
 
+// Each social icon cross-fades between random Catppuccin pastels, staggered 1s apart, re-randomised per load.
+function initSocialColorCycle() {
+    const icons = document.querySelectorAll('.social-glow');
+    if (!icons.length) return;
+    const palette = ['#cba6f7', '#f5c2e7', '#b4befe', '#89b4fa', '#74c7ec', '#89dceb', '#94e2d5'];
+    const pick = (avoid) => {
+        let c;
+        do { c = palette[Math.floor(Math.random() * palette.length)]; } while (c === avoid);
+        return c;
+    };
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const INTERVAL = 2240; // matches the CSS colour fade so the morph is continuous
+    icons.forEach((icon, i) => {
+        let current = pick(null);
+        icon.style.color = current;
+        if (reduce) return;
+        const tick = () => { current = pick(current); icon.style.color = current; };
+        setTimeout(() => { tick(); setInterval(tick, INTERVAL); }, i * 1000);
+    });
+}
+
 function initObservers() {
-    // Fade in sections
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -78,7 +97,6 @@ function initObservers() {
         observer.observe(section);
     });
 
-    // Nav Highlight
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -101,15 +119,26 @@ function initObservers() {
 }
 
 function initInteractions() {
-    // Skills Tab
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        const setOpen = (open) => {
+            mobileMenu.classList.toggle('hidden', !open);
+            menuBtn.setAttribute('aria-expanded', String(open));
+            menuBtn.querySelector('i').className = `fas ${open ? 'fa-xmark' : 'fa-bars'} text-lg`;
+        };
+        menuBtn.addEventListener('click', () => setOpen(mobileMenu.classList.contains('hidden')));
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    }
+
     document.querySelectorAll('.skill-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.skill-tab').forEach(t => {
-                t.classList.remove('bg-surface0', 'text-mauve', 'font-bold', 'active-tab');
+                t.classList.remove('bg-surface0', 'text-mauve', 'active-tab');
                 t.classList.add('bg-surface0/50', 'text-subtext0');
             });
             tab.classList.remove('bg-surface0/50', 'text-subtext0');
-            tab.classList.add('bg-surface0', 'text-mauve', 'font-bold', 'active-tab');
+            tab.classList.add('bg-surface0', 'text-mauve', 'active-tab');
 
             const category = tab.dataset.tab;
             document.querySelectorAll('.skill-panel').forEach(p => p.classList.add('hidden'));
@@ -117,7 +146,6 @@ function initInteractions() {
         });
     });
 
-    // Contact Form
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
@@ -143,7 +171,6 @@ function initInteractions() {
     }
 }
 
-// Smooth scroll for anchor links
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -162,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Initialize on DOMContentLoaded
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {

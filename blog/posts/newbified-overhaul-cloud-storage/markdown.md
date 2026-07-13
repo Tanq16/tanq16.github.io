@@ -1,3 +1,12 @@
+---
+title: Overhaul Personal Cloud Storage
+date: 2022-09-10
+category: Computers Newbified
+tags: [productivity, cloud-storage, data-organization]
+image: cloudstorage-cover.jpeg
+description: The following is a process of overhauling personal cloud storage to build an effective data hierarchy and build a collection which can be expanded upo...
+---
+
 The following is a process of overhauling personal cloud storage to build an effective data hierarchy and build a collection which can be expanded upon in an efficient manner.
 
 ## Collection of all data

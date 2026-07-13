@@ -1,3 +1,12 @@
+---
+title: Expense Tracking in Home Lab
+date: 2024-12-14
+category: Home Server
+tags: [expenseowl, expense-tracking, home-lab]
+image: homelab-cover.jpeg
+description: I wrote a tool called ExpenseOwl for one straightforward reason - to track expenses. There are so So sO SO many tools out there that do the same. And ...
+---
+
 ## Whats and Whys
 
 I wrote a tool called [ExpenseOwl](https://github.com/Tanq16/expenseowl) for one straightforward reason - to track expenses. There are `so` `So` `sO` `SO` many tools out there that do the same. And they do it so well, with so many features. What I wrote is very simple, so why not just use one of the existing tools? I was using one too! I preferred Spendee for a while but migrated from it. I also looked at Cashew, but still migrated away from it. I wanted something for my home server and something that does exactly what I want.

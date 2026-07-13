@@ -1,3 +1,12 @@
+---
+title: The Way to Go(lang)
+date: 2024-12-14
+category: Computers and Security
+tags: [programming, go, scripting, tool]
+image: go-cover.jpg
+description: When I started exploring new programming languages and tooling, Go caught my attention for several compelling reasons. First and foremost, its ability...
+---
+
 When I started exploring new programming languages and tooling, `Go` caught my attention for several compelling reasons. First and foremost, its ability to produce standalone binaries, similar to C, is HUGE! Unlike Python, I don't need to worry about where the final code would execute, everything can be just packaged together. YES, I know we can ultimately get Python to do something similar, but it's just soooo easy with Go. The ability to easily generate binaries for any operating system and architecture makes it a powerful choice for building cross-platform tools.
 
 Go offers a more modern and readable syntax like Python while maintaining static typing like C - offering the best of both worlds. Go is also very close to C in performance. What really sets Go apart is its extensive standard library combined with an incredible package sharing ecosystem. One of Go's standout features is `goroutines`, a straightforward yet robust and efficient concurrent programming approach. This, combined with compilation checks, makes it an excellent choice for building CLI tooling and backends.

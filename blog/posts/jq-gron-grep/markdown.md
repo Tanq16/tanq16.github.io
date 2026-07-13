@@ -1,3 +1,12 @@
+---
+title: The CLI Trinity for Cloud Security Operations
+date: 2025-12-21
+category: Computers and Security
+tags: [jq, gron, grep, cloud-security]
+image: jq-gron-grep-cover.webp
+description: If you spend any amount of time in Cloud Security and analysis, you'll realize that a large part of it is wrestling with massive, deeply nested JSON blobs. My holy trinity for this has been jq, gron, and ripgrep...
+---
+
 If you spend any amount of time in Cloud Security and analysis, you'll realize that a large part of is wrestling with massive, deeply nested JSON blobs. 
 
 Whether you are auditing an AWS environment for privilege escalation or debugging a Kubernetes manifest, your speed is limited by your ability to parse data. For a while now, my "holy trinity" for this has been `jq`, `gron`, and `ripgrep`.
