@@ -185,7 +185,7 @@ const definitions = {
                             icon: '/assets/images/projects/logos/expenseowl.svg'
                         },
                         {
-                            title: 'Claudex',
+                            title: 'ClaudeX',
                             description: 'Companion CLI for running Claude Code across multiple accounts — track usage, launch the right one, move conversations.',
                             tags: ['Go', 'CLI', 'Claude Code', 'TUI'],
                             link: 'https://github.com/Tanq16/claudex',

@@ -82,6 +82,7 @@ async function renderPaginated() {
                     <span>${RESUME_DATA.basics[k]}</span>
                 </div>` : '').join('')}
         </div>
+        ${RESUME_DATA.basics.summary ? `<p class="max-w-3xl mx-auto mt-4 text-[13px] text-gray-600 leading-snug">${RESUME_DATA.basics.summary}</p>` : ''}
     `;
     appendNode(header);
 
