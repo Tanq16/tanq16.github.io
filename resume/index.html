@@ -118,6 +118,7 @@
         ul.level-1 > li::before {
             content: '•'; position: absolute; left: 0; color: #1f2937; font-weight: bold; font-size: 1.2em; line-height: 1.2rem;
         }
+        ul.level-1.continued > li::before { content: none; }
 
         ul.level-2 { margin-top: 0.2rem; }
         ul.level-2 > li { 
@@ -254,7 +255,7 @@
     <div id="app-root" class="flex flex-col items-center w-full">
     </div>
 
-    <div id="staging-area" class="absolute top-0 left-0 opacity-0 pointer-events-none" style="width: 170mm;"></div>
+    <div id="staging-area" class="absolute top-0 left-0 opacity-0 pointer-events-none" style="width: 176mm;"></div>
 
     <script src="/resume/js/definitions.js"></script>
     <script src="/resume/js/main.js"></script>

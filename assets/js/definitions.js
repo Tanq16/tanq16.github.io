@@ -2,7 +2,7 @@ const definitions = {
     config: {
         name: "Tanishq Rupaal",
         title: "Cybersecurity Practician",
-        subtitle: "Lead Security Engineer at Praetorian",
+        subtitle: "Staff Security Engineer at Praetorian",
         email: "dragonking47@proton.me",
         socials: [
             { icon: "fa:fas fa-inbox", link: "mailto:dragonking47@proton.me", label: "Email" },
@@ -24,7 +24,7 @@ const definitions = {
             title: "About",
             showInNav: false,
             content: `<b><i>There is always a workaround</i></b> - that's an ideology I strongly believe in. It's a reminder that problems don't just have solutions, but smart solutions. I try to find such solutions through hacks for all puzzles in my life.<br><br>
-            I currently work as a <b>Lead Security Engineer</b> at <b>Praetorian</b> and graduated with an <b>MS Cybersecurity</b> degree from <b>Georgia Tech</b>. My primary interests are Cloud Security, Application Security, and tinkering with Linux and containers in my homelab.`,
+            I currently work as a <b>Staff Security Engineer</b> at <b>Praetorian</b> and graduated with an <b>MS Cybersecurity</b> degree from <b>Georgia Tech</b>. My primary interests are Cloud Security, Application Security, and tinkering with Linux and containers in my homelab.`,
             actions: [
                 { label: "Blog", link: "/blog", icon: "lucide:notebook-pen" },
                 { label: "Resume", link: "/resume", icon: "lucide:file-user" }
@@ -37,9 +37,17 @@ const definitions = {
             subtitle: "", 
             items: [
                 {
+                    title: "Staff Security Engineer",
+                    subtitle: "Praetorian Canada Inc.",
+                    date: "Apr 2026 - Present",
+                    icon: "fa:fas fa-user-shield",
+                    location: "Remote",
+                    summary: "Perform advanced security assessments and build autonomous AI security hunting methodologies and agentic workflows. Develop capabilities and tooling that feed into the <a href='https://www.praetorian.com/guard/' target='_blank'>Praetorian Guard</a> platform, and advise colleagues on cloud security and incorporating AI agents into their workflows."
+                },
+                {
                     title: "Lead Security Engineer",
                     subtitle: "Praetorian Canada Inc.",
-                    date: "Oct 2024 - Present",
+                    date: "Oct 2024 - Mar 2026",
                     icon: "fa:fas fa-user-shield",
                     location: "Remote",
                     summary: "Create assessment methodologies and tooling for cloud security service lines. Execute advanced cloud architecture security assessments and mentor junior engineers across product and cloud security verticals."
@@ -141,72 +149,119 @@ const definitions = {
         },
         {
             id: "projects",
-            type: "tiled", 
+            type: "tiled",
             title: "Projects",
-            subtitle: "", 
-            items: [
+            subtitle: "",
+            groups: [
                 {
-                    title: 'Expense Owl',
-                    description: 'Simple and beautiful, self-hosted expense tracking software.',
-                    tags: ['Go', 'Expense Tracker', 'Web App'],
-                    link: 'https://github.com/Tanq16/ExpenseOwl',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/ExpenseOwl/main/assets/logo.png'
+                    label: "Professional Tools",
+                    variant: "banner",
+                    items: [
+                        {
+                            title: 'Aurelian',
+                            description: "Multi-cloud security recon framework for AWS, Azure & GCP.",
+                            tags: ['Go', 'Cloud Security', 'Multi-Cloud', 'CLI'],
+                            link: 'https://github.com/praetorian-inc/aurelian',
+                            image: '/assets/images/projects/aurelian.webp'
+                        },
+                        {
+                            title: 'Trajan',
+                            description: "CI/CD & software supply-chain security scanner.",
+                            tags: ['Go', 'CI/CD Security', 'Supply Chain', 'Scanner'],
+                            link: 'https://github.com/praetorian-inc/trajan',
+                            image: '/assets/images/projects/trajan.webp'
+                        }
+                    ]
                 },
                 {
-                    title: 'Local-Content-Share',
-                    description: 'Self-hosted app for sharing text & files in LAN, along with a notepad.',
-                    tags: ['Go', 'Web App', 'Sharing'],
-                    link: 'https://github.com/Tanq16/local-content-share',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/local-content-share/refs/heads/main/assets/logo.png'
-                },
-                {
-                    title: 'Danzo',
-                    description: 'Fast, advanced, multi-threaded CLI download manager written in Go.',
-                    tags: ['Go', 'CLI', 'Downloader'],
-                    link: 'https://github.com/Tanq16/danzo',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/danzo/main/.github/assets/logo.png'
-                },
-                {
-                    title: 'Anbu',
-                    description: 'A swiss army knife CLI tool for performing everyday tasks with ease.',
-                    tags: ['Go', 'CLI', 'Automation'],
-                    link: 'https://github.com/tanq16/anbu',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/anbu/main/.github/assets/logo.png'
-                },
-                {
-                    title: 'AI Context',
-                    description: 'Generate AI-friendly context from code repos, webpages, or YouTube videos',
-                    tags: ['Go', 'CLI', 'AI', 'Archiver'],
-                    link: 'https://github.com/Tanq16/ai-context',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/ai-context/main/.github/assets/logo.png'
-                },
-                {
-                    title: 'Containerized Security Toolkit',
-                    description: 'A containerized collection of security tools for security assessments',
-                    tags: ['Docker', 'Pentesting', 'SecOps'],
-                    link: 'https://github.com/tanq16/containerized-security-toolkit',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/containerized-security-toolkit/main/docs/assets/CST-Logo.png'
-                },
-                {
-                    title: 'BackHub',
-                    description: 'A simple backup tool to maintain local mirrors of GitHub repositories.',
-                    tags: ['Go', 'Automation', 'Backup'],
-                    link: 'https://github.com/Tanq16/backhub',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/backhub/main/.github/assets/logo.png'
-                },
-                {
-                    title: 'CLI Productivity Suite',
-                    description: 'CLI tools for enhancing workflow efficiency for Linux & MacOS systems.',
-                    tags: ['Bash', 'CLI', 'Automation', 'Dotfiles'],
-                    link: 'https://github.com/Tanq16/cli-productivity-suite',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/cli-productivity-suite/master/logo.png'
-                },
-                {
-                    title: 'Link Hub',
-                    description: 'Collection of resources and tools for security professionals.',
-                    tags: ['Cybersecurity', 'Resources'],
-                    link: 'https://github.com/Tanq16/link-hub',
-                    icon: 'https://raw.githubusercontent.com/Tanq16/link-hub/main/.github/assets/logo.png'
+                    label: "Personal Projects",
+                    variant: "logo",
+                    items: [
+                        {
+                            title: 'ExpenseOwl',
+                            description: 'Dead-simple, self-hosted expense tracker — a quick monthly view of spending, with none of the budgeting bloat.',
+                            tags: ['Go', 'Self-Hosted', 'Finance', 'Web App'],
+                            link: 'https://github.com/Tanq16/ExpenseOwl',
+                            icon: '/assets/images/projects/logos/expenseowl.svg'
+                        },
+                        {
+                            title: 'ClaudeX',
+                            description: 'Companion CLI for running Claude Code across multiple accounts — track usage, launch the right one, move conversations.',
+                            tags: ['Go', 'CLI', 'Claude Code', 'TUI'],
+                            link: 'https://github.com/Tanq16/claudex',
+                            icon: '/assets/images/projects/logos/claudex.svg'
+                        },
+                        {
+                            title: 'Local-Content-Share',
+                            description: 'Self-hosted LAN sharing for text snippets, files & links — with a Markdown notepad and no client setup.',
+                            tags: ['Go', 'Web App', 'Self-Hosted', 'Sharing'],
+                            link: 'https://github.com/Tanq16/local-content-share',
+                            icon: '/assets/images/projects/logos/local-content-share.svg'
+                        },
+                        {
+                            title: 'Anbu',
+                            description: 'Swiss army knife CLI for devs & security — secrets, tunnels, secret scanning, HTTP server, bulk rename, and more.',
+                            tags: ['Go', 'CLI', 'Security', 'Automation'],
+                            link: 'https://github.com/Tanq16/anbu',
+                            icon: '/assets/images/projects/logos/anbu.svg'
+                        },
+                        {
+                            title: 'Rinnegan',
+                            description: 'Minimal self-hosted shared web terminal — one server-owned shell PTY, many viewers, one live controller.',
+                            tags: ['JavaScript', 'Web Terminal', 'Self-Hosted'],
+                            link: 'https://github.com/Tanq16/rinnegan',
+                            icon: '/assets/images/projects/logos/rinnegan.svg'
+                        },
+                        {
+                            title: 'Danzo',
+                            description: 'Multi-service CLI downloader — HTTP, HLS live streams, S3, GitHub releases, torrents, and yt-dlp.',
+                            tags: ['Go', 'CLI', 'Downloader'],
+                            link: 'https://github.com/Tanq16/danzo',
+                            icon: '/assets/images/projects/logos/danzo.svg'
+                        },
+                        {
+                            title: 'CLI Productivity Suite',
+                            description: 'Single Go binary (cps) that sets up and manages a full CLI dev environment on Linux & macOS — shell, Neovim, tmux, and more.',
+                            tags: ['Go', 'CLI', 'Dev Setup', 'Productivity'],
+                            link: 'https://github.com/Tanq16/cli-productivity-suite',
+                            icon: '/assets/images/projects/logos/cli-productivity-suite.svg'
+                        },
+                        {
+                            title: 'Link Hub',
+                            description: 'Curated index of Cybersecurity learning resources, labs & tools across cloud, web, and AI.',
+                            tags: ['Cybersecurity', 'Resources', 'Reference'],
+                            link: 'https://github.com/Tanq16/link-hub',
+                            icon: '/assets/images/projects/logos/link-hub.svg'
+                        },
+                        {
+                            title: 'Soifon',
+                            description: 'Browser extension that auto-captures regex-matched values from request bodies, storage & cookies.',
+                            tags: ['JavaScript', 'Browser Extension', 'Security'],
+                            link: 'https://github.com/Tanq16/soifon',
+                            icon: '/assets/images/projects/logos/soifon.svg'
+                        },
+                        {
+                            title: 'box-cli',
+                            description: 'CLI for Box.com file operations — upload, download, sync, share, and collaborate from the terminal.',
+                            tags: ['Go', 'CLI', 'Cloud Storage'],
+                            link: 'https://github.com/Tanq16/box-cli',
+                            icon: '/assets/images/projects/logos/box-cli.svg'
+                        },
+                        {
+                            title: 'gcli',
+                            description: 'Terminal client for Google Drive, Gmail & Calendar — manage files, threads, and events from the CLI.',
+                            tags: ['Go', 'CLI', 'Google Workspace', 'TUI'],
+                            link: 'https://github.com/Tanq16/gcli',
+                            icon: '/assets/images/projects/logos/gcli.svg'
+                        },
+                        {
+                            title: 'Raikiri',
+                            description: 'Fast, self-hosted media & music server — a lightweight, Catppuccin-themed alternative to Jellyfin/Plex.',
+                            tags: ['Self-Hosted', 'Media Server', 'Music'],
+                            link: 'https://github.com/Tanq16/raikiri',
+                            icon: '/assets/images/projects/logos/raikiri.svg'
+                        }
+                    ]
                 }
             ]
         },

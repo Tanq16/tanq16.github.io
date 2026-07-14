@@ -179,35 +179,64 @@ const elements = {
     },
 
     TiledSection: (data) => {
-        const items = data.items.map(item => `
-            <a href="${item.link}" target="_blank" class="bg-surface0/30 rounded-xl p-5 hover:bg-surface0 transition-all duration-300 flex flex-col h-full no-underline block group">
+        const tags = (item) => item.tags.map(tag => `
+            <span class="text-xs px-2 py-1 rounded-md bg-crust text-lavender border border-surface1/10 group-hover:text-mauve transition-colors">
+                ${tag}
+            </span>
+        `).join('');
 
+        const logoCard = (item) => `
+            <a href="${item.link}" target="_blank" class="bg-surface0/30 rounded-xl p-5 hover:bg-surface0 transition-all duration-300 flex flex-col h-full no-underline block group">
                 <div class="flex items-center gap-3 mb-3">
-                    <div class="w-16 h-16 shrink-0 flex items-center justify-center">
-                        <img src="${item.icon}" alt="${item.title}" class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.style.display='none'">
-                    </div>
+                    ${item.icon ? `<div class="w-14 h-14 shrink-0 flex items-center justify-center">
+                        <img src="${item.icon}" alt="${item.title}" class="w-full h-full object-contain opacity-90 group-hover:opacity-100 transition-opacity" onerror="this.style.display='none'">
+                    </div>` : ''}
                     <h3 class="text-lg font-bold text-lavender group-hover:text-mauve transition-colors">${item.title}</h3>
                 </div>
-
                 <p class="text-subtext0 text-sm mb-4 leading-relaxed flex-grow">${item.description}</p>
+                <div class="flex flex-wrap gap-2 mt-auto">${tags(item)}</div>
+            </a>
+        `;
 
-                <div class="flex flex-wrap gap-2 mt-auto">
-                    ${item.tags.map(tag => `
-                        <span class="text-xs px-2 py-1 rounded-md bg-crust text-lavender border border-surface1/10 group-hover:text-mauve transition-colors">
-                            ${tag}
+        const bannerCard = (item) => `
+            <a href="${item.link}" target="_blank" class="bg-surface0/30 rounded-xl p-3 hover:bg-surface0 transition-all duration-300 flex flex-col h-full no-underline block group border border-surface1/10 hover:border-mauve/30 hover:-translate-y-1">
+                <div class="aspect-[1200/628] overflow-hidden rounded-lg bg-crust">
+                    <img src="${item.image}" alt="${item.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500">
+                </div>
+                <div class="px-2 pt-4 pb-1 flex flex-col flex-grow">
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <h3 class="text-lg font-bold text-lavender group-hover:text-mauve transition-colors flex items-center gap-2">
+                            ${item.title}
+                            <i data-lucide="external-link" class="w-4 h-4 text-overlay1 group-hover:text-mauve transition-colors"></i>
+                        </h3>
+                        <span class="shrink-0 inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full bg-mauve/10 text-mauve border border-mauve/20 whitespace-nowrap">
+                            <i data-lucide="users" class="w-3 h-3"></i> Co-authored
                         </span>
-                    `).join('')}
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-auto">${tags(item)}</div>
                 </div>
             </a>
-        `).join('');
+        `;
+
+        const groups = data.groups.map(group => {
+            const isBanner = group.variant === 'banner';
+            const grid = isBanner ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3';
+            const cards = group.items.map(isBanner ? bannerCard : logoCard).join('');
+            return `
+            <div class="mb-12 last:mb-0">
+                <div class="flex items-center gap-4 mb-6">
+                    <h3 class="text-sm font-semibold text-subtext0 uppercase tracking-[0.15em] whitespace-nowrap">${group.label}</h3>
+                    <div class="flex-1 h-px bg-surface0"></div>
+                </div>
+                <div class="grid grid-cols-1 ${grid} gap-4">${cards}</div>
+            </div>`;
+        }).join('');
 
         return `
         <section id="${data.id}" class="py-10 fade-in-section">
             <div class="max-w-6xl mx-auto px-6">
                 <h2 class="text-3xl font-bold mb-10 text-mauve text-center">${data.title}</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    ${items}
-                </div>
+                ${groups}
             </div>
         </section>`;
     },
