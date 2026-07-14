@@ -59,16 +59,57 @@ async function renderPaginated() {
         currentHeight = 0;
     }
 
+    function currentPageUsed() {
+        const kids = currentPageContent.children;
+        if (!kids.length) return 0;
+        return kids[kids.length - 1].getBoundingClientRect().bottom - currentPageContent.getBoundingClientRect().top;
+    }
+
+    function fitsHere(node) {
+        currentPageContent.appendChild(node);
+        const ok = node.getBoundingClientRect().bottom - currentPageContent.getBoundingClientRect().top <= PAGE_CONTENT_HEIGHT_PX;
+        currentPageContent.removeChild(node);
+        return ok;
+    }
+
     function appendNode(node, forceNewPage = false) {
-        const clone = node.cloneNode(true);
-        staging.appendChild(clone);
-        const h = clone.offsetHeight;
-        staging.removeChild(clone);
-        if (forceNewPage || pages.length === 0 || (currentHeight + h > PAGE_CONTENT_HEIGHT_PX)) {
+        if (forceNewPage || pages.length === 0 || !fitsHere(node)) {
             createNewPage();
         }
         currentPageContent.appendChild(node);
-        currentHeight += h;
+        currentHeight = currentPageUsed();
+    }
+
+    function appendEntry(entry, type) {
+        if (type !== 'detailed' || !entry.details || entry.details.length === 0) {
+            appendNode(createEntryNode(entry, type));
+            return;
+        }
+        if (pages.length === 0 || fitsHere(createEntryNode(entry, type))) {
+            appendNode(createEntryNode(entry, type));
+            return;
+        }
+        const details = entry.details;
+        let idx = 0;
+        let continued = false;
+        while (idx < details.length) {
+            let count = 0;
+            while (idx + count + 1 <= details.length && fitsHere(createEntryNode({ ...entry, details: details.slice(idx, idx + count + 1) }, type, continued))) {
+                count++;
+            }
+            if (count === 0) {
+                createNewPage();
+                count = 1;
+                while (idx + count + 1 <= details.length && fitsHere(createEntryNode({ ...entry, details: details.slice(idx, idx + count + 1) }, type, continued))) {
+                    count++;
+                }
+            }
+            const chunk = createEntryNode({ ...entry, details: details.slice(idx, idx + count) }, type, continued);
+            currentPageContent.appendChild(chunk);
+            currentHeight = currentPageUsed();
+            idx += count;
+            continued = true;
+        }
     }
 
     const header = document.createElement('header');
@@ -123,31 +164,32 @@ async function renderPaginated() {
         appendNode(titleNode, forcePageBreak);
 
         for (let j = 0; j < section.entries.length; j++) {
-            const entryNode = createEntryNode(section.entries[j], section.type);
-            appendNode(entryNode);
+            appendEntry(section.entries[j], section.type);
         }
     }
     lucide.createIcons();
 }
 
-function createEntryNode(entry, type) {
+function createEntryNode(entry, type, continued = false) {
     const entryWrapper = document.createElement('ul');
-    entryWrapper.className = 'level-1'; 
+    entryWrapper.className = continued ? 'level-1 continued' : 'level-1';
     entryWrapper.style.marginTop = '0';
     entryWrapper.style.marginBottom = '0.5rem';
 
     let innerHTML = '';
     if (type === 'detailed') {
-         innerHTML = `
-            <li>
+         const headerHTML = continued ? '' : `
                 <div class="flex justify-between items-baseline -mt-1 mb-1">
                     <div class="text-[15px] text-gray-800 leading-snug">
-                        <span class="font-bold text-gray-900">${entry.title}</span> 
+                        <span class="font-bold text-gray-900">${entry.title}</span>
                         ${entry.subtitle ? `<span class="mx-1 text-gray-400 font-light">|</span> <span class="font-medium">${entry.subtitle}</span>` : ''}
                     </div>
                     <div class="text-[13px] text-gray-600 font-semibold whitespace-nowrap pl-4">${entry.date || ''}</div>
-                </div>
-                ${entry.details && entry.details.length ? 
+                </div>`;
+         innerHTML = `
+            <li>
+                ${headerHTML}
+                ${entry.details && entry.details.length ?
                     `<ul class="level-2">${entry.details.map(d => `<li>${d}</li>`).join('')}</ul>` : ''}
             </li>
         `;
@@ -159,4 +201,40 @@ function createEntryNode(entry, type) {
     return entryWrapper;
 }
 
-window.onload = renderPaginated;
+// resolve once the given web fonts are actually applied to layout, not merely downloaded: document.fonts
+// reports "loaded" before the metrics take effect, which would let pagination measure against fallback fonts
+function whenFontsApplied(families, timeout = 3000) {
+    return new Promise(resolve => {
+        const mk = ff => {
+            const s = document.createElement('span');
+            s.style.cssText = 'position:absolute;left:-9999px;top:-9999px;font-size:100px;white-space:nowrap;font-family:' + ff;
+            s.textContent = 'CloudSecurityAWSgqpjy0123';
+            document.body.appendChild(s);
+            return s;
+        };
+        const t0 = performance.now();
+        let remaining = families.length;
+        const done = () => { if (--remaining === 0) resolve(); };
+        families.forEach(fam => {
+            const base = mk('monospace');
+            const test = mk('"' + fam + '", monospace');
+            const baseWidth = base.getBoundingClientRect().width;
+            (function tick() {
+                if (test.getBoundingClientRect().width !== baseWidth || performance.now() - t0 > timeout) {
+                    base.remove();
+                    test.remove();
+                    done();
+                } else {
+                    requestAnimationFrame(tick);
+                }
+            })();
+        });
+    });
+}
+
+window.onload = async () => {
+    await whenFontsApplied(['Open Sans', 'Montserrat']);
+    renderPaginated();
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    renderPaginated();
+};

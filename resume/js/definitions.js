@@ -4,13 +4,14 @@ const RESUME_DATA = {
         email: "<a href='mailto:trupaal+resume@gmail.com' target='_blank'>trupaal@gmail.com</a>",
         website: "<a href='https://tanishq.page' target='_blank'>tanishq.page</a>",
         github: "<a href='https://github.com/Tanq16' target='_blank'>github.com/Tanq16</a>",
-        summary: "Staff Security Engineer specializing in cloud security and DevSecOps, with hands-on depth in AI-driven security automation and offensive tooling. Co-authored the CI/CD and multi-cloud scanners behind Praetorian's Guard platform and built an autonomous cloud-security hunting system that compresses weeks of manual assessment into hours."
+        summary: ""
+        // Cloud security and CI/CD specialist with 5+ years as an offensive-security practitioner across application, infrastructure, and platform security. Equally at home running assessments & building tooling and AI-driven automation that scale them.
     },
     sections: [
         {
             id: "experience",
             title: "Experience",
-            type: "detailed", 
+            type: "detailed",
             icon: "briefcase-business",
             entries: [
                 {
@@ -18,11 +19,12 @@ const RESUME_DATA = {
                     subtitle: "Staff Security Engineer",
                     date: "Apr 2026 - Present",
                     details: [
-                        "Built an LLM-driven agentic loop for continuous, autonomous cloud security hunting that replaces roughly three weeks of manual assessment with about 16 hours of automated execution, surfacing complex attack chains",
-                        "Co-authored <a href='https://github.com/praetorian-inc/trajan' target='_blank'>Trajan</a> (CI/CD supply-chain scanner) and <a href='https://github.com/praetorian-inc/aurelian' target='_blank'>Aurelian</a> (multi-cloud recon framework) for the <a href='https://www.praetorian.com/guard/' target='_blank'>Praetorian Guard</a> platform, and optimized Trajan's API and data-collection strategy to overcome rate-limit bottlenecks for a 40x performance gain",
-                        "Designed a lifecycle-managed, isolated engineer-workspace system for the Praetorian Guard platform, connecting to NATed workspaces over custom WebSocket tunnels via an ECS authorizer, with automatic ECS-based scaling",
-                        "Built an internal tool that automates security-assessment deliverables, including report generation, executive-debrief slides, and letters of attestation",
-                        "Perform security assessments, mentor a junior engineer, and serve as the company-wide advisor for cloud security and AI-agent integration questions"
+                        "Built an agentic loop for autonomous cloud security hunting that reduces 3 weeks of manual assessment to ~16 hours, surfacing comprehensive attack chains",
+                        "Co-authored <a href='https://github.com/praetorian-inc/trajan' target='_blank'>Trajan</a> (CI/CD supply-chain scan and attack tool) and <a href='https://github.com/praetorian-inc/aurelian' target='_blank'>Aurelian</a> (multi-cloud recon framework)",
+                        "Optimized <a href='https://github.com/praetorian-inc/trajan' target='_blank'>Trajan</a>'s GitHub collection to overcome rate-limit bottlenecks for 40x performance",
+                        "Architected the <a href='https://www.praetorian.com/guard/' target='_blank'>Praetorian Guard</a> platform's lifecycle-managed, isolated engineer-workspace system, connecting NATed workspaces over WebSocket tunnels via ECS authorizer",
+                        "Built internal tooling to automate security-assessment deliverables, including report generation, executive-debrief slides, and letters of attestation",
+                        "Performed advanced cloud security assessments, mentored junior engineers, and served as a cloudsec SME"
                     ]
                 },
                 {
@@ -30,7 +32,7 @@ const RESUME_DATA = {
                     subtitle: "Lead Security Engineer",
                     date: "Oct 2024 - Mar 2026",
                     details: [
-                        "Created repeatable assessment methodologies and tooling for the cloud security service lines",
+                        "Created repeatable assessment methodologies and tooling for cloud security services",
                         "Delivered cloud-architecture security assessments across AWS, GCP, and Azure",
                         "Mentored 2 junior engineers across product and cloud security verticals",
                         "Architected the Access Broker, the platform's central credential and lifecycle-management service, and implemented OIDC authentication for the <a href='https://www.praetorian.com/guard/' target='_blank'>Praetorian Guard</a> platform",
@@ -89,10 +91,10 @@ const RESUME_DATA = {
         {
             id: "skills",
             title: "Core Skills",
-            type: "basic", 
-            icon: "cpu", 
+            type: "basic",
+            icon: "cpu",
             entries: [
-                "<b>Cloud Security & DevSecOps (primary specialty):</b> <b>AWS</b>, <b>GCP</b>, <b>Azure</b>, and <b>Kubernetes</b> (EKS/GKE/AKS), with IAM/RBAC, OIDC/SSO, and least-privilege design",
+                "<b>Cloud Security (primary specialty):</b> <b>AWS</b>, <b>GCP</b>, <b>Azure</b>, and <b>Kubernetes</b>",
                 "<b>Supply Chain & CI/CD Security:</b> software composition analysis and secrets scanning across <b>GitHub Actions</b>, Azure DevOps, and CircleCI, with Infrastructure-as-Code security in <b>Terraform</b>",
                 "<b>Offensive Security:</b> Penetration testing and red-team operations, attack-path and privilege-escalation analysis, and threat modeling mapped to <b>MITRE ATT&CK</b> and <b>OWASP</b>",
                 "<b>AI Security & Agentic Systems:</b> LLM application security, prompt injection and the OWASP LLM Top 10, and AI red teaming, plus building advanced agentic AI workflows with multi-agent orchestration and MCP-based tool use",
@@ -117,7 +119,7 @@ const RESUME_DATA = {
                     title: "Personal Projects",
                     details: [
                         "<b><a href='https://github.com/Tanq16/claudex' target='_blank'>ClaudeX</a></b> - Companion CLI for running Claude Code across multiple accounts, with usage monitoring, guided launches, and moving conversations between accounts",
-                        "<b><a href='https://github.com/Tanq16/cli-productivity-suite' target='_blank'>CLI Productivity Suite</a></b> - Single Go binary (cps) that provisions and manages a complete CLI dev environment on Linux and macOS, with modular extension packs for runtimes, cloud, and security tools",
+                        "<b><a href='https://github.com/Tanq16/cli-productivity-suite' target='_blank'>CLI Productivity Suite</a></b> - Single Go binary to manage full CLI environments on Linux and macOS, with modular extensions for runtimes, cloud, and security tools",
                         "<b><a href='https://github.com/Tanq16/ExpenseOwl' target='_blank'>Expense Owl</a></b> - Self-hosted expense tracking web app built with Go",
                         "<b><a href='https://github.com/Tanq16/rinnegan' target='_blank'>Rinnegan</a></b> - Minimal self-hosted shared web terminal with a server-owned PTY, many viewers, and one live controller",
                         "<b><a href='https://github.com/Tanq16/local-content-share' target='_blank'>Local-Content-Share</a></b> - Self-hosted app for sharing text & files in LAN with integrated notepad",
@@ -128,7 +130,7 @@ const RESUME_DATA = {
                     title: "Exploratory Projects",
                     details: [
                         "<b><a href='https://github.com/Tanq16/subdextract' target='_blank'>SubDextract</a></b> - Sub-domain enumeration tool in Python with CT logs, SAN, DNS queries",
-                        "<b>Analysis of Top 1 Million Domains</b> from Majestic, Alexa, Tranco lists for HTTP/2.0, IPv6, TLS adoption"
+                        "<b>Analysis of Top 1 Million Domains</b> - from Majestic, Alexa, and Tranco lists for HTTP/2.0, IPv6, and TLS adoption"
                     ]
                 }
             ]
@@ -169,11 +171,11 @@ const RESUME_DATA = {
             id: "hobbies",
             title: "Extra-Curricular and Hobbies",
             type: "basic",
-            icon: "drum", 
+            icon: "drum",
             entries: [
                 "President & Founder of <b>ACM The Hacker's Exclusive (HEx)</b>, at BITS Pilani Dubai",
                 "Managed student placements as <b>Student Executive, Careers Division</b> at BITS Pilani Dubai",
-                "Tinkering with Linux systems, containers, and security tools in my home lab",
+                "Run a four-node mini-PC <b>home lab</b> (Proxmox, Docker) with self-hosted services and VPN access",
                 "Drumming, Photography, and Digital Concept Art"
             ]
         }
