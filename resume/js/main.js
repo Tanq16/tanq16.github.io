@@ -62,12 +62,13 @@ async function renderPaginated() {
     function currentPageUsed() {
         const kids = currentPageContent.children;
         if (!kids.length) return 0;
-        return kids[kids.length - 1].getBoundingClientRect().bottom - currentPageContent.getBoundingClientRect().top;
+        const last = kids[kids.length - 1];
+        return last.offsetTop + last.offsetHeight;
     }
 
     function fitsHere(node) {
         currentPageContent.appendChild(node);
-        const ok = node.getBoundingClientRect().bottom - currentPageContent.getBoundingClientRect().top <= PAGE_CONTENT_HEIGHT_PX;
+        const ok = node.offsetTop + node.offsetHeight <= PAGE_CONTENT_HEIGHT_PX;
         currentPageContent.removeChild(node);
         return ok;
     }
