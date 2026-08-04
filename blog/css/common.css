@@ -1,16 +1,29 @@
+/* github-markdown-css 5.x reads the fgColor/bgColor/borderColor variable family; the older
+   color-fg style names it also ships are inert in this build. */
 .markdown-body {
     background-color: transparent !important;
     font-family: 'Inter', sans-serif !important;
     color: rgb(var(--ctp-subtext0)) !important;
-    --color-canvas-default: transparent;
-    --color-canvas-subtle: rgb(var(--ctp-base));
-    --color-border-default: rgb(var(--ctp-surface1));
-    --color-border-muted: rgb(var(--ctp-surface0));
-    --color-fg-default: rgb(var(--ctp-text));
-    --color-fg-muted: rgb(var(--ctp-subtext0));
-    --color-accent-fg: rgb(var(--ctp-blue));
-    --color-accent-emphasis: rgb(var(--ctp-blue));
-    --color-danger-fg: rgb(var(--ctp-red));
+    --fgColor-default: rgb(var(--ctp-text));
+    --fgColor-muted: rgb(var(--ctp-subtext0));
+    --fgColor-accent: rgb(var(--ctp-blue));
+    --fgColor-danger: rgb(var(--ctp-red));
+    --fgColor-attention: rgb(var(--ctp-yellow));
+    --fgColor-success: rgb(var(--ctp-green));
+    --fgColor-done: rgb(var(--ctp-mauve));
+    --bgColor-default: transparent;
+    --bgColor-muted: rgb(var(--ctp-base));
+    --bgColor-neutral-muted: rgb(var(--ctp-surface0));
+    --bgColor-attention-muted: rgb(var(--ctp-yellow) / 0.15);
+    --borderColor-default: rgb(var(--ctp-surface1));
+    --borderColor-muted: rgb(var(--ctp-surface0));
+    --borderColor-neutral-muted: rgb(var(--ctp-surface0));
+    --borderColor-accent-emphasis: rgb(var(--ctp-blue));
+    --borderColor-attention-emphasis: rgb(var(--ctp-yellow));
+    --borderColor-danger-emphasis: rgb(var(--ctp-red));
+    --borderColor-success-emphasis: rgb(var(--ctp-green));
+    --borderColor-done-emphasis: rgb(var(--ctp-mauve));
+    --focus-outlineColor: rgb(var(--ctp-mauve));
 }
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3 {

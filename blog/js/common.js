@@ -33,8 +33,8 @@ const elements = {
     Layout: (data) => `
         <main class="flex-grow w-full max-w-7xl mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8">
             <div class="lg:col-span-9 lg:col-start-1 min-w-0">
-                <div class="w-full h-[320px] md:h-[400px] rounded-2xl overflow-hidden mb-8 border border-surface1/20 shadow-2xl relative">
-                    <div class="absolute inset-0 bg-gradient-to-t from-crust/50 to-transparent z-10"></div>
+                <div class="w-full h-[320px] md:h-[400px] rounded-2xl overflow-hidden mb-8 border border-surface1/20 relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
                     <img src="${data.meta.coverImage}" alt="Cover" class="w-full h-full object-cover">
                 </div>
                 <div class="mb-12 border-b border-surface1/20 pb-8">
