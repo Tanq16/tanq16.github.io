@@ -244,7 +244,7 @@
     {
         "id": "newbified-markdown",
         "title": "Markdown 101 - Master Your Note-Taking",
-        "description": "Are you tired of cumbersome note-taking tools that weigh you down with unnecessary features? Look no further than at the power of Markdown — a lightwe...",
+        "description": "Are you tired of cumbersome note-taking tools that weigh you down with unnecessary features? Look no further than at the power of Markdown, a lightwe...",
         "date": "May 13, 2023",
         "readTime": "5 min read",
         "category": "Computers Newbified",
@@ -299,7 +299,7 @@
     {
         "id": "homelab-jellyfin",
         "title": "Jellyfin in Home Lab",
-        "description": "Setting up Jellyfin as a self-hosted media server with Docker — a simpler, account-free alternative to Plex.",
+        "description": "Setting up Jellyfin as a self-hosted media server with Docker: a simpler, account-free alternative to Plex.",
         "date": "May 06, 2023",
         "readTime": "4 min read",
         "category": "Home Server",
@@ -365,7 +365,7 @@
     {
         "id": "newbified-apple-ecosystem-features",
         "title": "Interesting Apple Ecosystem Features",
-        "description": "A tour of handy Apple ecosystem features across iOS, iPadOS, and macOS — Handoff, Universal Clipboard, Siri tricks, and more.",
+        "description": "A tour of handy Apple ecosystem features across iOS, iPadOS, and macOS: Handoff, Universal Clipboard, Siri tricks, and more.",
         "date": "Nov 26, 2022",
         "readTime": "10 min read",
         "category": "Computers Newbified",
@@ -409,7 +409,7 @@
     {
         "id": "github-fundamentals",
         "title": "Fundamentals of GitHub",
-        "description": "The fundamentals of GitHub — repositories, commits, branches, and the pull and push workflow for collaborating on code.",
+        "description": "The fundamentals of GitHub: repositories, commits, branches, and the pull and push workflow for collaborating on code.",
         "date": "May 01, 2022",
         "readTime": "9 min read",
         "category": "Computers and Security",
@@ -574,7 +574,7 @@
     {
         "id": "oscp-pg-set2",
         "title": "OffSec PG - FunBox - Easy, Enum, Rookie",
-        "description": "OSCP-style walkthrough notes for the OffSec Proving Grounds FunBox machines — Easy, Enum, and Rookie.",
+        "description": "OSCP-style walkthrough notes for the OffSec Proving Grounds FunBox machines: Easy, Enum, and Rookie.",
         "date": "Dec 19, 2021",
         "readTime": "6 min read",
         "category": "Lab Practice Notes",
@@ -640,7 +640,7 @@
     {
         "id": "exploit-exercises-protostar",
         "title": "Exploit Exercises Protostar Lab Write-Up",
-        "description": "Write-ups for the Exploit Exercises Protostar labs — stack, format-string, and heap exploitation walked through with gdb.",
+        "description": "Write-ups for the Exploit Exercises Protostar labs: stack, format-string, and heap exploitation walked through with gdb.",
         "date": "Aug 12, 2019",
         "readTime": "20 min read",
         "category": "Lab Practice Notes",

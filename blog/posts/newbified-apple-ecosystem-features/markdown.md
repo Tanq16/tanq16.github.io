@@ -4,7 +4,7 @@ date: 2022-11-26
 category: Computers Newbified
 tags: [apple, productivity]
 image: appleecosystem-cover.jpeg
-description: A tour of handy Apple ecosystem features across iOS, iPadOS, and macOS — Handoff, Universal Clipboard, Siri tricks, and more.
+description: A tour of handy Apple ecosystem features across iOS, iPadOS, and macOS: Handoff, Universal Clipboard, Siri tricks, and more.
 ---
 
 > [!INFO]

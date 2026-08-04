@@ -49,6 +49,7 @@ function init() {
             case 'contact': app.innerHTML += elements.ContactSection(section); break;
         }
     });
+    app.innerHTML += elements.AlsoAvailable(definitions.config);
     app.innerHTML += elements.Footer(definitions.config);
     initInteractions();
     initSocialColorCycle();

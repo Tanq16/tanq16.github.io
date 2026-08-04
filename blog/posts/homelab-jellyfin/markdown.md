@@ -4,7 +4,7 @@ date: 2023-05-06
 category: Home Server
 tags: [jellyfin, home-lab]
 image: homelab-cover.jpeg
-description: Setting up Jellyfin as a self-hosted media server with Docker — a simpler, account-free alternative to Plex.
+description: Setting up Jellyfin as a self-hosted media server with Docker: a simpler, account-free alternative to Plex.
 ---
 
 ## Deployment
