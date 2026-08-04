@@ -3,21 +3,12 @@
     if (window.__ambientBackgroundInit) return;
     window.__ambientBackgroundInit = true;
 
-    const PALETTE = [
-        [203, 166, 247],
-        [137, 180, 250],
-        [180, 190, 254],
-        [245, 194, 231],
-        [148, 226, 213],
-        [137, 220, 235],
-        [250, 179, 135],
-        [166, 227, 161],
-    ];
     const COUNT = 7;
     const MAX_SPEED = 42;
 
     const rand = (min, max) => min + Math.random() * (max - min);
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const accent = () => ctp.triplet(pick(ctp.ambientAccents));
     const smooth = (t) => t * t * (3 - 2 * t); // smoothstep easing
 
     function injectKeyframes() {
@@ -53,7 +44,7 @@
         function spawn(s, first) {
             const size = rand(90, 190);
             s.size = size;
-            s.color = pick(PALETTE);
+            s.color = accent();
             s.alpha = rand(0.05, 0.11);
             s.baseBlur = size * rand(0.04, 0.07);
             s.x = rand(size * 0.3, Math.max(size * 0.3, W - size * 0.3));
@@ -84,6 +75,11 @@
             spawn(s, true);
             bubbles.push(s);
         }
+
+        ctp.onChange(() => bubbles.forEach((s) => {
+            s.color = accent();
+            s.el.style.background = `rgba(${s.color[0]},${s.color[1]},${s.color[2]},${s.alpha})`;
+        }));
 
         if (reduce) {
             bubbles.forEach((s) => {

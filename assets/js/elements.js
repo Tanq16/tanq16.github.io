@@ -22,7 +22,7 @@ const elements = {
         <header class="sticky top-0 z-50 bg-crust/80 backdrop-blur-md border-b border-surface0/0 py-4 transition-all duration-300">
             <div class="max-w-6xl mx-auto px-6 flex justify-between items-center gap-4">
                 <a href="#" class="flex items-center hover:opacity-80 transition-opacity duration-300 shrink-0">
-                    <img src="/assets/images/logosmall.svg" alt="Logo" class="h-8 w-8">
+                    <img src="/assets/images/logosmall.svg" alt="Logo" class="h-8 w-8 logo-adaptive">
                 </a>
 
                 <div class="hidden md:flex gap-8 items-center">

@@ -57,25 +57,27 @@ function init() {
     initObservers();
 }
 
-// Each social icon cross-fades between random Catppuccin pastels, staggered 1s apart, re-randomised per load.
+// Each social icon cross-fades between random Catppuccin accents, staggered 1s apart, re-randomised per load.
 function initSocialColorCycle() {
     const icons = document.querySelectorAll('.social-glow');
     if (!icons.length) return;
-    const palette = ['#cba6f7', '#f5c2e7', '#b4befe', '#89b4fa', '#74c7ec', '#89dceb', '#94e2d5'];
     const pick = (avoid) => {
-        let c;
-        do { c = palette[Math.floor(Math.random() * palette.length)]; } while (c === avoid);
-        return c;
+        let role;
+        do { role = ctp.glowAccents[Math.floor(Math.random() * ctp.glowAccents.length)]; } while (role === avoid);
+        return role;
     };
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const INTERVAL = 2240; // matches the CSS colour fade so the morph is continuous
+    const current = new Map();
+    const paint = (icon) => { icon.style.color = ctp.rgb(current.get(icon)); };
     icons.forEach((icon, i) => {
-        let current = pick(null);
-        icon.style.color = current;
+        current.set(icon, pick(null));
+        paint(icon);
         if (reduce) return;
-        const tick = () => { current = pick(current); icon.style.color = current; };
+        const tick = () => { current.set(icon, pick(current.get(icon))); paint(icon); };
         setTimeout(() => { tick(); setInterval(tick, INTERVAL); }, i * 1000);
     });
+    ctp.onChange(() => icons.forEach(paint));
 }
 
 function initObservers() {

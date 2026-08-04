@@ -179,7 +179,7 @@ function addCopyButtons() {
                 } catch (err2) {
                     console.error('All copy methods failed:', err2);
                     button.innerHTML = '<i data-lucide="x" class="w-4 h-4"></i>';
-                    button.style.color = '#f38ba8';
+                    button.style.color = ctp.rgb('red');
                     setTimeout(() => {
                         button.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i>';
                         button.style.color = '';
@@ -192,6 +192,124 @@ function addCopyButtons() {
         block.appendChild(button);
     });
     lucide.createIcons();
+}
+
+function wrapTables() {
+    document.querySelectorAll('#markdown-container table').forEach(table => {
+        if (table.parentElement.classList.contains('table-scroll')) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'table-scroll';
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+    });
+}
+
+function mermaidConfig() {
+    const c = ctp.rgb;
+    return {
+        startOnLoad: false,
+        theme: 'base',
+        fontFamily: 'Inter',
+        themeVariables: {
+            darkMode: ctp.isDark(),
+            fontFamily: 'Inter',
+            fontSize: '14px',
+            background: c('base'),
+            mainBkg: c('base'),
+            primaryColor: c('surface0'),
+            primaryTextColor: c('text'),
+            primaryBorderColor: c('blue'),
+            secondaryColor: c('surface1'),
+            secondaryTextColor: c('text'),
+            secondaryBorderColor: c('overlay1'),
+            tertiaryColor: c('surface0'),
+            tertiaryTextColor: c('text'),
+            tertiaryBorderColor: c('surface2'),
+            lineColor: c('blue'),
+            arrowheadColor: c('blue'),
+            textColor: c('text'),
+            titleColor: c('mauve'),
+            noteBkgColor: c('surface1'),
+            noteTextColor: c('yellow'),
+            noteBorderColor: c('surface2'),
+            nodeBkg: c('surface0'),
+            nodeBorder: c('blue'),
+            nodeTextColor: c('text'),
+            clusterBkg: c('mantle'),
+            clusterBorder: c('surface2'),
+            defaultLinkColor: c('blue'),
+            edgeLabelBackground: c('surface0'),
+            actorBkg: c('surface0'),
+            actorBorder: c('blue'),
+            actorTextColor: c('text'),
+            actorLineColor: c('surface2'),
+            signalColor: c('pink'),
+            signalTextColor: c('text'),
+            labelBoxBkgColor: c('surface1'),
+            labelBoxBorderColor: c('surface2'),
+            labelTextColor: c('text'),
+            loopTextColor: c('yellow'),
+            activationBorderColor: c('mauve'),
+            activationBkgColor: c('surface1'),
+            sequenceNumberColor: c('base'),
+            sectionBkgColor: c('mantle'),
+            altSectionBkgColor: c('base'),
+            sectionBkgColor2: c('crust'),
+            taskBkgColor: c('blue'),
+            taskBorderColor: c('lavender'),
+            taskTextColor: c('base'),
+            taskTextLightColor: c('base'),
+            taskTextDarkColor: c('text'),
+            taskTextOutsideColor: c('text'),
+            taskTextClickableColor: c('sky'),
+            activeTaskBkgColor: c('mauve'),
+            activeTaskBorderColor: c('pink'),
+            doneTaskBkgColor: c('surface1'),
+            doneTaskBorderColor: c('surface2'),
+            critBkgColor: c('red'),
+            critBorderColor: c('maroon'),
+            gridColor: c('surface0'),
+            todayLineColor: c('red'),
+            pie1: c('mauve'), pie2: c('blue'), pie3: c('green'), pie4: c('yellow'),
+            pie5: c('red'), pie6: c('teal'), pie7: c('peach'), pie8: c('sky'),
+            pie9: c('pink'), pie10: c('sapphire'), pie11: c('maroon'), pie12: c('lavender'),
+            pieTitleTextColor: c('text'),
+            pieSectionTextColor: c('base'),
+            pieLegendTextColor: c('text'),
+            pieStrokeColor: c('base'),
+            pieOuterStrokeColor: c('surface0'),
+            git0: c('blue'), git1: c('mauve'), git2: c('green'), git3: c('yellow'),
+            git4: c('red'), git5: c('teal'), git6: c('peach'), git7: c('sapphire'),
+            gitInv0: c('base'), gitInv1: c('base'), gitInv2: c('base'), gitInv3: c('base'),
+            gitInv4: c('base'), gitInv5: c('base'), gitInv6: c('base'), gitInv7: c('base'),
+            commitLabelColor: c('subtext1'),
+            commitLabelBackground: c('base'),
+            tagLabelColor: c('base'),
+            tagLabelBackground: c('yellow'),
+            tagLabelBorder: c('peach'),
+            labelBackgroundColor: c('surface0'),
+            cScale0: c('surface0'), cScale1: c('blue'), cScale2: c('mauve'), cScale3: c('green'),
+            cScale4: c('yellow'), cScale5: c('red'), cScale6: c('teal'), cScale7: c('peach'),
+            cScale8: c('sky'), cScale9: c('pink'), cScale10: c('sapphire'), cScale11: c('lavender'),
+        }
+    };
+}
+
+// mermaid.run() overwrites each node, so the source is stashed on the first pass to survive the
+// re-render an OS light/dark switch forces.
+function renderMermaid() {
+    const nodes = document.querySelectorAll('.mermaid');
+    if (!nodes.length) return;
+    nodes.forEach(node => {
+        if (node.dataset.mermaidSrc === undefined) {
+            node.dataset.mermaidSrc = node.textContent;
+        } else {
+            node.textContent = node.dataset.mermaidSrc;
+            node.removeAttribute('data-processed');
+        }
+    });
+    mermaid.initialize(mermaidConfig());
+    mermaid.run({ nodes }).catch(() => {});
 }
 
 async function initApp() {
@@ -245,47 +363,10 @@ async function initApp() {
     }
 
     addCopyButtons();
+    wrapTables();
 
-    mermaid.initialize({
-        startOnLoad: false,
-        theme: 'base',
-        themeVariables: {
-            darkMode: true,
-            background: '#181825',
-            fontFamily: 'Inter',
-            fontSize: '14px',
-            primaryColor: '#313244',
-            primaryTextColor: '#cdd6f4',
-            primaryBorderColor: '#cba6f7',
-            lineColor: '#b4befe',
-            secondaryColor: '#313244',
-            secondaryTextColor: '#cdd6f4',
-            secondaryBorderColor: '#89b4fa',
-            tertiaryColor: '#1e1e2e',
-            tertiaryTextColor: '#cdd6f4',
-            tertiaryBorderColor: '#f5c2e7',
-            nodeBorder: '#cba6f7',
-            clusterBkg: '#1e1e2e',
-            clusterBorder: '#45475a',
-            defaultLinkColor: '#b4befe',
-            titleColor: '#cba6f7',
-            edgeLabelBackground: '#11111b',
-            actorBorder: '#cba6f7',
-            actorBkg: '#1e1e2e',
-            signalColor: '#b4befe',
-            signalTextColor: '#cdd6f4',
-            labelBoxBkgColor: '#1e1e2e',
-            labelBoxBorderColor: '#cba6f7',
-            labelTextColor: '#cdd6f4',
-            loopTextColor: '#cdd6f4',
-            noteBkgColor: '#181825',
-            noteTextColor: '#cdd6f4',
-            noteBorderColor: '#f2cdcd',
-        }
-    });
-    document.fonts.ready.then(() => {
-        mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
-    });
+    document.fonts.ready.then(renderMermaid);
+    ctp.onChange(renderMermaid);
 
     renderTOC();
     lucide.createIcons();
