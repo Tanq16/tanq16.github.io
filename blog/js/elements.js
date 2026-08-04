@@ -69,7 +69,7 @@ const elements = {
                  data-tags="${post.tags.join(' ').toLowerCase()}">
             
             <div class="relative h-40 overflow-hidden block">
-                <div class="absolute inset-0 bg-gradient-to-t from-crust/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
                 <img src="/blog/images/${post.image}" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
             </div>
 

@@ -4,7 +4,7 @@ date: 2021-12-19
 category: Lab Practice Notes
 tags: [oscp, lab, offsec-proving-grounds]
 image: pg-cover.jpeg
-description: OSCP-style walkthrough notes for the OffSec Proving Grounds FunBox machines — Easy, Enum, and Rookie.
+description: OSCP-style walkthrough notes for the OffSec Proving Grounds FunBox machines: Easy, Enum, and Rookie.
 ---
 
 ## FunBoxEasy

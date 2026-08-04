@@ -22,7 +22,7 @@ const elements = {
         <header class="sticky top-0 z-50 bg-crust/80 backdrop-blur-md border-b border-surface0/0 py-4 transition-all duration-300">
             <div class="max-w-6xl mx-auto px-6 flex justify-between items-center gap-4">
                 <a href="#" class="flex items-center hover:opacity-80 transition-opacity duration-300 shrink-0">
-                    <img src="/assets/images/logosmall.svg" alt="Logo" class="h-8 w-8">
+                    <img src="/assets/images/logosmall.svg" alt="Logo" class="h-8 w-8 logo-adaptive">
                 </a>
 
                 <div class="hidden md:flex gap-8 items-center">
@@ -47,16 +47,25 @@ const elements = {
         </header>`;
     },
 
+    // sizeCls is separate because an inline SVG cannot inherit the font-size that scales a Font Awesome glyph.
+    icon: (spec, cls, sizeCls, style = '') => {
+        if (spec.startsWith('svg:')) {
+            return `<svg viewBox="0 0 50 50" fill="currentColor" aria-hidden="true"
+                     class="${sizeCls} ${cls}" style="${style}"><path d="${SVG_ICONS[spec.slice(4)]}"></path></svg>`;
+        }
+        return `<i class="${spec.replace(/^fa:/, '')} ${cls}" style="${style}"></i>`;
+    },
+
     Hero: (config) => {
         // Colour cross-fades slowly (initSocialColorCycle) while the hover lift stays quick.
         const socialLinks = config.socials.map((s, index) => {
-            const fa = s.icon.replace(/^fa:/, '');
             const popDelay = (0.52 + index * 0.08).toFixed(2);
+            const style = `animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards; transition: color 2.24s ease-in-out, transform .3s ease;`;
+            const cls = 'social-glow text-mauve group-hover:-translate-y-1';
             return `
             <a href="${s.link}" target="_blank" title="${s.label}"
                class="group text-2xl flex items-center justify-center w-10 h-10">
-                <i class="${fa} social-glow text-mauve group-hover:-translate-y-1"
-                   style="animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards; transition: color 2.24s ease-in-out, transform .3s ease;"></i>
+                ${elements.icon(s.icon, cls, 'w-6 h-6', style)}
             </a>
         `;
         }).join('');
@@ -205,9 +214,8 @@ const elements = {
                 </div>
                 <div class="px-2 pt-4 pb-1 flex flex-col flex-grow">
                     <div class="flex items-start justify-between gap-3 mb-3">
-                        <h3 class="text-lg font-bold text-lavender group-hover:text-mauve transition-colors flex items-center gap-2">
+                        <h3 class="text-lg font-bold text-lavender group-hover:text-mauve transition-colors">
                             ${item.title}
-                            <i data-lucide="external-link" class="w-4 h-4 text-overlay1 group-hover:text-mauve transition-colors"></i>
                         </h3>
                         <span class="shrink-0 inline-flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-full bg-mauve/10 text-mauve border border-mauve/20 whitespace-nowrap">
                             <i data-lucide="users" class="w-3 h-3"></i> Co-authored
@@ -279,7 +287,7 @@ const elements = {
                     ${tabs}
                 </div>
 
-                <div class="min-h-[300px]">
+                <div>
                     ${contentPanels}
                 </div>
             </div>
@@ -307,6 +315,21 @@ const elements = {
                         ${data.form.successMessage}
                     </div>
                 </div>
+            </div>
+        </section>`;
+    },
+
+    AlsoAvailable: (config) => {
+        const links = config.altSocials.map(s => `
+            <a href="${s.link}" target="_blank" title="${s.label}" aria-label="${s.label}"
+               class="flex text-text/60 hover:text-text hover:-translate-y-0.5 transition-all duration-300">
+                ${elements.icon(s.icon, '', 'w-5 h-5')}
+            </a>`).join('');
+
+        return `
+        <section class="pb-12 fade-in-section">
+            <div class="max-w-2xl mx-auto px-6 flex items-center justify-center gap-6 text-xl">
+                ${links}
             </div>
         </section>`;
     },

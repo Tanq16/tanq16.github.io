@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <meta name="description" content="Tanishq Rupaal - Lead Security Engineer at Praetorian. 
     MS Cybersecurity graduate from Georgia Tech. AWS Security and Application Security 
     professional. GCP Security and Kubernetes Security professional." />
@@ -21,73 +22,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <link rel="stylesheet" href="/assets/css/theme.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        rosewater: '#f5e0dc',
-                        flamingo: '#f2cdcd',
-                        pink: '#f5c2e7',
-                        mauve: '#cba6f7',
-                        red: '#f38ba8',
-                        maroon: '#eba0ac',
-                        peach: '#fab387',
-                        yellow: '#f9e2af',
-                        green: '#a6e3a1',
-                        teal: '#94e2d5',
-                        sky: '#89dceb',
-                        sapphire: '#74c7ec',
-                        blue: '#89b4fa',
-                        lavender: '#b4befe',
-                        text: '#cdd6f4',
-                        subtext1: '#bac2de',
-                        subtext0: '#a6adc8',
-                        overlay2: '#9399b2',
-                        overlay1: '#7f849c',
-                        overlay0: '#6c7086',
-                        surface2: '#585b70',
-                        surface1: '#45475a',
-                        surface0: '#313244',
-                        base: '#1e1e2e',
-                        mantle: '#181825',
-                        crust: '#11111b',
-                    },
-                    animation: {
-                        'orbit-slow': 'orbit 35s linear infinite',
-                        'orbit-medium': 'orbit 25s linear infinite',
-                        'orbit-fast': 'orbit 15s linear infinite',
-                    },
-                    keyframes: {
-                        orbit: {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="/assets/js/tailwind-theme.js"></script>
     <style>
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #11111b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #313244;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #45475a;
-        }
         html {
             scroll-behavior: smooth;
         }
