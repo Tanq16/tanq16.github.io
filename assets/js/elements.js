@@ -323,16 +323,13 @@ const elements = {
         const links = config.altSocials.map(s => `
             <a href="${s.link}" target="_blank" title="${s.label}" aria-label="${s.label}"
                class="flex text-text/60 hover:text-text hover:-translate-y-0.5 transition-all duration-300">
-                ${elements.icon(s.icon, '', 'w-4 h-4')}
+                ${elements.icon(s.icon, '', 'w-5 h-5')}
             </a>`).join('');
 
         return `
         <section class="pb-12 fade-in-section">
-            <div class="max-w-2xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-center gap-y-3 gap-x-4">
-                <span class="text-sm text-overlay1">Also available on</span>
-                <div class="flex items-center gap-5 text-base">
-                    ${links}
-                </div>
+            <div class="max-w-2xl mx-auto px-6 flex items-center justify-center gap-6 text-xl">
+                ${links}
             </div>
         </section>`;
     },
