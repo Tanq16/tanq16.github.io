@@ -28,6 +28,14 @@ function downloadYAML() {
     }
 }
 
+const CONTACT_ICONS = {
+    email: 'at-sign',
+    phone: 'phone',
+    website: 'globe',
+    github: 'git-branch',
+    location: 'map-pin',
+};
+
 async function renderPaginated() {
     const root = document.getElementById('app-root');
     const staging = document.getElementById('staging-area');
@@ -118,9 +126,9 @@ async function renderPaginated() {
     header.innerHTML = `
         <h1 class="text-4xl font-bold uppercase tracking-wider text-gray-800 mb-4">${RESUME_DATA.basics.name}</h1>
         <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm text-gray-600 font-medium">
-            ${['email','phone','website','github','location'].map(k => RESUME_DATA.basics[k] ? `
+            ${Object.entries(CONTACT_ICONS).map(([k, icon]) => RESUME_DATA.basics[k] ? `
                 <div class="flex items-center gap-2">
-                    <i data-lucide="${k === 'location' ? 'map-pin' : k === 'email' ? 'at-sign' : k === 'website' ? 'globe' : k}" class="w-4 h-4 text-gray-400"></i>
+                    <i data-lucide="${icon}" class="w-4 h-4 text-gray-400"></i>
                     <span>${RESUME_DATA.basics[k]}</span>
                 </div>` : '').join('')}
         </div>
