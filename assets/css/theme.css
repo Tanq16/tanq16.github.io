@@ -1,12 +1,7 @@
 :root {
     color-scheme: light dark;
 
-    /* Catppuccin Latte, with two deliberate departures from spec.
-       Neutrals shift one step lighter and crust becomes pure white: the layout treats crust as the
-       page canvas, which only reads correctly while the ramp runs dark-to-light, and that inverts in
-       Latte. Accents are traded, never rewritten, so mauve and blue (the harshest hues, on the most
-       repeated elements) hand their sharpness to lavender and sapphire, which appear far less often.
-       Trading rather than overwriting keeps all twelve distinct entries mermaid's colour scales need. */
+    /* Catppuccin Latte, with crust re-slotted to white and mauve/blue traded with lavender/sapphire. */
     --ctp-rosewater: 220 138 120;
     --ctp-flamingo: 221 120 120;
     --ctp-pink: 234 118 203;

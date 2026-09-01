@@ -202,8 +202,7 @@ function createEntryNode(entry, type, continued = false) {
     return entryWrapper;
 }
 
-// resolve once the given web fonts are actually applied to layout, not merely downloaded: document.fonts
-// reports "loaded" before the metrics take effect, which would let pagination measure against fallback fonts
+// document.fonts reports loaded before the new metrics apply, so pagination would measure fallback fonts
 function whenFontsApplied(families, timeout = 3000) {
     return new Promise(resolve => {
         const mk = ff => {

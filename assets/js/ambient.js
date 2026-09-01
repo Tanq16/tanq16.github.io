@@ -1,4 +1,3 @@
-// Shared, self-initialising ambient background: soft colour-bubbles that morph, wander, and re-form.
 (function () {
     if (window.__ambientBackgroundInit) return;
     window.__ambientBackgroundInit = true;
@@ -9,7 +8,7 @@
     const rand = (min, max) => min + Math.random() * (max - min);
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
     const accent = () => ctp.triplet(pick(ctp.ambientAccents));
-    const smooth = (t) => t * t * (3 - 2 * t); // smoothstep easing
+    const smooth = (t) => t * t * (3 - 2 * t);
 
     function injectKeyframes() {
         if (document.getElementById('ambient-morph-kf')) return;
@@ -55,7 +54,7 @@
             s.formDur = rand(1.1, 1.8);
             s.lifespan = rand(7, 16);
             s.dissolveDur = rand(1.1, 1.8);
-            s.age = first ? rand(0, s.lifespan) : 0; // stagger so they never sync
+            s.age = first ? rand(0, s.lifespan) : 0;
 
             const el = s.el;
             el.style.width = size + 'px';
@@ -93,13 +92,12 @@
 
         let last = performance.now();
         function frame(now) {
-            const dt = Math.min(0.05, (now - last) / 1000); // clamp long gaps (tab switch)
+            const dt = Math.min(0.05, (now - last) / 1000);
             last = now;
 
             for (const s of bubbles) {
                 s.age += dt;
 
-                // --- lifecycle: form -> alive -> disperse into "dust" -> respawn ---
                 let op, scale, extraBlur;
                 if (s.age < s.formDur) {
                     const t = smooth(s.age / s.formDur);
@@ -114,7 +112,6 @@
                     continue;
                 }
 
-                // --- truly-random wander: jitter velocity, cap speed, soft-bounce off edges ---
                 s.vx += rand(-14, 14) * dt;
                 s.vy += rand(-14, 14) * dt;
                 const sp = Math.hypot(s.vx, s.vy);

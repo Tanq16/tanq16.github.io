@@ -57,7 +57,6 @@ const elements = {
     },
 
     Hero: (config) => {
-        // Colour cross-fades slowly (initSocialColorCycle) while the hover lift stays quick.
         const socialLinks = config.socials.map((s, index) => {
             const popDelay = (0.52 + index * 0.08).toFixed(2);
             const style = `animation: popIn .5s cubic-bezier(.34,1.56,.64,1) ${popDelay}s backwards; transition: color 2.24s ease-in-out, transform .3s ease;`;
@@ -73,7 +72,6 @@ const elements = {
         return `
         <section class="min-h-[60vh] flex flex-col md:flex-row items-center justify-between px-6 py-10 max-w-6xl mx-auto relative overflow-hidden gap-12">
             <div class="z-10 max-w-xl text-center flex-1 flex flex-col items-center">
-                <!-- overflow-hidden masks the clip-up reveal; pb gives the descender room inside the mask -->
                 <div class="overflow-hidden pb-2 mb-2">
                     <h1 class="text-[40px] md:text-[64px] leading-[1.05] md:whitespace-nowrap font-bold tracking-tight bg-[linear-gradient(90deg,theme(colors.mauve),theme(colors.pink),theme(colors.blue),theme(colors.mauve))] bg-[length:200%_auto] bg-clip-text text-transparent"
                         style="animation: clipUp .7s cubic-bezier(.22,1,.36,1) .1s both, shimmer 4.2s linear 1s infinite;">
@@ -95,7 +93,6 @@ const elements = {
             </div>
 
             <div class="relative w-full md:w-1/2 h-[400px] flex items-center justify-center">
-                <!-- outer wrapper = drop-in entrance, inner = idle bob (base rotate/translate = reduced-motion rest) -->
                 <div class="absolute z-0" style="animation: dropIn .8s cubic-bezier(.34,1.4,.5,1) .15s both;">
                     <div class="w-64 h-64 bg-surface0/30 rounded-3xl rotate-12 backdrop-blur-sm border border-mauve/20" style="animation: sq1 9s ease-in-out infinite;"></div>
                 </div>

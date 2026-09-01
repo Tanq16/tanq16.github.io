@@ -1,5 +1,4 @@
-/* github-markdown-css 5.x reads the fgColor/bgColor/borderColor variable family; the older
-   color-fg style names it also ships are inert in this build. */
+/* github-markdown-css 5.8.1 reads these fgColor, bgColor, and borderColor variables. */
 .markdown-body {
     background-color: transparent !important;
     font-family: 'Inter', sans-serif !important;
@@ -72,9 +71,7 @@
     margin-bottom: 0.25rem;
 }
 
-/* border-collapse must stay separate: collapsing folds the table's own border into the edge
-   cells, which drops the box that border-radius rounds. overflow then clips the tinted thead
-   so it cannot paint square over the curve. */
+/* border-collapse: collapse would square off the rounded corners and the thead tint. */
 .markdown-body table {
     display: table !important;
     width: 100% !important;
