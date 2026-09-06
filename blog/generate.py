@@ -110,16 +110,19 @@ def dump_posts_json(posts):
 
 
 def render_post_html(template, p):
+    image = p["image"]
     repl = {
         "{{TITLE}}": esc_attr(p["title"]),
         "{{DESCRIPTION}}": esc_attr(p["description"]),
         "{{URL}}": f"{SITE}/blog/posts/{p['slug']}/",
-        "{{IMAGE_URL}}": f"{SITE}/blog/images/{p['image']}",
+        "{{IMAGE_URL}}": f"{SITE}/blog/images/{image}" if image else "",
         "{{DATE_ISO}}": p["date_iso"],
     }
     out = template
     for k, v in repl.items():
         out = out.replace(k, v)
+    if not image:
+        out = re.sub(r"^[ \t]*<meta [^>]*(?:og:image|twitter:image)[^>]*>\n", "", out, flags=re.M)
     return out
 
 

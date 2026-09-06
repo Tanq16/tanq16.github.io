@@ -5,7 +5,6 @@ const RESUME_DATA = {
         website: "<a href='https://tanishq.page' target='_blank'>tanishq.page</a>",
         github: "<a href='https://github.com/Tanq16' target='_blank'>github.com/Tanq16</a>",
         summary: ""
-        // Cloud security and CI/CD specialist with 5+ years as an offensive-security practitioner across application, infrastructure, and platform security. Equally at home running assessments & building tooling and AI-driven automation that scale them.
     },
     sections: [
         {

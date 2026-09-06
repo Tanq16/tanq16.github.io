@@ -33,10 +33,11 @@ const elements = {
     Layout: (data) => `
         <main class="flex-grow w-full max-w-7xl mx-auto px-6 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8">
             <div class="lg:col-span-9 lg:col-start-1 min-w-0">
+                ${data.meta.coverImage ? `
                 <div class="w-full h-[320px] md:h-[400px] rounded-2xl overflow-hidden mb-8 border border-surface1/20 relative">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
                     <img src="${data.meta.coverImage}" alt="Cover" class="w-full h-full object-cover">
-                </div>
+                </div>` : ''}
                 <div class="mb-12 border-b border-surface1/20 pb-8">
                     <div class="flex flex-wrap items-center gap-4 text-sm text-overlay1 mb-4">
                         <span class="flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4"></i> ${data.meta.date}</span>
@@ -52,7 +53,6 @@ const elements = {
                         <p>${data.meta.license}</p>
                     </div>
                 </div>
-                <!-- markdown-body class triggers the GitHub markdown CSS -->
                 <article id="markdown-container" class="markdown-body"></article>
             </div>
             <aside class="hidden lg:block lg:col-span-3 relative">
@@ -164,7 +164,6 @@ function addCopyButtons() {
                 textArea.select();
 
                 try {
-                    // execCommand is deprecated but kept as a legacy-browser fallback
                     const successful = document.execCommand('copy');
                     if (successful) {
                         button.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
@@ -295,8 +294,7 @@ function mermaidConfig() {
     };
 }
 
-// mermaid.run() overwrites each node, so the source is stashed on the first pass to survive the
-// re-render an OS light/dark switch forces.
+// mermaid.run() overwrites each node, so the source is stashed to survive a light/dark re-render
 function renderMermaid() {
     const nodes = document.querySelectorAll('.mermaid');
     if (!nodes.length) return;
@@ -315,7 +313,6 @@ function renderMermaid() {
 async function initApp() {
     const app = document.getElementById('app');
 
-    // Extract slug from URL: /blog/posts/{slug}/
     const pathParts = window.location.pathname.replace(/\/+$/, '').split('/');
     const slug = pathParts[pathParts.length - 1];
 
@@ -338,7 +335,7 @@ async function initApp() {
             author: "Tanishq Rupaal",
             date: post.date,
             readTime: post.readTime,
-            coverImage: "../../images/" + post.image,
+            coverImage: post.image ? "../../images/" + post.image : "",
             tags: post.tags,
             license: "This post is licensed under CC BY 4.0 by the author."
         }
@@ -374,36 +371,54 @@ async function initApp() {
     initObserver();
 }
 
+function clearHighlights(container) {
+    container.querySelectorAll('mark.search-match').forEach(mark => mark.replaceWith(mark.textContent));
+    container.normalize();
+}
+
+function highlightMatches(container, term) {
+    const regex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    let count = 0;
+    nodes.forEach(node => {
+        if (node.parentNode.closest('.mermaid')) return;
+        const text = node.nodeValue;
+        const fragment = document.createDocumentFragment();
+        let matches = 0;
+        let last = 0;
+        let match;
+        while ((match = regex.exec(text)) !== null) {
+            if (match.index > last) fragment.append(text.slice(last, match.index));
+            const mark = document.createElement('mark');
+            mark.className = 'search-match';
+            mark.textContent = match[0];
+            fragment.append(mark);
+            last = match.index + match[0].length;
+            matches++;
+        }
+        if (!matches) return;
+        if (last < text.length) fragment.append(text.slice(last));
+        node.replaceWith(fragment);
+        count += matches;
+    });
+    return count;
+}
+
 function initSearch() {
     const input = document.getElementById('articleSearch');
     const container = document.getElementById('markdown-container');
     const matchLabel = document.getElementById('matchCount');
-    let originalContent = null;
 
-    input.addEventListener('focus', () => { if(!originalContent) originalContent = container.innerHTML; });
     input.addEventListener('input', (e) => {
         const term = e.target.value.trim();
+        clearHighlights(container);
         if (!term) {
-            container.innerHTML = originalContent;
             matchLabel.classList.add('hidden');
-            document.fonts.ready.then(() => mermaid.run({ nodes: document.querySelectorAll('.mermaid') }));
             return;
         }
-        container.innerHTML = originalContent;
-        const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
-        const nodes = [];
-        while(walker.nextNode()) nodes.push(walker.currentNode);
-        let count = 0;
-        const regex = new RegExp(`(${term})`, 'gi');
-        nodes.forEach(node => {
-            if (node.parentNode.closest('.mermaid')) return;
-            if (node.nodeValue.match(regex)) {
-                const span = document.createElement('span');
-                span.innerHTML = node.nodeValue.replace(regex, (m) => { count++; return `<mark class="search-match">${m}</mark>`; });
-                node.parentNode.replaceChild(span, node);
-            }
-        });
-        matchLabel.textContent = `${count} matches`;
+        matchLabel.textContent = `${highlightMatches(container, term)} matches`;
         matchLabel.classList.remove('hidden');
     });
 }

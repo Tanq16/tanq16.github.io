@@ -3,7 +3,7 @@ title: Introduction to Open Source Projects and CMake
 date: 2021-06-15
 category: Computers and Security
 tags: [open-source, cmake, make]
-image: open-source-build
+image:
 description: An introduction to how open source projects are organized, the roles people play, and building them with CMake.
 ---
 

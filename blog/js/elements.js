@@ -10,6 +10,8 @@ window.handleTagClick = (event, tag) => {
     }
 };
 
+const escAttr = (value) => String(value).replace(/"/g, '&quot;');
+
 const elements = {
 
     Header: (config) => {
@@ -59,19 +61,22 @@ const elements = {
     },
 
     BlogCard: (post) => {
-        return `
-        <article class="blog-card flex flex-col h-full bg-surface0/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
-                 onclick="window.location.href='/blog/posts/${post.location}/'"
-                 data-title="${post.title.toLowerCase()}" 
-                 data-description="${post.description.toLowerCase()}"
-                 data-category="${post.category.toLowerCase()}"
-                 data-date="${post.date.toLowerCase()}"
-                 data-tags="${post.tags.join(' ').toLowerCase()}">
-            
+        const cover = post.image ? `
             <div class="relative h-40 overflow-hidden block">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
-                <img src="/blog/images/${post.image}" alt="${post.title}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
-            </div>
+                <img src="/blog/images/${escAttr(post.image)}" alt="${escAttr(post.title)}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out">
+            </div>` : '';
+        return `
+        <article class="blog-card flex flex-col h-full bg-surface0/30 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer group"
+                 onclick="window.location.href='/blog/posts/' + this.dataset.location + '/'"
+                 data-location="${escAttr(post.location)}"
+                 data-title="${escAttr(post.title.toLowerCase())}"
+                 data-description="${escAttr(post.description.toLowerCase())}"
+                 data-category="${escAttr(post.category.toLowerCase())}"
+                 data-date="${escAttr(post.date.toLowerCase())}"
+                 data-tags="${escAttr(post.tags.join(' ').toLowerCase())}">
+
+            ${cover}
 
             <div class="flex flex-col flex-grow p-5">
                 <div class="flex items-center gap-3 text-xs text-overlay1 mb-2">
@@ -93,7 +98,7 @@ const elements = {
 
                 <div class="flex flex-wrap gap-2 mt-auto relative z-20">
                     ${post.tags.slice(0, 3).map(tag => `
-                        <button onclick="handleTagClick(event, '${tag.toLowerCase()}')" 
+                        <button data-tag="${escAttr(tag.toLowerCase())}" onclick="handleTagClick(event, this.dataset.tag)"
                                 class="text-[10px] px-2 py-1 rounded-md bg-surface1/30 text-subtext1 transition-colors hover:text-mauve hover:bg-surface1/50 cursor-pointer">
                             ${tag.toLowerCase()}
                         </button>

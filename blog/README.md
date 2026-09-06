@@ -41,7 +41,7 @@ description: Why Go became my default for tooling.
 ```
 
 - `date` is ISO `YYYY-MM-DD`; the pretty form shown on the site is derived from it.
-- `image` is a filename under `blog/images/`.
+- `image` is a filename under `blog/images/`; leave it blank and the post renders with no cover.
 - `description` is optional; leave it blank to auto-derive from the first
   paragraph. It feeds the card, the meta description, and social share tags.
 - Reading time is computed from the word count (~180 wpm); there is no field for it.

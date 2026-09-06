@@ -57,7 +57,6 @@ function init() {
     initObservers();
 }
 
-// Each social icon cross-fades between random Catppuccin accents, staggered 1s apart, re-randomised per load.
 function initSocialColorCycle() {
     const icons = document.querySelectorAll('.social-glow');
     if (!icons.length) return;
