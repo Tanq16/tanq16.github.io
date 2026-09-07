@@ -112,7 +112,9 @@ const RESUME_DATA = {
                         "<b><a href='https://github.com/Tanq16/anbu' target='_blank'>Anbu</a></b> - Developer and security CLI for encryption, tunneling, secret scanning, and more",
                         "<b><a href='https://github.com/Tanq16/ExpenseOwl' target='_blank'>Expense Owl</a></b> - Self-hosted expense tracking web app built with Go",
                         "<b><a href='https://github.com/Tanq16/rinnegan' target='_blank'>Rinnegan</a></b> - Self-hosted personal web terminal with port tunneling and host file transfer",
-                        "<b><a href='https://github.com/Tanq16/local-content-share' target='_blank'>Local-Content-Share</a></b> - Self-hosted app for sharing text & files in LAN with integrated notepad"
+                        "<b><a href='https://github.com/Tanq16/local-content-share' target='_blank'>Local-Content-Share</a></b> - Self-hosted app for sharing text & files in LAN with integrated notepad",
+                        "<b><a href='https://github.com/Tanq16/isane' target='_blank'>Isane</a></b> - Self-hosted team chat with voice, video, and AI agents as first-class members",
+                        "<b><a href='https://github.com/Tanq16/sharingan' target='_blank'>Sharingan</a></b> - Manages long-lived EC2 workstations with per-region network scaffolding and SSH access"
                     ]
                 }
             ]
