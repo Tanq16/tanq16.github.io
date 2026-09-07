@@ -245,13 +245,6 @@ const definitions = {
                             icon: '/assets/images/projects/logos/link-hub.svg'
                         },
                         {
-                            title: 'Soifon',
-                            description: 'Browser extension that auto-captures regex-matched values from request bodies, storage & cookies.',
-                            tags: ['JavaScript', 'Browser Extension', 'Security'],
-                            link: 'https://github.com/Tanq16/soifon',
-                            icon: '/assets/images/projects/logos/soifon.svg'
-                        },
-                        {
                             title: 'box-cli',
                             description: 'CLI for Box.com file operations: upload, download, sync, share, and collaborate from the terminal.',
                             tags: ['Go', 'CLI', 'Cloud Storage'],
@@ -271,6 +264,48 @@ const definitions = {
                             tags: ['Self-Hosted', 'Media Server', 'Music'],
                             link: 'https://github.com/Tanq16/raikiri',
                             icon: '/assets/images/projects/logos/raikiri.svg'
+                        },
+                        {
+                            title: 'LinkSnapper',
+                            description: 'Self-hosted bookmark and note manager: sticky notes, quick-access bookmarks, and a saved-link library as three distinct surfaces.',
+                            tags: ['Go', 'Self-Hosted', 'Bookmarks', 'Web App'],
+                            link: 'https://github.com/Tanq16/linksnapper',
+                            icon: '/assets/images/projects/logos/linksnapper.svg'
+                        },
+                        {
+                            title: 'goff',
+                            description: 'Terminal media suite for FFmpeg: one verb per operation, sensible defaults, and no filter syntax to look up.',
+                            tags: ['Go', 'CLI', 'TUI', 'FFmpeg'],
+                            link: 'https://github.com/Tanq16/goff',
+                            icon: '/assets/images/projects/logos/goff.svg'
+                        },
+                        {
+                            title: 'Kairo',
+                            description: 'No-nonsense self-hosted Markdown notes, with a CodeMirror editor and live preview.',
+                            tags: ['Go', 'Self-Hosted', 'Markdown', 'Notes'],
+                            link: 'https://github.com/Tanq16/kairo',
+                            icon: '/assets/images/projects/logos/kairo.svg'
+                        },
+                        {
+                            title: 'Isane',
+                            description: 'Self-hosted team chat, voice, video & screen share where AI agents are first-class members you mention like anyone else.',
+                            tags: ['Go', 'Self-Hosted', 'Chat', 'AI Agents'],
+                            link: 'https://github.com/Tanq16/isane',
+                            icon: '/assets/images/projects/logos/isane.svg'
+                        },
+                        {
+                            title: 'Sharingan',
+                            description: 'Manages long-lived EC2 workstations: per-region network scaffolding, named machines, and SSH access from one command.',
+                            tags: ['Go', 'CLI', 'AWS', 'Dev Environment'],
+                            link: 'https://github.com/Tanq16/sharingan',
+                            icon: '/assets/images/projects/logos/sharingan.svg'
+                        },
+                        {
+                            title: 'Tiny AI Suite',
+                            description: 'Local AI toolbox for Apple Silicon: stem separation, transcription, TTS, voice cloning, OCR & image upscaling from one binary.',
+                            tags: ['Go', 'Local AI', 'Self-Hosted', 'macOS'],
+                            link: 'https://github.com/Tanq16/tiny-ai',
+                            icon: '/assets/images/projects/logos/tiny-ai.svg'
                         }
                     ]
                 }
