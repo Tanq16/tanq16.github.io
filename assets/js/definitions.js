@@ -238,11 +238,46 @@ const definitions = {
                             icon: '/assets/images/projects/logos/cli-productivity-suite.svg'
                         },
                         {
+                            title: 'LinkSnapper',
+                            description: 'Self-hosted bookmark and note manager: sticky notes, quick-access bookmarks, and a saved-link library as three distinct surfaces.',
+                            tags: ['Go', 'Self-Hosted', 'Bookmarks', 'Web App'],
+                            link: 'https://github.com/Tanq16/linksnapper',
+                            icon: '/assets/images/projects/logos/linksnapper.svg'
+                        },
+                        {
                             title: 'Link Hub',
                             description: 'Curated index of Cybersecurity learning resources, labs & tools across cloud, web, and AI.',
                             tags: ['Cybersecurity', 'Resources', 'Reference'],
                             link: 'https://github.com/Tanq16/link-hub',
                             icon: '/assets/images/projects/logos/link-hub.svg'
+                        },
+                        {
+                            title: 'Isane',
+                            description: 'Self-hosted team chat, voice, video & screen share where AI agents are first-class members you mention like anyone else.',
+                            tags: ['Go', 'Self-Hosted', 'Chat', 'AI Agents'],
+                            link: 'https://github.com/Tanq16/isane',
+                            icon: '/assets/images/projects/logos/isane.svg'
+                        },
+                        {
+                            title: 'Kairo',
+                            description: 'No-nonsense self-hosted Markdown notes, with a CodeMirror editor and live preview.',
+                            tags: ['Go', 'Self-Hosted', 'Markdown', 'Notes'],
+                            link: 'https://github.com/Tanq16/kairo',
+                            icon: '/assets/images/projects/logos/kairo.svg'
+                        },
+                        {
+                            title: 'Sharingan',
+                            description: 'Manages long-lived EC2 workstations: per-region network scaffolding, named machines, and SSH access from one command.',
+                            tags: ['Go', 'CLI', 'AWS', 'Dev Environment'],
+                            link: 'https://github.com/Tanq16/sharingan',
+                            icon: '/assets/images/projects/logos/sharingan.svg'
+                        },
+                        {
+                            title: 'Senkaimon',
+                            description: 'Forward-auth identity service for a Caddy edge: password plus TOTP for people, bearer tokens for machines, glob policies for both.',
+                            tags: ['Go', 'Self-Hosted', 'Auth', 'Security'],
+                            link: 'https://github.com/Tanq16/senkaimon',
+                            icon: '/assets/images/projects/logos/senkaimon.svg'
                         },
                         {
                             title: 'box-cli',
@@ -266,39 +301,11 @@ const definitions = {
                             icon: '/assets/images/projects/logos/raikiri.svg'
                         },
                         {
-                            title: 'LinkSnapper',
-                            description: 'Self-hosted bookmark and note manager: sticky notes, quick-access bookmarks, and a saved-link library as three distinct surfaces.',
-                            tags: ['Go', 'Self-Hosted', 'Bookmarks', 'Web App'],
-                            link: 'https://github.com/Tanq16/linksnapper',
-                            icon: '/assets/images/projects/logos/linksnapper.svg'
-                        },
-                        {
                             title: 'goff',
                             description: 'Terminal media suite for FFmpeg: one verb per operation, sensible defaults, and no filter syntax to look up.',
                             tags: ['Go', 'CLI', 'TUI', 'FFmpeg'],
                             link: 'https://github.com/Tanq16/goff',
                             icon: '/assets/images/projects/logos/goff.svg'
-                        },
-                        {
-                            title: 'Kairo',
-                            description: 'No-nonsense self-hosted Markdown notes, with a CodeMirror editor and live preview.',
-                            tags: ['Go', 'Self-Hosted', 'Markdown', 'Notes'],
-                            link: 'https://github.com/Tanq16/kairo',
-                            icon: '/assets/images/projects/logos/kairo.svg'
-                        },
-                        {
-                            title: 'Isane',
-                            description: 'Self-hosted team chat, voice, video & screen share where AI agents are first-class members you mention like anyone else.',
-                            tags: ['Go', 'Self-Hosted', 'Chat', 'AI Agents'],
-                            link: 'https://github.com/Tanq16/isane',
-                            icon: '/assets/images/projects/logos/isane.svg'
-                        },
-                        {
-                            title: 'Sharingan',
-                            description: 'Manages long-lived EC2 workstations: per-region network scaffolding, named machines, and SSH access from one command.',
-                            tags: ['Go', 'CLI', 'AWS', 'Dev Environment'],
-                            link: 'https://github.com/Tanq16/sharingan',
-                            icon: '/assets/images/projects/logos/sharingan.svg'
                         },
                         {
                             title: 'Tiny AI Suite',
