@@ -224,13 +224,6 @@ const definitions = {
                             icon: '/assets/images/projects/logos/rinnegan.svg'
                         },
                         {
-                            title: 'Danzo',
-                            description: 'Multi-service CLI downloader: HTTP, HLS live streams, S3, GitHub releases, torrents, and yt-dlp.',
-                            tags: ['Go', 'CLI', 'Downloader'],
-                            link: 'https://github.com/Tanq16/danzo',
-                            icon: '/assets/images/projects/logos/danzo.svg'
-                        },
-                        {
                             title: 'CLI Productivity Suite',
                             description: 'Single Go binary (cps) that sets up and manages a full CLI dev environment on Linux & macOS: shell, Neovim, tmux, and more.',
                             tags: ['Go', 'CLI', 'Dev Setup', 'Productivity'],
