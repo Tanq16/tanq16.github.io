@@ -259,6 +259,13 @@ const definitions = {
                             icon: '/assets/images/projects/logos/kairo.svg'
                         },
                         {
+                            title: 'Inoichi',
+                            description: 'Local-first mind mapping editor: drag a tree, attach Markdown notes to any node, export JSON, SVG or PNG.',
+                            tags: ['Go', 'Self-Hosted', 'Mind Mapping'],
+                            link: 'https://github.com/Tanq16/inoichi',
+                            icon: '/assets/images/projects/logos/inoichi.svg'
+                        },
+                        {
                             title: 'Sharingan',
                             description: 'Manages long-lived EC2 workstations: per-region network scaffolding, named machines, and SSH access from one command.',
                             tags: ['Go', 'CLI', 'AWS', 'Dev Environment'],
